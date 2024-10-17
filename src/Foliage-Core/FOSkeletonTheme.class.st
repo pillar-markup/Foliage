@@ -1,16 +1,26 @@
 Class {
-	#name : #FOSkeletonTheme,
-	#superclass : #FOTheme,
-	#category : #'Foliage-Core-Base'
+	#name : 'FOSkeletonTheme',
+	#superclass : 'FOTheme',
+	#category : 'Foliage-Core-Base',
+	#package : 'Foliage-Core',
+	#tag : 'Base'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'actions' }
+FOSkeletonTheme class >> install [
+	<script>
+	"Duplicated so that we can execute it on the skeleton"
+	self new install 
+]
+
+{ #category : 'as yet unclassified' }
 FOSkeletonTheme >> archiveName [
 	^ 'Skeleton-2.0.4.zip'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FOSkeletonTheme >> copyResources [
+	"self new copyResources"
 	| zip member stream |
 	zip := ZipArchive new 
 		readFrom: self archiveName asFileReference binaryReadStream.
@@ -29,30 +39,35 @@ FOSkeletonTheme >> copyResources [
 		close.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FOSkeletonTheme >> createPageTemplate [
+	"self new createPageTemplate"
 	'templates' asFileReference ensureCreateDirectory.
 	'templates/page' asFileReference binaryWriteStream 
 		nextPutAll: (self pageTemplate copyReplaceAll: String cr with: String crlf);
 		close
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FOSkeletonTheme >> downloadSkeleton [
+	<script>
+	
+		
+	self halt. 
 	self archiveName asFileReference exists ifFalse: [  
 		ZnClient new 
 			url: 'https://github.com/dhg/Skeleton/releases/download/2.0.4/', self archiveName;
 			downloadTo: '.' asFileReference ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FOSkeletonTheme >> install [
 	self downloadSkeleton.
 	self copyResources.
 	self createPageTemplate
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FOSkeletonTheme >> pageTemplate [ 
 	^ '<!DOCTYPE html>
 <html lang="en">

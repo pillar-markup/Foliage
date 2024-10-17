@@ -1,23 +1,25 @@
 Class {
-	#name : #FOWebContainer,
-	#superclass : #FOWebResource,
+	#name : 'FOWebContainer',
+	#superclass : 'FOWebResource',
 	#instVars : [
 		'items'
 	],
-	#category : #'Foliage-Core-Model'
+	#category : 'Foliage-Core-Model',
+	#package : 'Foliage-Core',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebContainer >> / aString [ 
 	^ items at: aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebContainer >> allPages [
 	^ items select: #isPage
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebContainer >> at: key put: value [
 	(items includesKey: key)
 		ifTrue: [ Error signal: 'child ', key asString, ' already exists' ].
@@ -27,25 +29,25 @@ FOWebContainer >> at: key put: value [
 		put: value
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FOWebContainer >> initialize [ 
 	super initialize.
 	items := SmallDictionary  new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebContainer >> items [
 	^ items
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebContainer >> nameOf: aWebEntity [
 	^ items 
 		keyAtValue: aWebEntity 
 		ifAbsent: [ Error signal: 'value not found' ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FOWebContainer >> setItems: aDictionary [ 
 	aDictionary values do: [ :each | each parent: self ].
 	items := aDictionary 

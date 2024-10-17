@@ -1,13 +1,15 @@
 Class {
-	#name : #HTMLWriter,
-	#superclass : #Object,
+	#name : 'HTMLWriter',
+	#superclass : 'Object',
 	#instVars : [
 		'stream'
 	],
-	#category : #'Foliage-Core-Base'
+	#category : 'Foliage-Core-Base',
+	#package : 'Foliage-Core',
+	#tag : 'Base'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HTMLWriter >> contents [ 
 	^ "(stream 
 		flush;
@@ -15,12 +17,12 @@ HTMLWriter >> contents [
 		stream contents
 ]
 
-{ #category : #flushing }
+{ #category : 'flushing' }
 HTMLWriter >> flush [
 	stream flush
 ]
 
-{ #category : #initialize }
+{ #category : 'initialize' }
 HTMLWriter >> initialize [ 
 	super initialize.
 	stream := String new writeStream "ZnCharacterWriteStream 
@@ -28,25 +30,25 @@ HTMLWriter >> initialize [
 		encoding: 'utf-8' "
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HTMLWriter >> stream: aStream [ 
 	stream := aStream
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 HTMLWriter >> writeHeaderLevel: anInteger with: aBlock [ 
 	^ self 
 		writeTag: 'h', anInteger asString
 		with: aBlock
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 HTMLWriter >> writeTag: aString [
 
 	stream << '<' << aString << ' />'		
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 HTMLWriter >> writeTag: aString attributes: aDictionary with: aBlock [ 
 	stream << '<' << aString.
 	aDictionary 
@@ -60,7 +62,7 @@ HTMLWriter >> writeTag: aString attributes: aDictionary with: aBlock [
 		
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 HTMLWriter >> writeTag: aString with: aBlock [ 
 	stream << '<' << aString << '>'.
 	aBlock value.
@@ -69,7 +71,7 @@ HTMLWriter >> writeTag: aString with: aBlock [
 		
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 HTMLWriter >> writeText: aPRText [ 
 	stream << aPRText text
 ]

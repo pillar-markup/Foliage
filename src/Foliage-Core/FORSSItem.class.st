@@ -1,40 +1,42 @@
 Class {
-	#name : #FORSSItem,
-	#superclass : #Object,
+	#name : 'FORSSItem',
+	#superclass : 'Object',
 	#instVars : [
 		'title',
 		'link',
 		'description'
 	],
-	#category : #'Foliage-Core-RSS'
+	#category : 'Foliage-Core-RSS',
+	#package : 'Foliage-Core',
+	#tag : 'RSS'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FORSSItem >> description [
 	^ description
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FORSSItem >> description: aString [ 
 	description := aString 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FORSSItem >> link [
 	^ link
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FORSSItem >> link: aLink [
 	link := aLink
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FORSSItem >> title [
 	^ title
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FORSSItem >> title: aString [ 
 	title := aString
 ]

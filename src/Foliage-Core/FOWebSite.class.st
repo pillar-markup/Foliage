@@ -1,6 +1,6 @@
 Class {
-	#name : #FOWebSite,
-	#superclass : #Object,
+	#name : 'FOWebSite',
+	#superclass : 'Object',
 	#instVars : [
 		'baseUri',
 		'targetPath',
@@ -13,41 +13,43 @@ Class {
 	#classInstVars : [
 		'instance'
 	],
-	#category : #'Foliage-Core-RSS'
+	#category : 'Foliage-Core-RSS',
+	#package : 'Foliage-Core',
+	#tag : 'RSS'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FOWebSite class >> build [
 	^ self instance build
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FOWebSite class >> instance [
 	^ instance ifNil: [ 
 		instance := self new ]
 ]
 
-{ #category : #resetting }
+{ #category : 'resetting' }
 FOWebSite class >> reset [
 	instance := nil
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 FOWebSite >> / anObject [
 	^ root / anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> absoluteLinkFor: aFOWebResourece [
 	^ baseUri asZnUrl / (aFOWebResourece pathString)  
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOWebSite >> acceptFOVisitor: aFOVisitor [ 
 	^ aFOVisitor visitWebsite: self 
 ]
 
-{ #category : #logging }
+{ #category : 'logging' }
 FOWebSite >> asBeaconSignal [
 
 	^ FOObjectSignal new 
@@ -56,151 +58,151 @@ FOWebSite >> asBeaconSignal [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> baseUri [
 	^ baseUri
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> baseUri: anObject [
 	baseUri := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> buildRoot [
 	^ FOWebsiteRoot new
 		parent: self 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> defaultRawPath [
 	^ 'raw'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> defaultTargetPath [
 	^ 'docs'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> defaultTemplatePath [ 
 	^ 'templates'
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FOWebSite >> import [
 	self importDirectory: self rawPath 
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FOWebSite >> importDirectory: path [ 
 	self importer
 		readAll: path allFiles
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> importer [ 
 	^ FOImporter new 
 		website: self;
 		yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FOWebSite >> initialize [ 
 	super initialize.
 	properties := Dictionary new.
 	root := self buildRoot 
 ]
 
-{ #category : #logging }
+{ #category : 'logging' }
 FOWebSite >> log [
 
 	self log: self withSlots: #(baseUri targetPath templatePath rawPath)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> properties [
 	^ properties
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> propertyAt: aString [ 
 	^ properties at: aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> propertyAt: aString put: anObject [
 	^ properties 
 		at: aString
 		put: anObject 
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FOWebSite >> publish [
 	FOPublishVisitor new
 		start: self
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> rawPath [
 	^ rawPath ifNil: [ 
 		rawPath := self defaultRawPath asFileReference ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> rawPath: anObject [
 	rawPath := anObject asFileReference 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> relativeRawPath: aFileReference [
 	^ aFileReference asAbsolute relativeTo: self rawPath asAbsolute 
 ]
 
-{ #category : #navigating }
+{ #category : 'navigating' }
 FOWebSite >> resolvePath: aPath [ 
 	^ root resolvePath: aPath
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> root [
 	^ root
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> targetPath [
 	^ targetPath ifNil: [ 
 		targetPath := self defaultTargetPath asFileReference ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> targetPath: anObject [
 	targetPath := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> targetPathFor: aWebObject [
 	^ self targetPath resolvePath: aWebObject path
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> templatePath [
 	^ templatePath ifNil: [ 
 		templatePath := self defaultTemplatePath asFileReference ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> templatePath: anObject [
 	templatePath := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> templatePathForLayout: aString [ 
 	^ self templatePath / aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebSite >> templatePathForLayout: aString  partial: partialName [
 	^ self templatePath / partialName
 ]

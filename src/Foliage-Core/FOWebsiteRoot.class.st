@@ -1,41 +1,43 @@
 Class {
-	#name : #FOWebsiteRoot,
-	#superclass : #FOWebFolder,
-	#category : #'Foliage-Core-Model'
+	#name : 'FOWebsiteRoot',
+	#superclass : 'FOWebFolder',
+	#category : 'Foliage-Core-Model',
+	#package : 'Foliage-Core',
+	#tag : 'Model'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOWebsiteRoot >> acceptFOVisitor: aFOVisitor [ 
 	^ aFOVisitor visitWebsiteRoot: self 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebsiteRoot >> defaultLayout [
 
 	^ 'page'
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FOWebsiteRoot >> isRoot [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebsiteRoot >> name [ 
 	^ #/
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebsiteRoot >> path [ 
 	^ Path root
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebsiteRoot >> root [ 	
 	^ self 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebsiteRoot >> website [ 
 	^ parent 
 ]

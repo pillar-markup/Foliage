@@ -1,32 +1,34 @@
 Class {
-	#name : #FOBlogOverviewBuilder,
-	#superclass : #Object,
+	#name : 'FOBlogOverviewBuilder',
+	#superclass : 'Object',
 	#instVars : [
 		'blog',
 		'numberOfCharacters'
 	],
-	#category : #'Foliage-Core-Blog'
+	#category : 'Foliage-Core-Blog',
+	#package : 'Foliage-Core',
+	#tag : 'Blog'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOBlogOverviewBuilder >> amountOfCharacters [
 	^ numberOfCharacters ifNil: [ 
 		numberOfCharacters := self defaultNumberOfCharacters ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOBlogOverviewBuilder >> blog: aBlog [
 
 	blog := aBlog
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FOBlogOverviewBuilder >> buildAbstract: aPage [
 	
 	^ PRRaw content: aPage renderAbstract
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FOBlogOverviewBuilder >> buildSummary [
 	| abstracts |
 
@@ -44,17 +46,17 @@ FOBlogOverviewBuilder >> buildSummary [
 			yourself)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOBlogOverviewBuilder >> defaultNumberOfCharacters [
 	^ 500
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOBlogOverviewBuilder >> numberOfCharacters: anObject [
 	numberOfCharacters := anObject
 ]
 
-{ #category : #'page creation' }
+{ #category : 'page creation' }
 FOBlogOverviewBuilder >> publishedPosts [
 
 	^ (blog posts select: #isPublished) sorted: #publishDate descending

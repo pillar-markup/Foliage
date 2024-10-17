@@ -1,22 +1,24 @@
 Class {
-	#name : #FOWebFolder,
-	#superclass : #FOWebContainer,
-	#category : #'Foliage-Core-Model'
+	#name : 'FOWebFolder',
+	#superclass : 'FOWebContainer',
+	#category : 'Foliage-Core-Model',
+	#package : 'Foliage-Core',
+	#tag : 'Model'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOWebFolder >> acceptFOVisitor: aFOVisitor [ 
 	^ aFOVisitor visitWebFolder: self 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'conversion' }
 FOWebFolder >> buildRssFeed [
 	^ (FORSSVisitor new
 		visit: self)
 			parent: self
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'conversion' }
 FOWebFolder >> convertToBlog [ 
 	| blog |
 	blog := FOBlog new
@@ -33,18 +35,18 @@ FOWebFolder >> convertToBlog [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'conversion' }
 FOWebFolder >> createOnTarget [
 	self publishPath ensureCreateDirectory 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'conversion' }
 FOWebFolder >> emitSelectors [
 
 	^ #(name)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'tools' }
 FOWebFolder >> gtInspectorItemsIn: composite [
 	<gtInspectorPresentationOrder: 0>
 	^ composite fastTable 
@@ -62,29 +64,29 @@ FOWebFolder >> gtInspectorItemsIn: composite [
 		
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FOWebFolder >> isRoot [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebFolder >> name [
 	^ parent nameOf: self
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FOWebFolder >> printOn: aStream [
 	aStream << self path asString << '/'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'conversion' }
 FOWebFolder >> replace: oldResource with: newResource [ 
 	items 
 		at: oldResource name 
 		put: newResource 
 ]
 
-{ #category : #resolving }
+{ #category : 'resolving' }
 FOWebFolder >> resolvePath: aRelativePath [ 
 	| child |
 	aRelativePath isEmpty ifTrue: [ ^ self ].
@@ -96,7 +98,7 @@ FOWebFolder >> resolvePath: aRelativePath [
 	^ child resolvePath: (RelativePath withAll: aRelativePath segments allButFirst)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'conversion' }
 FOWebFolder >> rssFeed [
 	^ self 
 		propertyAt: #rssFeed

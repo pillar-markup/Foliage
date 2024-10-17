@@ -1,6 +1,28 @@
+"
+Here are some random notes so that I understand something. 
+
+
+```
+FOPublisher commandLine activateWith: {
+    'foliage'.
+    'publish'.
+    '--source'. '/home/esteban/dev/pharo/foliage/test/pharo-test-master/site'.
+    '--target'. '/home/esteban/dev/pharo/foliage/test/'.
+    '/home/esteban/dev/pharo/foliage/test/pharo-test-master/site/.foliage.ston' }.
+```
+
+
+Donwload 
+
+```
+http://github.com/pharo-project/pharo-website
+```
+
+
+"
 Class {
-	#name : #FOPublisher,
-	#superclass : #Object,
+	#name : 'FOPublisher',
+	#superclass : 'Object',
 	#instVars : [
 		'baseUri',
 		'targetPath',
@@ -8,10 +30,11 @@ Class {
 		'templatePath',
 		'blogs'
 	],
-	#category : #'Foliage-Publisher'
+	#category : 'Foliage-Publisher',
+	#package : 'Foliage-Publisher'
 }
 
-{ #category : #'clap - commands' }
+{ #category : 'clap - commands' }
 FOPublisher class >> clapPublish: args [
 	
 	self withLoggingDo: [ 
@@ -23,7 +46,7 @@ FOPublisher class >> clapPublish: args [
 			publisher publish ] ]
 ]
 
-{ #category : #clap }
+{ #category : 'clap' }
 FOPublisher class >> commandLine [
 	<commandline>
 	
@@ -61,31 +84,31 @@ FOPublisher class >> commandLine [
 		yourself
 ]
 
-{ #category : #'clap - defaults' }
+{ #category : 'clap - defaults' }
 FOPublisher class >> defaultProjectFileName [
 		
 	^ '.foliage.ston'
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 FOPublisher class >> defaultSourcePath [
 
 	^ '.'
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 FOPublisher class >> defaultTargetPath [
 
 	^ 'generated'
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 FOPublisher class >> defaultTemplatePath [
 
 	^ 'templates'
 ]
 
-{ #category : #clap }
+{ #category : 'clap' }
 FOPublisher class >> readFile: aName [
 	| reference |
 
@@ -100,13 +123,13 @@ FOPublisher class >> readFile: aName [
 				format: { reference fullName. e messageText }) ]
 ]
 
-{ #category : #'ston-core' }
+{ #category : 'ston-core' }
 FOPublisher class >> stonName [
 
 	^ #Foliage
 ]
 
-{ #category : #clap }
+{ #category : 'clap' }
 FOPublisher class >> withErrorHandlingDo: aBlock [
 
 	aBlock 
@@ -116,38 +139,38 @@ FOPublisher class >> withErrorHandlingDo: aBlock [
 			Exit signalFailure ]
 ]
 
-{ #category : #clap }
+{ #category : 'clap' }
 FOPublisher class >> withLoggingDo: aBlock [
 
 	FOStdoutLogger start.
 	aBlock ensure: [ FOStdoutLogger stopAll ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPublisher >> baseUri [
 
 	^ baseUri
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPublisher >> baseUri: aString [
 
 	baseUri := aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPublisher >> blogs [
 
 	^ blogs ifNil: [ #() ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPublisher >> blogs: anObject [
 
 	blogs := anObject
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 FOPublisher >> publish [
 	| site allFiles |
 
@@ -178,37 +201,37 @@ FOPublisher >> publish [
 	site publish
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPublisher >> sourcePath [
 
 	^ sourcePath ifNil: [ sourcePath := self class defaultSourcePath ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPublisher >> sourcePath: aString [
 
 	sourcePath := aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPublisher >> targetPath [
 
 	^ targetPath ifNil: [ targetPath := self class defaultTargetPath ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPublisher >> targetPath: aString [
 
 	targetPath := aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPublisher >> templatePath [
 
 	^ templatePath ifNil: [ templatePath := self class defaultTemplatePath ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPublisher >> templatePath: aString [
 
 	templatePath := aString

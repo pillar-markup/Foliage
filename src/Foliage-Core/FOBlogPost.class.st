@@ -1,10 +1,12 @@
 Class {
-	#name : #FOBlogPost,
-	#superclass : #FOPillarPage,
-	#category : #'Foliage-Core-Blog'
+	#name : 'FOBlogPost',
+	#superclass : 'FOPillarPage',
+	#category : 'Foliage-Core-Blog',
+	#package : 'Foliage-Core',
+	#tag : 'Blog'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOBlogPost >> abstract [
 
 	^ FOPillarTruncateVisitor new 
@@ -12,7 +14,7 @@ FOBlogPost >> abstract [
 		post: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOBlogPost >> abstractLayout [
 
 	^ self meta 
@@ -20,36 +22,36 @@ FOBlogPost >> abstractLayout [
 		ifAbsent: [ self defaultAbstractLayout ]	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOBlogPost >> abstractTemplate [
 
 	^ (self website templatePathForLayout: self abstractLayout) asMustacheTemplate.
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOBlogPost >> acceptFOVisitor: aFOVisitor [ 
 	^ aFOVisitor visitBlogPost: self 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOBlogPost >> defaultAbstractLayout [
 
 	^ 'blog-post-abstract'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOBlogPost >> defaultLayout [
 
 	^ 'blogpost'
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FOBlogPost >> isPost [
 
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOBlogPost >> publicationDate [
 
 	^ self meta 
@@ -58,13 +60,13 @@ FOBlogPost >> publicationDate [
 		ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOBlogPost >> renderAbstract [
 
 	^ self newRenderContext renderTemplate: self abstractTemplate
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FOBlogPost >> renderContextClass [
 
 	^ FOBlogPostRenderContext 

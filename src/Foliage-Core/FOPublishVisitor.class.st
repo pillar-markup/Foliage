@@ -1,10 +1,12 @@
 Class {
-	#name : #FOPublishVisitor,
-	#superclass : #FOModelVisitor,
-	#category : #'Foliage-Core-Visitor'
+	#name : 'FOPublishVisitor',
+	#superclass : 'FOModelVisitor',
+	#category : 'Foliage-Core-Visitor',
+	#package : 'Foliage-Core',
+	#tag : 'Visitor'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOPublishVisitor >> copyResource: aResource [ 
 	| target |
 	target := aResource publishPath asFileReference.
@@ -12,44 +14,44 @@ FOPublishVisitor >> copyResource: aResource [
 	aResource sourcePath asFileReference copyTo: target
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPublishVisitor >> templateForLayout: aString [ 
 	self shouldBeImplemented.
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOPublishVisitor >> visitBlog: aFOBlog [ 
 
 	^ super visitWebFolder: aFOBlog
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOPublishVisitor >> visitBlogPost: aFOBlogPost [ 
 	^ self visitPillarPage: aFOBlogPost 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOPublishVisitor >> visitFileObject: aFileObject [ 
 	aFileObject emit.
 	self copyResource: aFileObject.
 	^ aFileObject 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOPublishVisitor >> visitHTMLPageSource: aFOHTMLPageSource [ 
 	aFOHTMLPageSource emit.
 	self copyResource: aFOHTMLPageSource.
 	^ aFOHTMLPageSource 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOPublishVisitor >> visitPillarPage: aFOPillarPage [ 
 	aFOPillarPage emit.
 	aFOPillarPage publish.
 	^ aFOPillarPage 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOPublishVisitor >> visitRSSFeed: aFORSSFeed [ 
 	| template targetPath stream |
 	
@@ -64,14 +66,14 @@ FOPublishVisitor >> visitRSSFeed: aFORSSFeed [
 	^ aFORSSFeed 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOPublishVisitor >> visitWebFolder: aFOWebsiteFolder [
 	aFOWebsiteFolder emit.
 	aFOWebsiteFolder createOnTarget.
 	^ super visitWebFolder: aFOWebsiteFolder 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOPublishVisitor >> visitWebImage: aWebImage [ 
 	aWebImage emit.
 	self copyResource: aWebImage.

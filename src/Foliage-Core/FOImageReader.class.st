@@ -1,15 +1,17 @@
 Class {
-	#name : #FOImageReader,
-	#superclass : #FORawReader,
-	#category : #'Foliage-Core-Reader'
+	#name : 'FOImageReader',
+	#superclass : 'FORawReader',
+	#category : 'Foliage-Core-Reader',
+	#package : 'Foliage-Core',
+	#tag : 'Reader'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 FOImageReader class >> supportedFileExtensions [ 
 	^ #( gif jpg jpeg png ) 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOImageReader >> model [ 
 	^ FOWebImage new 
 		sourcePath: file asPath

@@ -1,48 +1,50 @@
 Class {
-	#name : #FOBlog,
-	#superclass : #FOWebFolder,
+	#name : 'FOBlog',
+	#superclass : 'FOWebFolder',
 	#instVars : [
 		'layout',
 		'title'
 	],
-	#category : #'Foliage-Core-Blog'
+	#category : 'Foliage-Core-Blog',
+	#package : 'Foliage-Core',
+	#tag : 'Blog'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOBlog >> acceptFOVisitor: aFOVisitor [ 
 	^ aFOVisitor visitBlog: self 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOBlog >> adaptPage: aPage [
 	^ aPage asFOBlogPost 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOBlog >> defaultLayout [
 
 	^ 'blog'
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 FOBlog >> emitSlots [
 
 	^ #(title layout)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOBlog >> layout [
 
 	^ layout ifNil: [ self defaultLayout ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOBlog >> layout: aString [
 
 	layout := aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOBlog >> overviewPage [
 
 	^ FOBlogOverviewBuilder new 
@@ -51,7 +53,7 @@ FOBlog >> overviewPage [
 		buildSummary
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOBlog >> postAfter: aFOPillarPage [ 
 	| list index |
 	list := self sortedByPublishDate.
@@ -61,7 +63,7 @@ FOBlog >> postAfter: aFOPillarPage [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOBlog >> postBefore: aFOPillarPage [ 
 	| list index |
 	list := self sortedByPublishDate.
@@ -71,23 +73,23 @@ FOBlog >> postBefore: aFOPillarPage [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOBlog >> posts [
 	^ items values select: #isPost
 ]
 
-{ #category : #sorting }
+{ #category : 'sorting' }
 FOBlog >> publishedPosts [
 	^ self posts select: #isPublished
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 FOBlog >> renderContextClass [
 
 	^ FORenderContext
 ]
 
-{ #category : #resolving }
+{ #category : 'resolving' }
 FOBlog >> resolvePath: aRelativePath [ 
 	aRelativePath isEmpty ifTrue: [ 
 		^ self ].
@@ -98,19 +100,19 @@ FOBlog >> resolvePath: aRelativePath [
 
 ]
 
-{ #category : #sorting }
+{ #category : 'sorting' }
 FOBlog >> sortedByPublishDate [
 	^ self publishedPosts 
 		sorted: #publishDate ascending
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOBlog >> title [
 
 	^ title ifNil: [ 'Untitled' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOBlog >> title: aString [
 
 	title := aString

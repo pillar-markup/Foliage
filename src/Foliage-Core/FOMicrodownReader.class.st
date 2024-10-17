@@ -1,15 +1,17 @@
 Class {
-	#name : #FOMicrodownReader,
-	#superclass : #FORawReader,
-	#category : #'Foliage-Core-Reader'
+	#name : 'FOMicrodownReader',
+	#superclass : 'FORawReader',
+	#category : 'Foliage-Core-Reader',
+	#package : 'Foliage-Core',
+	#tag : 'Reader'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 FOMicrodownReader class >> supportedFileExtensions [
 	^ #( md )
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 FOMicrodownReader >> model [
 
 	^ FOPillarPage new
@@ -19,25 +21,25 @@ FOMicrodownReader >> model [
 
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 FOMicrodownReader >> readDocumentFrom: aStream [
 
-	^ (MacrodownParser parse: aStream upToEnd) asPillar
+	^ (MicrodownParser parse: aStream upToEnd) asPillar
 
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
 FOMicrodownReader >> readJsonFrom: aStream [
 	^ (NeoJSONReader on: aStream) next
 	
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
 FOMicrodownReader >> readMetaFrom: aStream [
 	^ self readSimpleMetaFrom: aStream
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
 FOMicrodownReader >> readSimpleMetaFrom: aStream [
 	^ (FOMetaReader on: aStream) next
 ]

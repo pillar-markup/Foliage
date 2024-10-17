@@ -1,15 +1,17 @@
 Class {
-	#name : #FOObjectSignal,
-	#superclass : #BeaconSignal,
+	#name : 'FOObjectSignal',
+	#superclass : 'BeaconSignal',
 	#instVars : [
 		'object',
 		'slots',
 		'selectors'
 	],
-	#category : #'Foliage-Core-Base'
+	#category : 'Foliage-Core-Base',
+	#package : 'Foliage-Core',
+	#tag : 'Base'
 }
 
-{ #category : #printing }
+{ #category : 'initialization' }
 FOObjectSignal >> initialize [
 
 	super initialize.
@@ -17,19 +19,19 @@ FOObjectSignal >> initialize [
 	selectors := #()
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOObjectSignal >> object [
 
 	^ object
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOObjectSignal >> object: anObject [
 
 	object := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FOObjectSignal >> printOneLineContentsOn: stream [
 
 	stream << (STON toString: 
@@ -37,7 +39,7 @@ FOObjectSignal >> printOneLineContentsOn: stream [
 		(selectors collect: [ :each | each -> (object perform: each) ]))
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FOObjectSignal >> printOneLineOn: stream [
 
 	stream
@@ -49,25 +51,25 @@ FOObjectSignal >> printOneLineOn: stream [
 	self printOneLineContentsOn: stream
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOObjectSignal >> selectors [
 
 	^ selectors
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOObjectSignal >> selectors: aCollection [
 
 	selectors := aCollection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOObjectSignal >> slots [
 
 	^ slots
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOObjectSignal >> slots: anObject [
 
 	slots := anObject

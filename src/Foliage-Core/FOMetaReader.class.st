@@ -1,35 +1,37 @@
 Class {
-	#name : #FOMetaReader,
-	#superclass : #Object,
+	#name : 'FOMetaReader',
+	#superclass : 'Object',
 	#instVars : [
 		'stream'
 	],
-	#category : #'Foliage-Core-Reader'
+	#category : 'Foliage-Core-Reader',
+	#package : 'Foliage-Core',
+	#tag : 'Reader'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FOMetaReader class >> on: aReadStream [ 
 	^ self new 
 		stream: aReadStream
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FOMetaReader class >> parse: aString [ 
 	^ self new parse: aString
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FOMetaReader >> next [
 	^ self readLines 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FOMetaReader >> parse: aString [ 
 	stream := ZnCharacterReadStream on: aString asByteArray readStream encoding: #utf8.
 	^ self readLines
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FOMetaReader >> readLine [
 	| line parts key vparts |
 	line := stream nextLine.
@@ -42,7 +44,7 @@ FOMetaReader >> readLine [
 		ifFalse: [ vparts collect: #trimBoth ])
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FOMetaReader >> readLines [
 	| properties line |
 	properties := Dictionary new.
@@ -54,7 +56,7 @@ FOMetaReader >> readLines [
 	^ properties
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FOMetaReader >> stream: aZnCharacterReadStream [ 
 	stream := aZnCharacterReadStream
 ]

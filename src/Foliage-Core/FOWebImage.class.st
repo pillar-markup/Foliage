@@ -1,15 +1,17 @@
 Class {
-	#name : #FOWebImage,
-	#superclass : #FOFileBasedWebEntity,
-	#category : #'Foliage-Core-Model'
+	#name : 'FOWebImage',
+	#superclass : 'FOFileBasedWebEntity',
+	#category : 'Foliage-Core-Model',
+	#package : 'Foliage-Core',
+	#tag : 'Model'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 FOWebImage class >> supportedFileExtensions [ 
 	^ #( gif jpg jpeg png ico  ) 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOWebImage >> acceptFOVisitor: aFOVisitor [ 
 	^ aFOVisitor visitWebImage: self  
 ]

@@ -1,23 +1,25 @@
 Class {
-	#name : #FORSSFeed,
-	#superclass : #FOWebResource,
+	#name : 'FORSSFeed',
+	#superclass : 'FOWebResource',
 	#instVars : [
 		'channels'
 	],
-	#category : #'Foliage-Core-RSS'
+	#category : 'Foliage-Core-RSS',
+	#package : 'Foliage-Core',
+	#tag : 'RSS'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FORSSFeed >> acceptFOVisitor: aFOVisitor [ 
 	^ aFOVisitor visitRSSFeed: self 
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FORSSFeed >> addChannel: aFORSSChannel [ 
 	self channels add: aFORSSChannel 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FORSSFeed >> addHeadersTo: aPage [
 	| htmlDocument head |
 	
@@ -32,33 +34,33 @@ FORSSFeed >> addHeadersTo: aPage [
 		yourself)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FORSSFeed >> channels [
 	^ channels ifNil: [ 
 		channels := OrderedCollection new ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'accessing' }
 FORSSFeed >> href [
 	^ self absoluteLink 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'accessing' }
 FORSSFeed >> linkType [
 	^ 'application/rss+xml'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FORSSFeed >> pathString [
 	^ (self path withExtension: #xml) pathString
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'accessing' }
 FORSSFeed >> rel [
 	^ #alternate
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FORSSFeed >> title [
 	^ 'blog'
 ]

@@ -1,70 +1,72 @@
 Class {
-	#name : #FOPageWithMetadata,
-	#superclass : #FOHTMLPage,
+	#name : 'FOPageWithMetadata',
+	#superclass : 'FOHTMLPage',
 	#instVars : [
 		'meta'
 	],
-	#category : #'Foliage-Core-Model'
+	#category : 'Foliage-Core-Model',
+	#package : 'Foliage-Core',
+	#tag : 'Model'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 FOPageWithMetadata class >> isAbstract [ 
 	^ self == FOPageWithMetadata  
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPageWithMetadata >> defaultLayout [
 
 	^ self parent defaultLayout
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 FOPageWithMetadata >> emitSlots [
 
 	^ super emitSlots, #(meta)
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FOPageWithMetadata >> hasDocumentType [
 	^ meta includesKey: 'layout'
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FOPageWithMetadata >> isPage [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FOPageWithMetadata >> isPublished [
 	^ self publishDate notNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPageWithMetadata >> layout [
 	^ self meta 
 		at: 'layout'
 		ifAbsent: [ self defaultLayout ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPageWithMetadata >> layout: aString [
 	^ self meta 
 		at: 'layout'
 		put: aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPageWithMetadata >> meta [
 	^ meta ifNil: [ 
 		meta := Dictionary new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPageWithMetadata >> meta: aCollection [ 
 	meta := aCollection 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPageWithMetadata >> metaAt: key put: value [
 	
 	self meta 
@@ -72,7 +74,7 @@ FOPageWithMetadata >> metaAt: key put: value [
 		put: value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPageWithMetadata >> publishDate [
 	^ self meta 
 		at: #publishDate 
@@ -85,12 +87,12 @@ FOPageWithMetadata >> publishDate [
 		ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPageWithMetadata >> title [
 	^ self meta at: 'title'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPageWithMetadata >> title: aString [ 
 	self meta 
 		at: 'title'

@@ -1,34 +1,36 @@
 Class {
-	#name : #FOFileBasedWebEntity,
-	#superclass : #FOWebResource,
+	#name : 'FOFileBasedWebEntity',
+	#superclass : 'FOWebResource',
 	#instVars : [
 		'sourcePath'
 	],
-	#category : #'Foliage-Core-Model'
+	#category : 'Foliage-Core-Model',
+	#package : 'Foliage-Core',
+	#tag : 'Model'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 FOFileBasedWebEntity class >> isAbstract [ 
 	^ self == FOFileBasedWebEntity
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 FOFileBasedWebEntity >> emitSlots [
 
 	^ super emitSlots, #(sourcePath)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOFileBasedWebEntity >> name [
 	^ parent nameOf: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOFileBasedWebEntity >> sourcePath [
 	^ sourcePath
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOFileBasedWebEntity >> sourcePath: anObject [
 	sourcePath := anObject
 ]

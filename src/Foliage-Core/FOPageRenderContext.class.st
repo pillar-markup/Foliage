@@ -1,45 +1,47 @@
 Class {
-	#name : #FOPageRenderContext,
-	#superclass : #FORenderContext,
+	#name : 'FOPageRenderContext',
+	#superclass : 'FORenderContext',
 	#instVars : [
 		'page'
 	],
-	#category : #'Foliage-Core-Base'
+	#category : 'Foliage-Core-Base',
+	#package : 'Foliage-Core',
+	#tag : 'Base'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPageRenderContext >> body [ 
 	^ self html
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPageRenderContext >> html [
 	^ String streamContents: [ :s| 
 		page renderOn: s ].
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'accessing' }
 FOPageRenderContext >> layout [
 	^ page layout
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPageRenderContext >> page [
 	^ page
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPageRenderContext >> page: anObject [
 	page := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPageRenderContext >> publicationDate [
 
 	^ page publicationDate
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPageRenderContext >> title [
 
 	^ page title

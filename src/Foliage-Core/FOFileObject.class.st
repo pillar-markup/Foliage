@@ -1,15 +1,17 @@
 Class {
-	#name : #FOFileObject,
-	#superclass : #FOFileBasedWebEntity,
-	#category : #'Foliage-Core-Model'
+	#name : 'FOFileObject',
+	#superclass : 'FOFileBasedWebEntity',
+	#category : 'Foliage-Core-Model',
+	#package : 'Foliage-Core',
+	#tag : 'Model'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 FOFileObject class >> supportedFileExtensions [ 
 	^ #( css js )
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOFileObject >> acceptFOVisitor: aFOVisitor [ 
 	^ aFOVisitor visitFileObject: self 
 ]

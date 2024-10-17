@@ -1,22 +1,24 @@
 Class {
-	#name : #FOPillarTruncateVisitor,
-	#superclass : #FOPillarRewriteVisitor,
+	#name : 'FOPillarTruncateVisitor',
+	#superclass : 'FOPillarRewriteVisitor',
 	#instVars : [
 		'post',
 		'upperLimit',
 		'amountOfCharacters',
 		'stream'
 	],
-	#category : #'Foliage-Core-Visitor'
+	#category : 'Foliage-Core-Visitor',
+	#package : 'Foliage-Core',
+	#tag : 'Visitor'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPillarTruncateVisitor >> amountOfCharacters: aNumber [ 
 	upperLimit := aNumber.
 	amountOfCharacters := 0.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPillarTruncateVisitor >> post: anObject [ 
 
 	post := anObject.
@@ -25,34 +27,34 @@ FOPillarTruncateVisitor >> post: anObject [
 	^ stream contents
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOPillarTruncateVisitor >> visit: anObject [
 	(amountOfCharacters >= upperLimit) ifTrue: [ 
 		^ nil ].
 	^ anObject accept: self
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOPillarTruncateVisitor >> visitAll: aCollection [
 	^ (aCollection 
 		collect: [ :each | self visit: each ])
 			reject: #isNil
 ]
 
-{ #category : #'visiting-document' }
+{ #category : 'visiting-document' }
 FOPillarTruncateVisitor >> visitFigure: anObject [
 	"ignore figures in the abstract"
 	^ self 
 ]
 
-{ #category : #'visiting-document' }
+{ #category : 'visiting-document' }
 FOPillarTruncateVisitor >> visitHeader: aPRHeader [
 	"skip header in order not to copy the header text into the 
 	abstract"
 	^ self
 ]
 
-{ #category : #'visiting-document' }
+{ #category : 'visiting-document' }
 FOPillarTruncateVisitor >> visitText: aPRText [
 	| text textSize | 
 	

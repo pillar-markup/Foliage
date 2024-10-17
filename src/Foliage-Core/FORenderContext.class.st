@@ -1,37 +1,39 @@
 Class {
-	#name : #FORenderContext,
-	#superclass : #Object,
+	#name : 'FORenderContext',
+	#superclass : 'Object',
 	#instVars : [
 		'website'
 	],
-	#category : #'Foliage-Core-Base'
+	#category : 'Foliage-Core-Base',
+	#package : 'Foliage-Core',
+	#tag : 'Base'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'accessing' }
 FORenderContext >> layout [
 	self subclassResponsibility 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FORenderContext >> partials [ 
 	^ FOPartialProvider new 
 		layout: self layout; 
 		website: website
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 FORenderContext >> renderTemplate: template [
 	^ template 
 		value: self 
 		partials: self partials.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FORenderContext >> website [
 	^ website
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FORenderContext >> website: anObject [
 	website := anObject
 ]

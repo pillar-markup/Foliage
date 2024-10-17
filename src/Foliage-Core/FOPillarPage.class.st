@@ -1,51 +1,53 @@
 Class {
-	#name : #FOPillarPage,
-	#superclass : #FOPageWithMetadata,
+	#name : 'FOPillarPage',
+	#superclass : 'FOPageWithMetadata',
 	#instVars : [
 		'document'
 	],
-	#category : #'Foliage-Core-Model'
+	#category : 'Foliage-Core-Model',
+	#package : 'Foliage-Core',
+	#tag : 'Model'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 FOPillarPage class >> supportedFileExtensions [
 	^ { } 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPillarPage >> abstract [
 	| abstract |
 	abstract := (Character space join: (document children allButFirst collect: #text)).
 	^ abstract first: (abstract size min: self abstractAmountOfCharacters)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPillarPage >> abstractAmountOfCharacters [
 
 	^ 400
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOPillarPage >> acceptFOVisitor: aFOVisitor [ 
 	^ aFOVisitor visitPillarPage: self 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPillarPage >> document [
 	^ document
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPillarPage >> document: aMicRootBlock [ 
 	document := aMicRootBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPillarPage >> pillar: aPRDocument [ 
 	document := aPRDocument 
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 FOPillarPage >> publish [
 
 	self publishPath
@@ -53,26 +55,26 @@ FOPillarPage >> publish [
 		writeStreamDo: [ :stream | stream << self htmlString ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPillarPage >> publishPath [
 
 	^ super publishPath withExtension: 'html'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPillarPage >> publishPathFor: aString [ 
 	^ (aString endsWith: #html)
 		ifTrue: [ aString ]
 		ifFalse: [ (aString allButLast: 2), #html ]
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 FOPillarPage >> render [ 
 
 	^ self newRenderContext renderTemplate: self template.
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 FOPillarPage >> renderOn: aStream [ 
 
 	FOPillarHTMLVisitor new
@@ -80,7 +82,7 @@ FOPillarPage >> renderOn: aStream [
 		start: document.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOPillarPage >> template [
 	^ (self website templatePathForLayout: self layout) asMustacheTemplate.
 ]

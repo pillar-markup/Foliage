@@ -1,1 +1,1 @@
-Package { #name : #'Foliage-Publisher' }
+Package { #name : 'Foliage-Publisher' }

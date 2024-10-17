@@ -1,6 +1,6 @@
-Extension { #name : #PRCodeblock }
+Extension { #name : 'PRCodeblock' }
 
-{ #category : #'*Foliage-Core' }
+{ #category : '*Foliage-Core' }
 PRCodeblock >> replaceTabs [
 	text := text copyReplaceAll: Character tab asString with: '    '
 ]

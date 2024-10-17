@@ -1,36 +1,38 @@
 Class {
-	#name : #FOWebResource,
-	#superclass : #Object,
+	#name : 'FOWebResource',
+	#superclass : 'Object',
 	#instVars : [
 		'parent',
 		'properties'
 	],
-	#category : #'Foliage-Core-Model'
+	#category : 'Foliage-Core-Model',
+	#package : 'Foliage-Core',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebResource class >> forFileExtension: aString [ 
 	^ (FOFileBasedWebEntity allSubclasses reject: #isAbstract)
 		detect: [ :each | each matchesFileExtension: aString ]
 		ifNone: [  nil ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FOWebResource class >> isAbstract [ 
 	^ self == FOWebResource 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebResource class >> matchesFileExtension: aString [ 
 	^ self supportedFileExtensions includes: aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebResource >> absoluteLink [
 	^ self website absoluteLinkFor: self 
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 FOWebResource >> asBeaconSignal [
 
 	^ FOObjectSignal new 
@@ -40,129 +42,129 @@ FOWebResource >> asBeaconSignal [
 		yourself
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 FOWebResource >> defaultLayout [
 	
 	^ 'page'
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 FOWebResource >> duplicate [ 
 	^ self copy resetParent
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 FOWebResource >> emitSelectors [
 		
 	^ #()
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 FOWebResource >> emitSlots [
 		
 	^ #()
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FOWebResource >> isChildOf: anObject [
 	^ self parent = anObject 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FOWebResource >> isPage [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FOWebResource >> isPost [
 	^ false
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FOWebResource >> newRenderContext [ 
 	^ self renderContextClass new 
 		website: self website
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebResource >> parent [
 	^ parent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebResource >> parent: anItem [
 	parent := anItem
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebResource >> path [
 	^ parent path / (parent nameOf: self)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebResource >> pathString [
 	^ (self path withExtension: #html) pathString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebResource >> properties [ 
 	^ properties ifNil: [ 
 		properties := Dictionary new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebResource >> propertyAt: key [ 
 	self properties at: key
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebResource >> propertyAt: key ifAbsent: aBlock [
 	self properties 
 		at: key
 		ifAbsent: aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebResource >> propertyAt: key ifAbsentPut: aBlock [
 	^ self properties 
 		at: key
 		ifAbsentPut: aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebResource >> publishPath [
 	self flag: #todo.
 	"path is not properly defined. When there is raw path and when publich path?"
 	^ self website targetPath resolvePath: self relativePath  
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebResource >> publishPathFor: aString [ 
 	^ aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebResource >> relativePath [
 	^ self path relativeTo: '/' asPath
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FOWebResource >> renderContextClass [
 
 	^ FORenderContext
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebResource >> resetParent [
 	parent := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebResource >> root [ 	
 	^ parent root
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOWebResource >> website [ 
 	^ self root website
 ]

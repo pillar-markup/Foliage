@@ -1,6 +1,6 @@
-Extension { #name : #String }
+Extension { #name : 'String' }
 
-{ #category : #'*Foliage-Core' }
+{ #category : '*Foliage-Core' }
 String >> asBeaconSignal [
 
 	^ StringSignal new 

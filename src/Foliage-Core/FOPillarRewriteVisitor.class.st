@@ -1,10 +1,12 @@
 Class {
-	#name : #FOPillarRewriteVisitor,
-	#superclass : #FOPillarVisitor,
-	#category : #'Foliage-Core-Visitor'
+	#name : 'FOPillarRewriteVisitor',
+	#superclass : 'FOPillarVisitor',
+	#category : 'Foliage-Core-Visitor',
+	#package : 'Foliage-Core',
+	#tag : 'Visitor'
 }
 
-{ #category : #'visiting-document' }
+{ #category : 'visiting-document' }
 FOPillarRewriteVisitor >> visitDocumentGroup: anObject [
 	^(self visitAll: anObject children)
 		ifNotEmpty: [ :c | anObject setChildren: c; yourself ]
@@ -13,7 +15,7 @@ FOPillarRewriteVisitor >> visitDocumentGroup: anObject [
 
 ]
 
-{ #category : #'visiting-document' }
+{ #category : 'visiting-document' }
 FOPillarRewriteVisitor >> visitDocumentItem: aDocumentItem [ 
 	^ aDocumentItem copy
 ]

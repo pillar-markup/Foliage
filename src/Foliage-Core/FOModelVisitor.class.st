@@ -1,46 +1,48 @@
 Class {
-	#name : #FOModelVisitor,
-	#superclass : #Object,
-	#category : #'Foliage-Core-Visitor'
+	#name : 'FOModelVisitor',
+	#superclass : 'Object',
+	#category : 'Foliage-Core-Visitor',
+	#package : 'Foliage-Core',
+	#tag : 'Visitor'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOModelVisitor >> start: anObject [ 
 	^ self visit: anObject
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOModelVisitor >> visit: anObject [
 	^ anObject acceptFOVisitor: self
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOModelVisitor >> visitAll: aCollection [ 
 	^ aCollection collect: [ :each |
 		self visit: each ]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOModelVisitor >> visitHTMLPageSource: aFOHTMLPageSource [ 
 	^ self visitPageSource: aFOHTMLPageSource 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOModelVisitor >> visitPageSource: aFOPageSource [ 
 	^ self visitWebEntity: aFOPageSource 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOModelVisitor >> visitWebBinaryEntity: aFOWebBinaryObject [
 	^ self visitWebEntity: aFOWebBinaryObject 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOModelVisitor >> visitWebEntity: aFOWebObject [
 	^ self visitWebResource: aFOWebObject 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOModelVisitor >> visitWebFolder: aFOWebsiteFolder [
 	aFOWebsiteFolder createOnTarget.
 	^ (self visitWebResource: aFOWebsiteFolder)
@@ -48,23 +50,23 @@ FOModelVisitor >> visitWebFolder: aFOWebsiteFolder [
 		yourself 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOModelVisitor >> visitWebImage: aWebImage [ 
 	^ self visitWebBinaryEntity: aWebImage 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOModelVisitor >> visitWebResource: aFOWebObject [
 	aFOWebObject emit.
 	^ aFOWebObject copy
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOModelVisitor >> visitWebsite: aFOWebsite [ 
 	^ self visit: aFOWebsite root
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOModelVisitor >> visitWebsiteRoot: aFOWebsiteRoot [ 
 	^ self visitWebFolder: aFOWebsiteRoot 
 ]

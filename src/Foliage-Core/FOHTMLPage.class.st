@@ -1,29 +1,31 @@
 Class {
-	#name : #FOHTMLPage,
-	#superclass : #FOFileBasedWebEntity,
+	#name : 'FOHTMLPage',
+	#superclass : 'FOFileBasedWebEntity',
 	#instVars : [
 		'htmlDocument',
 		'htmlString'
 	],
-	#category : #'Foliage-Core-Model'
+	#category : 'Foliage-Core-Model',
+	#package : 'Foliage-Core',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOHTMLPage class >> supportedFileExtensions [
 	^ #( html )
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FOHTMLPage >> acceptFOVisitor: aFOVisitor [ 
 	^ aFOVisitor visitHTMLPageSource: self 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FOHTMLPage >> asFOBlogPost [
 	^ self as: FOBlogPost
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOHTMLPage >> buildHtmlDocument [
 	| document |
 	document := Soup fromString: self htmlString utf8Encoded asString.
@@ -31,38 +33,38 @@ FOHTMLPage >> buildHtmlDocument [
 	^ document
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FOHTMLPage >> buildHtmlString [
 	htmlDocument ifNotNil: [ 
 		^ htmlDocument printString ].
 	^ self render
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOHTMLPage >> htmlDocument [
 	^ htmlDocument ifNil: [ 
 		htmlDocument := self buildHtmlDocument ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FOHTMLPage >> htmlString [
 	^ htmlString ifNil: [ 
 		htmlString := self buildHtmlString ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FOHTMLPage >> newRenderContext [ 
 	^ super newRenderContext 
 		page: self 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FOHTMLPage >> render [
 
 	^ nil
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FOHTMLPage >> renderContextClass [
 
 	^ FOPageRenderContext

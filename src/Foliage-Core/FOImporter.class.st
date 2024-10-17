@@ -1,37 +1,39 @@
 Class {
-	#name : #FOImporter,
-	#superclass : #Object,
+	#name : 'FOImporter',
+	#superclass : 'Object',
 	#instVars : [
 		'website'
 	],
-	#category : #'Foliage-Core-Base'
+	#category : 'Foliage-Core-Base',
+	#package : 'Foliage-Core',
+	#tag : 'Base'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOImporter class >> path: aString [
 	^ self new
 		path: aString asFileReference 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOImporter >> extensionsToIgnore [
 	^ #( swp DS_Store)
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
 FOImporter >> readAll: files [
 	files do: [ :file | 
 		self readFile: file ]
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
 FOImporter >> readFile: file [
 	self 
 		readFile: file
 		path: (website relativeRawPath: file)
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
 FOImporter >> readFile: file path: aPath [ 
 	|  model |
 	[ (self readerForExtension: file extension) ifNotNil: [ :reader | 
@@ -43,7 +45,7 @@ FOImporter >> readFile: file path: aPath [
 			do: [ :error | Transcript show: 'could not read in ', file asString; cr ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOImporter >> readerForExtension: aString [ 
 	(self extensionsToIgnore includes: aString) ifTrue: [ 
 		^ nil ].
@@ -54,7 +56,7 @@ FOImporter >> readerForExtension: aString [
 	^  FOFileReader
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOImporter >> website: aWebsite [ 
 	website := aWebsite 
 ]

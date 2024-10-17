@@ -1,10 +1,12 @@
 Class {
-	#name : #FORSSVisitor,
-	#superclass : #FOModelVisitor,
-	#category : #'Foliage-Core-RSS'
+	#name : 'FORSSVisitor',
+	#superclass : 'FOModelVisitor',
+	#category : 'Foliage-Core-RSS',
+	#package : 'Foliage-Core',
+	#tag : 'RSS'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FORSSVisitor >> visitBlog: aFOBlog [ 
 	| feed channel |
 	feed := FORSSFeed new.
@@ -18,12 +20,12 @@ FORSSVisitor >> visitBlog: aFOBlog [
 	^ feed
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FORSSVisitor >> visitBlogPost: aFOBlogPost [ 
 	^ self visitPillarPage: aFOBlogPost
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FORSSVisitor >> visitPillarPage: aFOPillarPage [ 
 	^ FORSSItem new 
 		title: aFOPillarPage title;
