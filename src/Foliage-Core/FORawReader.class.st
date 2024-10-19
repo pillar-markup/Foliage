@@ -17,7 +17,7 @@ FORawReader class >> file: aFileReference [
 
 { #category : 'accessing' }
 FORawReader class >> forFileExtension: aString [ 
-	^ (self allSubclasses reject: #isAbstract)
+	^ (self allSubclasses reject: [:each | each isAbstract])
 		detect: [ :each | each matchesFileExtension: aString ]
 		ifNone: [  nil ]
 ]

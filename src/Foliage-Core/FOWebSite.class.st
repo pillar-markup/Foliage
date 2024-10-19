@@ -1,3 +1,7 @@
+"
+I'm the main entity holding information relative to the site (uri, path) but also model (various files).
+I'm populated by FOReader subclasses.
+"
 Class {
 	#name : 'FOWebSite',
 	#superclass : 'Object',
@@ -13,9 +17,9 @@ Class {
 	#classInstVars : [
 		'instance'
 	],
-	#category : 'Foliage-Core-RSS',
+	#category : 'Foliage-Core-Model',
 	#package : 'Foliage-Core',
-	#tag : 'RSS'
+	#tag : 'Model'
 }
 
 { #category : 'instance creation' }

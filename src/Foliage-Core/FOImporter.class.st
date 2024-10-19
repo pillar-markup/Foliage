@@ -28,6 +28,7 @@ FOImporter >> readAll: files [
 
 { #category : 'generation' }
 FOImporter >> readFile: file [
+	self halt.
 	self 
 		readFile: file
 		path: (website relativeRawPath: file)
@@ -35,7 +36,7 @@ FOImporter >> readFile: file [
 
 { #category : 'generation' }
 FOImporter >> readFile: file path: aPath [ 
-	|  model |
+	"|  model |
 	[ (self readerForExtension: file extension) ifNotNil: [ :reader | 
 		model := (reader file: file) model.
 		(website resolvePath: aPath parent)
@@ -43,6 +44,7 @@ FOImporter >> readFile: file path: aPath [
 			put: model ] ]
 			on: NeoJSONParseError 
 			do: [ :error | Transcript show: 'could not read in ', file asString; cr ]
+	"
 ]
 
 { #category : 'accessing' }

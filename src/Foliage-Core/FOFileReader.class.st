@@ -1,3 +1,6 @@
+"
+I'm a file reader for css
+"
 Class {
 	#name : 'FOFileReader',
 	#superclass : 'FORawReader',

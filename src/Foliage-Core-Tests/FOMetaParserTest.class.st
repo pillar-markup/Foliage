@@ -1,15 +1,17 @@
 Class {
-	#name : #FOMetaParserTest,
-	#superclass : #TestCase,
-	#category : #'Foliage-Core-Tests'
+	#name : 'FOMetaParserTest',
+	#superclass : 'TestCase',
+	#category : 'Foliage-Core-Tests-Reader',
+	#package : 'Foliage-Core-Tests',
+	#tag : 'Reader'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 FOMetaParserTest >> parse: aString [ 
 	^ FOMetaReader parse: aString
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FOMetaParserTest >> testMetaPlusContent [
 	| props |
 	props := self parse: 'title: A blog entry
@@ -21,7 +23,7 @@ Some html maybe'.
 	self assert: (props at: 'foo') equals: 'bar'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FOMetaParserTest >> testMultipleLinesKeyValue [
 	| props |
 	props := self parse: 'title: A blog entry
@@ -31,7 +33,7 @@ foo: bar'.
 	self assert: (props at: 'foo') equals: 'bar'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FOMetaParserTest >> testOneLineKeyArray [
 	| props |
 	props := self parse: 'title: one ; two; three  '.
@@ -39,7 +41,7 @@ FOMetaParserTest >> testOneLineKeyArray [
 	self assert: (props at: 'title') equals: #( one two three ) asOrderedCollection 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FOMetaParserTest >> testOneLineKeyValue [
 	| props |
 	props := self parse: 'title: A blog entry'.
@@ -47,7 +49,7 @@ FOMetaParserTest >> testOneLineKeyValue [
 	self assert: (props at: 'title') equals: 'A blog entry'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FOMetaParserTest >> testOneLineKeyValueWithKeySpaces [
 	| props |
 	props := self parse: ' title :  A blog entry   '.

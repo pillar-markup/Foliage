@@ -173,7 +173,7 @@ FOPublisher >> blogs: anObject [
 { #category : 'actions' }
 FOPublisher >> publish [
 	| site allFiles |
-
+	self halt.
 	('Publishing: ', self baseUri) emit.
 
 	site := FOWebSite new
