@@ -1,3 +1,7 @@
+"
+I contain some files. 
+They are added using at:put: and accessed using /
+"
 Class {
 	#name : 'FOWebContainer',
 	#superclass : 'FOWebResource',
@@ -16,7 +20,8 @@ FOWebContainer >> / aString [
 
 { #category : 'accessing' }
 FOWebContainer >> allPages [
-	^ items select: #isPage
+
+	^ items select: [ :each | each isPage ]
 ]
 
 { #category : 'accessing' }
@@ -30,9 +35,10 @@ FOWebContainer >> at: key put: value [
 ]
 
 { #category : 'initialization' }
-FOWebContainer >> initialize [ 
+FOWebContainer >> initialize [
+
 	super initialize.
-	items := SmallDictionary  new
+	items := SmallDictionary new
 ]
 
 { #category : 'accessing' }

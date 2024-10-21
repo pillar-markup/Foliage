@@ -1,6 +1,12 @@
 "
 I'm the main entity holding information relative to the site (uri, path) but also model (various files).
 I'm populated by FOReader subclasses.
+
+As a model I store 
+- image files (basically just a file reference)
+- pillar files (for these I parse the microdown and convert it to pillar. 
+
+This is on the subclasses of `FOWebResource` that a publisher visitor will create the concrete website.
 "
 Class {
 	#name : 'FOWebSite',
@@ -143,6 +149,7 @@ FOWebSite >> propertyAt: aString put: anObject [
 
 { #category : 'building' }
 FOWebSite >> publish [
+
 	FOPublishVisitor new
 		start: self
 
