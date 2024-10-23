@@ -1,3 +1,9 @@
+"
+I use the file reader hierarchy (subclasses of `FOAbstractReader`) to read and create a model of files. 
+Most of the file kinds (images, html,...) are represented as a simple reference. 
+Microdown files are however parsed and represented a document tree that can then later be converted to HTML.
+
+"
 Class {
 	#name : 'FOImporter',
 	#superclass : 'Object',
@@ -52,7 +58,7 @@ FOImporter >> readFile: file path: aPath [
 FOImporter >> readerForExtension: aString [ 
 	(self extensionsToIgnore includes: aString) ifTrue: [ 
 		^ nil ].
-	(FORawReader forFileExtension: aString)
+	(FOAbstractReader forFileExtension: aString)
 		ifNotNil: [ :cls | ^ cls ].
 	
 	"just copy it"

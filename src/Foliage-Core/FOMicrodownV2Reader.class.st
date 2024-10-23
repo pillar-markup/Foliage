@@ -3,7 +3,7 @@ Once we will have migrated to MicrodownV2 we will see.
 "
 Class {
 	#name : 'FOMicrodownV2Reader',
-	#superclass : 'FORawReader',
+	#superclass : 'FOAbstractReader',
 	#category : 'Foliage-Core-Reader',
 	#package : 'Foliage-Core',
 	#tag : 'Reader'

@@ -1,5 +1,5 @@
 Class {
-	#name : 'FORawReader',
+	#name : 'FOAbstractReader',
 	#superclass : 'Object',
 	#instVars : [
 		'file',
@@ -11,29 +11,29 @@ Class {
 }
 
 { #category : 'accessing' }
-FORawReader class >> file: aFileReference [
+FOAbstractReader class >> file: aFileReference [
 	^ self new file: aFileReference 
 ]
 
 { #category : 'accessing' }
-FORawReader class >> forFileExtension: aString [ 
+FOAbstractReader class >> forFileExtension: aString [ 
 	^ (self allSubclasses reject: [:each | each isAbstract])
 		detect: [ :each | each matchesFileExtension: aString ]
 		ifNone: [  nil ]
 ]
 
 { #category : 'testing' }
-FORawReader class >> matchesFileExtension: aString [ 
+FOAbstractReader class >> matchesFileExtension: aString [ 
 	^ self supportedFileExtensions includes: aString
 ]
 
 { #category : 'accessing' }
-FORawReader >> file: aFileReference [ 
+FOAbstractReader >> file: aFileReference [ 
 	file := aFileReference 
 ]
 
 { #category : 'accessing' }
-FORawReader >> stream [ 
+FOAbstractReader >> stream [ 
 	^ stream ifNil: [ 
 		stream := file readStream ]
 ]

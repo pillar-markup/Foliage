@@ -1,6 +1,6 @@
 Class {
 	#name : 'FOImageReader',
-	#superclass : 'FORawReader',
+	#superclass : 'FOAbstractReader',
 	#category : 'Foliage-Core-Reader',
 	#package : 'Foliage-Core',
 	#tag : 'Reader'

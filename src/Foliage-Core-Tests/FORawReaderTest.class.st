@@ -12,9 +12,9 @@ Class {
 { #category : 'tests' }
 FORawReaderTest >> testFactoryIsWorking [ 
 
-	self assert: (FORawReader forFileExtension: 'glop') isNil.
-	self assert: (FORawReader forFileExtension: 'md') equals: FOMicrodownReader.
-	self assert: (FORawReader forFileExtension: 'css') equals: FOFileReader.
+	self assert: (FOAbstractReader forFileExtension: 'glop') isNil.
+	self assert: (FOAbstractReader forFileExtension: 'md') equals: FOMicrodownReader.
+	self assert: (FOAbstractReader forFileExtension: 'css') equals: FOFileReader.
 	
 ]
 
