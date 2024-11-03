@@ -18,7 +18,7 @@ FOMetaParserTest >> testMetaPlusContent [
 foo: bar
 
 Some html maybe'.
-	self assert: props size = 2.
+	self assert: props size equals: 2.
 	self assert: (props at: 'title') equals: 'A blog entry'.
 	self assert: (props at: 'foo') equals: 'bar'
 ]
@@ -28,7 +28,7 @@ FOMetaParserTest >> testMultipleLinesKeyValue [
 	| props |
 	props := self parse: 'title: A blog entry
 foo: bar'.
-	self assert: props size = 2.
+	self assert: props size equals: 2.
 	self assert: (props at: 'title') equals: 'A blog entry'.
 	self assert: (props at: 'foo') equals: 'bar'
 ]
@@ -37,7 +37,7 @@ foo: bar'.
 FOMetaParserTest >> testOneLineKeyArray [
 	| props |
 	props := self parse: 'title: one ; two; three  '.
-	self assert: props size = 1.
+	self assert: props size equals: 1.
 	self assert: (props at: 'title') equals: #( one two three ) asOrderedCollection 
 ]
 
@@ -45,7 +45,7 @@ FOMetaParserTest >> testOneLineKeyArray [
 FOMetaParserTest >> testOneLineKeyValue [
 	| props |
 	props := self parse: 'title: A blog entry'.
-	self assert: props size = 1.
+	self assert: props size equals: 1.
 	self assert: (props at: 'title') equals: 'A blog entry'
 ]
 
@@ -53,6 +53,6 @@ FOMetaParserTest >> testOneLineKeyValue [
 FOMetaParserTest >> testOneLineKeyValueWithKeySpaces [
 	| props |
 	props := self parse: ' title :  A blog entry   '.
-	self assert: props size = 1.
+	self assert: props size equals: 1.
 	self assert: (props at: 'title') equals: 'A blog entry'
 ]

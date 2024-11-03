@@ -154,6 +154,12 @@ FOImporterTest >> mdOneFileName [
 ]
 
 { #category : 'data' }
+FOImporterTest >> mdTwoFileName [
+
+	^ 'gsoc.md2'
+]
+
+{ #category : 'data' }
 FOImporterTest >> pngFileName [
 
 	^ 'aPNG.png'
@@ -166,6 +172,8 @@ FOImporterTest >> setUp [
 	root := FileSystem memory root.
 	root / self mdOneFileName
 		writeStreamDo: [ :st | st nextPutAll: self gsocContentsMD ].
+	root / self mdTwoFileName
+		writeStreamDo: [ :st | st nextPutAll: self gsocContentsMD2 ].
 	
 	root / self pngFileName
 		writeStreamDo: [ :st | st nextPutAll: 'This is a PNG' ].
@@ -191,9 +199,26 @@ FOImporterTest >> testReadFileMicrodonwContentsIsParsed [
 	web := (FOWebSite new baseUri: 'http://pharo.org').
 	importer := FOImporter new.
 	importer	website: web.
+	importer readFile: root / 'gsoc.md2'.
+	"I do not get why we have this path but why not for now. "
+	self assert: ( web root / '..' / '..' / '..' / '..'/ '..'/ '..'/ '..'/ 'gsoc.md2') document class equals: MicRootBlock
+	
+	"Check readDocumentFrom:"
+]
+
+{ #category : 'tests' }
+FOImporterTest >> testReadFileMicrodownV1ContentsIsParsedAndConvertedAsPillar [
+	"this version md is for manual meta data + md -> pillar"
+	
+	| importer web |
+	web := (FOWebSite new baseUri: 'http://pharo.org').
+	importer := FOImporter new.
+	importer	website: web.
 	importer readFile: root / 'gsoc.md'.
 	"I do not get why we have this path but why not for now. "
 	self assert: ( web root / '..' / '..' / '..' / '..'/ '..'/ '..'/ '..'/ 'gsoc.md') document class equals: PRDocument. 
+	
+	"Check readDocumentFrom:"
 ]
 
 { #category : 'tests' }

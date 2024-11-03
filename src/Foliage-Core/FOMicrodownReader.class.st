@@ -24,7 +24,7 @@ FOMicrodownReader >> model [
 { #category : 'reading' }
 FOMicrodownReader >> readDocumentFrom: aStream [
 
-	^ (MicrodownParser parse: aStream upToEnd)
+	^ (MicrodownParser parse: aStream upToEnd) asPillar
 
 ]
 
