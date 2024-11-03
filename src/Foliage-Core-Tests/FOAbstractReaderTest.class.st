@@ -2,7 +2,7 @@
 A FORawReaderTest is a test class for testing the behavior of FORawReader
 "
 Class {
-	#name : 'FORawReaderTest',
+	#name : 'FOAbstractReaderTest',
 	#superclass : 'TestCase',
 	#category : 'Foliage-Core-Tests-Reader',
 	#package : 'Foliage-Core-Tests',
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : 'tests' }
-FORawReaderTest >> testFactoryIsWorking [ 
+FOAbstractReaderTest >> testFactoryIsWorking [ 
 
 	self assert: (FOAbstractReader forFileExtension: 'glop') isNil.
 	self assert: (FOAbstractReader forFileExtension: 'md') equals: FOMicrodownReader.
@@ -19,7 +19,7 @@ FORawReaderTest >> testFactoryIsWorking [
 ]
 
 { #category : 'tests' }
-FORawReaderTest >> testMatchesFileExtensions [
+FOAbstractReaderTest >> testMatchesFileExtensions [
 
 	self assert: (FOFileReader matchesFileExtension: 'css').
 	self assert: (FOFileReader matchesFileExtension: 'js').

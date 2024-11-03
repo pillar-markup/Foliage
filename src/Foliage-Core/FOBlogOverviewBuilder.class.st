@@ -24,7 +24,8 @@ FOBlogOverviewBuilder >> blog: aBlog [
 
 { #category : 'building' }
 FOBlogOverviewBuilder >> buildAbstract: aPage [
-	
+		
+	self halt.
 	^ PRRaw content: aPage renderAbstract
 ]
 

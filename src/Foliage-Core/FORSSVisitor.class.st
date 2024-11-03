@@ -22,7 +22,7 @@ FORSSVisitor >> visitBlog: aFOBlog [
 
 { #category : 'visiting' }
 FORSSVisitor >> visitBlogPost: aFOBlogPost [ 
-	^ self visitPillarPage: aFOBlogPost
+	^ self visitMicrodownPage: aFOBlogPost
 ]
 
 { #category : 'visiting' }

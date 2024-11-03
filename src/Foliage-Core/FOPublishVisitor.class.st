@@ -14,11 +14,6 @@ FOPublishVisitor >> copyResource: aResource [
 	aResource sourcePath asFileReference copyTo: target
 ]
 
-{ #category : 'accessing' }
-FOPublishVisitor >> templateForLayout: aString [ 
-	self shouldBeImplemented.
-]
-
 { #category : 'visiting' }
 FOPublishVisitor >> visitBlog: aFOBlog [ 
 
@@ -27,7 +22,7 @@ FOPublishVisitor >> visitBlog: aFOBlog [
 
 { #category : 'visiting' }
 FOPublishVisitor >> visitBlogPost: aFOBlogPost [ 
-	^ self visitPillarPage: aFOBlogPost 
+	^ self visitMicrodownPage: aFOBlogPost 
 ]
 
 { #category : 'visiting' }

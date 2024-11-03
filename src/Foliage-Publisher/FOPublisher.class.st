@@ -6,9 +6,9 @@ Here are some random notes so that I understand something.
 FOPublisher commandLine activateWith: {
     'foliage'.
     'publish'.
-    '--source'. '/home/esteban/dev/pharo/foliage/test/pharo-test-master/site'.
-    '--target'. '/home/esteban/dev/pharo/foliage/test/'.
-    '/home/esteban/dev/pharo/foliage/test/pharo-test-master/site/.foliage.ston' }.
+    '--source'. '/Users/ducasse/Test2/pharo-website/site'.
+    '--target'. '/home/ducasse/Test2/foliage/test/'.
+    '/Users/ducasse/Test2/pharo-website/site/.foliage.ston' }.
 ```
 
 

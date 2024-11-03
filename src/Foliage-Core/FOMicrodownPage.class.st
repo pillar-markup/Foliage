@@ -29,7 +29,7 @@ FOMicrodownPage >> abstractAmountOfCharacters [
 
 { #category : 'visiting' }
 FOMicrodownPage >> acceptFOVisitor: aFOVisitor [ 
-	^ aFOVisitor visitPillarPage: self 
+	^ aFOVisitor visitMicrodownPage: self 
 ]
 
 { #category : 'accessing' }

@@ -1,3 +1,8 @@
+"
+I'm a copy of the Pillar HTML writer. I just write tag, header into a stream. 
+So far I neglect character encoding. 
+In the long term I should disappear and let the Microdown Visitor do its job. 
+"
 Class {
 	#name : 'HTMLWriter',
 	#superclass : 'Object',

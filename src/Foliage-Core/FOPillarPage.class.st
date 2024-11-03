@@ -17,7 +17,7 @@ FOPillarPage class >> supportedFileExtensions [
 { #category : 'accessing' }
 FOPillarPage >> abstract [
 	| abstract |
-	abstract := (Character space join: (document children allButFirst collect: #text)).
+	abstract := (Character space join: (document children allButFirst collect: [:each | each text])).
 	^ abstract first: (abstract size min: self abstractAmountOfCharacters)
 ]
 
