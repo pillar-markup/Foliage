@@ -19,6 +19,15 @@ http://github.com/pharo-project/pharo-website
 ```
 
 
+```
+| l p |
+Transcript open. 
+l := TranscriptLogger new.
+p := FOPublisher new. 
+p baseUri: 'http://pharo.org'.
+l runDuring: [ p publish ].
+```
+
 "
 Class {
 	#name : 'FOPublisher',
@@ -173,7 +182,7 @@ FOPublisher >> blogs: anObject [
 { #category : 'actions' }
 FOPublisher >> publish [
 	| site allFiles |
-	self halt.
+
 	('Publishing: ', self baseUri) emit.
 
 	site := FOWebSite new
