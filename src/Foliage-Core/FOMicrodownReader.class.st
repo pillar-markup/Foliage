@@ -30,7 +30,7 @@ FOMicrodownReader >> readDocumentFrom: aStream [
 
 { #category : 'generation' }
 FOMicrodownReader >> readJsonFrom: aStream [
-	^ (NeoJSONReader on: aStream) next
+	^ (STONJSON fromStream: aStream) next
 	
 ]
 

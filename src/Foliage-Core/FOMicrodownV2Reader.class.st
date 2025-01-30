@@ -17,10 +17,12 @@ FOMicrodownV2Reader class >> supportedFileExtensions [
 { #category : 'reading' }
 FOMicrodownV2Reader >> model [
 
+	| doc |
+	doc := self readDocumentFrom: self stream. 
 	^ FOPillarPage new
 		sourcePath: file asPath;
-		meta: (self readMetaFrom: self stream);
-		document: (self readDocumentFrom: self stream). 
+		meta: doc children first;
+		document: doc. 
 
 ]
 
