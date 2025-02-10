@@ -1,3 +1,7 @@
+"
+I m the root of a virtual folder to keep the model of the website. 
+My leaves are for example instances of FOPillarPage, FOFileObject, or FOWebImage.
+"
 Class {
 	#name : 'FOWebsiteRoot',
 	#superclass : 'FOWebFolder',

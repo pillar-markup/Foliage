@@ -1,3 +1,6 @@
+"
+I represent image resources that do not require any treatment and that the publisher will just copy around. 
+"
 Class {
 	#name : 'FOWebImage',
 	#superclass : 'FOFileBasedWebEntity',

@@ -1,3 +1,6 @@
+"
+I represent resources with a path.
+"
 Class {
 	#name : 'FOFileBasedWebEntity',
 	#superclass : 'FOWebResource',

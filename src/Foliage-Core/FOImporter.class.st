@@ -43,6 +43,7 @@ FOImporter >> readFile: file [
 { #category : 'generation' }
 FOImporter >> readFile: file path: aPath [ 
 	|  model |
+	self halt.
 	[ (self readerForExtension: file extension) ifNotNil: [ :reader | 
 		model := (reader file: file) model.
 		(website resolvePath: aPath parent)

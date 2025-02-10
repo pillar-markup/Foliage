@@ -5,8 +5,11 @@ I'm populated by FOReader subclasses.
 As a model I store 
 - image files (basically just a file reference)
 - pillar files (for these I parse the microdown and convert it to pillar. 
+- my root is a FoWebSiteRoot that manages the model entities as a file trees.
 
 This is on the subclasses of `FOWebResource` that a publisher visitor will create the concrete website.
+
+
 "
 Class {
 	#name : 'FOWebSite',

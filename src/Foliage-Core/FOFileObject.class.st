@@ -1,3 +1,7 @@
+"
+I'm a simple file resources, in the same spirit as the webimages. I will be just copy 
+to the target by the publisher. 
+"
 Class {
 	#name : 'FOFileObject',
 	#superclass : 'FOFileBasedWebEntity',
