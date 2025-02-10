@@ -146,12 +146,12 @@ FOPublisher class >> stonName [
 { #category : 'clap' }
 FOPublisher class >> withErrorHandlingDo: aBlock [
 
-	self halt.
-	aBlock 
+	aBlock value. 
+	"aBlock 
 		on: Error 
-		do: [ :e | 
-			NonInteractiveTranscript stderr crShow: e messageText.
-			Exit signalFailure ]
+		do: [ :e | "
+	"	NonInteractiveTranscript stderr crShow: e messageText.
+			Exit signalFailure ]"
 ]
 
 { #category : 'clap' }
