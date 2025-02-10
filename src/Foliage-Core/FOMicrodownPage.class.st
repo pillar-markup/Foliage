@@ -77,7 +77,8 @@ FOMicrodownPage >> render [
 { #category : 'rendering' }
 FOMicrodownPage >> renderOn: aStream [ 
 
-	FOPillarHTMLVisitor new
+	self halt.
+	MicHTMLVisitor new
 		stream: aStream;
 		start: document.
 ]

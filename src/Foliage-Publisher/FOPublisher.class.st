@@ -28,6 +28,11 @@ p baseUri: 'http://pharo.org'.
 l runDuring: [ p publish ].
 ```
 
+```
+pharo-ui /Users/ducasse/Documents/Pharo/images/P13Foliage3/P13Foliage3.image clap foliage publish --source /Users/ducasse/Test2/pharo-website/site --target /home/ducasse/Test2/foliage/test/ /Users/ducasse/Test2/pharo-website/site/.foliage.ston
+```
+
+
 "
 Class {
 	#name : 'FOPublisher',
@@ -49,6 +54,7 @@ FOPublisher class >> clapPublish: args [
 	self withLoggingDo: [ 
 		self withErrorHandlingDo: [
 			| publisher |
+			
 			publisher := self readFile: (args at: #project) value. 
 			args at: #target ifPresent: [ :arg | publisher targetPath: (arg at: #path) value ].
 			args at: #source ifPresent: [ :arg | publisher sourcePath: (arg at: #path) value ].
@@ -120,7 +126,6 @@ FOPublisher class >> defaultTemplatePath [
 { #category : 'clap' }
 FOPublisher class >> readFile: aName [
 	| reference |
-
 	reference := aName asFileReference.
 	reference exists ifFalse: [ 
 		self error: ('File {1} does not exists' format: { reference fullName }) ].
@@ -141,6 +146,7 @@ FOPublisher class >> stonName [
 { #category : 'clap' }
 FOPublisher class >> withErrorHandlingDo: aBlock [
 
+	self halt.
 	aBlock 
 		on: Error 
 		do: [ :e | 
@@ -207,7 +213,9 @@ FOPublisher >> publish [
 		blog emit.
 		"blog rssFeed addHeadersTo: blog / 'index.html'" ].
 	
-	site publish
+	self halt.
+	site publish.
+	self halt. 
 ]
 
 { #category : 'accessing' }
