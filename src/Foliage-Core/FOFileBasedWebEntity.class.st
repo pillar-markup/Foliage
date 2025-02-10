@@ -28,6 +28,15 @@ FOFileBasedWebEntity >> name [
 	^ parent nameOf: self
 ]
 
+{ #category : 'printing' }
+FOFileBasedWebEntity >> printOn: aStream [
+
+	super printOn: aStream.
+	sourcePath ifNotNil: [ 
+		aStream nextPutAll: '(', sourcePath basename asString , ')'
+		 ]
+]
+
 { #category : 'accessing' }
 FOFileBasedWebEntity >> sourcePath [
 	^ sourcePath

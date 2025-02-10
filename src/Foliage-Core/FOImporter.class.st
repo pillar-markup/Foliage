@@ -3,6 +3,12 @@ I use the file reader hierarchy (subclasses of `FOAbstractReader`) to read and c
 Most of the file kinds (images, html,...) are represented as a simple reference. 
 Microdown files are however parsed and represented a document tree that can then later be converted to HTML.
 
+The method readFile: file path: aPath is the most important: it parses, builds and store the corresponding entity. 
+This entity will be stored in the root structure of the website. 
+
+```
+	model := (reader file: file) model.
+```
 "
 Class {
 	#name : 'FOImporter',
@@ -43,7 +49,6 @@ FOImporter >> readFile: file [
 { #category : 'generation' }
 FOImporter >> readFile: file path: aPath [ 
 	|  model |
-	self halt.
 	[ (self readerForExtension: file extension) ifNotNil: [ :reader | 
 		model := (reader file: file) model.
 		(website resolvePath: aPath parent)
