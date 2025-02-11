@@ -42,7 +42,8 @@ Class {
 		'targetPath',
 		'sourcePath',
 		'templatePath',
-		'blogs'
+		'blogs',
+		'site'
 	],
 	#category : 'Foliage-Publisher',
 	#package : 'Foliage-Publisher'
@@ -186,38 +187,47 @@ FOPublisher >> blogs: anObject [
 ]
 
 { #category : 'actions' }
+FOPublisher >> configureBlogs [
+	self blogs do: [ :assoc |
+		| blog |
+		blog := (site / assoc key) convertToBlog.
+		blog title: assoc value.
+		blog
+			at: #'index.html' put: blog overviewPage;
+			at: #'rss.xml' put: blog rssFeed.
+		blog emit
+		"blog rssFeed addHeadersTo: blog / 'index.html'" ].
+]
+
+{ #category : 'as yet unclassified' }
+FOPublisher >> configureNewWebSite [
+
+	^ FOWebSite new
+		        baseUri: self baseUri;
+		        targetPath: self targetPath asFileReference;
+		        rawPath: self sourcePath asFileReference;
+		        templatePath:
+			        self sourcePath asFileReference / self templatePath.
+]
+
+{ #category : 'actions' }
 FOPublisher >> publish [
-	| site allFiles |
 
-	('Publishing: ', self baseUri) emit.
-
-	site := FOWebSite new
-		baseUri: self baseUri;
-		targetPath: self targetPath asFileReference;
-		rawPath: self sourcePath asFileReference;
-		templatePath: self sourcePath asFileReference / self templatePath.
-	
+	| allFiles |
+	('Publishing: ' , self baseUri) emit.
+	site := self configureNewWebSite.
 	site emit.
 
 	allFiles := site rawPath allFiles.
 	site importer readAll: allFiles.
-	
-	self halt.
 
-	('Imported ', allFiles size asString, ' files') emit.
-	
-	self blogs do: [ :assoc | | blog |
-		blog := (site / assoc key) convertToBlog.
-		blog title: assoc value.
-		blog 
-    		at: #'index.html' put: blog overviewPage;
-    		at: #'rss.xml' put: blog rssFeed.
-		blog emit.
-		"blog rssFeed addHeadersTo: blog / 'index.html'" ].
-	
+	('Imported ' , allFiles size asString , ' files') emit.
+
+	self configureBlogs.
+
 	self halt.
 	site publish.
-	self halt. 
+	self halt
 ]
 
 { #category : 'accessing' }
