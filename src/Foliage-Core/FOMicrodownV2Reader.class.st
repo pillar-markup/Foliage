@@ -19,7 +19,7 @@ FOMicrodownV2Reader >> model [
 
 	| doc |
 	doc := self readDocumentFrom: self stream. 
-	^ FOPillarPage new
+	^ FOMicrodownPage new
 		sourcePath: file asPath;
 		meta: doc children first;
 		document: doc. 

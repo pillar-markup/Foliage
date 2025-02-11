@@ -7,15 +7,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-FoliageTodo >> m001 [
-
-	'extract site creation from publisher >> publish
-	+ write some tests.
-	'
-]
-
-{ #category : 'as yet unclassified' }
-FoliageTodo >> m002 [
+FoliageTodo >> m002Done [
 
 	' I want to get a FOPillarPage from 
 		File @ /Users/ducasse/Test2/pharo-website/site/license.md
@@ -24,4 +16,15 @@ FoliageTodo >> m002 [
 	+ 
 	
 	' We should do that for each of the kind of extensions because adfter we will do one for md2'
+]
+
+{ #category : 'as yet unclassified' }
+FoliageTodo >> m003 [
+
+	'Define a test case for each entity of the model
+	calling directly the reader.
+	
+	see FOPillarPageTest FOMicrodownPageTest
+	
+	'
 ]

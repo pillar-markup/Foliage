@@ -201,6 +201,7 @@ FOImporterTest >> testReadFileMicrodonwContentsIsParsed [
 	importer	website: web.
 	importer readFile: root / 'gsoc.md2'.
 	"I do not get why we have this path but why not for now. "
+	self halt.
 	self assert: ( web root / '..' / '..' / '..' / '..'/ '..'/ '..'/ '..'/ 'gsoc.md2') document class equals: MicRootBlock
 	
 	"Check readDocumentFrom:"
