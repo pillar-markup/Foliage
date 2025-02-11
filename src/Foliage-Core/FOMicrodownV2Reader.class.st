@@ -15,7 +15,7 @@ FOMicrodownV2Reader class >> supportedFileExtensions [
 ]
 
 { #category : 'reading' }
-FOMicrodownV2Reader >> model [
+FOMicrodownV2Reader >> createModelEntity [
 
 	| doc |
 	doc := self readDocumentFrom: self stream. 

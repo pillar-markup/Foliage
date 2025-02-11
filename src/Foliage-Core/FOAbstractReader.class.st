@@ -28,6 +28,13 @@ FOAbstractReader class >> matchesFileExtension: aString [
 ]
 
 { #category : 'accessing' }
+FOAbstractReader >> createModelEntity [
+	"Each of my subclass should return an adequate object of the site metamodel."
+	
+	^ self subclassResponsibility 
+]
+
+{ #category : 'accessing' }
 FOAbstractReader >> file: aFileReference [ 
 	file := aFileReference 
 ]

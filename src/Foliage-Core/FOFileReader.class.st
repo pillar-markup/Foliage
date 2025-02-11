@@ -15,7 +15,7 @@ FOFileReader class >> supportedFileExtensions [
 ]
 
 { #category : 'accessing' }
-FOFileReader >> model [ 
+FOFileReader >> createModelEntity [ 
 	^ FOFileObject new 
 		sourcePath: file asPath
 ]

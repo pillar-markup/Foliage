@@ -12,7 +12,7 @@ FOMicrodownReader class >> supportedFileExtensions [
 ]
 
 { #category : 'reading' }
-FOMicrodownReader >> model [
+FOMicrodownReader >> createModelEntity [
 
 	^ FOPillarPage new
 		sourcePath: file asPath;

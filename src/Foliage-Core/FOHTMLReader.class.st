@@ -12,7 +12,7 @@ FOHTMLReader class >> supportedFileExtensions [
 ]
 
 { #category : 'instance creation' }
-FOHTMLReader >> model [
+FOHTMLReader >> createModelEntity [
 	^ FOHTMLPage new
 		sourcePath: file asPath
 ]

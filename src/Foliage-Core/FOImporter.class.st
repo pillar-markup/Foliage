@@ -50,7 +50,7 @@ FOImporter >> readFile: file [
 FOImporter >> readFile: file path: aPath [ 
 	|  model |
 	[ (self readerForExtension: file extension) ifNotNil: [ :reader | 
-		model := (reader file: file) model.
+		model := (reader file: file) createModelEntity.
 		(website resolvePath: aPath parent)
 			at: aPath basename
 			put: model ] ]

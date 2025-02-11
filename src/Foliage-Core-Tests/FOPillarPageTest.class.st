@@ -44,7 +44,7 @@ You can get an instant invite following this [link](https://discord.gg/QewZMZa).
 FOPillarPageTest >> testGetAPageWithAPRDocument [
 
 	| aPage |
-	aPage := (FOMicrodownReader file: root / 'community.md') model.
+	aPage := (FOMicrodownReader file: root / 'community.md') createModelEntity.
 	self assert: aPage class equals: FOPillarPage.
 	self assert: (aPage meta at: 'layout') equals: 'default'.
 	self assert: (aPage meta at: 'publishDate') equals: '2021-11-04'.

@@ -44,7 +44,7 @@ You can get an instant invite following this [link](https://discord.gg/QewZMZa).
 FOMicrodownPageTest >> testGetAMicrodownPageWithAMicrodownTree [
 
 	| aPage |
-	aPage := (FOMicrodownV2Reader file: root / 'community.md') model.
+	aPage := (FOMicrodownV2Reader file: root / 'community.md') createModelEntity.
 	self assert: aPage class equals: FOMicrodownPage.
 	self assert: (aPage meta atKey: 'layout') equals: 'default'.
 	self assert: (aPage meta atKey: 'publishDate') equals: '2021-11-04'.
