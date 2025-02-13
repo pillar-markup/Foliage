@@ -50,3 +50,21 @@ FOPillarPageTest >> testGetAPageWithAPRDocument [
 	self assert: (aPage meta at: 'publishDate') equals: '2021-11-04'.
 	self assert: aPage document class equals: PRDocument
 ]
+
+{ #category : 'tests' }
+FOPillarPageTest >> testHTMLString [
+
+	| aPage |
+	aPage := (FOMicrodownReader file: root / 'community.md') createModelEntity.
+	self assert: aPage htmlString
+]
+
+{ #category : 'tests' }
+FOPillarPageTest >> testHTMLString2 [
+
+	| web aPillarPage |
+	web := FOWebSite new. 
+	web importer readFile: root / 'community.md'.
+	aPillarPage := (web / 'community.md').
+	self assert: aPillarPage htmlString
+]

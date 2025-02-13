@@ -220,6 +220,7 @@ FOPublisher >> publish [
 	site emit.
 
 	allFiles := site rawPath allFiles.
+	self halt.
 	site importer readAll: allFiles.
 
 	('Imported ' , allFiles size asString , ' files') emit.
