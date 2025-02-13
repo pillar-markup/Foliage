@@ -16,6 +16,16 @@ To load it in Pharo 13
                     unload;
                     forget ] ].
 
+Smalltalk globals
+	at: #BaselineOfMicrodown 
+	ifPresent: [ :c | c removeFromSystem ].
+
+Metacello new
+	baseline: 'Microdown';
+	repository: 'github://pillar-markup/Microdown:dev/src';
+	onConflict: [ :ex | ex useIncoming ];
+	onUpgrade: [ :ex | ex useIncoming ];
+	load: #('All').
 
 Metacello new
 	baseline: 'Pillar';
@@ -24,13 +34,6 @@ Metacello new
 	onUpgrade: [ :ex | ex useIncoming ];
 	load.
 
-Metacello new
-	baseline: 'Microdown';
-	repository: 'github://pillar-markup/Microdown:dev/src';
-	onConflict: [ :ex | ex useIncoming ];
-	onUpgrade: [ :ex | ex useIncoming ];
-	load: #('All').
-	
 Metacello new
 	baseline: 'Foliage';
 	repository: 'github://Ducasse/Foliage:master/src';
