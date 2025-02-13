@@ -23,6 +23,8 @@ FOMicrodownV2Reader >> createModelEntity [
 		sourcePath: file asPath;
 		meta: doc children first;
 		document: doc. 
+		
+	"may be we could remove the metadata from the document since it is the first element."
 
 ]
 
@@ -31,20 +33,4 @@ FOMicrodownV2Reader >> readDocumentFrom: aStream [
 
 	^ (MicrodownParser parse: aStream upToEnd)
 
-]
-
-{ #category : 'generation' }
-FOMicrodownV2Reader >> readJsonFrom: aStream [
-	^ (NeoJSONReader on: aStream) next
-	
-]
-
-{ #category : 'generation' }
-FOMicrodownV2Reader >> readMetaFrom: aStream [
-	^ self readSimpleMetaFrom: aStream
-]
-
-{ #category : 'generation' }
-FOMicrodownV2Reader >> readSimpleMetaFrom: aStream [
-	^ (FOMetaReader on: aStream) next
 ]

@@ -29,12 +29,6 @@ FOMicrodownReader >> readDocumentFrom: aStream [
 ]
 
 { #category : 'generation' }
-FOMicrodownReader >> readJsonFrom: aStream [
-	^ (STONJSON fromStream: aStream) next
-	
-]
-
-{ #category : 'generation' }
 FOMicrodownReader >> readMetaFrom: aStream [
 	^ self readSimpleMetaFrom: aStream
 ]
