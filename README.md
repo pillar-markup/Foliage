@@ -44,6 +44,10 @@ Metacello new
 	onConflict: [ :ex | ex useIncoming ];
 	onUpgrade: [ :ex | ex useIncoming ];
 	load.
+
+
+"load manually Microdown-Pillar since it contains the converter from Microdown to Pillar"
+
 ```
 
 Note that the conversion of microdown AST to pillar AST is not loaded. 
