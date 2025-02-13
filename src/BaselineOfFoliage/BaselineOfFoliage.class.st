@@ -26,7 +26,7 @@ BaselineOfFoliage >> baseline: spec [
 			package: 'Foliage-Core-Tests' with: [
 				spec requires: #('Foliage-Core') ].
 		spec 
-			group: 'Core' with: #('Foliage-Core' );
+			group: 'Core' with: #('Foliage-Core' 'Foliage-Publisher');
 			group: 'Publisher' with: #('Core' 'Foliage-Publisher');
 			group: 'Tests' with: #('Foliage-Core-Tests' );
 			group: 'default' with: #('Core' 'Tests');
