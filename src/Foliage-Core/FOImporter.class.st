@@ -50,8 +50,10 @@ FOImporter >> readFile: file [
 FOImporter >> readFile: file path: aPath [ 
 	|  model |
 	[ (self readerForExtension: file extension) ifNotNil: [ :reader | 
-		self halt.
 		model := (reader file: file) createModelEntity.
+		
+		"Set the parent (which is used to compute the root) 
+		of the model based on the tree structure."
 		(website resolvePath: aPath parent)
 			at: aPath basename
 			put: model ] ]

@@ -77,12 +77,14 @@ FOMicrodownPage >> render [
 ]
 
 { #category : 'rendering' }
-FOMicrodownPage >> renderOn: aStream [ 
+FOMicrodownPage >> renderOn: aStream [
 
-	self halt.
-	MicHTMLVisitor new
-		stream: aStream;
-		start: document.
+	| visitor |
+	visitor := MicHTMLVisitor new
+		           stream: aStream;
+		           yourself.
+	visitor visit: document.
+	^ visitor contents
 ]
 
 { #category : 'accessing' }

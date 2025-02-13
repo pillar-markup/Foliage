@@ -204,11 +204,10 @@ FOPublisher >> configureBlogs [
 FOPublisher >> configureNewWebSite [
 
 	^ FOWebSite new
-		        baseUri: self baseUri;
-		        targetPath: self targetPath asFileReference;
-		        rawPath: self sourcePath asFileReference;
-		        templatePath:
-			        self sourcePath asFileReference / self templatePath.
+		  baseUri: self baseUri;
+		  targetPath: self targetPath asFileReference;
+		  rawPath: self sourcePath asFileReference;
+		  templatePath: self sourcePath asFileReference / self templatePath
 ]
 
 { #category : 'actions' }
@@ -220,7 +219,6 @@ FOPublisher >> publish [
 	site emit.
 
 	allFiles := site rawPath allFiles.
-	self halt.
 	site importer readAll: allFiles.
 
 	('Imported ' , allFiles size asString , ' files') emit.
