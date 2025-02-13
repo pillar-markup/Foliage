@@ -8,6 +8,17 @@ For initial instructions have a look at https://norbert.hartl.name/blog/2021-01-
 To load it in Pharo 13
 
 ```
+
+
+
+
+Metacello new
+	baseline: 'Pillar';
+	repository: 'github://pillar-markup/Pillar:dev/src';
+	onConflict: [ :ex | ex useIncoming ];
+	onUpgrade: [ :ex | ex useIncoming ];
+	load.
+
 #( 'Microdown' ) do: [ :name |
         (IceRepository repositoryNamed: name)
             ifNil: [ self inform: 'Project not found: ' , name ]
@@ -26,13 +37,6 @@ Metacello new
 	onConflict: [ :ex | ex useIncoming ];
 	onUpgrade: [ :ex | ex useIncoming ];
 	load: #('All').
-
-Metacello new
-	baseline: 'Pillar';
-	repository: 'github://pillar-markup/Pillar:dev/src';
-	onConflict: [ :ex | ex useIncoming ];
-	onUpgrade: [ :ex | ex useIncoming ];
-	load.
 
 Metacello new
 	baseline: 'Foliage';
