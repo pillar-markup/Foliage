@@ -8,7 +8,7 @@ For initial instructions have a look at https://norbert.hartl.name/blog/2021-01-
 To load it in Pharo 13
 
 ```
-#( 'Microdown' 'BeautifulComments' 'DocumentBrowser' ) do: [ :name |
+#( 'Microdown' ) do: [ :name |
         (IceRepository repositoryNamed: name)
             ifNil: [ self inform: 'Project not found: ' , name ]
             ifNotNil: [ :found |
