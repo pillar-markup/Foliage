@@ -10,3 +10,10 @@ Class {
 FOImageReader class >> supportedFileExtensions [ 
 	^ #( gif jpg jpeg png ) 
 ]
+
+{ #category : 'accessing' }
+FOImageReader >> createModelEntity [ 
+
+	^ FOWebImage new 
+		sourcePath: file asPath
+]

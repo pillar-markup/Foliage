@@ -23,6 +23,9 @@ FORenderContext >> partials [
 
 { #category : 'rendering' }
 FORenderContext >> renderTemplate: template [
+	"Ask mustache to expand the template with the values defined by self partials.
+	Returns the expanded string."
+	
 	^ template 
 		value: self 
 		partials: self partials.

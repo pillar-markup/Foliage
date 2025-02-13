@@ -49,7 +49,9 @@ FOMicrodownPage >> pillar: aPRDocument [
 
 { #category : 'actions' }
 FOMicrodownPage >> publish [
-
+	
+	self halt. 
+	"here we should call the Microdown HTML renderer"
 	self publishPath
 		ensureDelete;
 		writeStreamDo: [ :stream | stream << self htmlString ]

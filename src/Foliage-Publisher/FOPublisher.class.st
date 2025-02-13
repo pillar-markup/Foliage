@@ -25,6 +25,7 @@ Transcript open.
 l := TranscriptLogger new.
 p := FOPublisher new. 
 p baseUri: 'http://pharo.org'.
+p sourcePath: '/Users/ducasse/Test2/pharo-website/site'.
 l runDuring: [ p publish ].
 ```
 

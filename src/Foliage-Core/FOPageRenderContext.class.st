@@ -16,6 +16,8 @@ FOPageRenderContext >> body [
 
 { #category : 'accessing' }
 FOPageRenderContext >> html [
+
+	self halt. 
 	^ String streamContents: [ :s| 
 		page renderOn: s ].
 ]
