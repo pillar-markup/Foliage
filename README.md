@@ -9,16 +9,6 @@ To load it in Pharo 13
 
 ```
 
-
-
-
-Metacello new
-	baseline: 'Pillar';
-	repository: 'github://pillar-markup/Pillar:dev/src';
-	onConflict: [ :ex | ex useIncoming ];
-	onUpgrade: [ :ex | ex useIncoming ];
-	load.
-
 #( 'Microdown' ) do: [ :name |
         (IceRepository repositoryNamed: name)
             ifNil: [ self inform: 'Project not found: ' , name ]
@@ -30,6 +20,16 @@ Metacello new
 Smalltalk globals
 	at: #BaselineOfMicrodown 
 	ifPresent: [ :c | c removeFromSystem ].
+
+
+Metacello new
+	baseline: 'Pillar';
+	repository: 'github://pillar-markup/Pillar:dev/src';
+	onConflict: [ :ex | ex useIncoming ];
+	onUpgrade: [ :ex | ex useIncoming ];
+	load.
+
+
 
 Metacello new
 	baseline: 'Microdown';
