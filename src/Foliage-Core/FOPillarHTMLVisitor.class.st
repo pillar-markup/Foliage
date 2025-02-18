@@ -127,6 +127,7 @@ FOPillarHTMLVisitor >> visitFormat: anObject [
 
 { #category : 'visiting-document' }
 FOPillarHTMLVisitor >> visitHeader: anObject [
+	writer newLine.
 	writer 
 		writeHeaderLevel: anObject level 
 		with: [ self visitDocumentGroup: anObject ]
@@ -191,7 +192,8 @@ FOPillarHTMLVisitor >> visitOrderedList: anObject [
 { #category : 'visiting-document' }
 FOPillarHTMLVisitor >> visitParagraph: anObject [
 
-	^ writer 
+	writer newLine.
+	writer 
 		writeTag: 'p' 
 		with: [ self visitDocumentGroup: anObject ]
 ]

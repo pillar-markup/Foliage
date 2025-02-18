@@ -35,6 +35,12 @@ HTMLWriter >> initialize [
 		encoding: 'utf-8' "
 ]
 
+{ #category : 'flushing' }
+HTMLWriter >> newLine [ 
+	
+	stream nextPutAll: String crlf
+]
+
 { #category : 'accessing' }
 HTMLWriter >> stream: aStream [ 
 	stream := aStream
