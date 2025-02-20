@@ -11,10 +11,12 @@ BaselineOfFoliage >> baseline: spec [
 
 	spec for: #'common' do: [
 		self
+			pillar: spec; 
 			mustache: spec; 
 			neoJson: spec;
 			soup: spec;
 			zinc: spec.
+		spec postLoadDoIt: #postloadWithLoader:withPackageSpec:.
 
 		spec 
 			package: 'Foliage-Core' with: [
@@ -46,6 +48,56 @@ BaselineOfFoliage >> mustache: spec [
 BaselineOfFoliage >> neoJson: spec [
 	spec baseline: 'NeoJSON' with: [
 		spec repository: 'github://svenvc/NeoJSON/repository'].
+]
+
+{ #category : 'baselines' }
+BaselineOfFoliage >> pillar: spec [
+	spec baseline: 'Pillar' with: [
+		spec 
+			repository: 'github://pillar-markup/pillar:dev/src';
+			loads ].
+]
+
+{ #category : 'baselines' }
+BaselineOfFoliage >> postloadWithLoader: loader withPackageSpec: spec [
+
+	| mic |
+	mic := (IceRepository repositoryNamed: 'Microdown').
+	(mic packageNamed: 'Microdown-Pillar') load.
+	
+]
+
+{ #category : 'baselines' }
+BaselineOfFoliage >> preload: loader package: packageSpec [
+	"Ignore pre and post loads if already executed"
+
+	| packagesToUnload mic |
+packagesToUnload := ((PackageOrganizer default packages 
+		select: [ :each | each name beginsWith: 'Microdown' ])  collect: [ :each | each name ]) 
+		reject: [ :each |  
+ 	#('Microdown-RichTextPresenter' 'Microdown-RichTextPresenter-Tests') includes: each ].
+	"these two are not managed by the microdown repo but the documentation.
+	I should rename them in the future to avoid confusion"
+	packagesToUnload := packagesToUnload asOrderedCollection.
+	packagesToUnload add: 'BaselineOfMicrodown'.
+	mic := (IceRepository repositoryNamed: 'Microdown').
+	mic ifNotNil: [ 
+		packagesToUnload do: 
+			[ :each | 
+				(mic packageNamed: each) unload ].
+		mic delete ].
+
+#( 'Microdown' ) do: [ :name |
+        (IceRepository repositoryNamed: name)
+            ifNil: [ self inform: 'Project not found: ' , name ]
+            ifNotNil: [ :found |
+                found
+                    unload;
+                    forget ] ].
+
+Smalltalk globals
+	at: #BaselineOfMicrodown 
+	ifPresent: [ :c | c removeFromSystem ].
 ]
 
 { #category : 'baselines' }
