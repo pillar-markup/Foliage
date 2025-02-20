@@ -37,45 +37,14 @@ Smalltalk globals
 	at: #BaselineOfMicrodown 
 	ifPresent: [ :c | c removeFromSystem ].
 
-"this guy is loading microdown 2.7.1"
 Metacello new
 	baseline: 'Pillar';
 	repository: 'github://pillar-markup/Pillar:dev/src';
 	onConflict: [ :ex | ex useIncoming ];
 	onUpgrade: [ :ex | ex useIncoming ];
 	load.
-	
-	
-packagesToUnload := ((PackageOrganizer default packages 
-		select: [ :each | each name beginsWith: 'Microdown' ])  collect: [ :each | each name ]) 
-		reject: [ :each |  
- 	#('Microdown-RichTextPresenter' 'Microdown-RichTextPresenter-Tests') includes: each ].
-	"these two are not managed by the microdown repo but the documentation.
-	I should rename them in the future to avoid confusion"
-	packagesToUnload := packagesToUnload asOrderedCollection.
-	packagesToUnload add: 'BaselineOfMicrodown'.
-	mic := (IceRepository repositoryNamed: 'Microdown').
-	mic ifNotNil: [ 
-		packagesToUnload do: 
-			[ :each | 
-				(mic packageNamed: each) unload ].
-		mic delete ].
 
-#( 'Microdown' ) do: [ :name |
-        (IceRepository repositoryNamed: name)
-            ifNil: [ self inform: 'Project not found: ' , name ]
-            ifNotNil: [ :found |
-                found
-                    unload;
-                    forget ] ].	
-
-Metacello new
-	baseline: 'Microdown';
-	repository: 'github://pillar-markup/Microdown:dev/src';
-	onConflict: [ :ex | ex useIncoming ];
-	onUpgrade: [ :ex | ex useIncoming ];
-	load: #('All').
-
+mic := (IceRepository repositoryNamed: 'Microdown').
 (mic packageNamed: 'Microdown-Pillar') load.
 
 	
