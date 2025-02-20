@@ -5,9 +5,26 @@ A simple static site generator
 For initial instructions have a look at https://norbert.hartl.name/blog/2021-01-17-foliage-released.html
 
 
-To load it in Pharo 13 - first try
-- should handle gitbrigde
-- pick up a group for pillar load:
+To load it in Pharo 13
+
+
+```
+Metacello new
+	baseline: 'Foliage';
+	repository: 'github://Ducasse/Foliage:master/src';
+	onConflict: [ :ex | ex useIncoming ];
+	onUpgrade: [ :ex | ex useIncoming ];
+	load.
+```
+
+
+
+
+
+
+### Old
+
+
 ```
 | packagesToUnload mic |
 packagesToUnload := ((PackageOrganizer default packages 
