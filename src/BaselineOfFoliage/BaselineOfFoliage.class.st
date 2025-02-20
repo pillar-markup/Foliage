@@ -10,13 +10,18 @@ BaselineOfFoliage >> baseline: spec [
 	<baseline>
 
 	spec for: #'common' do: [
+		
+		spec preLoadDoIt: #preload:package:.
+		spec postLoadDoIt: #postloadWithLoader:withPackageSpec:.
+		
 		self
 			pillar: spec; 
 			mustache: spec; 
 			neoJson: spec;
 			soup: spec;
 			zinc: spec.
-		spec postLoadDoIt: #postloadWithLoader:withPackageSpec:.
+			
+		
 
 		spec 
 			package: 'Foliage-Core' with: [
@@ -55,7 +60,7 @@ BaselineOfFoliage >> pillar: spec [
 	spec baseline: 'Pillar' with: [
 		spec 
 			repository: 'github://pillar-markup/pillar:dev/src';
-			loads ].
+			loads: 'default'  ].
 ]
 
 { #category : 'baselines' }
