@@ -54,7 +54,7 @@ FOVisitorDifferPageTest >> createMDLinkTestFile [
 		ensureCreateFile;
 		writeStreamDo: [ :s |
 			s << '
-Here is a link: [http://pharo.org](http://pharo.org).
+[Pharo](http://pharo.org).
 ' ]
 ]
 

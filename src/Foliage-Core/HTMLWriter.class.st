@@ -60,17 +60,15 @@ HTMLWriter >> writeTag: aString [
 ]
 
 { #category : 'writing' }
-HTMLWriter >> writeTag: aString attributes: aDictionary with: aBlock [ 
+HTMLWriter >> writeTag: aString attributes: aDictionary with: aBlock [
+
 	stream << '<' << aString.
-	aDictionary 
-		ifNotNil: [ 
-			aDictionary asDictionary keysAndValuesDo: [ :key :value |
-				stream << ' ' << key asString << '="' << value asString << '"' ] ].
+	aDictionary ifNotNil: [
+		aDictionary asDictionary keysAndValuesDo: [ :key :value |
+			stream << ' ' << key asString << '="' << value asString << '"' ] ].
 	stream << '>'.
 	aBlock value.
-	stream << '</' << aString << '>'.
-	
-		
+	stream << '</' << aString << '>'
 ]
 
 { #category : 'writing' }

@@ -54,20 +54,20 @@ FOPillarHTMLVisitor >> visitAnnotatedParagraph: aDocument [
 
 { #category : 'visiting-document' }
 FOPillarHTMLVisitor >> visitBoldFormat: anObject [
-	^ writer 
-		writeTag: 'b' 
-		with: [self visitFormat: anObject]
+
+	writer writeTag: 'strong' with: [ self visitFormat: anObject ]
 ]
 
 { #category : 'visiting-document' }
-FOPillarHTMLVisitor >> visitCodeblock: aCodeBlock [ 
-	^ writer 
-		writeTag: 'pre' 
-		with:  [
-			writer 
-				writeTag: 'code'
-				attributes: { #class -> 'language-smalltalk' }
-				with: [ self visitText: aCodeBlock replaceTabs  ]]
+FOPillarHTMLVisitor >> visitCodeblock: aCodeBlock [
+
+	writer newLine.
+	writer writeTag: 'pre' with: [
+		writer
+			writeTag: 'code'
+			with: [ self visitText: aCodeBlock replaceTabs ].
+		"attributes: { (#class -> 'language-smalltalk') }" ].
+	writer newLine.
 ]
 
 { #category : 'visiting-document' }
@@ -97,11 +97,14 @@ FOPillarHTMLVisitor >> visitEmptyParagraph: anObject [
 ]
 
 { #category : 'visiting-document' }
-FOPillarHTMLVisitor >> visitExternalLink: anObject [ 
-	^ writer 
-		writeTag: 'a'
-		attributes: { #href -> (anObject reference asString) } 
-		with: [ self visitLink: anObject ]
+FOPillarHTMLVisitor >> visitExternalLink: anObject [
+
+	writer
+		  writeTag: 'a'
+		  attributes: {
+				  (#href -> anObject reference asString).
+				  (#target -> '_blank') }
+		  with: [ self visitLink: anObject ]
 ]
 
 { #category : 'visiting-document' }
@@ -162,31 +165,35 @@ FOPillarHTMLVisitor >> visitLineBreak: anObject [
 
 { #category : 'visiting-document' }
 FOPillarHTMLVisitor >> visitLink: anObject [
+
 	^ self visitReference: anObject
 ]
 
 { #category : 'visiting-document' }
 FOPillarHTMLVisitor >> visitList: anObject [
-	^ self visitDocumentGroup: anObject
+
+	writer newLine.
+	self visitDocumentGroup: anObject
 ]
 
 { #category : 'visiting-document' }
 FOPillarHTMLVisitor >> visitListItem: anObject [
-	^ writer
-		writeTag: 'li' 
-		with: [self visitDocumentGroup: anObject]
+
+	writer writeTag: 'li' with: [ self visitDocumentGroup: anObject ].	
+	writer newLine
 ]
 
 { #category : 'visiting-document' }
 FOPillarHTMLVisitor >> visitMonospaceFormat: anObject [
-	^ self visitFormat: anObject
+
+	writer writeTag: 'code' with: [ self visitFormat: anObject ]
 ]
 
 { #category : 'visiting-document' }
 FOPillarHTMLVisitor >> visitOrderedList: anObject [
-	^ writer 
-		writeTag: 'ol' 
-		with: [ self visitList: anObject ]
+
+	writer newLine.
+	writer writeTag: 'ol' with: [ self visitList: anObject ].
 ]
 
 { #category : 'visiting-document' }
@@ -282,7 +289,7 @@ FOPillarHTMLVisitor >> visitUnderlineFormat: anObject [
 
 { #category : 'visiting-document' }
 FOPillarHTMLVisitor >> visitUnorderedList: anObject [
-	^ writer 
-		writeTag: 'ul' 
-		with: [ self visitList: anObject ]
+
+	writer newLine.
+	writer writeTag: 'ul' with: [ self visitList: anObject ].
 ]
