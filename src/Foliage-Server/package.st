@@ -1,1 +1,1 @@
-Package { #name : #'Foliage-Server' }
+Package { #name : 'Foliage-Server' }

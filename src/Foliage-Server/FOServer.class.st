@@ -1,52 +1,53 @@
 Class {
-	#name : #FOServer,
-	#superclass : #Object,
+	#name : 'FOServer',
+	#superclass : 'Object',
 	#instVars : [
 		'server',
 		'baseDirectory'
 	],
-	#category : #'Foliage-Server'
+	#category : 'Foliage-Server',
+	#package : 'Foliage-Server'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOServer class >> start [
 	<script>
 
 	^ self new start
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOServer class >> stop [
 	<script>
 	
 	^ ZnServer default stop
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOServer >> baseDirectory [
 
 	^ baseDirectory ifNil: [ baseDirectory := 'generated' asFileReference ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOServer >> baseDirectory: aReference [
 
 	baseDirectory := aReference
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOServer >> baseUrl [
 
 	^ ''
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FOServer >> port [
 
 	^ 7070
 ]
 
-{ #category : #'start/stop' }
+{ #category : 'start/stop' }
 FOServer >> start [
 	<script: 'self new start'>
 

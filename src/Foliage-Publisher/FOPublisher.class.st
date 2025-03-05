@@ -225,9 +225,7 @@ FOPublisher >> publish [
 
 	self configureBlogs.
 
-	self halt.
 	site publish.
-	self halt
 ]
 
 { #category : 'accessing' }

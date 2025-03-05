@@ -1,25 +1,26 @@
 Class {
-	#name : #FOStaticFileServerDelegate,
-	#superclass : #ZnStaticFileServerDelegate,
-	#category : #'Foliage-Server'
+	#name : 'FOStaticFileServerDelegate',
+	#superclass : 'ZnStaticFileServerDelegate',
+	#category : 'Foliage-Server',
+	#package : 'Foliage-Server'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 FOStaticFileServerDelegate >> actualFilenameFor: uri [
 
 	^ (super actualFilenameFor: uri)
 		ifNil: [ super actualFilenameFor: (self tryHtml: uri) ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FOStaticFileServerDelegate >> redirectNeededFor: uri actualFilename: actualFilename [
 
-	uri isDirectoryPath ifTrue: [ ^ false ].  
-	^ (actualFilename endsWith: uri lastPathSegment) not 
-		and: [ (actualFilename endsWith: '.html') not ]
+	uri isDirectoryPath ifTrue: [ ^ false ].
+	^ (actualFilename endsWith: uri lastPathSegment) not and: [
+		  (actualFilename endsWith: '.html') not ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FOStaticFileServerDelegate >> tryHtml: uri [
 	| newUri |
 

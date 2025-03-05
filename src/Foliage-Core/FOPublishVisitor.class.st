@@ -40,6 +40,14 @@ FOPublishVisitor >> visitHTMLPageSource: aFOHTMLPageSource [
 ]
 
 { #category : 'visiting' }
+FOPublishVisitor >> visitMicrodownPage: aMicrodownPage [
+
+	aMicrodownPage emit.
+	aMicrodownPage publish.
+	^ aMicrodownPage 
+]
+
+{ #category : 'visiting' }
 FOPublishVisitor >> visitPillarPage: aFOPillarPage [ 
 	aFOPillarPage emit.
 	aFOPillarPage publish.

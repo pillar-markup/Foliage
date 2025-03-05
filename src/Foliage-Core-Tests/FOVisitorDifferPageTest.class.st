@@ -54,7 +54,7 @@ FOVisitorDifferPageTest >> createMDLinkTestFile [
 		ensureCreateFile;
 		writeStreamDo: [ :s |
 			s << '
-Here is a link: [http://pharo.org](http://pharo.org).
+[Pharo](http://pharo.org).
 ' ]
 ]
 
@@ -203,8 +203,10 @@ FOVisitorDifferPageTest >> testCode [
 FOVisitorDifferPageTest >> testFigure [
 
 	| aPillarPage aMicrodownPage |
-	aPillarPage := (FOMicrodownReader file: root / 'test-figure.md') createModelEntity.
-	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-figure.md') createModelEntity.
+	aPillarPage := (FOMicrodownReader file: root / 'test-figure.md')
+		               createModelEntity.
+	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-figure.md')
+		                  createModelEntity.
 
 	self
 		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
