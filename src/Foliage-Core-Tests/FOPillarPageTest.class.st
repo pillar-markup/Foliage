@@ -223,10 +223,12 @@ FOPillarPageTest >> testHTMLString [
 FOPillarPageTest >> testRenderOn [
 
 	| aPage |
-	aPage := (FOMicrodownReader file: root / 'community.md') createModelEntity.
+	aPage := (FOMicrodownReader file: root / 'community.md')
+		         createModelEntity.
 
 	self
 		assert: (String streamContents: [ :s | aPage renderOn: s ])
 		equals:
-		'<h1>Community & help</h1><h2>Discord team</h2><p>We hang out on Discord (Invitation at <a href="https://discord.gg/QewZMZa"><a href="https://discord.gg/QewZMZa">https://discord.gg/QewZMZa</a></a>), where we discuss everything for Pharo users and developers.</p><p>You can get an instant invite following this <a href="https://discord.gg/QewZMZa">link</a>.</p>'
+		'
+<h1>Community & help</h1><h2>Discord team</h2><p>We hang out on Discord (Invitation at <a href="https://discord.gg/QewZMZa"><a href="https://discord.gg/QewZMZa">https://discord.gg/QewZMZa</a></a>), where we discuss everything for Pharo users and developers.</p><p>You can get an instant invite following this <a href="https://discord.gg/QewZMZa">link</a>.</p>'
 ]

@@ -44,7 +44,7 @@ FOPageWithMetadata >> isPublished [
 { #category : 'accessing' }
 FOPageWithMetadata >> layout [
 	^ self meta 
-		at: 'layout'
+		atKey: 'layout'
 		ifAbsent: [ self defaultLayout ]
 ]
 
@@ -89,7 +89,7 @@ FOPageWithMetadata >> publishDate [
 
 { #category : 'accessing' }
 FOPageWithMetadata >> title [
-	^ self meta at: 'title'
+	^ self meta atKey: 'title'
 ]
 
 { #category : 'accessing' }

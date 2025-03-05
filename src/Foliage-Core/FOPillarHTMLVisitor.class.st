@@ -11,6 +11,7 @@ Class {
 
 { #category : 'accessing' }
 FOPillarHTMLVisitor >> contents [
+
 	^ writer contents
 ]
 
@@ -109,18 +110,17 @@ FOPillarHTMLVisitor >> visitExternalLink: anObject [
 
 { #category : 'visiting-document' }
 FOPillarHTMLVisitor >> visitFigure: anObject [
+
 	| ref uri |
-	
 	ref := anObject reference asZnUrl.
-	uri := ref isRelative 
-		ifTrue: [ '/',($/ join: ref segments) ]
-		ifFalse: [ ref asString ].
-	^ writer 
-		writeTag: 'img'
-		attributes: 
-			{ #src -> uri }, 
-			anObject parameters asDictionary associations 
-		with: [ ]
+	uri := ref isRelative
+		       ifTrue: [ '/' , ($/ join: ref segments) ]
+		       ifFalse: [ ref asString ].
+	writer
+		  writeTag: 'img'
+		  attributes:
+		  { (#src -> uri) } , anObject parameters asDictionary associations
+		  with: [  ]
 ]
 
 { #category : 'visiting-document' }
@@ -143,24 +143,26 @@ FOPillarHTMLVisitor >> visitHorizontalRule: anObject [
 ]
 
 { #category : 'visiting-document' }
-FOPillarHTMLVisitor >> visitInternalLink: anObject [	
-	^ writer 
-		writeTag: 'a'
-		attributes: { #href -> ('javascript:alert(''{1}'')' format: { anObject anchor }) }
-		with: [ self visitText: (PRText content: anObject anchor) ]
+FOPillarHTMLVisitor >> visitInternalLink: anObject [
+
+	writer
+		  writeTag: 'a'
+		  attributes:
+		  { (#href
+		   -> ('javascript:alert(''{1}'')' format: { anObject anchor })) }
+		  with: [ self visitText: (PRText content: anObject anchor) ]
 ]
 
 { #category : 'visiting-document' }
 FOPillarHTMLVisitor >> visitItalicFormat: anObject [
-	^ writer
-		writeTag: 'i' 
-		with: [ self visitFormat: anObject ]
+
+	writer writeTag: 'i' with: [ self visitFormat: anObject ]
 ]
 
 { #category : 'visiting-document' }
 FOPillarHTMLVisitor >> visitLineBreak: anObject [
 
-	^ writer writeTag: 'br'
+	writer writeTag: 'br'
 ]
 
 { #category : 'visiting-document' }
@@ -230,9 +232,8 @@ FOPillarHTMLVisitor >> visitParameters: anObject [
 
 { #category : 'visiting-document' }
 FOPillarHTMLVisitor >> visitPreformatted: anObject [
-	^ writer 
-		writeTag: 'pre' 
-		with: [ self visitDocumentGroup: anObject ]
+
+	writer writeTag: 'pre' with: [ self visitDocumentGroup: anObject ]
 ]
 
 { #category : 'visiting-document' }
