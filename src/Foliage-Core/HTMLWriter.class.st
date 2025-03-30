@@ -9,9 +9,9 @@ Class {
 	#instVars : [
 		'stream'
 	],
-	#category : 'Foliage-Core-Base',
+	#category : 'Foliage-Core-Pillar',
 	#package : 'Foliage-Core',
-	#tag : 'Base'
+	#tag : 'Pillar'
 }
 
 { #category : 'accessing' }

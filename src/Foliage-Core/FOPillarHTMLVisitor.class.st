@@ -4,9 +4,9 @@ Class {
 	#instVars : [
 		'writer'
 	],
-	#category : 'Foliage-Core-Visitor',
+	#category : 'Foliage-Core-Pillar',
 	#package : 'Foliage-Core',
-	#tag : 'Visitor'
+	#tag : 'Pillar'
 }
 
 { #category : 'accessing' }

@@ -12,7 +12,7 @@ FOBlogPostRenderContext >> abstract [
 	^ self page abstract
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 FOBlogPostRenderContext >> nextPost [ 
 	^ page parent postAfter: self page
 ]
@@ -23,7 +23,7 @@ FOBlogPostRenderContext >> pathString [
 	^ page pathString
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 FOBlogPostRenderContext >> previousPost [ 
 	^ page parent postBefore: self page
 ]

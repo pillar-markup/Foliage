@@ -1,9 +1,9 @@
 Class {
 	#name : 'FOPillarRewriteVisitor',
 	#superclass : 'FOPillarVisitor',
-	#category : 'Foliage-Core-Visitor',
+	#category : 'Foliage-Core-Pillar',
 	#package : 'Foliage-Core',
-	#tag : 'Visitor'
+	#tag : 'Pillar'
 }
 
 { #category : 'visiting-document' }
