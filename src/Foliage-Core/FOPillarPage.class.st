@@ -32,6 +32,15 @@ FOPillarPage >> acceptFOVisitor: aFOVisitor [
 	^ aFOVisitor visitPillarPage: self 
 ]
 
+{ #category : 'as yet unclassified' }
+FOPillarPage >> asFOBlogPost [
+	
+	self flag: #todoSD.
+	"we should use FOMicrodownBlogPost newFrom: self"
+	
+	^ self as: FOBlogPost
+]
+
 { #category : 'accessing' }
 FOPillarPage >> document [
 	^ document

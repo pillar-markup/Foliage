@@ -22,7 +22,11 @@ FOHTMLPage >> acceptFOVisitor: aFOVisitor [
 
 { #category : 'as yet unclassified' }
 FOHTMLPage >> asFOBlogPost [
-	^ self as: FOBlogPost
+	
+	self flag: #todoSD.
+	"we should use FOMicrodownBlogPost newFrom: self"
+	
+	^ self as: FOMicrodownBlogPost
 ]
 
 { #category : 'accessing' }

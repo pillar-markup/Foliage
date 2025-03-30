@@ -29,7 +29,8 @@ FOPublisherTest >> testBasicPublisherConfiguration [
 		baseUri: 'http://pharo.org';
 		blogs: { 'news' -> 'Pharo News' . 'success' -> 'Pharo Success Stories' };
 		yourself.
-	self assert: publisher baseUri equals: 'http://pharo.org'
+	self assert: publisher baseUri equals: 'http://pharo.org'.
+	self assert: publisher blogs size equals: 2.
 
 ]
 

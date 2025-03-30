@@ -44,7 +44,7 @@ FOPageWithMetadata >> isPublished [
 { #category : 'accessing' }
 FOPageWithMetadata >> layout [
 	^ self meta 
-		atKey: 'layout'
+		at: 'layout'
 		ifAbsent: [ self defaultLayout ]
 ]
 
@@ -82,14 +82,14 @@ FOPageWithMetadata >> publishDate [
 			"reading from file an empty date easily ends up being an 
 			empty string so we consider it absent in this case" 
 			string 
-				ifNotEmpty: [ (DateAndTime fromString: string) asDate ]
+				ifNotEmpty: [ Date fromString: string ]
 				ifEmpty: [ nil ]  ]
 		ifAbsent: [ nil ]
 ]
 
 { #category : 'accessing' }
 FOPageWithMetadata >> title [
-	^ self meta atKey: 'title'
+	^ self meta at: 'title'
 ]
 
 { #category : 'accessing' }

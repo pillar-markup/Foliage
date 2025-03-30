@@ -17,6 +17,7 @@ FOBlog >> acceptFOVisitor: aFOVisitor [
 
 { #category : 'accessing' }
 FOBlog >> adaptPage: aPage [
+	self halt.
 	^ aPage asFOBlogPost 
 ]
 
@@ -80,7 +81,7 @@ FOBlog >> posts [
 
 { #category : 'sorting' }
 FOBlog >> publishedPosts [
-	^ self posts select: #isPublished
+	^ self posts select: [ :each | each isPublished ]
 ]
 
 { #category : 'rendering' }

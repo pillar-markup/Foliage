@@ -43,14 +43,14 @@ FOMicrodownPage >> document: aMicRootBlock [
 ]
 
 { #category : 'accessing' }
-FOMicrodownPage >> pillar: aPRDocument [ 
+FOMicrodownPage >> pillar: aPRDocument [
+	self halt.
 	document := aPRDocument 
 ]
 
 { #category : 'actions' }
 FOMicrodownPage >> publish [
-	
-	"here we should call the Microdown HTML renderer"
+
 	self publishPath
 		ensureDelete;
 		writeStreamDo: [ :stream | stream << self htmlString ]

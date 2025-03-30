@@ -12,7 +12,20 @@ FOPublisher commandLine activateWith: {
 ```
 
 
-Donwload 
+Apparently the configuration file .foliage.ston defines the blogs,
+
+```
+
+Foliage {
+	#baseUri: 'http://pharo.org',
+	#blogs: [ 
+		'news': 'Pharo News', 
+		'success': 'Pharo Success Stories' 
+	]
+}
+```
+
+Download 
 
 ```
 http://github.com/pharo-project/pharo-website
@@ -189,6 +202,7 @@ FOPublisher >> blogs: anObject [
 
 { #category : 'actions' }
 FOPublisher >> configureBlogs [
+	"During the configuration of blogs, pages are converted to blog post objects in the model."
 	self blogs do: [ :assoc |
 		| blog |
 		blog := (site / assoc key) convertToBlog.
@@ -222,7 +236,7 @@ FOPublisher >> publish [
 	site importer readAll: allFiles.
 
 	('Imported ' , allFiles size asString , ' files') emit.
-
+	self halt.
 	self configureBlogs.
 
 	site publish.

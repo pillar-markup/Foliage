@@ -25,8 +25,9 @@ FOBlogOverviewBuilder >> blog: aBlog [
 { #category : 'building' }
 FOBlogOverviewBuilder >> buildAbstract: aPage [
 		
-	self halt.
-	^ PRRaw content: aPage renderAbstract
+	"This is a bit ugly to get HTML this forces us to use a RawBlock."
+	
+	^ MicRawBlock new bodyString: aPage renderAbstract
 ]
 
 { #category : 'building' }
@@ -37,6 +38,7 @@ FOBlogOverviewBuilder >> buildSummary [
 		collect: [ :post | self buildAbstract: post ].
 
 	self flag: #todo.
+	self halt: 'Should migrate to microdown'.
 	"how to organite layouts for in-memory pages??"
 	^ FOBlogPage new 
 		metaAt: 'layout' put: blog layout;

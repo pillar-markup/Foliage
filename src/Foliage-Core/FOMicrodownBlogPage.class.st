@@ -1,9 +1,9 @@
 Class {
 	#name : 'FOMicrodownBlogPage',
 	#superclass : 'FOMicrodownPage',
-	#category : 'Foliage-Core-Model',
+	#category : 'Foliage-Core-Blog',
 	#package : 'Foliage-Core',
-	#tag : 'Model'
+	#tag : 'Blog'
 }
 
 { #category : 'instance creation' }

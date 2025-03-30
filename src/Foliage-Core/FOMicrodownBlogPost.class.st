@@ -57,7 +57,7 @@ FOMicrodownBlogPost >> publicationDate [
 
 	^ self meta 
 		at: 'publishDate'
-		ifPresent: [ :aString | (aString copyWithout: $") asDate ]
+		ifPresent: [ :aString | aString asDate ]
 		ifAbsent: [ nil ]
 ]
 
