@@ -88,11 +88,6 @@ FOWebSite >> buildRoot [
 ]
 
 { #category : 'accessing' }
-FOWebSite >> defaultRawPath [
-	^ 'raw'
-]
-
-{ #category : 'accessing' }
 FOWebSite >> defaultTargetPath [
 	^ 'docs'
 ]
@@ -114,7 +109,9 @@ FOWebSite >> importDirectory: path [
 ]
 
 { #category : 'accessing' }
-FOWebSite >> importer [ 
+FOWebSite >> importer [
+	"Creates a new importer associated with the website."
+	
 	^ FOImporter new 
 		website: self;
 		yourself
@@ -124,7 +121,9 @@ FOWebSite >> importer [
 FOWebSite >> initialize [ 
 	super initialize.
 	properties := Dictionary new.
-	root := self buildRoot 
+	root := self buildRoot.
+
+	rawPath := '' asFileReference
 ]
 
 { #category : 'accessing' }
@@ -154,8 +153,7 @@ FOWebSite >> publish [
 
 { #category : 'accessing' }
 FOWebSite >> rawPath [
-	^ rawPath ifNil: [ 
-		rawPath := self defaultRawPath asFileReference ]
+	^ rawPath 
 ]
 
 { #category : 'accessing' }
@@ -186,7 +184,8 @@ FOWebSite >> targetPath [
 
 { #category : 'accessing' }
 FOWebSite >> targetPath: anObject [
-	targetPath := anObject
+
+	targetPath := anObject asFileReference
 ]
 
 { #category : 'accessing' }
@@ -202,7 +201,7 @@ FOWebSite >> templatePath [
 
 { #category : 'accessing' }
 FOWebSite >> templatePath: anObject [
-	templatePath := anObject
+	templatePath := anObject asFileReference
 ]
 
 { #category : 'accessing' }

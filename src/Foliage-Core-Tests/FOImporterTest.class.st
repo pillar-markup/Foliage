@@ -189,7 +189,19 @@ FOImporterTest >> testReadFile [
 	importer	website: web.
 	importer readFile: root / 'gsoc.md'.
 	"I do not get why we have this path but why not for now. "
-	self assert: ( web root / '..' / '..' / '..' / '..'/ '..'/ '..'/ '..'/ 'gsoc.md') class equals: FOPillarPage 
+	self assert: ( web root /'gsoc.md') class equals: FOPillarPage 
+]
+
+{ #category : 'tests' }
+FOImporterTest >> testReadFile2 [
+	
+	| importer web |
+	web := (FOWebSite new baseUri: 'http://pharo.org'; rawPath: '' asPath).
+	importer := FOImporter new.
+	importer	website: web.
+	importer readFile: root / 'gsoc.md'.
+	"I do not get why we have this path but why not for now. "
+	self assert: ( web root / 'gsoc.md') class equals: FOPillarPage 
 ]
 
 { #category : 'tests' }
@@ -201,7 +213,7 @@ FOImporterTest >> testReadFileMicrodonwContentsIsParsed [
 	importer	website: web.
 	importer readFile: root / 'gsoc.md2'.
 	"I do not get why we have this path but why not for now. "
-	self assert: ( web root / '..' / '..' / '..' / '..'/ '..'/ '..'/ '..'/ 'gsoc.md2') document class equals: MicRootBlock
+	self assert: ( web root / 'gsoc.md2') document class equals: MicRootBlock
 	
 	"Check readDocumentFrom:"
 ]
@@ -216,7 +228,7 @@ FOImporterTest >> testReadFileMicrodownV1ContentsIsParsedAndConvertedAsPillar [
 	importer	website: web.
 	importer readFile: root / 'gsoc.md'.
 	"I do not get why we have this path but why not for now. "
-	self assert: ( web root / '..' / '..' / '..' / '..'/ '..'/ '..'/ '..'/ 'gsoc.md') document class equals: PRDocument. 
+	self assert: ( web root / 'gsoc.md') document class equals: PRDocument. 
 	
 	"Check readDocumentFrom:"
 ]
@@ -231,12 +243,12 @@ FOImporterTest >> testReadFilePngKeepsJustARef [
 	importer readFile: root / self pngFileName.
 	"I do not get why we have this path but why not for now. "
 	self 
-		assert: ( web root / '..' / '..' / '..' / '..'/ '..'/ '..'/ '..'/ self pngFileName) class 
+		assert: ( web root / self pngFileName) class 
 		equals: FOWebImage. 
 	self 
-		assert: ( web root / '..' / '..' / '..' / '..'/ '..'/ '..'/ '..'/ self pngFileName) name 
+		assert: ( web root / self pngFileName) name 
 		equals: self pngFileName.
 	self 
-		assert: ( web root / '..' / '..' / '..' / '..'/ '..'/ '..'/ '..'/ self pngFileName) sourcePath
+		assert: ( web root / self pngFileName) sourcePath
 		equals: Path / 'aPNG.png'
 ]
