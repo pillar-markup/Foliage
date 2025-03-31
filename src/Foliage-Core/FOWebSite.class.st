@@ -127,12 +127,6 @@ FOWebSite >> initialize [
 	root := self buildRoot 
 ]
 
-{ #category : 'logging' }
-FOWebSite >> log [
-
-	self log: self withSlots: #(baseUri targetPath templatePath rawPath)
-]
-
 { #category : 'accessing' }
 FOWebSite >> properties [
 	^ properties
