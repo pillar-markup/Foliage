@@ -223,7 +223,7 @@ FOPublisher >> configureBlogs [
 		"blog rssFeed addHeadersTo: blog / 'index.html'" ].
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'actions' }
 FOPublisher >> configureNewWebSite [
 
 	^ FOWebSite new

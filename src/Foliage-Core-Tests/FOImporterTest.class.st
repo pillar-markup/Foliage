@@ -177,7 +177,24 @@ FOImporterTest >> setUp [
 	
 	root / self pngFileName
 		writeStreamDo: [ :st | st nextPutAll: 'This is a PNG' ].
+		
+	(root / 'news') ensureCreateDirectory.
+	root / 'news' / self mdTwoFileName
+		writeStreamDo: [ :st | st nextPutAll: self gsocContentsMD2 ]. 
 	
+]
+
+{ #category : 'tests - blogs' }
+FOImporterTest >> testConvertToBlog [
+	
+	| importer web |
+	web := (FOWebSite new baseUri: 'http://pharo.org').
+	importer := FOImporter new.
+	importer	website: web.
+	importer readFile: root /  'news'/ self mdTwoFileName.
+	(web root / 'news' ) convertToBlog.
+	
+	self assert: ( web root /  'news' / self mdTwoFileName ) class equals: FOMicrodownBlogPost
 ]
 
 { #category : 'tests' }
@@ -189,14 +206,14 @@ FOImporterTest >> testReadFile [
 	importer	website: web.
 	importer readFile: root / 'gsoc.md'.
 	"I do not get why we have this path but why not for now. "
-	self assert: ( web root /'gsoc.md') class equals: FOPillarPage 
+	self assert: ( web root /'gsoc.md' ) class equals: FOPillarPage 
 ]
 
 { #category : 'tests' }
 FOImporterTest >> testReadFile2 [
 	
 	| importer web |
-	web := (FOWebSite new baseUri: 'http://pharo.org'; rawPath: '' asPath).
+	web := (FOWebSite new baseUri: 'http://pharo.org').
 	importer := FOImporter new.
 	importer	website: web.
 	importer readFile: root / 'gsoc.md'.
@@ -251,4 +268,16 @@ FOImporterTest >> testReadFilePngKeepsJustARef [
 	self 
 		assert: ( web root / self pngFileName) sourcePath
 		equals: Path / 'aPNG.png'
+]
+
+{ #category : 'tests - blogs' }
+FOImporterTest >> testReadMDFile [
+	
+	| importer web |
+	web := (FOWebSite new baseUri: 'http://pharo.org').
+	importer := FOImporter new.
+	importer	website: web.
+	importer readFile: root / self mdTwoFileName.
+	"I do not get why we have this path but why not for now. "
+	self assert: ( web root / self mdTwoFileName ) class equals: FOMicrodownPage
 ]
