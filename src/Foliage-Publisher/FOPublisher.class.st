@@ -1,4 +1,7 @@
 "
+I'm a simple object responsible of configuring the system and launch the publishing process. 
+Check the implementations of the publish methods - each kind of objects has its own way.
+
 Here are some random notes so that I understand something. 
 
 
@@ -195,9 +198,15 @@ FOPublisher >> blogs [
 ]
 
 { #category : 'accessing' }
-FOPublisher >> blogs: anObject [
+FOPublisher >> blogs: aColOfPairOfFolderNamesToTitles [
+	"| p |
+	p := FOPublisher new. 
+	p blogs: {
+		'news' -> 'Pharo News' . 
+		'success' ->'Pharo Success Stories'  }."
 
-	blogs := anObject
+
+	blogs := aColOfPairOfFolderNamesToTitles
 ]
 
 { #category : 'actions' }
@@ -219,8 +228,8 @@ FOPublisher >> configureNewWebSite [
 
 	^ FOWebSite new
 		  baseUri: self baseUri;
-		  targetPath: self targetPath asFileReference;
-		  rawPath: self sourcePath asFileReference;
+		  targetPath: self targetPath;
+		  rawPath: self sourcePath;
 		  templatePath: self sourcePath asFileReference / self templatePath
 ]
 
@@ -245,19 +254,19 @@ FOPublisher >> publish [
 { #category : 'accessing' }
 FOPublisher >> sourcePath [
 
-	^ sourcePath ifNil: [ sourcePath := self class defaultSourcePath ]
+	^ sourcePath ifNil: [ self sourcePath: self class defaultSourcePath ]
 ]
 
 { #category : 'accessing' }
 FOPublisher >> sourcePath: aString [
 
-	sourcePath := aString
+	sourcePath := aString asFileReference
 ]
 
 { #category : 'accessing' }
 FOPublisher >> targetPath [
 
-	^ targetPath ifNil: [ targetPath := self class defaultTargetPath ]
+	^ targetPath ifNil: [ self targetPath: self class defaultTargetPath ]
 ]
 
 { #category : 'accessing' }
@@ -269,11 +278,11 @@ FOPublisher >> targetPath: aString [
 { #category : 'accessing' }
 FOPublisher >> templatePath [
 
-	^ templatePath ifNil: [ templatePath := self class defaultTemplatePath ]
+	^ templatePath ifNil: [ self templatePath: self class defaultTemplatePath ]
 ]
 
 { #category : 'accessing' }
 FOPublisher >> templatePath: aString [
 
-	templatePath := aString
+	templatePath := aString asFileReference
 ]
