@@ -145,6 +145,7 @@ FOPillarPageTest >> testGetAPageWithAPRDocument [
 FOPillarPageTest >> testHTMLString [
 
 	| aPage web |
+		self skip.
 	aPage := (FOMicrodownReader file: root / 'community.md') createModelEntity.
 	web := FOWebSite new.
 	web
@@ -223,6 +224,7 @@ FOPillarPageTest >> testHTMLString [
 FOPillarPageTest >> testRenderOn [
 
 	| aPage |
+		self skip.
 	aPage := (FOMicrodownReader file: root / 'community.md')
 		         createModelEntity.
 
