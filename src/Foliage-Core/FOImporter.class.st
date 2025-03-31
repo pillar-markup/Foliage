@@ -47,7 +47,10 @@ FOImporter >> readFile: file [
 ]
 
 { #category : 'generation' }
-FOImporter >> readFile: file path: aPath [ 
+FOImporter >> readFile: file path: aPath [
+	"Create a model  (file, resources,... object) for the file at the path.
+	The model is stored in the site root."
+	
 	|  model |
 	[ (self readerForExtension: file extension) ifNotNil: [ :reader | 
 		model := (reader file: file) createModelEntity.
@@ -58,7 +61,7 @@ FOImporter >> readFile: file path: aPath [
 			at: aPath basename
 			put: model ] ]
 			on: STONReaderError 
-			do: [ :error | Transcript show: 'could not read in ', file asString; cr ]
+			do: [ :error |  ('Could not read in ', file asString) emit ]
 	
 	
 ]
@@ -72,6 +75,11 @@ FOImporter >> readerForExtension: aString [
 	
 	"just copy it"
 	^  FOFileReader
+]
+
+{ #category : 'accessing' }
+FOImporter >> website [
+	^ website
 ]
 
 { #category : 'accessing' }
