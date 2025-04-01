@@ -37,16 +37,13 @@ FOBlogOverviewBuilder >> buildSummary [
 	abstracts := self publishedPosts 
 		collect: [ :post | self buildAbstract: post ].
 
-	self flag: #todo.
-	self halt: 'Should migrate to microdown'.
-	"how to organite layouts for in-memory pages??"
-	^ FOBlogPage new 
+	^ FOMicrodownBlogPage new 
 		metaAt: 'layout' put: blog layout;
 		metaAt: 'title' put: blog title;
 		parent: blog parent;
-		pillar: (PRDocument new
-			setChildren: abstracts;
-			yourself)
+		pillar: (MicRootBlock new 
+					 	children: abstracts; yourself)
+	
 ]
 
 { #category : 'accessing' }
