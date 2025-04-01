@@ -216,9 +216,9 @@ FOPublisher >> configureBlogs [
 		| blog |
 		blog := (site / assoc key) convertToBlog.
 		blog title: assoc value.
-		blog
+		"blog
 			at: #'index.html' put: blog overviewPage;
-			at: #'rss.xml' put: blog rssFeed.
+			at: #'rss.xml' put: blog rssFeed."
 		blog emit
 		"blog rssFeed addHeadersTo: blog / 'index.html'" ].
 ]
@@ -230,7 +230,7 @@ FOPublisher >> configureNewWebSite [
 		  baseUri: self baseUri;
 		  targetPath: self targetPath;
 		  rawPath: self sourcePath;
-		  templatePath: self sourcePath asFileReference / self templatePath
+		  templatePath: self sourcePath asFileReference / self templatePath asString
 ]
 
 { #category : 'actions' }
@@ -245,7 +245,6 @@ FOPublisher >> publish [
 	site importer readAll: allFiles.
 
 	('Imported ' , allFiles size asString , ' files') emit.
-	self halt.
 	self configureBlogs.
 
 	site publish.
@@ -254,7 +253,7 @@ FOPublisher >> publish [
 { #category : 'accessing' }
 FOPublisher >> sourcePath [
 
-	^ sourcePath ifNil: [ self sourcePath: self class defaultSourcePath ]
+	^ sourcePath ifNil: [ self sourcePath: self class defaultSourcePath. ^ sourcePath ]
 ]
 
 { #category : 'accessing' }
@@ -265,8 +264,9 @@ FOPublisher >> sourcePath: aString [
 
 { #category : 'accessing' }
 FOPublisher >> targetPath [
-
-	^ targetPath ifNil: [ self targetPath: self class defaultTargetPath ]
+	
+	^ targetPath 
+		ifNil: [ self targetPath: self class defaultTargetPath. ^ targetPath ]
 ]
 
 { #category : 'accessing' }
@@ -278,11 +278,11 @@ FOPublisher >> targetPath: aString [
 { #category : 'accessing' }
 FOPublisher >> templatePath [
 
-	^ templatePath ifNil: [ self templatePath: self class defaultTemplatePath ]
+	^ templatePath ifNil: [ self templatePath: self class defaultTemplatePath. ^ templatePath ]
 ]
 
 { #category : 'accessing' }
 FOPublisher >> templatePath: aString [
 
-	templatePath := aString asFileReference
+	templatePath := aString
 ]

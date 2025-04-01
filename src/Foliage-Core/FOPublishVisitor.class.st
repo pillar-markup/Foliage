@@ -22,7 +22,7 @@ FOPublishVisitor >> visitBlog: aFOBlog [
 
 { #category : 'visiting' }
 FOPublishVisitor >> visitBlogPost: aFOBlogPost [
-	self halt.
+	
 	^ self visitMicrodownPage: aFOBlogPost 
 ]
 

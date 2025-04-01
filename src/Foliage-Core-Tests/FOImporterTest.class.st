@@ -181,17 +181,18 @@ FOImporterTest >> setUp [
 	(root / 'news') ensureCreateDirectory.
 	root / 'news' / self mdTwoFileName
 		writeStreamDo: [ :st | st nextPutAll: self gsocContentsMD2 ]. 
+	root / 'news' / 'gsoc2.md2'
+		writeStreamDo: [ :st | st nextPutAll: self gsocContentsMD2 ]. 
 	
 ]
 
 { #category : 'tests - blogs' }
 FOImporterTest >> testConvertToBlog [
 	
-	| importer web |
+	| web |
 	web := (FOWebSite new baseUri: 'http://pharo.org').
-	importer := FOImporter new.
-	importer	website: web.
-	importer readFile: root /  'news'/ self mdTwoFileName.
+	web importer readFile: root /  'news'/ self mdTwoFileName.
+	web importer readFile: root /  'news'/ 'gsoc2.md2'.
 	(web root / 'news' ) convertToBlog.
 	
 	self assert: ( web root /  'news' / self mdTwoFileName ) class equals: FOMicrodownBlogPost

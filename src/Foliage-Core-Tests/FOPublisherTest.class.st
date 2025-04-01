@@ -43,6 +43,10 @@ FOPublisherTest >> testConfigurateWebSite [
 		blogs: { 'news' -> 'Pharo News' . 'success' -> 'Pharo Success Stories' };
 		targetPath: '/home/ducasse/Test2/foliage/output';
 		sourcePath: '/home/ducasse/Test2/foliage/test/'.
+	self assert: publisher sourcePath fullName equals: '/home/ducasse/Test2/foliage/test'.		
+	self assert: publisher targetPath equals: '/home/ducasse/Test2/foliage/output'.	
+	self assert: publisher templatePath equals: 'templates'.	
+		
 	ws := publisher configureNewWebSite.
 	self assert: ws baseUri equals: 'http://pharo.org'.
 	self assert: ws targetPath fullName equals: '/home/ducasse/Test2/foliage/output'.
