@@ -53,15 +53,6 @@ FOMicrodownBlogPost >> isPost [
 ]
 
 { #category : 'accessing' }
-FOMicrodownBlogPost >> publicationDate [
-
-	^ self meta 
-		at: 'publishDate'
-		ifPresent: [ :aString | aString asDate ]
-		ifAbsent: [ nil ]
-]
-
-{ #category : 'accessing' }
 FOMicrodownBlogPost >> renderAbstract [
 	"Using the corresponding template, launch the rendering of the abstract."
 	

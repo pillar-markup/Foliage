@@ -48,6 +48,15 @@ FOMicrodownPage >> pillar: aPRDocument [
 	document := aPRDocument 
 ]
 
+{ #category : 'accessing' }
+FOMicrodownPage >> publicationDate [
+
+	^ self meta 
+		at: 'publishDate'
+		ifPresent: [ :aString | Date readFrom: aString pattern: 'yyyy-mm-dd'  ]
+		ifAbsent: [ nil ]
+]
+
 { #category : 'actions' }
 FOMicrodownPage >> publish [
 
