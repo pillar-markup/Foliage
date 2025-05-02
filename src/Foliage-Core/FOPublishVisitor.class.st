@@ -1,3 +1,8 @@
+"
+I'm responsible to publish the resulting project. 
+
+Check `FOWebSite publish`
+"
 Class {
 	#name : 'FOPublishVisitor',
 	#superclass : 'FOModelVisitor',

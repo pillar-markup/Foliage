@@ -30,7 +30,7 @@ FoliageTodo >> m003Done [
 ]
 
 { #category : 'list of todos' }
-FoliageTodo >> m004 [
+FoliageTodo >> m004Done [
 
 	' Revisit the test of the importer 
 	
@@ -44,7 +44,7 @@ FoliageTodo >> m004 [
 ]
 
 { #category : 'list of todos' }
-FoliageTodo >> m005 [
+FoliageTodo >> m005Done [
 
 	' Write some tests for the HTML generation of PR just to make sure it works.
 	
@@ -52,7 +52,7 @@ FoliageTodo >> m005 [
 ]
 
 { #category : 'list of todos' }
-FoliageTodo >> m006 [
+FoliageTodo >> m006Done [
 
 	' Write some tests for the HTML generation of Microdown.
 	We should take the same file as input and make sure we will get the same as the HTML counter part.
@@ -60,10 +60,12 @@ FoliageTodo >> m006 [
 ]
 
 { #category : 'list of todos' }
-FoliageTodo >> m007 [
+FoliageTodo >> m007Done [
 
 	'-write a test for blog configuration 
-a file -> a blog post	'
+a file -> a blog post
+
+See testConvertToBlog	'
 ]
 
 { #category : 'list of todos' }
