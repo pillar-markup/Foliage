@@ -4,34 +4,12 @@ Check the implementations of the publish methods - each kind of objects has its 
 
 Here are some random notes so that I understand something. 
 
-
-```
-FOPublisher commandLine activateWith: {
-    'foliage'.
-    'publish'.
-    '--source'. '/Users/ducasse/Test2/pharo-website/site'.
-    '--target'. '/home/ducasse/Test2/foliage/test/'.
-    '/Users/ducasse/Test2/pharo-website/site/.foliage.ston' }.
-```
-
-
-Apparently the configuration file .foliage.ston defines the blogs,
-
-```
-
-Foliage {
-	#baseUri: 'http://pharo.org',
-	#blogs: [ 
-		'news': 'Pharo News', 
-		'success': 'Pharo Success Stories' 
-	]
-}
-```
-
-Download 
+### Download 
 
 ```
 http://github.com/pharo-project/pharo-website
+then 
+> co WithFoliage20
 ```
 
 
@@ -45,10 +23,36 @@ p sourcePath: '/Users/ducasse/Test2/pharo-website/site'.
 l runDuring: [ p publish ].
 ```
 
+
+### On the command line
 ```
 pharo-ui /Users/ducasse/Documents/Pharo/images/P13Foliage3/P13Foliage3.image clap foliage publish --source /Users/ducasse/Test2/pharo-website/site --target /home/ducasse/Test2/foliage/test/ /Users/ducasse/Test2/pharo-website/site/.foliage.ston
 ```
 
+
+### Should investigate more
+
+```
+FOPublisher commandLine activateWith: {
+    'foliage'.
+    'publish'.
+    '--source'. '/Users/ducasse/Test2/pharo-website/site'.
+    '--target'. '/home/ducasse/Test2/foliage/test/'.
+    '/Users/ducasse/Test2/pharo-website/site/.foliage.ston' }.
+```
+
+Apparently the configuration file .foliage.ston defines the blogs,
+
+```
+
+Foliage {
+	#baseUri: 'http://pharo.org',
+	#blogs: [ 
+		'news': 'Pharo News', 
+		'success': 'Pharo Success Stories' 
+	]
+}
+```
 
 "
 Class {

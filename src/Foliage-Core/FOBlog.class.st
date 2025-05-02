@@ -76,7 +76,7 @@ FOBlog >> postBefore: aFOPillarPage [
 
 { #category : 'accessing' }
 FOBlog >> posts [
-	^ items values select: #isPost
+	^ items values select: [:each | each isPost ]
 ]
 
 { #category : 'sorting' }

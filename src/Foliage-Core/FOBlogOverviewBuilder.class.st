@@ -24,8 +24,13 @@ FOBlogOverviewBuilder >> blog: aBlog [
 
 { #category : 'building' }
 FOBlogOverviewBuilder >> buildAbstract: aPage [
+	"Return the Mic object corresponding to the abstract of a page."
+	
+	"The logic is a bit ugly: 
+		- first render the abstract 
+		- then create a piece of text.
 		
-	"This is a bit ugly to get HTML this forces us to use a RawBlock."
+	This is a bit ugly to get HTML this forces us to use a RawBlock."
 	
 	^ MicRawBlock new bodyString: aPage renderAbstract
 ]

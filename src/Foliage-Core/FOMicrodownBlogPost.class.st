@@ -63,7 +63,8 @@ FOMicrodownBlogPost >> publicationDate [
 
 { #category : 'accessing' }
 FOMicrodownBlogPost >> renderAbstract [
-
+	"Using the corresponding template, launch the rendering of the abstract."
+	
 	^ self newRenderContext renderTemplate: self abstractTemplate
 ]
 
