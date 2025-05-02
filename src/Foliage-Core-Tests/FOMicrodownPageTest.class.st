@@ -52,6 +52,15 @@ FOMicrodownPageTest >> testGetAMicrodownPageWithAMicrodownTree [
 ]
 
 { #category : 'running' }
+FOMicrodownPageTest >> testPublicationDate [
+
+	| aPage |
+	aPage := (FOMicrodownV2Reader file: root / 'community.md') createModelEntity.
+	self assert: aPage publicationDate equals: (Date readFrom: '2021-11-04' pattern: 'yyyy-mm-dd').
+
+]
+
+{ #category : 'running' }
 FOMicrodownPageTest >> testRenderOnWithMicrodownV2 [
 
 	| aPage |

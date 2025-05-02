@@ -41,7 +41,7 @@ FOBlogOverviewBuilder >> buildSummary [
 
 	abstracts := self publishedPosts 
 		collect: [ :post | self buildAbstract: post ].
-
+	self halt.
 	^ FOMicrodownBlogPage new 
 		metaAt: 'layout' put: blog layout;
 		metaAt: 'title' put: blog title;
