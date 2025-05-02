@@ -64,5 +64,6 @@ FOBlogOverviewBuilder >> numberOfCharacters: anObject [
 { #category : 'page creation' }
 FOBlogOverviewBuilder >> publishedPosts [
 
-	^ (blog posts select: #isPublished) sorted: #publishDate descending
+	^ (blog posts select: [:each | each isPublished]) 
+			sorted: #publishDate descending
 ]

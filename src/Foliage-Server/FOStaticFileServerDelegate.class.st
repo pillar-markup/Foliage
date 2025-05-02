@@ -22,10 +22,9 @@ FOStaticFileServerDelegate >> redirectNeededFor: uri actualFilename: actualFilen
 
 { #category : 'private' }
 FOStaticFileServerDelegate >> tryHtml: uri [
-	| newUri |
 
+	| newUri |
 	newUri := uri copy removeLastPathSegment.
 	newUri addPathSegment: uri lastPathSegment, '.html'.
-
 	^ newUri
 ]

@@ -87,10 +87,10 @@ FOPublisher class >> clapPublish: args [
 FOPublisher class >> commandLine [
 	<commandline>
 	
-	^ (ClapCommand id: 'foliage')
+	^ (ClapCommandSpec id: 'foliage')
 		description: 'Foliage publisher';
 		add: ClapFlag forHelp;
-		add: ((ClapCommand id: 'publish')
+		add: ((ClapCommandSpec id: 'publish')
 			description: 'Publish foliage project';
 			add: ClapFlag forHelp;
 			add: ((ClapFlag id: 'source')
@@ -147,6 +147,7 @@ FOPublisher class >> defaultTemplatePath [
 
 { #category : 'clap' }
 FOPublisher class >> readFile: aName [
+
 	| reference |
 	reference := aName asFileReference.
 	reference exists ifFalse: [ 
@@ -216,6 +217,7 @@ FOPublisher >> blogs: aColOfPairOfFolderNamesToTitles [
 { #category : 'actions' }
 FOPublisher >> configureBlogs [
 	"During the configuration of blogs, pages are converted to blog post objects in the model."
+	
 	self blogs do: [ :assoc |
 		| blog |
 		blog := (site / assoc key) convertToBlog.
@@ -240,7 +242,7 @@ FOPublisher >> configureNewWebSite [
 { #category : 'actions' }
 FOPublisher >> publish [
 
-	| allFiles |
+	| allFiles configurationInstance |
 	('Publishing: ' , self baseUri) emit.
 	site := self configureNewWebSite.
 	site emit.
@@ -249,6 +251,15 @@ FOPublisher >> publish [
 	site importer readAll: allFiles.
 
 	('Imported ' , allFiles size asString , ' files') emit.
+	self halt.
+
+	"basically using the command line we get an instance of FOPublisher that is configured 
+	based on the command argument. This is not nice for tests and to interactively develop.
+	No I do not want to close pharo, type a command to get it. "
+	
+	configurationInstance := self class readFile: (site rawPath asFileReference / self class defaultProjectFileName asString). 
+	site baseUri: configurationInstance baseUri.
+	self blogs: configurationInstance blogs. 	
 	self configureBlogs.
 
 	site publish.
@@ -257,7 +268,10 @@ FOPublisher >> publish [
 { #category : 'accessing' }
 FOPublisher >> sourcePath [
 
-	^ sourcePath ifNil: [ self sourcePath: self class defaultSourcePath. ^ sourcePath ]
+	^ sourcePath 
+			ifNil: [ 
+					self sourcePath: self class defaultSourcePath. 
+					^ sourcePath ]
 ]
 
 { #category : 'accessing' }

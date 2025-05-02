@@ -44,7 +44,7 @@ FOServer >> baseUrl [
 { #category : 'accessing' }
 FOServer >> port [
 
-	^ 7070
+	^ 7071
 ]
 
 { #category : 'start/stop' }
@@ -52,8 +52,19 @@ FOServer >> start [
 	<script: 'self new start'>
 
 	(ZnServer defaultOn: self port) start.
-	ZnServer default delegate: ((FOStaticFileServerDelegate new)
+	ZnServer default delegate: (FOStaticFileServerDelegate new
 		prefixFromString: self baseUrl;
 		directory: self baseDirectory;
+	 	yourself)
+]
+
+{ #category : 'start/stop' }
+FOServer >> startOnTestFolder [
+	<script: 'self new start'>
+
+	(ZnServer defaultOn: self port) start.
+	ZnServer default delegate: (FOStaticFileServerDelegate new
+		prefixFromString: self baseUrl;
+		directory: '/Users/ducasse/Test2/pharo-website/generated/';
 	 	yourself)
 ]
