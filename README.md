@@ -18,6 +18,30 @@ Metacello new
 ```
 
 
+### To generate the Pharo website
+
+```
+git clone git@github.com:pharo-project/pharo-website.git
+git co WithFoliage20
+```
+
+```
+| l p |
+Transcript open. 
+l := TranscriptLogger new.
+p := FOPublisher new. 
+p baseUri: 'http://pharo.org'.
+p sourcePath: '/Users/ducasse/Test2/pharo-website/site'.
+l runDuring: [ p publish ].
+```
+
+
+
+
+
+
+
+
 
 
 
