@@ -27,6 +27,12 @@ FOPublishVisitor >> visitBlog: aFOBlog [
 ]
 
 { #category : 'visiting' }
+FOPublishVisitor >> visitBlogPage: aFOMicrodownBlogPage [ 
+	
+	^ aFOMicrodownBlogPage
+]
+
+{ #category : 'visiting' }
 FOPublishVisitor >> visitBlogPost: aFOBlogPost [
 	
 	^ self visitMicrodownPage: aFOBlogPost 

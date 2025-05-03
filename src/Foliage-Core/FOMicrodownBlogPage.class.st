@@ -11,6 +11,12 @@ Class {
 }
 
 { #category : 'instance creation' }
+FOMicrodownBlogPage >> acceptFOVisitor: aVisitor [
+
+	^ aVisitor visitBlogPage: self
+]
+
+{ #category : 'instance creation' }
 FOMicrodownBlogPage >> renderContextClass [
 
 	^ FOBlogRenderContext
