@@ -9,8 +9,7 @@ Class {
 { #category : 'accessing' }
 FOMicrodownBlogPost >> abstract [
 	
-	self halt.
-	^ FOPillarTruncateVisitor new 
+	^ FOAbstractWriterVisitor new 
 		amountOfCharacters: self abstractAmountOfCharacters;
 		post: self
 ]

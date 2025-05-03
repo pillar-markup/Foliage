@@ -222,6 +222,7 @@ FOPublisher >> configureBlogs [
 		| blog |
 		blog := (site / assoc key) convertToBlog.
 		blog title: assoc value.
+		self halt.
 		blog
 			at: #'index.html' put: blog overviewPage";
 			at: #'rss.xml' put: blog rssFeed".
@@ -251,15 +252,15 @@ FOPublisher >> publish [
 	site importer readAll: allFiles.
 
 	('Imported ' , allFiles size asString , ' files') emit.
-	self halt.
+
 
 	"basically using the command line we get an instance of FOPublisher that is configured 
 	based on the command argument. This is not nice for tests and to interactively develop.
-	No I do not want to close pharo, type a command to get it. "
-	
+	No I do not want to close pharo, type a command to get it. "	
 	configurationInstance := self class readFile: (site rawPath asFileReference / self class defaultProjectFileName asString). 
 	site baseUri: configurationInstance baseUri.
 	self blogs: configurationInstance blogs. 	
+
 	self configureBlogs.
 
 	site publish.

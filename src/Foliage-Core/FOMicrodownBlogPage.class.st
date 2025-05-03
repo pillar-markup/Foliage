@@ -1,3 +1,7 @@
+"
+I represent the main (index.html) entry of a blog. 
+I contain abstracts of the posts.
+"
 Class {
 	#name : 'FOMicrodownBlogPage',
 	#superclass : 'FOMicrodownPage',
@@ -8,6 +12,6 @@ Class {
 
 { #category : 'instance creation' }
 FOMicrodownBlogPage >> renderContextClass [
-
+	self halt.
 	^ FOBlogRenderContext
 ]

@@ -47,8 +47,8 @@ FOPillarPage >> document [
 ]
 
 { #category : 'accessing' }
-FOPillarPage >> document: aMicRootBlock [ 
-	document := aMicRootBlock
+FOPillarPage >> document: aPRDocument [ 
+	document := aPRDocument 
 ]
 
 { #category : 'accessing' }

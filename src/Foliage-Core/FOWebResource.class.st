@@ -81,9 +81,9 @@ FOWebResource >> isPost [
 ]
 
 { #category : 'instance creation' }
-FOWebResource >> newRenderContext [ 
-	^ self renderContextClass new 
-		website: self website
+FOWebResource >> newRenderContext [
+
+	^ self renderContextClass new website: self website
 ]
 
 { #category : 'accessing' }

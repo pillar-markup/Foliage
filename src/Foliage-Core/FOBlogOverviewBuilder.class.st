@@ -1,3 +1,6 @@
+"
+I'm responsible to assemble the main page, instance of `FOMicrodownBlogPage`, of the blog with abstracts of the blog posts.
+"
 Class {
 	#name : 'FOBlogOverviewBuilder',
 	#superclass : 'Object',
@@ -37,11 +40,10 @@ FOBlogOverviewBuilder >> buildAbstract: aPage [
 
 { #category : 'building' }
 FOBlogOverviewBuilder >> buildSummary [
-	| abstracts |
 
+	| abstracts |
 	abstracts := self publishedPosts 
 		collect: [ :post | self buildAbstract: post ].
-	self halt.
 	^ FOMicrodownBlogPage new 
 		metaAt: 'layout' put: blog layout;
 		metaAt: 'title' put: blog title;

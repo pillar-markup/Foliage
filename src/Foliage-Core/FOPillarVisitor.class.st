@@ -1,6 +1,9 @@
 Class {
 	#name : 'FOPillarVisitor',
 	#superclass : 'PRVisitor',
+	#instVars : [
+		'post'
+	],
 	#category : 'Foliage-Core-Pillar',
 	#package : 'Foliage-Core',
 	#tag : 'Pillar'

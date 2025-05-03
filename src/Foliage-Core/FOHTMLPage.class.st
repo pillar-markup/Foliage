@@ -57,9 +57,9 @@ FOHTMLPage >> htmlString [
 ]
 
 { #category : 'instance creation' }
-FOHTMLPage >> newRenderContext [ 
-	^ super newRenderContext 
-		page: self 
+FOHTMLPage >> newRenderContext [
+
+	^ super newRenderContext page: self 
 ]
 
 { #category : 'as yet unclassified' }

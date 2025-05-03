@@ -44,7 +44,7 @@ FOMicrodownPage >> document: aMicRootBlock [
 
 { #category : 'accessing' }
 FOMicrodownPage >> pillar: aPRDocument [
-	self halt.
+
 	document := aPRDocument 
 ]
 

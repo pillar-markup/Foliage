@@ -103,8 +103,8 @@ FOBlog >> resolvePath: aRelativePath [
 
 { #category : 'sorting' }
 FOBlog >> sortedByPublishDate [
-	^ self publishedPosts 
-		sorted: #publishDate ascending
+
+	^ self publishedPosts sorted: #publishDate ascending
 ]
 
 { #category : 'accessing' }
