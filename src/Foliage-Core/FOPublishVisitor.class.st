@@ -21,7 +21,8 @@ FOPublishVisitor >> copyResource: aResource [
 
 { #category : 'visiting' }
 FOPublishVisitor >> visitBlog: aFOBlog [ 
-
+	"a blog is a kind of folder"
+	
 	^ super visitWebFolder: aFOBlog
 ]
 
@@ -49,12 +50,15 @@ FOPublishVisitor >> visitHTMLPageSource: aFOHTMLPageSource [
 FOPublishVisitor >> visitMicrodownPage: aMicrodownPage [
 
 	aMicrodownPage emit.
+	(aMicrodownPage path basename = 'index.html') ifTrue: [ self halt ].
+	"recursive publish"
 	aMicrodownPage publish.
 	^ aMicrodownPage 
 ]
 
 { #category : 'visiting' }
 FOPublishVisitor >> visitPillarPage: aFOPillarPage [ 
+	self halt.
 	aFOPillarPage emit.
 	aFOPillarPage publish.
 	^ aFOPillarPage 

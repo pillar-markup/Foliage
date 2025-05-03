@@ -12,6 +12,6 @@ Class {
 
 { #category : 'instance creation' }
 FOMicrodownBlogPage >> renderContextClass [
-	self halt.
+
 	^ FOBlogRenderContext
 ]

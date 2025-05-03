@@ -222,7 +222,6 @@ FOPublisher >> configureBlogs [
 		| blog |
 		blog := (site / assoc key) convertToBlog.
 		blog title: assoc value.
-		self halt.
 		blog
 			at: #'index.html' put: blog overviewPage";
 			at: #'rss.xml' put: blog rssFeed".
@@ -243,15 +242,13 @@ FOPublisher >> configureNewWebSite [
 { #category : 'actions' }
 FOPublisher >> publish [
 
-	| allFiles configurationInstance |
+	|  configurationInstance |
 	('Publishing: ' , self baseUri) emit.
+	
 	site := self configureNewWebSite.
-	site emit.
+	site importFiles.
 
-	allFiles := site rawPath allFiles.
-	site importer readAll: allFiles.
-
-	('Imported ' , allFiles size asString , ' files') emit.
+	('Imported ' , site allFiles size asString , ' files') emit.
 
 
 	"basically using the command line we get an instance of FOPublisher that is configured 

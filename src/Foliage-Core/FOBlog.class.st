@@ -47,7 +47,7 @@ FOBlog >> layout: aString [
 
 { #category : 'accessing' }
 FOBlog >> overviewPage [
-
+	self halt.
 	^ FOBlogOverviewBuilder new 
 		blog: self;
 		numberOfCharacters: 100; 

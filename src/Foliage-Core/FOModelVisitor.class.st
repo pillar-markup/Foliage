@@ -13,6 +13,7 @@ FOModelVisitor >> start: anObject [
 
 { #category : 'visiting' }
 FOModelVisitor >> visit: anObject [
+	
 	^ anObject acceptFOVisitor: self
 ]
 
@@ -44,6 +45,7 @@ FOModelVisitor >> visitWebEntity: aFOWebObject [
 
 { #category : 'visiting' }
 FOModelVisitor >> visitWebFolder: aFOWebsiteFolder [
+
 	aFOWebsiteFolder createOnTarget.
 	^ (self visitWebResource: aFOWebsiteFolder)
 		setItems: (self visitAll: aFOWebsiteFolder items );

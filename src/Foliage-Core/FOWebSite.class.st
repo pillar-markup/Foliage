@@ -62,6 +62,12 @@ FOWebSite >> acceptFOVisitor: aFOVisitor [
 	^ aFOVisitor visitWebsite: self 
 ]
 
+{ #category : 'enumerating' }
+FOWebSite >> allFiles [
+
+	^ self rawPath allFiles
+]
+
 { #category : 'logging' }
 FOWebSite >> asBeaconSignal [
 
@@ -98,14 +104,14 @@ FOWebSite >> defaultTemplatePath [
 ]
 
 { #category : 'building' }
-FOWebSite >> import [
-	self importDirectory: self rawPath 
-]
-
-{ #category : 'building' }
 FOWebSite >> importDirectory: path [ 
 	self importer
 		readAll: path allFiles
+]
+
+{ #category : 'building' }
+FOWebSite >> importFiles [
+	self importDirectory: self rawPath 
 ]
 
 { #category : 'accessing' }

@@ -41,15 +41,16 @@ FOBlogOverviewBuilder >> buildAbstract: aPage [
 { #category : 'building' }
 FOBlogOverviewBuilder >> buildSummary [
 
-	| abstracts |
+	| abstracts document |
 	abstracts := self publishedPosts 
 		collect: [ :post | self buildAbstract: post ].
+	document := MicRootBlock new.
+	abstracts do: [ :each | document addChild: each ].
 	^ FOMicrodownBlogPage new 
 		metaAt: 'layout' put: blog layout;
 		metaAt: 'title' put: blog title;
 		parent: blog parent;
-		pillar: (MicRootBlock new 
-					 	children: abstracts; yourself)
+		document: document
 	
 ]
 

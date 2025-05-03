@@ -20,7 +20,7 @@ FOAbstractWriterVisitor >> amountOfCharacters: aNumber [
 
 { #category : 'accessing' }
 FOAbstractWriterVisitor >> post: anObject [ 
-
+	
 	post := anObject.
 	stream := String new writeStream.
 	self visit: anObject document copy.

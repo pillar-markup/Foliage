@@ -52,6 +52,7 @@ FOHTMLPage >> htmlDocument [
 
 { #category : 'as yet unclassified' }
 FOHTMLPage >> htmlString [
+
 	^ htmlString ifNil: [ 
 		htmlString := self buildHtmlString ]
 ]

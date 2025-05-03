@@ -17,7 +17,8 @@ FOMicrodownPage class >> supportedFileExtensions [
 { #category : 'accessing' }
 FOMicrodownPage >> abstract [
 	| abstract |
-	abstract := (Character space join: (document children allButFirst collect: #text)).
+	self halt.
+	abstract := (Character space join: (document children allButFirst collect: [ :each | each text ])).
 	^ abstract first: (abstract size min: self abstractAmountOfCharacters)
 ]
 
@@ -40,12 +41,6 @@ FOMicrodownPage >> document [
 { #category : 'accessing' }
 FOMicrodownPage >> document: aMicRootBlock [ 
 	document := aMicRootBlock
-]
-
-{ #category : 'accessing' }
-FOMicrodownPage >> pillar: aPRDocument [
-
-	document := aPRDocument 
 ]
 
 { #category : 'accessing' }
