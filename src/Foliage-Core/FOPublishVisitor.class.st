@@ -29,6 +29,7 @@ FOPublishVisitor >> visitBlog: aFOBlog [
 { #category : 'visiting' }
 FOPublishVisitor >> visitBlogPage: aFOMicrodownBlogPage [ 
 	
+	aFOMicrodownBlogPage publish.
 	^ aFOMicrodownBlogPage
 ]
 
@@ -65,7 +66,6 @@ FOPublishVisitor >> visitMicrodownPage: aMicrodownPage [
 { #category : 'visiting' }
 FOPublishVisitor >> visitPillarPage: aFOPillarPage [ 
 	self halt.
-	aFOPillarPage emit.
 	aFOPillarPage publish.
 	^ aFOPillarPage 
 ]

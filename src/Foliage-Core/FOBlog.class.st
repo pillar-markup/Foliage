@@ -27,6 +27,11 @@ FOBlog >> defaultLayout [
 	^ 'blog'
 ]
 
+{ #category : 'accessing' }
+FOBlog >> document [
+	self shouldBeImplemented.
+]
+
 { #category : 'converting' }
 FOBlog >> emitSlots [
 
@@ -47,7 +52,7 @@ FOBlog >> layout: aString [
 
 { #category : 'accessing' }
 FOBlog >> overviewPage [
-	self halt.
+
 	^ FOBlogOverviewBuilder new 
 		blog: self;
 		numberOfCharacters: 100; 

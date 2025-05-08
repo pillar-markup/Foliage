@@ -220,6 +220,8 @@ FOPublisher >> configureBlogs [
 	
 	self blogs do: [ :assoc |
 		| blog |
+		"this logic should not be in the publisher
+		but in the website and it should call the blog. "
 		blog := (site / assoc key) convertToBlog.
 		blog title: assoc value.
 		blog

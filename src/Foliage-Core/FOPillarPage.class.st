@@ -38,7 +38,7 @@ FOPillarPage >> asFOBlogPost [
 	self flag: #todoSD.
 	"we should use FOMicrodownBlogPost newFrom: self"
 	
-	^ self as: FOBlogPost
+	^ self as: FOMicrodownBlogPost
 ]
 
 { #category : 'accessing' }

@@ -87,6 +87,14 @@ FOWebSite >> baseUri: anObject [
 	baseUri := anObject
 ]
 
+{ #category : 'as yet unclassified' }
+FOWebSite >> buildOverviewFor: aString [ 
+	
+	| blog |
+	blog := self / aString.
+	blog at: #'index.html' put: blog overviewPage.  
+]
+
 { #category : 'accessing' }
 FOWebSite >> buildRoot [
 	^ FOWebsiteRoot new

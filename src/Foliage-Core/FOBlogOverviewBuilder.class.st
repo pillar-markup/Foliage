@@ -42,6 +42,7 @@ FOBlogOverviewBuilder >> buildAbstract: aPage [
 FOBlogOverviewBuilder >> buildSummary [
 
 	| abstracts document |
+	self halt.
 	abstracts := self publishedPosts 
 		collect: [ :post | self buildAbstract: post ].
 	document := MicRootBlock new.
