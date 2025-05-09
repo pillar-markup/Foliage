@@ -20,7 +20,8 @@ FOWebFolder >> buildRssFeed [
 
 { #category : 'conversion' }
 FOWebFolder >> convertToBlog [ 
-	| blog |.
+
+	| blog |
 	blog := FOBlog new
 		title: 'Blog';
 		parent: parent;

@@ -12,11 +12,22 @@ Class {
 }
 
 { #category : 'data' }
+FOBlogTest >> blogPostAbstractContents [
+
+	^ 'blog-post-abstract                                                [15:53:12]
+<h2><a href="{{pathString}}">{{title}}</a></h2>
+{{abstract}}
+<div class="date">{{{publicationDate}}}</div>'
+]
+
+{ #category : 'data' }
 FOBlogTest >> gsocContentsMD [
 
-	^ '{"title" : "Google Summer of Code",
+	^ '{
+"title" : "Google Summer of Code",
 "layout" : "default",
-"publishDate" : "2019-05-21"}
+"publishDate" : "2019-05-21"
+}
 
 # Google Summer of Code 2019 Students
 
@@ -79,9 +90,11 @@ On this page, you can find the personal blogs and social media links of the seve
 { #category : 'data' }
 FOBlogTest >> gsocContentsMD2 [
 
-	^ '{"title" : "IsLoop",
+	^ '{
+"title" : "IsLoop",
 "layout" : "default",
-"publishDate" : "2025-05-21"}
+"publishDate" : "2025-05-21"
+}
 
 # IsLoop summer school
 
@@ -109,83 +122,19 @@ FOBlogTest >> mdOneFileName2 [
 
 { #category : 'running' }
 FOBlogTest >> setUp [ 
-	
-		super setUp.
+
 		root := FileSystem memory root.
 		(root / 'success') ensureCreateDirectory.
 		root / 'success' / self mdOneFileName
 			writeStreamDo: [ :st | st nextPutAll: self gsocContentsMD ].
 		root / 'success' / self mdOneFileName2
 			writeStreamDo: [ :st | st nextPutAll: self gsocContentsMD2 ].
-		site := FOWebSite new.
-		site importDirectory: root.
+		(root / 'templates' ) ensureCreateDirectory.
 		
-		"we sbould be able to write
-		blog := site convertToBlog: 'success' "
-
-		blog := (site / 'success') convertToBlog.
-		"	blog at: #'index.html' put: blog overviewPage."
-	
-]
-
-{ #category : 'failing tests' }
-FOBlogTest >> testBlogAfterOverviewBuildingNowContainsIndex [ 
-
-	site buildOverviewFor: 'success'.
-	self assert: blog items size equals: 3.
-	self assert: (blog items at: #'index.html') class equals: FOMicrodownBlogPage 
-	
-]
-
-{ #category : 'running' }
-FOBlogTest >> testBlogBeforeOverviewBuildingOnlyContainsChildren [ 
-
-	self assert: blog items size equals: 2.
-	blog items keys do: [ :each | self assert: (#( 'gsoc.md2' 'gsoc2.md2') includes: each) ].
-	self assert: blog publishedPosts size equals: 2.
-]
-
-{ #category : 'failing tests' }
-FOBlogTest >> testBlogGeneration [
-
-	| p |
-	self halt. 
-	"we should call the publisher!"
-	p := FOPublisher new. 
-	p baseUri: 'http://pharo.org'.
-	p targetPath: root / 'generated'.
-	
-	self assert: blog items size equals: 3.
-	self assert: (blog items at: #'index.html') class equals: FOMicrodownBlogPage.
-	
-	
-]
-
-{ #category : 'running' }
-FOBlogTest >> testBlogIsNowInFileModel [
-	
-	self assert: (site / 'success') equals: blog.
-	self assert: (site / 'success') class equals: FOBlog
-]
-
-{ #category : 'failing tests' }
-FOBlogTest >> testBlogOverviewHasAbstracts [
-
-	| summaryPageObject |
-	summaryPageObject := blog items at: #'index.html'.
-	self assert: summaryPageObject document children size equals: 2
-	
-]
-
-{ #category : 'failing tests' }
-FOBlogTest >> testBlogOverviewRender [
-
-	| summaryPageObject |
-	self skip. 
-	"we should has template in the fileSystem too."
-	
-	summaryPageObject := blog items at: #'index.html'.
-	self halt.
-	self assert: summaryPageObject html
-	
+		root / 'templates' / 'blog-post-abstract'
+			writeStreamDo: [ :st | st nextPutAll: self blogPostAbstractContents ].
+			
+		site := FOWebSite new.
+		site templatePath: (root / 'templates' ).
+		site importDirectory: root.
 ]

@@ -227,7 +227,7 @@ FOPublisher >> configureBlogs [
 		blog
 			at: #'index.html' put: blog overviewPage";
 			at: #'rss.xml' put: blog rssFeed".
-		blog emit
+		
 		"blog rssFeed addHeadersTo: blog / 'index.html'" ].
 ]
 
