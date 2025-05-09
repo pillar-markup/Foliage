@@ -39,22 +39,6 @@ FOBlogAfterConversionTest >> testBlogBeforeOverviewBuildingOnlyContainsChildren 
 	self assert: blog publishedPosts size equals: 2.
 ]
 
-{ #category : 'failing tests' }
-FOBlogAfterConversionTest >> testBlogGeneration [
-
-	| p |
-	self halt. 
-	"we should call the publisher!"
-	p := FOPublisher new. 
-	p baseUri: 'http://pharo.org'.
-	p targetPath: root / 'generated'.
-	p publish. 
-	self assert: blog items size equals: 3.
-	self assert: (blog items at: #'index.html') class equals: FOMicrodownBlogPage.
-	
-	
-]
-
 { #category : 'running' }
 FOBlogAfterConversionTest >> testBlogIsNowInFileModel [
 	
@@ -126,6 +110,17 @@ FOBlogAfterConversionTest >> testBlogOverviewRender [
                 <div class="container">
                     <h1>Super success</h1>
                     
+	BODYSTART
+	<h2><a href="/success/gsoc2.html">IsLoop</a></h2>
+We are organizing a summer school on Pharo and advanced design every year.
+The previous editions were held at Split, Montpelllier and Fianarantsoa.
+<div class="date">21 May 2025</div>
+<h2><a href="/success/gsoc.html">Google Summer of Code</a></h2>
+On this page, you can find the personal blogs and social media links of the seven students accepted for Google Summer of Code with Pharo Consortium in 2019. Follow their pages to get regular updates on their progress. Don''t hesitate to get in touch with those students - they need your feedback.Personal blogTwitterGitHubPersonal blogTwitterFacebookGitHubPersonal blogTwitterFacebookGitHubPersonal...TwitterGitHubPersona...TwitterFacebookGitHubPersona...TwitterGitHubPersona...TwitterGitHub
+<div class="date">21 May 2019</div>
+
+	BODYEND
+	
                     <div class="blog-footer">
 <hr>
 Suscribe to this blog: <a href="http://pharo.org/news/atom.xml">Entries RSS</a> or follow on Twitter <a href="https://twitter.com/pharoproject">@pharoproject</a>
@@ -147,8 +142,25 @@ Suscribe to this blog: <a href="http://pharo.org/news/atom.xml">Entries RSS</a> 
 <script>
 </script>
     </body>
-</html>'
+</html>'  
 	
+]
+
+{ #category : 'failing tests' }
+FOBlogAfterConversionTest >> testBlogOverviewRenderOn [
+
+	| summaryPageObject str |
+	site buildOverviewFor: 'success'.
+	summaryPageObject := blog items at: #'index.html'.
+	str := String streamContents: [ :st | summaryPageObject renderOn: st ].
+	self assert: str equals: '<h2><a href="/success/gsoc2.html">IsLoop</a></h2>
+We are organizing a summer school on Pharo and advanced design every year.
+The previous editions were held at Split, Montpelllier and Fianarantsoa.
+<div class="date">21 May 2025</div>
+<h2><a href="/success/gsoc.html">Google Summer of Code</a></h2>
+On this page, you can find the personal blogs and social media links of the seven students accepted for Google Summer of Code with Pharo Consortium in 2019. Follow their pages to get regular updates on their progress. Don''t hesitate to get in touch with those students - they need your feedback.Personal blogTwitterGitHubPersonal blogTwitterFacebookGitHubPersonal blogTwitterFacebookGitHubPersonal...TwitterGitHubPersona...TwitterFacebookGitHubPersona...TwitterGitHubPersona...TwitterGitHub
+<div class="date">21 May 2019</div>
+' 
 ]
 
 { #category : 'running' }

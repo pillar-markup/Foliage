@@ -86,6 +86,7 @@ FOPillarPage >> render [
 { #category : 'rendering' }
 FOPillarPage >> renderOn: aStream [ 
 
+	self halt.
 	FOPillarHTMLVisitor new
 		stream: aStream;
 		start: document.

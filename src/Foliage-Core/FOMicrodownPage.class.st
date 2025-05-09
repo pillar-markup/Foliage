@@ -16,9 +16,11 @@ FOMicrodownPage class >> supportedFileExtensions [
 
 { #category : 'accessing' }
 FOMicrodownPage >> abstract [
+	
 	| abstract |
 	self halt.
 	abstract := (Character space join: (document children allButFirst collect: [ :each | each text ])).
+	
 	^ abstract first: (abstract size min: self abstractAmountOfCharacters)
 ]
 
