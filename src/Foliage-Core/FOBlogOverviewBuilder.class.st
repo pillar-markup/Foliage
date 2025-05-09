@@ -42,13 +42,12 @@ FOBlogOverviewBuilder >> buildAbstract: aPage [
 FOBlogOverviewBuilder >> buildSummary [
 
 	| abstracts document |
-	self halt.
 	abstracts := self publishedPosts 
 		collect: [ :post | self buildAbstract: post ].
-	self halt.	
+	
 	document := MicRootBlock new.
 	abstracts do: [ :each | document addChild: each ].
-	self halt.
+	
 	^ FOMicrodownBlogPage new 
 		metaAt: 'layout' put: blog layout;
 		metaAt: 'title' put: blog title;

@@ -48,7 +48,7 @@ FOBlogAfterConversionTest >> testBlogGeneration [
 	p := FOPublisher new. 
 	p baseUri: 'http://pharo.org'.
 	p targetPath: root / 'generated'.
-	
+	p publish. 
 	self assert: blog items size equals: 3.
 	self assert: (blog items at: #'index.html') class equals: FOMicrodownBlogPage.
 	
@@ -66,7 +66,11 @@ FOBlogAfterConversionTest >> testBlogIsNowInFileModel [
 FOBlogAfterConversionTest >> testBlogOverviewHasAbstracts [
 
 	| summaryPageObject |
+	site buildOverviewFor: 'success'.
 	summaryPageObject := blog items at: #'index.html'.
+	self assert: blog items size equals: 3.
+	
+	"The abstracts are correctly generated."
 	self assert: summaryPageObject document children size equals: 2
 	
 ]
@@ -75,12 +79,75 @@ FOBlogAfterConversionTest >> testBlogOverviewHasAbstracts [
 FOBlogAfterConversionTest >> testBlogOverviewRender [
 
 	| summaryPageObject |
-	self skip. 
-	"we should has template in the fileSystem too."
-	
+	site buildOverviewFor: 'success'.
 	summaryPageObject := blog items at: #'index.html'.
-	self halt.
-	self assert: summaryPageObject html
+
+	self assert: summaryPageObject htmlString equals: '<!DOCTYPE HTML>
+<html>
+    
+    <body class="default">
+        <div id="wrap">
+            <div id="main">
+                <nav class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/web"><img src="/web/files/pharo-logo-small.png" alt="Pharo" srcset="/web/files/pharo-logo-small-2x.png 2x"/></a>
+    </div>    
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+    <li><a href="/news" class="">News</a></li>
+    <li><a href="/features"  class="">Features</a></li>
+    <li><a href="/download"  class="">Download</a></li>
+    <li><a href="/documentation"  class="">Documentation</a></li>
+    <li><a href="/community"  class="">Community</a></li>
+    <li><a href="/contribute"  class="">Contribute</a></li>
+    <li><a href="/success"  class="">Stories</a></li>
+    <li><a href="/about"  class="">About</a></li>
+</ul>
+         <!--
+         <form class="navbar-form navbar-right">
+            <div class="form-group">
+                <a class="btn btn-default" href="/web/download">Download latest version ($.0)</a>
+                <a class="btn" href="/web/documentation">Learn more</a>
+            </div>
+        </form>
+        -->
+    </div>
+
+  </div>
+</nav>
+                <div class="container">
+                    <h1>Super success</h1>
+                    
+                    <div class="blog-footer">
+<hr>
+Suscribe to this blog: <a href="http://pharo.org/news/atom.xml">Entries RSS</a> or follow on Twitter <a href="https://twitter.com/pharoproject">@pharoproject</a>
+</div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+    <div class="container"> 
+        <div class="small">
+            <br/><br/>
+            <p>Pharo is developed by an international community of open-source developers, coordinated and maintained by the pharo consortium and receives essential support from Inria, RMOD, CNRS, UDL, Cristal and many others.</p>
+            <div style="text-align: center">
+                  <img src="https://files.pharo.org/web-images/all-logos.png"/>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+</script>
+    </body>
+</html>'
 	
 ]
 
@@ -93,13 +160,17 @@ FOBlogAfterConversionTest >> testBlogPostHasMetaData [
 ]
 
 { #category : 'overviewBuilder' }
-FOBlogAfterConversionTest >> testOverviewBuilder [
+FOBlogAfterConversionTest >> testOverviewBuilderCreatesPageWithDocumentHavingRawChildren [
 
-	| o |
-	o := FOBlogOverviewBuilder new 
+	| o page |
+	o := FOBlogOverviewBuilder new.
+	o
 		blog: blog;
-		numberOfCharacters: 100; 
-		buildSummary.
-		
-	self halt.
+		numberOfCharacters: 100. 
+	page := o buildSummary.
+	self assert: page title equals: blog title.
+	self assert: page layout equals: blog layout.
+	self assert: page document children size equals: 2.
+	
+	self assert: page document children first class equals: MicRawBlock
 ]
