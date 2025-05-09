@@ -1,12 +1,11 @@
 # Foliage
 
-A simple static site generator
+A simple static site generator based on Microdown.
 
 For initial instructions have a look at https://norbert.hartl.name/blog/2021-01-17-foliage-released.html
 
 
 To load it in Pharo 13
-
 
 ```
 Metacello new
@@ -26,27 +25,16 @@ git co WithFoliage20
 ```
 
 ```
-| l p |
-Transcript open. 
-l := TranscriptLogger new.
+|  p |
 p := FOPublisher new. 
 p baseUri: 'http://pharo.org'.
 p sourcePath: '/Users/ducasse/Test2/pharo-website/site'.
-l runDuring: [ p publish ].
+p publish
 ```
 
 
 
-
-
-
-
-
-
-
-
-
-### Old
+### Old scripts
 
 
 ```
