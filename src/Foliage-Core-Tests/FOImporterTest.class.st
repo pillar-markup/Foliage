@@ -207,7 +207,7 @@ FOImporterTest >> testReadFile [
 	importer	website: web.
 	importer readFile: root / 'gsoc.md'.
 	"I do not get why we have this path but why not for now. "
-	self assert: ( web root /'gsoc.md' ) class equals: FOPillarPage 
+	self assert: ( web root /'gsoc.md' ) class equals: FOMicrodownPage 
 ]
 
 { #category : 'tests' }
@@ -219,7 +219,7 @@ FOImporterTest >> testReadFile2 [
 	importer	website: web.
 	importer readFile: root / 'gsoc.md'.
 	"I do not get why we have this path but why not for now. "
-	self assert: ( web root / 'gsoc.md') class equals: FOPillarPage 
+	self assert: ( web root / 'gsoc.md') class equals: FOMicrodownPage 
 ]
 
 { #category : 'tests' }

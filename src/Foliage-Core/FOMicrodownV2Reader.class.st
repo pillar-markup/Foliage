@@ -11,7 +11,7 @@ Class {
 
 { #category : 'testing' }
 FOMicrodownV2Reader class >> supportedFileExtensions [
-	^ #( md2 )
+	^ #( md )
 ]
 
 { #category : 'reading' }

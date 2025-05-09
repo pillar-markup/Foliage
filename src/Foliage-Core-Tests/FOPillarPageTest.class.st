@@ -134,8 +134,8 @@ You can get an instant invite following this [link](https://discord.gg/QewZMZa).
 FOPillarPageTest >> testGetAPageWithAPRDocument [
 
 	| aPage |
-	aPage := (FOMicrodownReader file: root / 'community.md') createModelEntity.
-	self assert: aPage class equals: FOPillarPage.
+	aPage := (FOMicrodownV2Reader file: root / 'community.md') createModelEntity.
+	self assert: aPage class equals: FOMicrodownPage.
 	self assert: (aPage meta at: 'layout') equals: 'default'.
 	self assert: (aPage meta at: 'publishDate') equals: '2021-11-04'.
 	self assert: aPage document class equals: PRDocument
@@ -146,7 +146,7 @@ FOPillarPageTest >> testHTMLString [
 
 	| aPage web |
 		self skip.
-	aPage := (FOMicrodownReader file: root / 'community.md') createModelEntity.
+	aPage := (FOMicrodownV2Reader file: root / 'community.md') createModelEntity.
 	web := FOWebSite new.
 	web
 		rawPath: root;
@@ -225,7 +225,7 @@ FOPillarPageTest >> testRenderOn [
 
 	| aPage |
 		self skip.
-	aPage := (FOMicrodownReader file: root / 'community.md')
+	aPage := (FOMicrodownV2Reader file: root / 'community.md')
 		         createModelEntity.
 
 	self

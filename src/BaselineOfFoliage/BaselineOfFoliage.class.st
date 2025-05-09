@@ -15,17 +15,13 @@ BaselineOfFoliage >> baseline: spec [
 		spec postLoadDoIt: #postloadWithLoader:withPackageSpec:.
 		
 		self
-			pillar: spec; 
 			mustache: spec; 
-			neoJson: spec;
 			soup: spec;
 			zinc: spec.
 			
-		
-
 		spec 
 			package: 'Foliage-Core' with: [
-				spec requires: #( 'Soup' 'Pillar' ) ];
+				spec requires: #( 'Soup' ) ];
 			package: 'Foliage-Publisher' with: [
 				spec requires: #('Foliage-Core') ];
 			package: 'Foliage-Server' with: [
@@ -47,20 +43,6 @@ BaselineOfFoliage >> mustache: spec [
 		spec 
 			repository: 'github://noha/Mustache/repository';
 			loads: #('Core')].
-]
-
-{ #category : 'baselines' }
-BaselineOfFoliage >> neoJson: spec [
-	spec baseline: 'NeoJSON' with: [
-		spec repository: 'github://svenvc/NeoJSON/repository'].
-]
-
-{ #category : 'baselines' }
-BaselineOfFoliage >> pillar: spec [
-	spec baseline: 'Pillar' with: [
-		spec 
-			repository: 'github://pillar-markup/pillar:dev/src';
-			loads: 'default'  ].
 ]
 
 { #category : 'baselines' }
@@ -92,7 +74,7 @@ packagesToUnload := ((PackageOrganizer default packages
 				(mic packageNamed: each) unload ].
 		mic delete ].
 
-#( 'Microdown' ) do: [ :name |
+	#( 'Microdown' ) do: [ :name |
         (IceRepository repositoryNamed: name)
             ifNil: [ self inform: 'Project not found: ' , name ]
             ifNotNil: [ :found |
@@ -100,9 +82,9 @@ packagesToUnload := ((PackageOrganizer default packages
                     unload;
                     forget ] ].
 
-Smalltalk globals
-	at: #BaselineOfMicrodown 
-	ifPresent: [ :c | c removeFromSystem ].
+	Smalltalk globals
+		at: #BaselineOfMicrodown 
+		ifPresent: [ :c | c removeFromSystem ].
 ]
 
 { #category : 'baselines' }

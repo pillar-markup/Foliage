@@ -13,7 +13,7 @@ Class {
 FOAbstractReaderTest >> testFactoryIsWorking [ 
 
 	self assert: (FOAbstractReader forFileExtension: 'glop') isNil.
-	self assert: (FOAbstractReader forFileExtension: 'md') equals: FOMicrodownReader.
+	self assert: (FOAbstractReader forFileExtension: 'md') equals: FOMicrodownV2Reader.
 	self assert: (FOAbstractReader forFileExtension: 'css') equals: FOFileReader.
 	
 ]

@@ -6,9 +6,9 @@ Class {
 		'slots',
 		'selectors'
 	],
-	#category : 'Foliage-Core-Base',
+	#category : 'Foliage-Core-Logging',
 	#package : 'Foliage-Core',
-	#tag : 'Base'
+	#tag : 'Logging'
 }
 
 { #category : 'initialization' }

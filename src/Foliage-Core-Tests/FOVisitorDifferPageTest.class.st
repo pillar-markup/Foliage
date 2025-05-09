@@ -178,142 +178,126 @@ You can get an instant invite following this [link](https://discord.gg/QewZMZa).
 { #category : 'tests' }
 FOVisitorDifferPageTest >> testBold [
 
-	| aPillarPage aMicrodownPage |
-	aPillarPage := (FOMicrodownReader file: root / 'test-text-bold.md') createModelEntity.
+	| aMicrodownPage |
 	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-text-bold.md') createModelEntity.
 
 	self
 		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s | aPillarPage renderOn: s ])
+		equals: (String streamContents: [ :s | '' ])
 ]
 
 { #category : 'tests' }
 FOVisitorDifferPageTest >> testCode [
 
-	| aPillarPage aMicrodownPage |
-	aPillarPage := (FOMicrodownReader file: root / 'test-code.md') createModelEntity.
+	| aMicrodownPage |
 	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-code.md') createModelEntity.
 
 	self
 		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s | aPillarPage renderOn: s ])
+		equals: (String streamContents: [ :s | '' ])
 ]
 
 { #category : 'tests' }
 FOVisitorDifferPageTest >> testFigure [
 
-	| aPillarPage aMicrodownPage |
-		self skip.
-	aPillarPage := (FOMicrodownReader file: root / 'test-figure.md')
-		               createModelEntity.
+	| aMicrodownPage |
 	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-figure.md')
 		                  createModelEntity.
-
 	self
 		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s | aPillarPage renderOn: s ])
+		equals: (String streamContents: [ :s | ''])
 ]
 
 { #category : 'tests' }
 FOVisitorDifferPageTest >> testItalic [
 
-	| aPillarPage aMicrodownPage |
-	aPillarPage := (FOMicrodownReader file: root / 'test-text-italic.md') createModelEntity.
+	|  aMicrodownPage |
 	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-text-italic.md') createModelEntity.
 
 	self
 		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s | aPillarPage renderOn: s ])
+		equals: (String streamContents: [ :s |  '' ])
 ]
 
 { #category : 'tests' }
 FOVisitorDifferPageTest >> testLink [
 
 	| aPillarPage aMicrodownPage |
-		self skip.
-	aPillarPage := (FOMicrodownReader file: root / 'test-link.md') createModelEntity.
 	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-link.md') createModelEntity.
 
 	self
 		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s | aPillarPage renderOn: s ])
+		equals: (String streamContents: [ :s | '' ])
 ]
 
 { #category : 'tests' }
 FOVisitorDifferPageTest >> testList [
 
-	| aPillarPage aMicrodownPage |
-	aPillarPage := (FOMicrodownReader file: root / 'test-list.md') createModelEntity.
+	| aMicrodownPage |
 	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-list.md') createModelEntity.
 
 	self
 		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s | aPillarPage renderOn: s ])
+		equals: (String streamContents: [ :s | '' ])
 
 ]
 
 { #category : 'tests' }
 FOVisitorDifferPageTest >> testMonospace [
 
-	| aPillarPage aMicrodownPage |
-	aPillarPage := (FOMicrodownReader file: root / 'test-text-monospace.md') createModelEntity.
+	| aMicrodownPage |
 	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-text-monospace.md') createModelEntity.
 
 	self
 		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s | aPillarPage renderOn: s ])
+		equals: (String streamContents: [ :s |  '' ])
 
 ]
 
 { #category : 'tests' }
 FOVisitorDifferPageTest >> testOrderedList [
 
-	| aPillarPage aMicrodownPage |
-	aPillarPage := (FOMicrodownReader file: root / 'test-list-ordered.md') createModelEntity.
+	| aMicrodownPage |
 	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-list-ordered.md') createModelEntity.
 
 	self
 		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s | aPillarPage renderOn: s ])
+		equals: (String streamContents: [ :s | '' ])
 
 ]
 
 { #category : 'tests' }
 FOVisitorDifferPageTest >> testRenderOn [
 
-	| aPillarPage aMicrodownPage |
-	self skip.
-	aPillarPage := (FOMicrodownReader file: root / 'community.md') createModelEntity.
+	| aMicrodownPage |
 	aMicrodownPage := (FOMicrodownV2Reader file: root / 'community.md') createModelEntity.
 
 	self
 		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s | aPillarPage renderOn: s ])
+		equals: (String streamContents: [ :s | '' ])
 
 ]
 
 { #category : 'tests' }
 FOVisitorDifferPageTest >> testTitles [
 
-	| aPillarPage aMicrodownPage |
-	aPillarPage := (FOMicrodownReader file: root / 'test-titles.md') createModelEntity.
+	| aMicrodownPage |
 	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-titles.md') createModelEntity.
 
 	self
 		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s | aPillarPage renderOn: s ])
+		equals: (String streamContents: [ :s | '' ])
 
 ]
 
 { #category : 'tests' }
 FOVisitorDifferPageTest >> testUnorderedList [
 
-	| aPillarPage aMicrodownPage |
-	aPillarPage := (FOMicrodownReader file: root / 'test-list-unordered.md') createModelEntity.
+	| aMicrodownPage |
 	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-list-unordered.md') createModelEntity.
 
 	self
 		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s | aPillarPage renderOn: s ])
+		equals: (String streamContents: [ :s | '' ])
 
 ]

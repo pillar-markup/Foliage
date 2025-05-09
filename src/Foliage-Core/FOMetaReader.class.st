@@ -9,13 +9,13 @@ Class {
 	#tag : 'Reader'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'instance creation' }
 FOMetaReader class >> on: aReadStream [ 
 	^ self new 
 		stream: aReadStream
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'instance creation' }
 FOMetaReader class >> parse: aString [ 
 	^ self new parse: aString
 ]
