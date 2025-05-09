@@ -12,7 +12,7 @@ FOPublisher commandLine activateWith: {
 ```
 
 
-Donwload 
+Download 
 
 ```
 http://github.com/pharo-project/pharo-website

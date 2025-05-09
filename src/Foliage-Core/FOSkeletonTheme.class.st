@@ -1,9 +1,9 @@
 Class {
 	#name : 'FOSkeletonTheme',
 	#superclass : 'FOTheme',
-	#category : 'Foliage-Core-Base',
+	#category : 'Foliage-Core-Themes',
 	#package : 'Foliage-Core',
-	#tag : 'Base'
+	#tag : 'Themes'
 }
 
 { #category : 'actions' }
@@ -52,8 +52,6 @@ FOSkeletonTheme >> createPageTemplate [
 FOSkeletonTheme >> downloadSkeleton [
 	<script>
 	
-		
-	self halt. 
 	self archiveName asFileReference exists ifFalse: [  
 		ZnClient new 
 			url: 'https://github.com/dhg/Skeleton/releases/download/2.0.4/', self archiveName;

@@ -1,9 +1,9 @@
 Class {
 	#name : 'FOTheme',
 	#superclass : 'Object',
-	#category : 'Foliage-Core-Base',
+	#category : 'Foliage-Core-Themes',
 	#package : 'Foliage-Core',
-	#tag : 'Base'
+	#tag : 'Themes'
 }
 
 { #category : 'actions' }

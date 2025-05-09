@@ -87,7 +87,7 @@ FOWebSite >> baseUri: anObject [
 	baseUri := anObject
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'building' }
 FOWebSite >> buildOverviewFor: aString [ 
 	
 	| blog |
