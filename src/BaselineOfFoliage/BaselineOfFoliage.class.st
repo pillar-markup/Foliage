@@ -10,9 +10,7 @@ BaselineOfFoliage >> baseline: spec [
 	<baseline>
 
 	spec for: #'common' do: [
-		
 		spec preLoadDoIt: #preload:package:.
-		spec postLoadDoIt: #postloadWithLoader:withPackageSpec:.
 		
 		self
 			microdown: spec;
@@ -52,15 +50,6 @@ BaselineOfFoliage >> mustache: spec [
 		spec 
 			repository: 'github://noha/Mustache/repository';
 			loads: #('Core')].
-]
-
-{ #category : 'baselines' }
-BaselineOfFoliage >> postloadWithLoader: loader withPackageSpec: spec [
-
-	| mic |
-	mic := (IceRepository repositoryNamed: 'Microdown').
-	(mic packageNamed: 'Microdown-Pillar') load.
-	
 ]
 
 { #category : 'baselines' }
