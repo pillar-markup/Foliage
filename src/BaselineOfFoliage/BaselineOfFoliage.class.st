@@ -55,7 +55,7 @@ BaselineOfFoliage >> microdown: spec [
 BaselineOfFoliage >> mustache: spec [
 	spec baseline: 'Mustache' with: [
 		spec 
-			repository: 'github://noha/Mustache/repository:v1.3/';
+			repository: 'github://noha/Mustache:v1.3/repository/';
 			loads: #('Core')].
 ]
 
