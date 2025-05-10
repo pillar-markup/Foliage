@@ -15,6 +15,7 @@ BaselineOfFoliage >> baseline: spec [
 		spec postLoadDoIt: #postloadWithLoader:withPackageSpec:.
 		
 		self
+			microdown: spec;
 			mustache: spec; 
 			soup: spec;
 			zinc: spec.
