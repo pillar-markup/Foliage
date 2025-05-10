@@ -320,10 +320,10 @@ FOVisitorDifferPageTest >> testUnorderedList [
 	self
 		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ]) 
 		equals:
-Character cr asString , Character lf asString,  'Here is a list:
-<ul>
-<li>item 1</li>
-<li>item 2</li>
-<li>item 3</li>
-</ul>'
+Character cr asString , Character lf asString,  'Here is a list:',Character cr asString , Character lf asString,
+'<ul>',Character cr asString , Character lf asString, 
+'<li>item 1</li>',Character cr asString , Character lf asString, 
+'<li>item 2</li>',Character cr asString , Character lf asString, 
+'<li>item 3</li>',Character cr asString , Character lf asString, 
+'</ul>'
 ]
