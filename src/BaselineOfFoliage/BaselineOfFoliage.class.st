@@ -20,7 +20,7 @@ BaselineOfFoliage >> baseline: spec [
 			
 		spec 
 			package: 'Foliage-Core' with: [
-				spec requires: #( 'Soup' 'Microdown') ];
+				spec requires: #( 'Soup' 'Microdown' 'Mustache') ];
 			package: 'Foliage-Publisher' with: [
 				spec requires: #('Foliage-Core') ];
 			package: 'Foliage-Server' with: [
