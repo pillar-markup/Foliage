@@ -194,8 +194,8 @@ FOVisitorDifferPageTest >> testCode [
 		assert: (String streamContents: [ :s | 
 			(FOMicrodownV2Reader file: root / 'test-code.md') createModelEntity renderOn: s ]) 
 		equals:
-Character cr asString , Character lf asString, 'Here is some code
-<pre><code>   1000 factorial / 999 factorial</code></pre>', Character cr asString , Character lf asString
+Character cr asString , Character lf asString, 'Here is some code', Character cr asString , Character lf asString,
+'<pre><code>   1000 factorial / 999 factorial</code></pre>', Character cr asString , Character lf asString
 
 		
 ]
@@ -269,32 +269,27 @@ FOVisitorDifferPageTest >> testMonospace [
 { #category : 'tests' }
 FOVisitorDifferPageTest >> testOrderedList [
 
-	| aMicrodownPage |
-	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-list-ordered.md') createModelEntity.
-
 	self
-		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
+		assert: (String streamContents: [ :s | 
+			(FOMicrodownV2Reader file: root / 'test-list-ordered.md') createModelEntity renderOn: s ])
 		equals: 
-Character cr asString , Character lf asString, 'Here is a list:
-<ol>
-<li>item 1</li>
-<li>item 2</li>
-<li>item 3</li>
-</ol>'
+Character cr asString , Character lf asString, 'Here is a list:', Character cr asString , Character lf asString,
+'<ol>', Character cr asString , Character lf asString,
+'<li>item 1</li>', Character cr asString , Character lf asString,
+'<li>item 2</li>', Character cr asString , Character lf asString,
+'<li>item 3</li>', Character cr asString , Character lf asString,
+'</ol>'
 ]
 
 { #category : 'tests' }
 FOVisitorDifferPageTest >> testRenderOn [
 
-	| aMicrodownPage |
-	aMicrodownPage := (FOMicrodownV2Reader file: root / 'community.md') createModelEntity.
-
 	self
-		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ]) equals: 
-Character cr asString , Character lf asString, '<h1>Community & help</h1>
-<h2>Discord team</h2>
-We hang out on Discord (Invitation at <a target="_blank" href="https://discord.gg/QewZMZa"><a target="_blank" href="https://discord.gg/QewZMZa">https://discord.gg/QewZMZa</a></a>), where we discuss everything for Pharo users and developers.
-You can get an instant invite following this <a target="_blank" href="https://discord.gg/QewZMZa">link</a>.'
+		assert: (String streamContents: [ :s | (FOMicrodownV2Reader file: root / 'community.md') createModelEntity renderOn: s ]) equals: 
+Character cr asString , Character lf asString, '<h1>Community & help</h1>', Character cr asString , Character lf asString,
+'<h2>Discord team</h2>', Character cr asString , Character lf asString,
+'We hang out on Discord (Invitation at <a target="_blank" href="https://discord.gg/QewZMZa"><a target="_blank" href="https://discord.gg/QewZMZa">https://discord.gg/QewZMZa</a></a>), where we discuss everything for Pharo users and developers.', Character cr asString , Character lf asString,
+'You can get an instant invite following this <a target="_blank" href="https://discord.gg/QewZMZa">link</a>.'
 		
 ]
 
