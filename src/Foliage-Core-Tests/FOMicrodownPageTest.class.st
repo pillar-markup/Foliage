@@ -64,14 +64,12 @@ FOMicrodownPageTest >> testPublicationDate [
 { #category : 'running' }
 FOMicrodownPageTest >> testRenderOnWithMicrodownV2 [
 
-	| aPage |
-	aPage := (FOMicrodownV2Reader file: root / 'community.md') createModelEntity.
-
 	self
-		assert: (String streamContents: [ :s | aPage renderOn: s ]) equals: '
-<h1>Community & help</h1>
-<h2>Discord team</h2>
-We hang out on Discord (Invitation at <a target="_blank" href="https://discord.gg/QewZMZa"><a target="_blank" href="https://discord.gg/QewZMZa">https://discord.gg/QewZMZa</a></a>), where we discuss everything for Pharo users and developers.
-You can get an instant invite following this <a target="_blank" href="https://discord.gg/QewZMZa">link</a>.'
+		assert: (String streamContents: [ :s | 
+			(FOMicrodownV2Reader file: root / 'community.md') createModelEntity renderOn: s ]) 
+		equals: Character cr asString, Character lf asString, '<h1>Community & help</h1>', Character cr asString, Character lf asString,
+'<h2>Discord team</h2>', Character cr asString, Character lf asString,
+'We hang out on Discord (Invitation at <a target="_blank" href="https://discord.gg/QewZMZa"><a target="_blank" href="https://discord.gg/QewZMZa">https://discord.gg/QewZMZa</a></a>), where we discuss everything for Pharo users and developers.', Character cr asString, Character lf asString,
+'You can get an instant invite following this <a target="_blank" href="https://discord.gg/QewZMZa">link</a>.'
 		
 ]
