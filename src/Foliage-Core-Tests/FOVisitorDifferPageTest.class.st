@@ -258,12 +258,11 @@ Character cr asString , Character lf asString,
 { #category : 'tests' }
 FOVisitorDifferPageTest >> testMonospace [
 
-	| aMicrodownPage |
-	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-text-monospace.md') createModelEntity.
 
 	self
-		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ]) equals:
-Character cr asString , Character lf asString, '<code>monospace</code>'
+		assert: (String streamContents: [ :s | 
+			(FOMicrodownV2Reader file: root / 'test-text-monospace.md') createModelEntity renderOn: s ]) 
+		equals: Character cr asString , Character lf asString, '<code>monospace</code>'
 		
 ]
 
@@ -306,9 +305,9 @@ FOVisitorDifferPageTest >> testTitles [
 		assert: (String streamContents: [ :s | 
 			(FOMicrodownV2Reader file: root / 'test-titles.md') createModelEntity renderOn: s ])
 		equals: 
-Character cr asString , Character lf asString, '<h1>Microdown is quite cool</h1>
-<h2>Microdown is quite coool x2</h2>
-<h3>Microdown is quite cooool x3</h3>'
+Character cr asString , Character lf asString, '<h1>Microdown is quite cool</h1>', Character cr asString , Character lf asString, 
+'<h2>Microdown is quite coool x2</h2>', Character cr asString , Character lf asString, 
+'<h3>Microdown is quite cooool x3</h3>'
 		
 ]
 
