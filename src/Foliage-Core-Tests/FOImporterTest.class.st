@@ -20,9 +20,12 @@ FOImporterTest >> PNGContents [ ^ (Form
 { #category : 'data' }
 FOImporterTest >> gsocContentsMD [
 
-	^ 'title: Google Summer of Code
-layout: default
-publishDate: "2019-05-21"
+	^ '
+{
+"title" : "Google Summer of Code",
+"layout" : "default",
+"publishDate" : "2019-05-21"
+}
 
 # Google Summer of Code 2019 Students
 
@@ -85,9 +88,11 @@ On this page, you can find the personal blogs and social media links of the seve
 { #category : 'data' }
 FOImporterTest >> gsocContentsMD2 [ 
 
-	^ '{"title" : "Google Summer of Code",
+	^ '{
+"title" : "Google Summer of Code",
 "layout" : "default",
-"publishDate" : "2019-05-21"}
+"publishDate" : "2019-05-21"
+}
 
 # Google Summer of Code 2019 Students
 
@@ -156,7 +161,7 @@ FOImporterTest >> mdOneFileName [
 { #category : 'data' }
 FOImporterTest >> mdTwoFileName [
 
-	^ 'gsoc.md2'
+	^ 'gsoc.md'
 ]
 
 { #category : 'data' }
@@ -181,7 +186,7 @@ FOImporterTest >> setUp [
 	(root / 'news') ensureCreateDirectory.
 	root / 'news' / self mdTwoFileName
 		writeStreamDo: [ :st | st nextPutAll: self gsocContentsMD2 ]. 
-	root / 'news' / 'gsoc2.md2'
+	root / 'news' / 'gsoc2.md'
 		writeStreamDo: [ :st | st nextPutAll: self gsocContentsMD2 ]. 
 	
 ]
@@ -192,7 +197,7 @@ FOImporterTest >> testConvertToBlog [
 	| web |
 	web := (FOWebSite new baseUri: 'http://pharo.org').
 	web importer readFile: root /  'news'/ self mdTwoFileName.
-	web importer readFile: root /  'news'/ 'gsoc2.md2'.
+	web importer readFile: root /  'news'/ 'gsoc2.md'.
 	(web root / 'news' ) convertToBlog.
 	
 	self assert: ( web root /  'news' / self mdTwoFileName ) class equals: FOMicrodownBlogPost
@@ -229,26 +234,24 @@ FOImporterTest >> testReadFileMicrodonwContentsIsParsed [
 	web := (FOWebSite new baseUri: 'http://pharo.org').
 	importer := FOImporter new.
 	importer	website: web.
-	importer readFile: root / 'gsoc.md2'.
+	importer readFile: root / 'gsoc.md'.
 	"I do not get why we have this path but why not for now. "
-	self assert: ( web root / 'gsoc.md2') document class equals: MicRootBlock
+	self assert: ( web root / 'gsoc.md') document class equals: MicRootBlock
 	
-	"Check readDocumentFrom:"
+	
 ]
 
 { #category : 'tests' }
 FOImporterTest >> testReadFileMicrodownV1ContentsIsParsedAndConvertedAsPillar [
-	"this version md is for manual meta data + md -> pillar"
 	
 	| importer web |
 	web := (FOWebSite new baseUri: 'http://pharo.org').
 	importer := FOImporter new.
 	importer	website: web.
 	importer readFile: root / 'gsoc.md'.
-	"I do not get why we have this path but why not for now. "
-	self assert: ( web root / 'gsoc.md') document class equals: PRDocument. 
+	self assert: ( web root / 'gsoc.md') document class equals: MicRootBlock. 
 	
-	"Check readDocumentFrom:"
+
 ]
 
 { #category : 'tests' }
@@ -279,6 +282,5 @@ FOImporterTest >> testReadMDFile [
 	importer := FOImporter new.
 	importer	website: web.
 	importer readFile: root / self mdTwoFileName.
-	"I do not get why we have this path but why not for now. "
 	self assert: ( web root / self mdTwoFileName ) class equals: FOMicrodownPage
 ]

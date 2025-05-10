@@ -184,16 +184,14 @@ FOBlogTest >> mainTemplateContents [
 
 { #category : 'data' }
 FOBlogTest >> mdOneFileName [
-	self flag: #todo.
-	"to rename when we remove md for pillar and keep md (eg. md2 -> md)"
-	^ 'gsoc.md2'
+
+	^ 'gsoc.md'
 ]
 
 { #category : 'data' }
 FOBlogTest >> mdOneFileName2 [
-	self flag: #todo. 
-	"to rename when we remove md for pillar and keep md (eg. md2 -> md)"
-	^ 'gsoc2.md2'
+	
+	^ 'gsoc2.md'
 ]
 
 { #category : 'running' }

@@ -35,7 +35,7 @@ FOBlogAfterConversionTest >> testBlogAfterOverviewBuildingNowContainsIndex [
 FOBlogAfterConversionTest >> testBlogBeforeOverviewBuildingOnlyContainsChildren [ 
 
 	self assert: blog items size equals: 2.
-	blog items keys do: [ :each | self assert: (#( 'gsoc.md2' 'gsoc2.md2') includes: each) ].
+	blog items keys do: [ :each | self assert: (#( 'gsoc.md' 'gsoc2.md') includes: each) ].
 	self assert: blog publishedPosts size equals: 2.
 ]
 
@@ -166,9 +166,9 @@ On this page, you can find the personal blogs and social media links of the seve
 { #category : 'running' }
 FOBlogAfterConversionTest >> testBlogPostHasMetaData [
 	
-	self assert: blog publishedPosts first publicationDate printString equals: '21 May 2019'.
+	self assert: blog publishedPosts first publicationDate printString equals: '21 May 2025'.
 	self assert: blog publishedPosts first layout  equals: 'default'.
-	self assert: blog publishedPosts first title equals: 'Google Summer of Code'.
+	self assert: blog publishedPosts first title equals: 'IsLoop'.
 ]
 
 { #category : 'overviewBuilder' }
