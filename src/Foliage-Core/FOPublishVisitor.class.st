@@ -57,17 +57,9 @@ FOPublishVisitor >> visitHTMLPageSource: aFOHTMLPageSource [
 FOPublishVisitor >> visitMicrodownPage: aMicrodownPage [
 
 	aMicrodownPage emit.
-	(aMicrodownPage path basename = 'index.html') ifTrue: [ self halt ].
 	"recursive publish"
 	aMicrodownPage publish.
 	^ aMicrodownPage 
-]
-
-{ #category : 'visiting' }
-FOPublishVisitor >> visitPillarPage: aFOPillarPage [ 
-	self halt.
-	aFOPillarPage publish.
-	^ aFOPillarPage 
 ]
 
 { #category : 'visiting' }

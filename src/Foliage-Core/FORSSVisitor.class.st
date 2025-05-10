@@ -24,11 +24,3 @@ FORSSVisitor >> visitBlog: aFOBlog [
 FORSSVisitor >> visitBlogPost: aFOBlogPost [ 
 	^ self visitMicrodownPage: aFOBlogPost
 ]
-
-{ #category : 'visiting' }
-FORSSVisitor >> visitPillarPage: aFOPillarPage [ 
-	^ FORSSItem new 
-		title: aFOPillarPage title;
-		link: aFOPillarPage absoluteLink;
-		description: aFOPillarPage abstract.
-]

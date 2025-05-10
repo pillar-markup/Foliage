@@ -1,3 +1,8 @@
+"
+I'm a blog I have a title and a layout.
+I'm build from a folder. 
+I generate a Blog page overview and a list of posts.
+"
 Class {
 	#name : 'FOBlog',
 	#superclass : 'FOWebFolder',

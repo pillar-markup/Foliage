@@ -1,3 +1,6 @@
+"
+A simple visitor to manipulate the model.
+"
 Class {
 	#name : 'FOModelVisitor',
 	#superclass : 'Object',
