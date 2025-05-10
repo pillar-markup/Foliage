@@ -167,7 +167,7 @@ FOVisitorDifferPageTest >> setUp [
 
 ## Discord team
 
-We hang out on Discord \(Invitation at [https://discord.gg/QewZMZa](https://discord.gg/QewZMZa)\), where we discuss everything for Pharo users and developers.
+We hang out on Discord (Invitation at [https://discord.gg/QewZMZa](https://discord.gg/QewZMZa)), where we discuss everything for Pharo users and developers.
 
 You can get an instant invite following this [link](https://discord.gg/QewZMZa).
 ' ].
@@ -182,8 +182,10 @@ FOVisitorDifferPageTest >> testBold [
 	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-text-bold.md') createModelEntity.
 
 	self
-		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s | '' ])
+		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ]) 
+		equals: '
+<strong>Bold</strong>'
+		
 ]
 
 { #category : 'tests' }
@@ -193,8 +195,12 @@ FOVisitorDifferPageTest >> testCode [
 	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-code.md') createModelEntity.
 
 	self
-		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s | '' ])
+		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ]) 
+		equals: '
+Here is some code
+<pre><code>   1000 factorial / 999 factorial</code></pre>
+'
+		
 ]
 
 { #category : 'tests' }
@@ -204,8 +210,10 @@ FOVisitorDifferPageTest >> testFigure [
 	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-figure.md')
 		                  createModelEntity.
 	self
-		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s | ''])
+		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ]) 
+		equals: '
+Here is a figure: <figure><img src="/media/logo/logo.png" alt="Pharologo"><figcaption>Pharologo</figcaption></img></figure>'
+		
 ]
 
 { #category : 'tests' }
@@ -215,19 +223,23 @@ FOVisitorDifferPageTest >> testItalic [
 	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-text-italic.md') createModelEntity.
 
 	self
-		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s |  '' ])
+		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ]) 
+		equals: '
+<i>italic</i>'
+	
 ]
 
 { #category : 'tests' }
 FOVisitorDifferPageTest >> testLink [
 
-	| aPillarPage aMicrodownPage |
+	| aMicrodownPage |
 	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-link.md') createModelEntity.
 
 	self
 		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s | '' ])
+		equals:  '
+<a target="_blank" href="http://pharo.org/">Pharo</a>.'
+	
 ]
 
 { #category : 'tests' }
@@ -237,9 +249,17 @@ FOVisitorDifferPageTest >> testList [
 	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-list.md') createModelEntity.
 
 	self
-		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s | '' ])
-
+		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ]) equals: '
+Here is a list:
+<ul>
+<li>item 1
+<ol>
+<li>sub item 1</li>
+<li>sub item 2</li>
+</ol></li>
+<li>item 2</li>
+</ul>'
+		
 ]
 
 { #category : 'tests' }
@@ -249,9 +269,9 @@ FOVisitorDifferPageTest >> testMonospace [
 	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-text-monospace.md') createModelEntity.
 
 	self
-		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s |  '' ])
-
+		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ]) equals: '
+<code>monospace</code>'
+		
 ]
 
 { #category : 'tests' }
@@ -262,8 +282,13 @@ FOVisitorDifferPageTest >> testOrderedList [
 
 	self
 		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s | '' ])
-
+		equals: '
+Here is a list:
+<ol>
+<li>item 1</li>
+<li>item 2</li>
+<li>item 3</li>
+</ol>'
 ]
 
 { #category : 'tests' }
@@ -273,9 +298,12 @@ FOVisitorDifferPageTest >> testRenderOn [
 	aMicrodownPage := (FOMicrodownV2Reader file: root / 'community.md') createModelEntity.
 
 	self
-		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s | '' ])
-
+		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ]) equals: '
+<h1>Community & help</h1>
+<h2>Discord team</h2>
+We hang out on Discord (Invitation at <a target="_blank" href="https://discord.gg/QewZMZa"><a target="_blank" href="https://discord.gg/QewZMZa">https://discord.gg/QewZMZa</a></a>), where we discuss everything for Pharo users and developers.
+You can get an instant invite following this <a target="_blank" href="https://discord.gg/QewZMZa">link</a>.'
+		
 ]
 
 { #category : 'tests' }
@@ -286,8 +314,11 @@ FOVisitorDifferPageTest >> testTitles [
 
 	self
 		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s | '' ])
-
+		equals:  '
+<h1>Microdown is quite cool</h1>
+<h2>Microdown is quite coool x2</h2>
+<h3>Microdown is quite cooool x3</h3>'
+		
 ]
 
 { #category : 'tests' }
@@ -297,7 +328,11 @@ FOVisitorDifferPageTest >> testUnorderedList [
 	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-list-unordered.md') createModelEntity.
 
 	self
-		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: (String streamContents: [ :s | '' ])
-
+		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ]) equals: '
+Here is a list:
+<ul>
+<li>item 1</li>
+<li>item 2</li>
+<li>item 3</li>
+</ul>'
 ]

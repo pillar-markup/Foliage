@@ -23,9 +23,12 @@ FOPillarPageTest >> setUp [
 	(root / 'community.md')
 		ensureCreateFile;
 		writeStreamDo: [ :s |
-			s << 'title: Community
-layout: default
-publishDate: 2021-11-04
+			s << '
+{
+"title" : "Community",
+"layout" : "default",
+"publishDate" : "2021-11-04"
+}
 
 # Community & help
 
@@ -138,22 +141,19 @@ FOPillarPageTest >> testGetAPageWithAPRDocument [
 	self assert: aPage class equals: FOMicrodownPage.
 	self assert: (aPage meta at: 'layout') equals: 'default'.
 	self assert: (aPage meta at: 'publishDate') equals: '2021-11-04'.
-	self assert: aPage document class equals: PRDocument
+	self assert: aPage document class equals: MicRootBlock
 ]
 
 { #category : 'tests' }
 FOPillarPageTest >> testHTMLString [
 
 	| aPage web |
-		self skip.
 	aPage := (FOMicrodownV2Reader file: root / 'community.md') createModelEntity.
 	web := FOWebSite new.
 	web
 		rawPath: root;
 		templatePath: root / 'templates'.
 	aPage parent: web.
-	
-	
 	
 	self assert: aPage htmlString equals: '<!DOCTYPE HTML>
 <html>
@@ -212,25 +212,28 @@ FOPillarPageTest >> testHTMLString [
 </nav>
 
                 <div class="container">
-                    <h1>Community & help</h1><h2>Discord team</h2><p>We hang out on Discord (Invitation at <a href="https://discord.gg/QewZMZa"><a href="https://discord.gg/QewZMZa">https://discord.gg/QewZMZa</a></a>), where we discuss everything for Pharo users and developers.</p><p>You can get an instant invite following this <a href="https://discord.gg/QewZMZa">link</a>.</p>
+                    
+<h1>Community & help</h1>
+<h2>Discord team</h2>
+We hang out on Discord (Invitation at <a target="_blank" href="https://discord.gg/QewZMZa"><a target="_blank" href="https://discord.gg/QewZMZa">https://discord.gg/QewZMZa</a></a>), where we discuss everything for Pharo users and developers.
+You can get an instant invite following this <a target="_blank" href="https://discord.gg/QewZMZa">link</a>.
                 </div>
             </div>
         </div>
     </body>
-</html>'
+</html>' 
 ]
 
 { #category : 'tests' }
 FOPillarPageTest >> testRenderOn [
 
 	| aPage |
-		self skip.
-	aPage := (FOMicrodownV2Reader file: root / 'community.md')
-		         createModelEntity.
-
+	aPage := (FOMicrodownV2Reader file: root / 'community.md') createModelEntity.
 	self
-		assert: (String streamContents: [ :s | aPage renderOn: s ])
-		equals:
-		'
-<h1>Community & help</h1><h2>Discord team</h2><p>We hang out on Discord (Invitation at <a href="https://discord.gg/QewZMZa"><a href="https://discord.gg/QewZMZa">https://discord.gg/QewZMZa</a></a>), where we discuss everything for Pharo users and developers.</p><p>You can get an instant invite following this <a href="https://discord.gg/QewZMZa">link</a>.</p>'
+		assert: (String streamContents: [ :s | aPage renderOn: s ]) equals: '
+<h1>Community & help</h1>
+<h2>Discord team</h2>
+We hang out on Discord (Invitation at <a target="_blank" href="https://discord.gg/QewZMZa"><a target="_blank" href="https://discord.gg/QewZMZa">https://discord.gg/QewZMZa</a></a>), where we discuss everything for Pharo users and developers.
+You can get an instant invite following this <a target="_blank" href="https://discord.gg/QewZMZa">link</a>.'
+		
 ]
