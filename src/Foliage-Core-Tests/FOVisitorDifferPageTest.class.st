@@ -178,13 +178,12 @@ You can get an instant invite following this [link](https://discord.gg/QewZMZa).
 { #category : 'tests' }
 FOVisitorDifferPageTest >> testBold [
 
-	| aMicrodownPage |
-	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-text-bold.md') createModelEntity.
+
 
 	self
-		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ]) 
-		equals: '
-<strong>Bold</strong>'
+		assert: (String streamContents: [ :s | 
+			(FOMicrodownV2Reader file: root / 'test-text-bold.md') createModelEntity renderOn: s ]) 
+		equals: Character cr asString , Character lf asString, '<strong>Bold</strong>'
 		
 ]
 

@@ -23,7 +23,8 @@ FOMicrodownPageTest >> setUp [
 	(root / 'community.md')
 		ensureCreateFile;
 		writeStreamDo: [ :s | s << 
-'{ "title" : "Community",
+'{ 
+"title" : "Community",
 "layout" : "default",
 "publishDate" : "2021-11-04"
 }
