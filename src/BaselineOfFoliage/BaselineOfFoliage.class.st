@@ -12,15 +12,20 @@ BaselineOfFoliage >> baseline: spec [
 	spec for: #'common' do: [
 		spec preLoadDoIt: #preload:package:.
 		
+		spec baseline: 'Microdown' with: [
+			spec 
+				repository: 'github://pillar-markup/Microdown:dev/src';
+				loads: #( 'Core' #'Microdown-HTMLExporter')]. 
+		spec baseline: 'GitBridge' with: [ spec repository: 'github://jecisc/GitBridge:v1.x.x/src' ].
+		
 		self
-			microdown: spec;
 			mustache: spec; 
 			soup: spec;
 			zinc: spec.
 			
 		spec 
 			package: 'Foliage-Core' with: [
-				spec requires: #( 'Soup' 'Microdown' 'Mustache') ];
+				spec requires: #( 'Soup' 'Microdown' 'Mustache' 'GitBridge') ];
 			package: 'Foliage-Publisher' with: [
 				spec requires: #('Foliage-Core') ];
 			package: 'Foliage-Server' with: [
