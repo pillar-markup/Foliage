@@ -65,8 +65,10 @@ FOBlogAfterConversionTest >> testBlogOverviewRender [
 	| summaryPageObject |
 	site buildOverviewFor: 'success'.
 	summaryPageObject := blog items at: #'index.html'.
-
-	self assert: summaryPageObject htmlString equals: '<!DOCTYPE HTML>
+	self 
+		assert: summaryPageObject htmlString
+		equals: 
+	 '<!DOCTYPE HTML>
 <html>
     
     <body class="default">
@@ -142,8 +144,7 @@ Suscribe to this blog: <a href="http://pharo.org/news/atom.xml">Entries RSS</a> 
 <script>
 </script>
     </body>
-</html>'  
-	
+</html>'
 ]
 
 { #category : 'failing tests' }

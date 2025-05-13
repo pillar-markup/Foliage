@@ -19,7 +19,7 @@ Class {
 { #category : 'running' }
 FOMicrodownPageTest >> lineEnding [
 
-	^ Character cr asString , Character lf asString
+	^ Character cr asString
 ]
 
 { #category : 'running' }

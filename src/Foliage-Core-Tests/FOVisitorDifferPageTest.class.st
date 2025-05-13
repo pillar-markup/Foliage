@@ -158,7 +158,7 @@ FOVisitorDifferPageTest >> createMDTitlesTestFile [
 { #category : 'as yet unclassified' }
 FOVisitorDifferPageTest >> lineEnding [
 
-	^ Character cr asString , Character lf asString
+	^ Character cr asString
 ]
 
 { #category : 'running' }
