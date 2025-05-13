@@ -21,12 +21,6 @@ FOBlog >> acceptFOVisitor: aFOVisitor [
 ]
 
 { #category : 'accessing' }
-FOBlog >> adaptPage: aPage [
-	self halt.
-	^ aPage asFOBlogPost 
-]
-
-{ #category : 'accessing' }
 FOBlog >> defaultLayout [
 
 	^ 'blog'
