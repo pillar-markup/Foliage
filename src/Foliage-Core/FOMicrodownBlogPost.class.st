@@ -14,7 +14,7 @@ FOMicrodownBlogPost >> abstract [
 		post: self
 ]
 
-{ #category : 'accessing' }
+{ #category : 'scripting - layouts' }
 FOMicrodownBlogPost >> abstractLayout [
 
 	^ self meta 
@@ -22,7 +22,7 @@ FOMicrodownBlogPost >> abstractLayout [
 		ifAbsent: [ self defaultAbstractLayout ]	
 ]
 
-{ #category : 'accessing' }
+{ #category : 'scripting - layouts' }
 FOMicrodownBlogPost >> abstractTemplate [
 
 	^ (self website templatePathForLayout: self abstractLayout) asMustacheTemplate.

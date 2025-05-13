@@ -1,7 +1,12 @@
 "
 I'm a file written in Microdown. 
-I usually have metadata and a body
+I usually have metadata and a body.
+In addition a page defines one or more layout.
+For example a blog post can be rendered as full page or in an abstract version. 
+This is done having different templates (and layouts).  
 
+
+Here is a typical starts of a microdown page. 
 ```
 {
 ""title"" : ""An Example"",
@@ -32,11 +37,10 @@ FOMicrodownPage class >> supportedFileExtensions [
 
 { #category : 'accessing' }
 FOMicrodownPage >> abstract [
+	"Perform a basic text abstract just collecting everything and cutting it off the first: n elments."
 	
 	| abstract |
-	self halt.
 	abstract := (Character space join: (document children allButFirst collect: [ :each | each text ])).
-	
 	^ abstract first: (abstract size min: self abstractAmountOfCharacters)
 ]
 
