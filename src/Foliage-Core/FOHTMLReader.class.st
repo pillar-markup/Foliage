@@ -1,3 +1,6 @@
+"
+.html file to FOHTMLPage object
+"
 Class {
 	#name : 'FOHTMLReader',
 	#superclass : 'FOAbstractReader',
@@ -13,6 +16,6 @@ FOHTMLReader class >> supportedFileExtensions [
 
 { #category : 'instance creation' }
 FOHTMLReader >> createModelEntity [
-	^ FOHTMLPage new
-		sourcePath: file asPath
+
+	^ FOHTMLPage new sourcePath: file asPath; yourself
 ]

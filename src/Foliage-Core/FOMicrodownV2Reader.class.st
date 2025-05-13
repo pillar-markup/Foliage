@@ -23,14 +23,12 @@ FOMicrodownV2Reader >> createModelEntity [
 		sourcePath: file asPath;
 		meta: doc children first;
 		document: doc. 
-		
-	"may be we could remove the metadata from the document since it is the first element."
-
+	
 ]
 
 { #category : 'reading' }
 FOMicrodownV2Reader >> readDocumentFrom: aStream [
 
-	^ (MicrodownParser parse: aStream upToEnd)
+	^ MicrodownParser parse: aStream upToEnd
 
 ]

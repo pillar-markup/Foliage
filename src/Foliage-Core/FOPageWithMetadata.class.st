@@ -20,14 +20,14 @@ FOPageWithMetadata >> defaultLayout [
 	^ self parent defaultLayout
 ]
 
-{ #category : 'converting' }
+{ #category : 'logging' }
 FOPageWithMetadata >> emitSlots [
 
 	^ super emitSlots, #(meta)
 ]
 
 { #category : 'testing' }
-FOPageWithMetadata >> hasDocumentType [
+FOPageWithMetadata >> hasLayout [
 	^ meta includesKey: 'layout'
 ]
 

@@ -160,8 +160,7 @@ FOWebSite >> propertyAt: aString put: anObject [
 { #category : 'building' }
 FOWebSite >> publish [
 
-	FOPublishVisitor new
-		start: self
+	FOPublishVisitor new visit: self
 
 ]
 

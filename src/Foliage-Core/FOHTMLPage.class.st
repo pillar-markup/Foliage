@@ -1,3 +1,6 @@
+"
+I'm an html file. I'm usually written in HTML format. 
+"
 Class {
 	#name : 'FOHTMLPage',
 	#superclass : 'FOFileBasedWebEntity',

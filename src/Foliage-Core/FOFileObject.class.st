@@ -1,5 +1,5 @@
 "
-I'm a simple file resources, in the same spirit as the webimages. I will be just copy 
+I'm a simple file ressources, in the same spirit as the webimages. I will be just copy 
 to the target by the publisher. 
 "
 Class {

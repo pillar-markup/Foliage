@@ -1,3 +1,7 @@
+"
+I'm the root of a little hierarchy of reader objects. 
+Their job is to convert a file into a domain object (e.g., an image, an html or a microdown page object)
+"
 Class {
 	#name : 'FOAbstractReader',
 	#superclass : 'Object',

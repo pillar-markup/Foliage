@@ -1,3 +1,19 @@
+"
+I'm a file written in Microdown. 
+I usually have metadata and a body
+
+```
+{
+""title"" : ""An Example"",
+""publicationDate"" : '2025-06-01"",
+""layout"" : ""default""
+}
+
+## A title 
+
+and more .... 
+```
+"
 Class {
 	#name : 'FOMicrodownPage',
 	#superclass : 'FOPageWithMetadata',

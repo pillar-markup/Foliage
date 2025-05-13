@@ -1,3 +1,6 @@
+"
+gif jpg jpeg png to corresponding FOImage object
+"
 Class {
 	#name : 'FOImageReader',
 	#superclass : 'FOAbstractReader',
@@ -15,5 +18,5 @@ FOImageReader class >> supportedFileExtensions [
 FOImageReader >> createModelEntity [ 
 
 	^ FOWebImage new 
-		sourcePath: file asPath
+		sourcePath: file asPath ; yourself
 ]
