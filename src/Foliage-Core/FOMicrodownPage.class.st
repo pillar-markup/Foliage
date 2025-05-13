@@ -85,6 +85,7 @@ FOMicrodownPage >> render [
 FOMicrodownPage >> renderOn: aStream [
 
 	| visitor |
+	"here we could set the lline ending convention."
 	visitor := MicHTMLVisitor new
 		           stream: aStream;
 		           yourself.
