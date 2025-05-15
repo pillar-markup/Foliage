@@ -38,8 +38,8 @@ BaselineOfFoliage >> baseline: spec [
 			group: 'Core' with: #('Foliage-Core' 'Foliage-Publisher');
 			group: 'Publisher' with: #('Core' 'Foliage-Publisher');
 			group: 'Tests' with: #('Foliage-Core-Tests' );
-			group: 'default' with: #('Core' 'Tests');
-			group: 'development' with: #('Core' 'Tests' 'ZincHTTPComponents') ]
+			group: 'default' with: #('Core' 'Foliage-Feed' 'Publisher' 'Tests');
+			group: 'development' with: #('Core' 'Tests' 'Publisher' 'Foliage-Feed' 'ZincHTTPComponents') ]
 
 ]
 
