@@ -1,1 +1,1 @@
-Package { #name : #'Foliage-Feed' }
+Package { #name : 'Foliage-Feed' }

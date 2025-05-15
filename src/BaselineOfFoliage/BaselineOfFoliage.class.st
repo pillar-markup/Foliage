@@ -12,8 +12,6 @@ BaselineOfFoliage >> baseline: spec [
 	spec for: #'common' do: [
 		spec preLoadDoIt: #preload:package:.
 		
-		"spec baseline: 'GitBridge' with: [ spec repository: 'github://jecisc/GitBridge:v1.x.x/src' ]."
-		
 		spec baseline: 'Microdown' with: [
 			spec 
 				repository: 'github://pillar-markup/Microdown:dev/src'
@@ -27,11 +25,13 @@ BaselineOfFoliage >> baseline: spec [
 			
 		spec 
 			package: 'Foliage-Core' with: [
-				spec requires: #( 'Soup' 'Microdown' 'Mustache') ];
+				spec requires: #( 'Microdown' 'Mustache') ];
 			package: 'Foliage-Publisher' with: [
 				spec requires: #('Foliage-Core') ];
 			package: 'Foliage-Server' with: [
 				spec requires: #('Foliage-Core') ];
+			package: 'Foliage-Feed' with: [
+				spec requires: #( 'Soup' 'Foliage-Core') ];
 			package: 'Foliage-Core-Tests' with: [
 				spec requires: #('Foliage-Core') ].
 		spec 

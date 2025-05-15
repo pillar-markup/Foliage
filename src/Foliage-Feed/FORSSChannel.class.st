@@ -7,9 +7,8 @@ Class {
 		'link',
 		'description'
 	],
-	#category : 'Foliage-Core-RSS',
-	#package : 'Foliage-Core',
-	#tag : 'RSS'
+	#category : 'Foliage-Feed',
+	#package : 'Foliage-Feed'
 }
 
 { #category : 'accessing' }
