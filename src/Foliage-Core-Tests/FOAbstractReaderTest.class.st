@@ -10,6 +10,13 @@ Class {
 }
 
 { #category : 'tests' }
+FOAbstractReaderTest >> testFactoryForUnknownFiles [
+
+	self assert: (FOAbstractReader forFileExtension: 'md2') isNil.
+	
+]
+
+{ #category : 'tests' }
 FOAbstractReaderTest >> testFactoryIsWorking [ 
 
 	self assert: (FOAbstractReader forFileExtension: 'glop') isNil.
