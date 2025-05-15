@@ -2,7 +2,9 @@ Class {
 	#name : 'FOImporterTest',
 	#superclass : 'TestCase',
 	#instVars : [
-		'root'
+		'root',
+		'web',
+		'importer'
 	],
 	#category : 'Foliage-Core-Tests-Importer',
 	#package : 'Foliage-Core-Tests',
@@ -188,81 +190,49 @@ FOImporterTest >> setUp [
 		writeStreamDo: [ :st | st nextPutAll: self gsocContentsMD2 ]. 
 	root / 'news' / 'gsoc2.md'
 		writeStreamDo: [ :st | st nextPutAll: self gsocContentsMD2 ]. 
+		
+	web := FOWebSite new baseUri: 'http://pharo.org'.
+	importer := FOImporter new.
+	importer	website: web.	
 	
 ]
 
 { #category : 'tests - blogs' }
 FOImporterTest >> testConvertToBlog [
 	
-	| web |
-	web := (FOWebSite new baseUri: 'http://pharo.org').
 	web importer readFile: root /  'news'/ self mdTwoFileName.
 	web importer readFile: root /  'news'/ 'gsoc2.md'.
 	(web root / 'news' ) convertToBlog.
 	
-	self assert: ( web root /  'news' / self mdTwoFileName ) class equals: FOMicrodownBlogPost
+	self 
+		assert: ( web root /  'news' / self mdTwoFileName ) class 
+		equals: FOMicrodownBlogPost
+		
 ]
 
 { #category : 'tests' }
 FOImporterTest >> testReadFile [
-	
-	| importer web |
-	web := (FOWebSite new baseUri: 'http://pharo.org').
-	importer := FOImporter new.
-	importer	website: web.
-	importer readFile: root / 'gsoc.md'.
-	"I do not get why we have this path but why not for now. "
-	self assert: ( web root /'gsoc.md' ) class equals: FOMicrodownPage 
-]
 
-{ #category : 'tests' }
-FOImporterTest >> testReadFile2 [
-	
-	| importer web |
-	web := (FOWebSite new baseUri: 'http://pharo.org').
-	importer := FOImporter new.
-	importer	website: web.
 	importer readFile: root / 'gsoc.md'.
-	"I do not get why we have this path but why not for now. "
-	self assert: ( web root / 'gsoc.md') class equals: FOMicrodownPage 
+	self 
+		assert: ( web root /'gsoc.md' ) class 
+		equals: FOMicrodownPage 
 ]
 
 { #category : 'tests' }
 FOImporterTest >> testReadFileMicrodonwContentsIsParsed [
 	
-	| importer web |
-	web := (FOWebSite new baseUri: 'http://pharo.org').
-	importer := FOImporter new.
-	importer	website: web.
 	importer readFile: root / 'gsoc.md'.
-	"I do not get why we have this path but why not for now. "
 	self assert: ( web root / 'gsoc.md') document class equals: MicRootBlock
 	
 	
 ]
 
 { #category : 'tests' }
-FOImporterTest >> testReadFileMicrodownV1ContentsIsParsedAndConvertedAsPillar [
-	
-	| importer web |
-	web := (FOWebSite new baseUri: 'http://pharo.org').
-	importer := FOImporter new.
-	importer	website: web.
-	importer readFile: root / 'gsoc.md'.
-	self assert: ( web root / 'gsoc.md') document class equals: MicRootBlock. 
-	
-
-]
-
-{ #category : 'tests' }
 FOImporterTest >> testReadFilePngKeepsJustARef [
 	
-	| importer web |
-	web := (FOWebSite new baseUri: 'http://pharo.org').
-	importer := FOImporter new.
-	importer	website: web.
 	importer readFile: root / self pngFileName.
-	"I do not get why we have this path but why not for now. "
+	
 	self 
 		assert: ( web root / self pngFileName) class 
 		equals: FOWebImage. 
@@ -272,15 +242,4 @@ FOImporterTest >> testReadFilePngKeepsJustARef [
 	self 
 		assert: ( web root / self pngFileName) sourcePath
 		equals: Path / 'aPNG.png'
-]
-
-{ #category : 'tests - blogs' }
-FOImporterTest >> testReadMDFile [
-	
-	| importer web |
-	web := (FOWebSite new baseUri: 'http://pharo.org').
-	importer := FOImporter new.
-	importer	website: web.
-	importer readFile: root / self mdTwoFileName.
-	self assert: ( web root / self mdTwoFileName ) class equals: FOMicrodownPage
 ]
