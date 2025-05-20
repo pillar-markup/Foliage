@@ -196,41 +196,6 @@ FOPublisher >> baseUri: aString [
 	baseUri := aString
 ]
 
-{ #category : 'accessing' }
-FOPublisher >> blogs [
-
-	^ blogs ifNil: [ #() ]
-]
-
-{ #category : 'accessing' }
-FOPublisher >> blogs: aColOfPairOfFolderNamesToTitles [
-	"| p |
-	p := FOPublisher new. 
-	p blogs: {
-		'news' -> 'Pharo News' . 
-		'success' ->'Pharo Success Stories'  }."
-
-
-	blogs := aColOfPairOfFolderNamesToTitles
-]
-
-{ #category : 'actions' }
-FOPublisher >> configureBlogs [
-	"During the configuration of blogs, pages are converted to blog post objects in the model."
-	
-	self blogs do: [ :assoc |
-		| blog |
-		"this logic should not be in the publisher
-		but in the website and it should call the blog. "
-		blog := (site / assoc key) convertToBlog.
-		blog title: assoc value.
-		blog
-			at: #'index.html' put: blog overviewPage";
-			at: #'rss.xml' put: blog rssFeed".
-		
-		"blog rssFeed addHeadersTo: blog / 'index.html'" ].
-]
-
 { #category : 'actions' }
 FOPublisher >> configureNewWebSite [
 
@@ -251,16 +216,14 @@ FOPublisher >> publish [
 	site importFiles.
 
 	('Imported ' , site allFiles size asString , ' files') emit.
-
-
 	"basically using the command line we get an instance of FOPublisher that is configured 
 	based on the command argument. This is not nice for tests and to interactively develop.
 	No I do not want to close pharo, type a command to get it. "	
 	configurationInstance := self class readFile: (site rawPath asFileReference / self class defaultProjectFileName asString). 
 	site baseUri: configurationInstance baseUri.
-	self blogs: configurationInstance blogs. 	
-
-	self configureBlogs.
+		
+	site blogSpecs: configurationInstance blogs.
+	site configureBlogs.
 
 	site publish.
 ]

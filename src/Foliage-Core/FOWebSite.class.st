@@ -16,12 +16,14 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'baseUri',
+		'blogs',
 		'targetPath',
 		'templatePath',
 		'rawPath',
 		'model',
 		'root',
-		'properties'
+		'properties',
+		'blogSpecs'
 	],
 	#classInstVars : [
 		'instance'
@@ -87,6 +89,16 @@ FOWebSite >> baseUri: anObject [
 	baseUri := anObject
 ]
 
+{ #category : 'accessing-blogs' }
+FOWebSite >> blogSpecs: aColOfPairOfFolderNamesToTitles [
+	"| p |
+	p := FOPublisher new. 
+	p blogs: {
+		'news' -> 'Pharo News' . 
+		'success' ->'Pharo Success Stories'  }."
+	blogSpecs := aColOfPairOfFolderNamesToTitles
+]
+
 { #category : 'building' }
 FOWebSite >> buildOverviewFor: aString [ 
 	
@@ -101,12 +113,27 @@ FOWebSite >> buildRoot [
 		parent: self 
 ]
 
-{ #category : 'accessing' }
+{ #category : 'accessing-blogs' }
+FOWebSite >> configureBlogs [
+	"During the configuration of blogs, pages are converted to blog post objects in the model."
+	
+	blogSpecs do: [ :assoc |
+		| blog |
+		blog := (self / assoc key) convertToBlog.
+		blog title: assoc value.
+		blog
+			at: #'index.html' put: blog overviewPage";
+			at: #'rss.xml' put: blog rssFeed".
+		
+		"blog rssFeed addHeadersTo: blog / 'index.html'" ].
+]
+
+{ #category : 'defaults' }
 FOWebSite >> defaultTargetPath [
 	^ 'docs'
 ]
 
-{ #category : 'accessing' }
+{ #category : 'defaults' }
 FOWebSite >> defaultTemplatePath [ 
 	^ 'templates'
 ]
@@ -135,6 +162,7 @@ FOWebSite >> importer [
 FOWebSite >> initialize [ 
 	super initialize.
 	properties := Dictionary new.
+	blogSpecs := OrderedCollection new. 
 	root := self buildRoot.
 
 	rawPath := '' asFileReference

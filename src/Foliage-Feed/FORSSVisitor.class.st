@@ -11,6 +11,7 @@ FORSSVisitor >> visitBlog: aFOBlog [
 	feed := FORSSFeed new.
 	channel := FORSSChannel new
 		title: 'fo';
+		halt; 
 		link: 'https://norbert.hartl.name/blog/rss.xml';
 		description: 'the general channel'.
 	channel items: (super visitAll: aFOBlog posts).
