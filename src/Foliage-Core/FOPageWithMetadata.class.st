@@ -43,6 +43,7 @@ FOPageWithMetadata >> isPublished [
 
 { #category : 'accessing' }
 FOPageWithMetadata >> layout [
+	
 	^ self meta 
 		at: 'layout'
 		ifAbsent: [ self defaultLayout ]

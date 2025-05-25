@@ -73,7 +73,7 @@ FOBlog >> postBefore: aFOPillarPage [
 	| list index |
 	list := self sortedByPublishDate.
 	index := list indexOf: aFOPillarPage.
-	^ (index > 1)
+	^ index > 1
 		ifTrue: [ list at: index - 1 ]
 		ifFalse: [ nil ]
 ]

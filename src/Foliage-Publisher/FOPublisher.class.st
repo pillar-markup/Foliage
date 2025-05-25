@@ -196,6 +196,11 @@ FOPublisher >> baseUri: aString [
 	baseUri := aString
 ]
 
+{ #category : 'accessing' }
+FOPublisher >> blogs [
+	^ blogs
+]
+
 { #category : 'actions' }
 FOPublisher >> configureNewWebSite [
 

@@ -10,7 +10,8 @@ Class {
 }
 
 { #category : 'accessing' }
-FOPageRenderContext >> body [ 
+FOPageRenderContext >> body [
+
 	^ self html
 ]
 

@@ -13,7 +13,8 @@ FOBlogPostRenderContext >> abstract [
 ]
 
 { #category : 'accessing' }
-FOBlogPostRenderContext >> nextPost [ 
+FOBlogPostRenderContext >> nextPost [
+
 	^ page parent postAfter: self page
 ]
 
@@ -24,7 +25,8 @@ FOBlogPostRenderContext >> pathString [
 ]
 
 { #category : 'accessing' }
-FOBlogPostRenderContext >> previousPost [ 
+FOBlogPostRenderContext >> previousPost [
+
 	^ page parent postBefore: self page
 ]
 

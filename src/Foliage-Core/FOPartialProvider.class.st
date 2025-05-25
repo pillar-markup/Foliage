@@ -12,6 +12,7 @@ Class {
 
 { #category : 'accessing' }
 FOPartialProvider >> at: key [
+	
 	^ (website templatePathForLayout: layout partial: key) asMustacheTemplate 
 ]
 

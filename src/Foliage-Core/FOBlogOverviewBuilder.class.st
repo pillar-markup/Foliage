@@ -58,11 +58,13 @@ FOBlogOverviewBuilder >> buildSummary [
 
 { #category : 'accessing' }
 FOBlogOverviewBuilder >> defaultNumberOfCharacters [
+
 	^ 500
 ]
 
 { #category : 'accessing' }
 FOBlogOverviewBuilder >> numberOfCharacters: anObject [
+
 	numberOfCharacters := anObject
 ]
 

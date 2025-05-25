@@ -98,7 +98,7 @@ FOMicrodownPage >> publishPathFor: aString [
 { #category : 'rendering' }
 FOMicrodownPage >> render [ 
 
-	^ self newRenderContext renderTemplate: self template.
+	^ self newRenderContext renderTemplate: self template
 ]
 
 { #category : 'rendering' }

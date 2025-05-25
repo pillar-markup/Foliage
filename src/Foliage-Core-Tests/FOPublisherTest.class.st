@@ -12,7 +12,6 @@ FOPublisherTest >> testBasic2 [
 	| publisher |
 	publisher := FOPublisher new
 		baseUri: 'http://pharo.org';
-		blogs: { 'news' -> 'Pharo News' . 'success' -> 'Pharo Success Stories' };
 		yourself.
 	self assert: publisher baseUri equals: 'http://pharo.org'.
 	publisher targetPath: '/home/ducasse/Test2/foliage/output'.
@@ -22,25 +21,11 @@ FOPublisherTest >> testBasic2 [
 ]
 
 { #category : 'tests' }
-FOPublisherTest >> testBasicPublisherConfiguration [
-	
-	| publisher |
-	publisher := FOPublisher new
-		baseUri: 'http://pharo.org';
-		blogs: { 'news' -> 'Pharo News' . 'success' -> 'Pharo Success Stories' };
-		yourself.
-	self assert: publisher baseUri equals: 'http://pharo.org'.
-	self assert: publisher blogs size equals: 2.
-
-]
-
-{ #category : 'tests' }
 FOPublisherTest >> testConfigurateWebSite [
 	
 	| publisher ws |
 	publisher := FOPublisher new
 		baseUri: 'http://pharo.org';
-		blogs: { 'news' -> 'Pharo News' . 'success' -> 'Pharo Success Stories' };
 		targetPath: '/home/ducasse/Test2/foliage/output';
 		sourcePath: '/home/ducasse/Test2/foliage/test/'.
 	self assert: publisher sourcePath fullName equals: '/home/ducasse/Test2/foliage/test'.		
