@@ -6,6 +6,7 @@ Besides fixing bugs and glitches here is a list of next tasks
 - Generate publications based on citezen extension
 - Generate thematic publication pages extension
 - Book gallery extension
+- Schedule for ESUG like page
 - What about a contents of the blog page?
 
 
