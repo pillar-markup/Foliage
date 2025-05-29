@@ -18,7 +18,32 @@ Download
 http://github.com/pharo-project/pharo-website
 ```
 
+### About templates and loops 
 
+Here is one way to use loops in template
+
+```
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset=""UTF-8"" />
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />
+    <link rel=""stylesheet"" type=""text/css"" href=""files/newstef.css"" /> 
+    <title>PLAY</title>
+</head>
+    <body>
+	<pr> Play file template
+	<pr> Before the foo variable
+	{{{foo}}}
+	<pr> After foo variable
+
+
+	{{# list }}
+	Number: {{{ number }}} 
+	{{/ list }}'.
+    </body>
+</html>
+```
 "
 Class {
 	#name : 'FOWelcome',

@@ -24,6 +24,7 @@ FOPageRenderContext >> html [
 
 { #category : 'accessing' }
 FOPageRenderContext >> layout [
+
 	^ page layout
 ]
 
