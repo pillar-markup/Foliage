@@ -1,5 +1,5 @@
 Class {
-	#name : 'FOPublicationListSpecification',
+	#name : 'FOPublicationList',
 	#superclass : 'Object',
 	#instVars : [
 		'workingDirectory',
@@ -21,12 +21,12 @@ Class {
 }
 
 { #category : 'queries' }
-FOPublicationListSpecification >> PhDAndHabilitationQuery [
+FOPublicationList >> PhDAndHabilitationQuery [
 	^ CZQuery PhDAndHabilitation
 ]
 
 { #category : 'intersections' }
-FOPublicationListSpecification >> addEntitledSection: aString withBibEntries: entries [
+FOPublicationList >> addEntitledSection: aString withBibEntries: entries [
 
 	self addSection: (CZSection new
 			 title: aString;
@@ -37,7 +37,7 @@ FOPublicationListSpecification >> addEntitledSection: aString withBibEntries: en
 ]
 
 { #category : 'private' }
-FOPublicationListSpecification >> addSectionFromQuery: aQuery withTitle: aString [
+FOPublicationList >> addSectionFromQuery: aQuery withTitle: aString [
 	"Adding a section just add a section and a list of entries following it.
 	By default, empty sections are not created and entries are sorted to get more recent on the top. Pay attention that the items of a section are a new group of items. "
 
@@ -49,26 +49,26 @@ FOPublicationListSpecification >> addSectionFromQuery: aQuery withTitle: aString
 ]
 
 { #category : 'private' }
-FOPublicationListSpecification >> allowEmptySections [
+FOPublicationList >> allowEmptySections [
 	"It can be useful for document or bibfile debugging purposes to see the empty section of a document. By default it is turn off. "
 
 	noEmptySection := false
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> annotationWithType: aString [
+FOPublicationList >> annotationWithType: aString [
 
 	^  CZQuery annotationWithType: aString
 ]
 
 { #category : 'main configuration' }
-FOPublicationListSpecification >> authorMatchingString: aString [
+FOPublicationList >> authorMatchingString: aString [
 
 	authorMatchingString := aString
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> authorQuery [
+FOPublicationList >> authorQuery [
 
 	^ CZFieldQuery 
 		named: #author 
@@ -76,7 +76,7 @@ FOPublicationListSpecification >> authorQuery [
 ]
 
 { #category : 'private' }
-FOPublicationListSpecification >> bibset: aBibSet [
+FOPublicationList >> bibset: aBibSet [
 	"We copy the original to be sure that we can always refer to it, even if we destructively change the working set."
 	originalBibSet := aBibSet.
 	aBibSet scope: CZSet standardDefinitions.
@@ -84,28 +84,28 @@ FOPublicationListSpecification >> bibset: aBibSet [
 ]
 
 { #category : 'accessing' }
-FOPublicationListSpecification >> bodySpecification [
+FOPublicationList >> bodySpecification [
 
 	^ bodySpecification ifNil: [ bodySpecification := self defaultSpecification ]
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> bookChapterQuery [
+FOPublicationList >> bookChapterQuery [
 	^ CZQuery bookChapter
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> bookQuery [
+FOPublicationList >> bookQuery [
 	^ CZQuery book
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> bookletQuery [
+FOPublicationList >> bookletQuery [
 	^ CZQuery booklet
 ]
 
 { #category : 'private' }
-FOPublicationListSpecification >> build [
+FOPublicationList >> build [
 	"Build the current document: filter entities that not desirable and build the document body."
 	
 	self filter.
@@ -113,7 +113,7 @@ FOPublicationListSpecification >> build [
 ]
 
 { #category : 'private' }
-FOPublicationListSpecification >> buildBody [
+FOPublicationList >> buildBody [
 
 	self bodySpecification do: [ :each |
 			self
@@ -123,7 +123,7 @@ FOPublicationListSpecification >> buildBody [
 ]
 
 { #category : 'main configuration' }
-FOPublicationListSpecification >> configure [
+FOPublicationList >> configure [
 
 	self 
 		fileNamed: 'rmod.bib';
@@ -135,43 +135,43 @@ FOPublicationListSpecification >> configure [
 ]
 
 { #category : 'initialization' }
-FOPublicationListSpecification >> defaultFieldOrder [
+FOPublicationList >> defaultFieldOrder [
 
 	^ #(#author #title #chapter #journal #booktitle #volume #pages #publisher #school #year #pdf #url #doi)
 
 ]
 
 { #category : 'initialization' }
-FOPublicationListSpecification >> defaultKeysOfBlackListedEntries [ 
+FOPublicationList >> defaultKeysOfBlackListedEntries [ 
 
 	^ #()
 ]
 
 { #category : 'initialization' }
-FOPublicationListSpecification >> defaultSectionSpecification [
+FOPublicationList >> defaultSectionSpecification [
 
 	^ #(#internationalJournal #topConference #nationalJournal internationalConference #nationalConference #invitedPaper #bookChapter #book #editor #internationalWorkshop #PhDAndHabilitation #toolDemo #vulgarisation)
 ]
 
 { #category : 'initialization' }
-FOPublicationListSpecification >> defaultSpecification [
+FOPublicationList >> defaultSpecification [
 
 	^ #( #internationalJournal #nationalJournal #topConference #internationalConference #nationalConference #invitedPaper #bookChapter #book #editor #internationalWorkshop #toolDemo #vulgarisation #PhDAndHabilitation)
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> deliverableQuery [
+FOPublicationList >> deliverableQuery [
 	^ CZQuery deliverable
 ]
 
 { #category : 'private' }
-FOPublicationListSpecification >> doNotAllowEmptySections [
+FOPublicationList >> doNotAllowEmptySections [
 
 	noEmptySection := true
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> editorQuery [
+FOPublicationList >> editorQuery [
 	"We refine it for a single author!: the entrie is flagged as workshopproceeddings or as editor. This way papers written by the author that is also editor will not be mixed in the editor zone."
 
 	"we know that this is in the author entries, so he is an editor since he marked it"
@@ -180,13 +180,13 @@ FOPublicationListSpecification >> editorQuery [
 ]
 
 { #category : 'main configuration' }
-FOPublicationListSpecification >> english [
+FOPublicationList >> english [
 
 	localization english
 ]
 
 { #category : 'accessing' }
-FOPublicationListSpecification >> fieldOrder: aCol [
+FOPublicationList >> fieldOrder: aCol [
 	"To specify the order and fields that should be displayed, for example, 
 	#(#author #title #chapter #journal #booktitle #volume #pages #publisher #school #year #url #doi)."
 
@@ -194,13 +194,13 @@ FOPublicationListSpecification >> fieldOrder: aCol [
 ]
 
 { #category : 'files' }
-FOPublicationListSpecification >> fileNamed: aStringDotBib [
+FOPublicationList >> fileNamed: aStringDotBib [
 	"Parser and set the bib file."
 	self onStream: (workingDirectory resolve: aStringDotBib) readStream
 ]
 
 { #category : 'private' }
-FOPublicationListSpecification >> filter [
+FOPublicationList >> filter [
 	"Filter insubmission and other blacklisted entries"
 
 	self shouldFilterNonPublic
@@ -214,13 +214,13 @@ FOPublicationListSpecification >> filter [
 ]
 
 { #category : 'main configuration' }
-FOPublicationListSpecification >> french [
+FOPublicationList >> french [
 
 	localization french
 ]
 
 { #category : 'initialization' }
-FOPublicationListSpecification >> generateFor: aDoc on: aStream [
+FOPublicationList >> generateFor: aDoc on: aStream [
 
 	| visitor |
 	visitor := self configureGenerator.
@@ -230,12 +230,12 @@ FOPublicationListSpecification >> generateFor: aDoc on: aStream [
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> inSubmissionQuery [
+FOPublicationList >> inSubmissionQuery [
 	^ CZQuery inSubmission
 ]
 
 { #category : 'initialization' }
-FOPublicationListSpecification >> initialize [
+FOPublicationList >> initialize [
 
 	super initialize.
 	workingDirectory := FileSystem workingDirectory.
@@ -251,13 +251,13 @@ FOPublicationListSpecification >> initialize [
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> internationalConferenceQuery [
+FOPublicationList >> internationalConferenceQuery [
 
 	^ (self annotationWithType:  '*internationalconference*') AND: (self topConferenceQuery) NOT
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> internationalJournalQuery [
+FOPublicationList >> internationalJournalQuery [
 
 	^ (CZFieldQuery 
 			named: #annote 
@@ -265,64 +265,64 @@ FOPublicationListSpecification >> internationalJournalQuery [
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> internationalWorkshopQuery [
+FOPublicationList >> internationalWorkshopQuery [
 	^ CZQuery internationalWorkshop
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> invitedPaperQuery [
+FOPublicationList >> invitedPaperQuery [
 
 	^ self annotationWithType:  '*invited*'
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> invitedQuery [
+FOPublicationList >> invitedQuery [
 
 	^ self annotationWithType:  '*invited*'
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> journalQuery [
+FOPublicationList >> journalQuery [
 	^ CZQuery journal
 ]
 
 { #category : 'main configuration' }
-FOPublicationListSpecification >> keysOfBlackListedEntries [
+FOPublicationList >> keysOfBlackListedEntries [
 	"Returns the list of entities (identfied via their bib key) that should not be taken into account when building a document."
 	
 	^ keysOfBlackListedEntries
 ]
 
 { #category : 'accessing' }
-FOPublicationListSpecification >> keysOfBlackListedEntries: aCol [
+FOPublicationList >> keysOfBlackListedEntries: aCol [
 
 	keysOfBlackListedEntries := aCol
 ]
 
 { #category : 'main configuration' }
-FOPublicationListSpecification >> localizationClass [
+FOPublicationList >> localizationClass [
 	^ CZLocalisation
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> nationalConferenceQuery [
+FOPublicationList >> nationalConferenceQuery [
 	"pay attention not to put a star else internationalconference will be matched too"
 
 	^ CZQuery nationalConference
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> nationalJournalQuery [
+FOPublicationList >> nationalJournalQuery [
 	^ CZQuery nationalJournal
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> nationalWorkshopQuery [
+FOPublicationList >> nationalWorkshopQuery [
 	^ CZQuery nationalWorkshop
 ]
 
 { #category : 'private' }
-FOPublicationListSpecification >> onStream: aStream [
+FOPublicationList >> onStream: aStream [
 
 	| bibset2 |
 	bibset2 := CZBibParser parse: aStream contents.
@@ -332,31 +332,31 @@ FOPublicationListSpecification >> onStream: aStream [
 ]
 
 { #category : 'accessing' }
-FOPublicationListSpecification >> perYear: aBoolean [
+FOPublicationList >> perYear: aBoolean [
 
 	perYear := aBoolean
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> periodicalQuery [
+FOPublicationList >> periodicalQuery [
 	^ CZQuery periodical
 ]
 
 { #category : 'main configuration' }
-FOPublicationListSpecification >> setFilteringOff [
+FOPublicationList >> setFilteringOff [
 
 	shouldFilterNonPublic := false
 ]
 
 { #category : 'main configuration' }
-FOPublicationListSpecification >> setFilteringOn [
+FOPublicationList >> setFilteringOn [
 	"to filter private entries and others insubmissions"
 	
 	shouldFilterNonPublic := true
 ]
 
 { #category : 'main configuration' }
-FOPublicationListSpecification >> setLanguage: aSymbol [
+FOPublicationList >> setLanguage: aSymbol [
 	"right now only english and french are managed."
 	
 	| language |
@@ -367,33 +367,33 @@ FOPublicationListSpecification >> setLanguage: aSymbol [
 ]
 
 { #category : 'main configuration' }
-FOPublicationListSpecification >> shouldFilterNonPublic [
+FOPublicationList >> shouldFilterNonPublic [
 
 	^ shouldFilterNonPublic
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> teamEntryQuery [
+FOPublicationList >> teamEntryQuery [
 	^ CZQuery teamEntry
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> technicalReportQuery [
+FOPublicationList >> technicalReportQuery [
 	^ CZQuery techReport
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> toolDemoQuery [
+FOPublicationList >> toolDemoQuery [
 	^ CZQuery toolDemo
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> topConferenceQuery [
+FOPublicationList >> topConferenceQuery [
 	^ CZQuery topConference
 ]
 
 { #category : 'private' }
-FOPublicationListSpecification >> treatBody [
+FOPublicationList >> treatBody [
 	self bodySpecification
 		do: [ :each |  
 					self 
@@ -403,23 +403,23 @@ FOPublicationListSpecification >> treatBody [
 ]
 
 { #category : 'queries' }
-FOPublicationListSpecification >> vulgarisationQuery [
+FOPublicationList >> vulgarisationQuery [
 	^ CZQuery vulgarisation
 ]
 
 { #category : 'accessing' }
-FOPublicationListSpecification >> workingBibSet [ 
+FOPublicationList >> workingBibSet [ 
 	
 	^ workingBibSet
 ]
 
 { #category : 'accessing' }
-FOPublicationListSpecification >> workingDirectory: aWorkingDirectory [ 
+FOPublicationList >> workingDirectory: aWorkingDirectory [ 
 	
 	workingDirectory := aWorkingDirectory
 ]
 
 { #category : 'accessing' }
-FOPublicationListSpecification >> years: aCollection [ 
+FOPublicationList >> years: aCollection [ 
 	years := aCollection
 ]
