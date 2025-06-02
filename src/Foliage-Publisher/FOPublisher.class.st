@@ -54,6 +54,15 @@ Foliage {
 }
 ```
 
+## Example to generate my website
+
+```
+p := FOPublisher new. 
+p baseUri: 'http://pharo.org'.
+p sourcePath: '/Users/ducasse/Test2/MySite/StephaneDucasse.github.io/site'.
+p targetPath: '/Users/ducasse/Test2/MySite/StephaneDucasse.github.io/generated'.
+p publish.
+```
 "
 Class {
 	#name : 'FOPublisher',
@@ -202,7 +211,7 @@ FOPublisher >> blogs [
 ]
 
 { #category : 'actions' }
-FOPublisher >> configureNewWebSite [
+FOPublisher >> newWebSite [
 
 	^ FOWebSite new
 		  baseUri: self baseUri;
@@ -214,22 +223,9 @@ FOPublisher >> configureNewWebSite [
 { #category : 'actions' }
 FOPublisher >> publish [
 
-	|  configurationInstance |
-	('Publishing: ' , self baseUri) emit.
-	
-	site := self configureNewWebSite.
+	site := self newWebSite.
 	site importFiles.
-
-	('Imported ' , site allFiles size asString , ' files') emit.
-	"basically using the command line we get an instance of FOPublisher that is configured 
-	based on the command argument. This is not nice for tests and to interactively develop.
-	No I do not want to close pharo, type a command to get it. "	
-	configurationInstance := self class readFile: (site rawPath asFileReference / self class defaultProjectFileName asString). 
-	site baseUri: configurationInstance baseUri.
-		
-	site blogSpecs: configurationInstance blogs.
-	site configureBlogs.
-
+	site configureFromConfigFile.
 	site publish.
 ]
 

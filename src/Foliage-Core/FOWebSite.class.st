@@ -117,6 +117,7 @@ FOWebSite >> buildRoot [
 FOWebSite >> configureBlogs [
 	"During the configuration of blogs, pages are converted to blog post objects in the model."
 	
+	"This could be managed in a more modular fashion via a plugin architecture if needed."
 	blogSpecs do: [ :assoc |
 		| blog |
 		blog := (self / assoc key) convertToBlog.
@@ -126,6 +127,17 @@ FOWebSite >> configureBlogs [
 			at: #'rss.xml' put: blog rssFeed".
 		
 		"blog rssFeed addHeadersTo: blog / 'index.html'" ].
+]
+
+{ #category : 'importing' }
+FOWebSite >> configureFromConfigFile [
+	
+	| instance |
+	instance := self readConfigFile: (self rawPath asFileReference / 'FoliageConfig.ston').
+	self baseUri: instance baseUri.
+		
+	self blogSpecs: instance blogs.
+	self configureBlogs.
 ]
 
 { #category : 'defaults' }
@@ -200,6 +212,22 @@ FOWebSite >> rawPath [
 { #category : 'accessing' }
 FOWebSite >> rawPath: anObject [
 	rawPath := anObject asFileReference 
+]
+
+{ #category : 'importing' }
+FOWebSite >> readConfigFile: aName [
+
+	| reference |
+	reference := aName asFileReference.
+	reference exists ifFalse: [ 
+		self error: ('File {1} does not exists' format: { reference fullName }) ].
+	
+	^ [ (STONReader on: reference readStream) next ]
+		on: Error 
+		do: [ :e | 
+			self error: ('Error reading file {1}: {2}' 
+				format: { reference fullName. e messageText }) ]
+	
 ]
 
 { #category : 'accessing' }
