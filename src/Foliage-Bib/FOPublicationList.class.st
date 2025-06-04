@@ -11,7 +11,6 @@ Class {
 		'years',
 		'fieldOrder',
 		'originalBibSet',
-		'perYear',
 		'bodySpecification',
 		'noEmptySection',
 		'sections'
@@ -75,6 +74,11 @@ FOPublicationList >> authorQuery [
 		checks: [ :value | self authorMatchingString match: value ]
 ]
 
+{ #category : 'accessing' }
+FOPublicationList >> bibset [
+	^ workingBibSet 
+]
+
 { #category : 'private' }
 FOPublicationList >> bibset: aBibSet [
 	"We copy the original to be sure that we can always refer to it, even if we destructively change the working set."
@@ -128,8 +132,6 @@ FOPublicationList >> configure [
 	self 
 		fileNamed: 'rmod.bib';
 		authorMatchingString: '*', 'Ducasse', '*';
-		fieldOrder:  #(#author #editor #title #chapter #journal #booktitle #volume #pages #publisher #collection #school #year #pdf);
-		bodySpecification: #(#internationalJournal  #topConference #internationalConference #nationalJournal #nationalConference #invitedPaper #bookChapter #book #editor #internationalWorkshop #toolDemo #vulgarisation #technicalReport #PhDAndHabilitation);
 		keysOfBlackListedEntries: #(Berg13b Berg16a Denk14a Denk15a Denk16a Denk18a Denk19a Denk20a Denk21a Anqu17a Denk22a);
 		setFilteringOn.
 ]
@@ -137,8 +139,7 @@ FOPublicationList >> configure [
 { #category : 'initialization' }
 FOPublicationList >> defaultFieldOrder [
 
-	^ #(#author #title #chapter #journal #booktitle #volume #pages #publisher #school #year #pdf #url #doi)
-
+	^ #(#author #editor #title #chapter #journal #booktitle #volume #pages #publisher #collection #school #year #pdf)
 ]
 
 { #category : 'initialization' }
@@ -150,7 +151,7 @@ FOPublicationList >> defaultKeysOfBlackListedEntries [
 { #category : 'initialization' }
 FOPublicationList >> defaultSectionSpecification [
 
-	^ #(#internationalJournal #topConference #nationalJournal internationalConference #nationalConference #invitedPaper #bookChapter #book #editor #internationalWorkshop #PhDAndHabilitation #toolDemo #vulgarisation)
+	^ #(#internationalJournal  #topConference #internationalConference #nationalJournal #nationalConference #invitedPaper #bookChapter #book #editor #internationalWorkshop #toolDemo #vulgarisation #technicalReport #PhDAndHabilitation)
 ]
 
 { #category : 'initialization' }
@@ -196,6 +197,7 @@ FOPublicationList >> fieldOrder: aCol [
 { #category : 'files' }
 FOPublicationList >> fileNamed: aStringDotBib [
 	"Parser and set the bib file."
+	
 	self onStream: (workingDirectory resolve: aStringDotBib) readStream
 ]
 
@@ -329,12 +331,6 @@ FOPublicationList >> onStream: aStream [
 	bibset2 scope: CZSet standardDefinitions.
 	self bibset: bibset2
 	
-]
-
-{ #category : 'accessing' }
-FOPublicationList >> perYear: aBoolean [
-
-	perYear := aBoolean
 ]
 
 { #category : 'queries' }
