@@ -12,9 +12,7 @@ Class {
 FOPublicationListTest >> contents [
 
 	^ '
-	
-	
-	
+
 	@article{Duca22a,
   author = {St{\''e}phane Ducasse and  Guillermo Polito and Oleksandr Zaitsev and Marcus Denker and Pablo Tesone},
   title = {Deprewriter: On the fly rewriting method deprecations},
@@ -38,8 +36,8 @@ FOPublicationListTest >> contents [
   year = {2000},
   pdf = {http://rmod-files.lille.inria.fr/Team/Texts/Papers/Duca00cTransform.pdf},
   abstract = {Conditionals -i.e., switch statements, nested ifs- that are used to simulate polymorphism hamper evolution and flexibility of applications. The reengineering patterns presented in this paper show you how to transform conditionals in object-oriented code to improve the flexibility of application.},
-  annote = {internationalworkshop},
-  keywords = {stefPub kzPattern}}
+  annote = {internalworkshop},
+  keywords = {insubmission stefPub kzPattern}}
 	
 	@article{Saren24a,
   author = {Balsa Sarenac and Nicolas Anquetil and St{\''e}phane Ducasse and Pablo Tesone},
@@ -113,6 +111,63 @@ FOPublicationListTest >> setUp [
 		writeStreamDo: [ :s | s << self contents ].
 	
 	
+]
+
+{ #category : 'running' }
+FOPublicationListTest >> testFilteringOffInSubmission [
+
+	| p |
+	p := FOPublicationList new.
+	p fileNamed: filesystem / 'rmod.bib'.
+	p authorMatchingString: '*', 'Ducasse', '*'.
+	self assert: p bibset size equals: 6.
+	p setFilteringOfNonPublicOff.
+	p filter.
+	self assert: p workingBibSet size equals: 6.
+]
+
+{ #category : 'running' }
+FOPublicationListTest >> testFilteringOutBlackListed [
+
+	| p |
+	p := FOPublicationList new.
+	p fileNamed: filesystem / 'rmod.bib'.
+	p authorMatchingString: '*', 'Ducasse', '*'.
+	p keysOfBlackListedEntries: #(Duca22a Duca00c).
+	
+	self assert: p bibset size equals: 6.
+	p setFilteringOfNonPublicOn.
+	p filter.
+	self assert: p workingBibSet size equals: 4.
+]
+
+{ #category : 'running' }
+FOPublicationListTest >> testFilteringOutBlackListedWithInSubmissionToo [
+
+	| p |
+	p := FOPublicationList new.
+	p fileNamed: filesystem / 'rmod.bib'.
+	p authorMatchingString: '*', 'Ducasse', '*'.
+	p keysOfBlackListedEntries: #(Duca22a Scha03a).
+	
+	self assert: p bibset size equals: 6.
+	p setFilteringOfNonPublicOn.
+	p filter.
+	self assert: p workingBibSet size equals: 3.
+]
+
+{ #category : 'running' }
+FOPublicationListTest >> testFilteringOutInSubmission [
+
+	| p |
+	p := FOPublicationList new.
+	p fileNamed: filesystem / 'rmod.bib'.
+	p authorMatchingString: '*', 'Ducasse', '*'.
+
+	self assert: p bibset size equals: 6.
+	p setFilteringOfNonPublicOn.
+	p filter.
+	self assert: p workingBibSet size equals: 5.
 ]
 
 { #category : 'running' }

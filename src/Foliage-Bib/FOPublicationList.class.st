@@ -60,6 +60,11 @@ FOPublicationList >> annotationWithType: aString [
 	^  CZQuery annotationWithType: aString
 ]
 
+{ #category : 'accessing' }
+FOPublicationList >> authorMatchingString [
+	^ authorMatchingString
+]
+
 { #category : 'main configuration' }
 FOPublicationList >> authorMatchingString: aString [
 
@@ -133,7 +138,7 @@ FOPublicationList >> configure [
 		fileNamed: 'rmod.bib';
 		authorMatchingString: '*', 'Ducasse', '*';
 		keysOfBlackListedEntries: #(Berg13b Berg16a Denk14a Denk15a Denk16a Denk18a Denk19a Denk20a Denk21a Anqu17a Denk22a);
-		setFilteringOn.
+		setFilteringOfNonPublicOn
 ]
 
 { #category : 'initialization' }
@@ -245,7 +250,7 @@ FOPublicationList >> initialize [
 	localization := self localizationClass new.
 	self english.
 	self fieldOrder: self defaultFieldOrder.
-	self setFilteringOn.
+	self setFilteringOfNonPublicOn.
 	self keysOfBlackListedEntries: self defaultKeysOfBlackListedEntries.
 	years := 1990 to: Year currentYearNumber.
 	self doNotAllowEmptySections.
@@ -336,6 +341,20 @@ FOPublicationList >> onStream: aStream [
 { #category : 'queries' }
 FOPublicationList >> periodicalQuery [
 	^ CZQuery periodical
+]
+
+{ #category : 'main configuration' }
+FOPublicationList >> setFilteringOfNonPublicOff [
+	"to filter private entries and others insubmissions"
+	
+	shouldFilterNonPublic := false
+]
+
+{ #category : 'main configuration' }
+FOPublicationList >> setFilteringOfNonPublicOn [
+	"to filter private entries and others insubmissions"
+	
+	shouldFilterNonPublic := true
 ]
 
 { #category : 'main configuration' }
