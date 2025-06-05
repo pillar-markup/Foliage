@@ -27,7 +27,7 @@ FOPublicationList >> PhDAndHabilitationQuery [
 { #category : 'intersections' }
 FOPublicationList >> addEntitledSection: aString withBibEntries: entries [
 
-	self addSection: (CZSection new
+	self addSection: (FOSection new
 			 title: aString;
 			 items: (CZSet new
 					  addAll: entries;
@@ -35,10 +35,18 @@ FOPublicationList >> addEntitledSection: aString withBibEntries: entries [
 					yourself)
 ]
 
-{ #category : 'private' }
+{ #category : 'intersections' }
+FOPublicationList >> addSection: aSection [
+
+
+	sections add: aSection
+]
+
+{ #category : 'intersections' }
 FOPublicationList >> addSectionFromQuery: aQuery withTitle: aString [
 	"Adding a section just add a section and a list of entries following it.
-	By default, empty sections are not created and entries are sorted to get more recent on the top. Pay attention that the items of a section are a new group of items. "
+	By default, empty sections are not created and entries are sorted to get more recent on the top. 
+	Pay attention that the items of a section are a new group of items."
 
 	| entries |
 	entries := workingBibSet select: aQuery.
@@ -341,6 +349,12 @@ FOPublicationList >> onStream: aStream [
 { #category : 'queries' }
 FOPublicationList >> periodicalQuery [
 	^ CZQuery periodical
+]
+
+{ #category : 'intersections' }
+FOPublicationList >> sections [
+
+	^ sections
 ]
 
 { #category : 'main configuration' }

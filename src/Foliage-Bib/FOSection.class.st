@@ -24,6 +24,15 @@ FOSection >> items: anObject [
 	items := anObject
 ]
 
+{ #category : 'printing' }
+FOSection >> printOn: aStream [
+
+	super printOn: aStream. 
+	aStream nextPutAll: '(', title,  '-'.
+	items entries do: [ :s | aStream nextPutAll: s key ] separatedBy: [ aStream nextPutAll: ', ' ].
+	aStream nextPutAll: ')' 
+]
+
 { #category : 'accessing' }
 FOSection >> title [
 

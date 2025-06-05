@@ -74,19 +74,35 @@ FOPublicationListTest >> contents [
   month = jul,
   series = {LNCS}}
 
-@article{Poli14c,
-  author = {Polito, Guillermo and Ducasse, St{\''e}phane and Fabresse, Luc and Bouraqadi, Noury and van Ryseghem, Benjamin},
-  title = {Bootstrapping Reflective Systems: The Case of Pharo},
-  journal = {Science of Computer Programming},
-  volume = {96},
-  pages = {141-155},
-  publisher = {Elsevier},
-  year = {2014},
-  doi = {10.1016/j.scico.2013.10.008},
-  pdf = {http://rmod-files.lille.inria.fr/Team/Texts/Papers/Poli14c-BootstrappingASmalltalk-ScienceOfComputerProgramming.pdf},
-  annote = {internationaljournal},
-  hal-id = {hal-00903724},
-  keywords = {lse-pub virtualization metacircularities recovery isolation kzReflection stefpub}}
+@inproceedings{Anqu20a,
+  author = {Nicolas Anquetil and Anne Etien and Houekpetodji, Mahugnon Honor\''e and Beno{\^\i}t Verhaeghe and St{\''e}phane Ducasse and Clotilde Toullec and Fatija Djareddir and J\''er\^ome Sudich and Mustapha Derras},
+  title = {Modular {Moose}:  A new generation of software reengineering platform},
+  booktitle = {International Conference on Software and Systems Reuse (ICSR''20)},
+  pages = {119--134},
+  year = {2020},
+  misc = {acceptance rate: 16/60 = 27\%},
+  doi = {10.1007/978-3-030-64694-3_8},
+  pdf = {http://rmod-files.lille.inria.fr/Team/Texts/Papers/Anqu20a-ICSR-Moose.pdf},
+  series = {LNCS},
+  number = {12541},
+  hal-id = {hal-02972159},
+  hal-url = {https://hal.inria.fr/hal-02972159},
+  annote = {internationalconference},
+  tagnicolasa = {tools},
+  keywords = {kzEvolution},
+  month = dec}
+
+@inproceedings{Duca20a,
+  author = {Ducasse, St{\''e}phane and Dargaud, Laurine and Polito, Guillermo},
+  title = {Microdown: a Clean and extensible markup language to support Pharo documentation},
+  booktitle = {Proceedings of the 2020 International Workshop on Smalltalk Technologies},
+  year = {2020},
+  pdf = {http://rmod-files.lille.inria.fr/Team/Texts/Papers/Duca20a-Microdown-IWST.pdf},
+  annote = {internationalworkshop},
+  keywords = {StefPub kzDesign},
+  hal-id = {hal-03137098},
+  hal-url = {https://hal.inria.fr/hal-03137098}}
+
 
 @inproceedings{Poli22a,
   author = {Guillermo Polito and Pablo Tesone and St{\''e}phane Ducasse},
@@ -113,20 +129,36 @@ FOPublicationListTest >> setUp [
 	
 ]
 
-{ #category : 'running' }
+{ #category : 'tests - sections' }
+FOPublicationListTest >> testBuild [
+
+	| p |
+	p := FOPublicationList new.
+	p fileNamed: filesystem / 'rmod.bib'.
+	p authorMatchingString: '*', 'Ducasse', '*'.
+	p setFilteringOfNonPublicOff.
+	p build.
+	self assert: p sections size equals: #(intJournal topConf internConf intWorks) size.
+	self assert: p sections first title equals: 'Refereed Articles in International Journals'.
+	self assert: p sections first items size equals: 2.
+	self assert: p sections second title equals: 'Refereed Articles in Top Conferences'.
+	self assert: p sections first items size equals: 2.
+]
+
+{ #category : 'tests - filter by script' }
 FOPublicationListTest >> testFilteringOffInSubmission [
 
 	| p |
 	p := FOPublicationList new.
 	p fileNamed: filesystem / 'rmod.bib'.
 	p authorMatchingString: '*', 'Ducasse', '*'.
-	self assert: p bibset size equals: 6.
+	self assert: p bibset size equals: 7.
 	p setFilteringOfNonPublicOff.
 	p filter.
-	self assert: p workingBibSet size equals: 6.
+	self assert: p workingBibSet size equals: p bibset size.
 ]
 
-{ #category : 'running' }
+{ #category : 'tests - filter by script' }
 FOPublicationListTest >> testFilteringOutBlackListed [
 
 	| p |
@@ -134,14 +166,12 @@ FOPublicationListTest >> testFilteringOutBlackListed [
 	p fileNamed: filesystem / 'rmod.bib'.
 	p authorMatchingString: '*', 'Ducasse', '*'.
 	p keysOfBlackListedEntries: #(Duca22a Duca00c).
-	
-	self assert: p bibset size equals: 6.
 	p setFilteringOfNonPublicOn.
 	p filter.
-	self assert: p workingBibSet size equals: 4.
+	self assert: p workingBibSet size equals: 5.
 ]
 
-{ #category : 'running' }
+{ #category : 'tests - filter by script' }
 FOPublicationListTest >> testFilteringOutBlackListedWithInSubmissionToo [
 
 	| p |
@@ -149,34 +179,30 @@ FOPublicationListTest >> testFilteringOutBlackListedWithInSubmissionToo [
 	p fileNamed: filesystem / 'rmod.bib'.
 	p authorMatchingString: '*', 'Ducasse', '*'.
 	p keysOfBlackListedEntries: #(Duca22a Scha03a).
-	
-	self assert: p bibset size equals: 6.
 	p setFilteringOfNonPublicOn.
 	p filter.
-	self assert: p workingBibSet size equals: 3.
+	self assert: p workingBibSet size equals: 4.
 ]
 
-{ #category : 'running' }
+{ #category : 'tests - filter by script' }
 FOPublicationListTest >> testFilteringOutInSubmission [
 
 	| p |
 	p := FOPublicationList new.
 	p fileNamed: filesystem / 'rmod.bib'.
 	p authorMatchingString: '*', 'Ducasse', '*'.
-
-	self assert: p bibset size equals: 6.
 	p setFilteringOfNonPublicOn.
 	p filter.
-	self assert: p workingBibSet size equals: 5.
+	self assert: p workingBibSet size equals: 6.
 ]
 
-{ #category : 'running' }
+{ #category : 'tests - import' }
 FOPublicationListTest >> testPublicationListHasEntryBeforeBuilding [
 
 	| p |
 	p := FOPublicationList new.
 	p fileNamed: filesystem / 'rmod.bib'.
 	
-	self assert: p bibset size equals: 6.
+	self assert: p bibset size equals: 7.
 	self assert: p bibset entries first class equals: CZEntry.
 ]
