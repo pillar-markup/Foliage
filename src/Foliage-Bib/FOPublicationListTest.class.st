@@ -4,8 +4,9 @@ Class {
 	#instVars : [
 		'filesystem'
 	],
-	#category : 'Foliage-Bib',
-	#package : 'Foliage-Bib'
+	#category : 'Foliage-Bib-Tests',
+	#package : 'Foliage-Bib',
+	#tag : 'Tests'
 }
 
 { #category : 'running' }

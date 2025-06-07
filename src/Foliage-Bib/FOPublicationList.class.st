@@ -15,13 +15,20 @@ Class {
 		'noEmptySection',
 		'sections'
 	],
-	#category : 'Foliage-Bib',
-	#package : 'Foliage-Bib'
+	#category : 'Foliage-Bib-Core',
+	#package : 'Foliage-Bib',
+	#tag : 'Core'
 }
 
 { #category : 'queries' }
 FOPublicationList >> PhDAndHabilitationQuery [
 	^ CZQuery PhDAndHabilitation
+]
+
+{ #category : 'visiting' }
+FOPublicationList >> acceptFOVisitor: aFOVisitor [
+
+	self halt.
 ]
 
 { #category : 'intersections' }
@@ -349,6 +356,12 @@ FOPublicationList >> onStream: aStream [
 { #category : 'queries' }
 FOPublicationList >> periodicalQuery [
 	^ CZQuery periodical
+]
+
+{ #category : 'private' }
+FOPublicationList >> publishToWebSite: aWebSite withPath: aPath [
+
+	
 ]
 
 { #category : 'intersections' }

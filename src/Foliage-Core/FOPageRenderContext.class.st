@@ -25,7 +25,7 @@ FOPageRenderContext >> html [
 { #category : 'accessing' }
 FOPageRenderContext >> layout [
 
-	^ page layout
+	^ self page layout
 ]
 
 { #category : 'accessing' }
@@ -47,5 +47,5 @@ FOPageRenderContext >> publicationDate [
 { #category : 'accessing' }
 FOPageRenderContext >> title [
 
-	^ page title
+	^ self page title
 ]

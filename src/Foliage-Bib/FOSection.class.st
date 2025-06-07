@@ -8,9 +8,16 @@ Class {
 		'title',
 		'items'
 	],
-	#category : 'Foliage-Bib',
-	#package : 'Foliage-Bib'
+	#category : 'Foliage-Bib-Core',
+	#package : 'Foliage-Bib',
+	#tag : 'Core'
 }
+
+{ #category : 'visiting' }
+FOSection >> acceptFOVisitor: aFOVisitor [
+
+	self halt.
+]
 
 { #category : 'accessing' }
 FOSection >> items [
