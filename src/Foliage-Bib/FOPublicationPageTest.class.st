@@ -39,10 +39,10 @@ FOPublicationPageTest >> publicationPageName [
 ]
 
 { #category : 'running' }
-FOPublicationPageTest >> testBuildPublicationPage [ 
-	
+FOPublicationPageTest >> testBuildPublicationPage [
+
 	| publications |
 	site rawPath: root.
 	publications := site buildPublicationPage: self publicationPageName.
-	self assert: publications sections isEmpty not.
+	self assert: publications sections isNotEmpty
 ]
