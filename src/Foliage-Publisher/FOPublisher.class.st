@@ -224,8 +224,14 @@ FOPublisher >> newWebSite [
 FOPublisher >> publish [
 
 	site := self newWebSite.
+	
+	"this should probably pushed to the website"
 	site importFiles.
 	site configureFromConfigFile.
+	site handlePlugins.
+	""
+	
+	
 	site publish.
 ]
 

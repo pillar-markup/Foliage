@@ -1,9 +1,8 @@
 Class {
 	#name : 'FOFullPublicationPage',
 	#superclass : 'FOMicrodownPage',
-	#category : 'Foliage-Core-Blog',
-	#package : 'Foliage-Core',
-	#tag : 'Blog'
+	#category : 'Foliage-Bib',
+	#package : 'Foliage-Bib'
 }
 
 { #category : 'visiting' }

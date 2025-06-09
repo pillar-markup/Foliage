@@ -168,6 +168,27 @@ FOWebSite >> defaultTemplatePath [
 	^ 'templates'
 ]
 
+{ #category : 'importing' }
+FOWebSite >> handlePlugins [
+	"We could check all the file and check plugins"
+	
+	"for now only top level: make it work, make it right, make it better"
+	| plugins elemenWithPlugin |
+	plugins := self root items select: [ :each | (each respondsTo: #meta)
+				ifTrue: [  each meta
+						at: #plugin 
+						ifPresent: [ :string | true ]
+						ifAbsent: [ false ] 
+		] 
+				ifFalse: [ false ]
+	].	
+	
+	elemenWithPlugin := plugins asArray first.
+	self pluginHandle: (elemenWithPlugin meta at: #plugin) for: elemenWithPlugin.
+	
+	self halt.
+]
+
 { #category : 'building' }
 FOWebSite >> importDirectory: path [ 
 	self importer
@@ -196,6 +217,31 @@ FOWebSite >> initialize [
 	root := self buildRoot.
 
 	rawPath := '' asFileReference
+]
+
+{ #category : 'as yet unclassified' }
+FOWebSite >> pluginHandle: aString for: aFOMicrodownPage [ 
+	
+	"
+	here we could change the class of the file to be a PublicationPage
+	See convertToBlog for an idea how to do it and without duplication
+	"
+	| p sections |
+	self halt.
+		p := FOPublicationList new.
+		"so ugly"
+		p onStream:  (root  / 'rmod.bib') sourcePath asFileReference readStream.
+		p authorMatchingString: '*', 'Ducasse', '*'.
+		p build.
+	sections := p sections.
+	aFOMicrodownPage meta at: #sections put: sections.
+		
+	self halt.
+]
+
+{ #category : 'as yet unclassified' }
+FOWebSite >> pluginHandleFor: aString [ 
+	self shouldBeImplemented.
 ]
 
 { #category : 'accessing' }
