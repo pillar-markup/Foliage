@@ -134,7 +134,7 @@ FOPublicationListTest >> setUp [
 FOPublicationListTest >> testBuild [
 
 	| p |
-	p := FOPublicationList new.
+	p := FOPublicationListBuilder new.
 	p fileNamed: filesystem / 'rmod.bib'.
 	p authorMatchingString: '*', 'Ducasse', '*'.
 	p setFilteringOfNonPublicOff.
@@ -150,7 +150,7 @@ FOPublicationListTest >> testBuild [
 FOPublicationListTest >> testFilteringOffInSubmission [
 
 	| p |
-	p := FOPublicationList new.
+	p := FOPublicationListBuilder new.
 	p fileNamed: filesystem / 'rmod.bib'.
 	p authorMatchingString: '*', 'Ducasse', '*'.
 	self assert: p bibset size equals: 7.
@@ -163,7 +163,7 @@ FOPublicationListTest >> testFilteringOffInSubmission [
 FOPublicationListTest >> testFilteringOutBlackListed [
 
 	| p |
-	p := FOPublicationList new.
+	p := FOPublicationListBuilder new.
 	p fileNamed: filesystem / 'rmod.bib'.
 	p authorMatchingString: '*', 'Ducasse', '*'.
 	p keysOfBlackListedEntries: #(Duca22a Duca00c).
@@ -176,7 +176,7 @@ FOPublicationListTest >> testFilteringOutBlackListed [
 FOPublicationListTest >> testFilteringOutBlackListedWithInSubmissionToo [
 
 	| p |
-	p := FOPublicationList new.
+	p := FOPublicationListBuilder new.
 	p fileNamed: filesystem / 'rmod.bib'.
 	p authorMatchingString: '*', 'Ducasse', '*'.
 	p keysOfBlackListedEntries: #(Duca22a Scha03a).
@@ -189,7 +189,7 @@ FOPublicationListTest >> testFilteringOutBlackListedWithInSubmissionToo [
 FOPublicationListTest >> testFilteringOutInSubmission [
 
 	| p |
-	p := FOPublicationList new.
+	p := FOPublicationListBuilder new.
 	p fileNamed: filesystem / 'rmod.bib'.
 	p authorMatchingString: '*', 'Ducasse', '*'.
 	p setFilteringOfNonPublicOn.
@@ -201,7 +201,7 @@ FOPublicationListTest >> testFilteringOutInSubmission [
 FOPublicationListTest >> testPublicationListHasEntryBeforeBuilding [
 
 	| p |
-	p := FOPublicationList new.
+	p := FOPublicationListBuilder new.
 	p fileNamed: filesystem / 'rmod.bib'.
 	
 	self assert: p bibset size equals: 7.

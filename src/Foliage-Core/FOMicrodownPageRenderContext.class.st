@@ -1,5 +1,5 @@
 Class {
-	#name : 'FOPageRenderContext',
+	#name : 'FOMicrodownPageRenderContext',
 	#superclass : 'FORenderContext',
 	#instVars : [
 		'page'
@@ -10,42 +10,37 @@ Class {
 }
 
 { #category : 'accessing' }
-FOPageRenderContext >> body [
-
-	^ self html
-]
-
-{ #category : 'accessing' }
-FOPageRenderContext >> html [
-
+FOMicrodownPageRenderContext >> body [
+	"{{{body}}} is used in template to represent the body of the page"
+	
 	^ String streamContents: [ :s |
 		page renderOn: s ].
 ]
 
 { #category : 'accessing' }
-FOPageRenderContext >> layout [
+FOMicrodownPageRenderContext >> layout [
 
 	^ self page layout
 ]
 
 { #category : 'accessing' }
-FOPageRenderContext >> page [
+FOMicrodownPageRenderContext >> page [
 	^ page
 ]
 
 { #category : 'accessing' }
-FOPageRenderContext >> page: anObject [
+FOMicrodownPageRenderContext >> page: anObject [
 	page := anObject
 ]
 
 { #category : 'accessing' }
-FOPageRenderContext >> publicationDate [
+FOMicrodownPageRenderContext >> publicationDate [
 
 	^ page publicationDate
 ]
 
 { #category : 'accessing' }
-FOPageRenderContext >> title [
+FOMicrodownPageRenderContext >> title [
 
 	^ self page title
 ]

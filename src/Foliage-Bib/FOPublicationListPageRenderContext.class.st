@@ -1,8 +1,9 @@
 Class {
 	#name : 'FOPublicationListPageRenderContext',
-	#superclass : 'FOPageRenderContext',
-	#category : 'Foliage-Bib',
-	#package : 'Foliage-Bib'
+	#superclass : 'FOMicrodownPageRenderContext',
+	#category : 'Foliage-Bib-Core',
+	#package : 'Foliage-Bib',
+	#tag : 'Core'
 }
 
 { #category : 'accessing' }

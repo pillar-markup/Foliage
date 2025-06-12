@@ -114,7 +114,7 @@ FOWebSite >> buildPublicationPage: aString [
 	This may be the case for the virtual page"
 	
 	| p |
-	p := FOPublicationList new.
+	p := FOPublicationListBuilder new.
 	p workingDirectory: self rawPath.
 	p fileNamed:'rmod.bib'.
 	p authorMatchingString: '*', 'Ducasse', '*'.
@@ -185,8 +185,6 @@ FOWebSite >> handlePlugins [
 	
 	elemenWithPlugin := plugins asArray first.
 	self pluginHandle: (elemenWithPlugin meta at: #plugin) for: elemenWithPlugin.
-	
-	self halt.
 ]
 
 { #category : 'building' }
@@ -227,16 +225,15 @@ FOWebSite >> pluginHandle: aString for: aFOMicrodownPage [
 	See convertToBlog for an idea how to do it and without duplication
 	"
 	| p sections |
-	self halt.
-		p := FOPublicationList new.
+	p := FOPublicationListBuilder new.
 		"so ugly"
-		p onStream:  (root  / 'rmod.bib') sourcePath asFileReference readStream.
-		p authorMatchingString: '*', 'Ducasse', '*'.
-		p build.
+	p onStream:  (root  / 'rmod.bib') sourcePath asFileReference readStream.
+	p authorMatchingString: '*', 'Ducasse', '*'.
+	p build.
 	sections := p sections.
-	aFOMicrodownPage meta at: #sections put: sections.
-		
-	self halt.
+	
+	"this is super ugly we should change the import to create correct objects first"
+	self root items at: aFOMicrodownPage sourcePath basename put: ((aFOMicrodownPage as: FOFullPublicationPage) sections: sections; yourself)
 ]
 
 { #category : 'as yet unclassified' }

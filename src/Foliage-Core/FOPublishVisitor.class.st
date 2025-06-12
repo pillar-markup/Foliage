@@ -41,14 +41,21 @@ FOPublishVisitor >> visitBlogPost: aFOBlogPost [
 
 { #category : 'visiting' }
 FOPublishVisitor >> visitFileObject: aFileObject [ 
-	aFileObject emit.
+	
 	self copyResource: aFileObject.
 	^ aFileObject 
 ]
 
 { #category : 'visiting' }
+FOPublishVisitor >> visitFullPublicationPage: aMicrodownPage [
+
+	aMicrodownPage publish.
+	^ aMicrodownPage 
+]
+
+{ #category : 'visiting' }
 FOPublishVisitor >> visitHTMLPageSource: aFOHTMLPageSource [ 
-	aFOHTMLPageSource emit.
+
 	self copyResource: aFOHTMLPageSource.
 	^ aFOHTMLPageSource 
 ]
@@ -56,17 +63,14 @@ FOPublishVisitor >> visitHTMLPageSource: aFOHTMLPageSource [
 { #category : 'visiting' }
 FOPublishVisitor >> visitMicrodownPage: aMicrodownPage [
 
-	aMicrodownPage emit.
-	"recursive publish"
 	aMicrodownPage publish.
 	^ aMicrodownPage 
 ]
 
 { #category : 'visiting' }
-FOPublishVisitor >> visitRSSFeed: aFORSSFeed [ 
+FOPublishVisitor >> visitRSSFeed: aFORSSFeed [
+
 	| template targetPath stream |
-	
-	aFORSSFeed emit.
 	template := (aFORSSFeed website templatePath / #'rss.xml') asMustacheTemplate.
 	targetPath := aFORSSFeed publishPath asFileReference.
 	stream := targetPath writeStream
@@ -79,14 +83,14 @@ FOPublishVisitor >> visitRSSFeed: aFORSSFeed [
 
 { #category : 'visiting' }
 FOPublishVisitor >> visitWebFolder: aFOWebsiteFolder [
-	aFOWebsiteFolder emit.
+	
 	aFOWebsiteFolder createOnTarget.
 	^ super visitWebFolder: aFOWebsiteFolder 
 ]
 
 { #category : 'visiting' }
 FOPublishVisitor >> visitWebImage: aWebImage [ 
-	aWebImage emit.
+
 	self copyResource: aWebImage.
 	^ aWebImage 
 ]

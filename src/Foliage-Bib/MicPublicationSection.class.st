@@ -1,9 +1,9 @@
 "
-I'm a bib section in a document. I have one title and a list of items.
+I represent a list of publications with a title. 
 "
 Class {
-	#name : 'FOSection',
-	#superclass : 'Object',
+	#name : 'MicPublicationSection',
+	#superclass : 'MicElement',
 	#instVars : [
 		'title',
 		'items'
@@ -13,26 +13,20 @@ Class {
 	#tag : 'Core'
 }
 
-{ #category : 'visiting' }
-FOSection >> acceptFOVisitor: aFOVisitor [
-
-	self halt.
-]
-
 { #category : 'accessing' }
-FOSection >> items [
+MicPublicationSection >> items [
 
 	^ items
 ]
 
 { #category : 'accessing' }
-FOSection >> items: anObject [
+MicPublicationSection >> items: anObject [
 
 	items := anObject
 ]
 
 { #category : 'printing' }
-FOSection >> printOn: aStream [
+MicPublicationSection >> printOn: aStream [
 
 	super printOn: aStream. 
 	aStream nextPutAll: '(', title,  '-'.
@@ -41,13 +35,13 @@ FOSection >> printOn: aStream [
 ]
 
 { #category : 'accessing' }
-FOSection >> title [
+MicPublicationSection >> title [
 
 	^ title
 ]
 
 { #category : 'accessing' }
-FOSection >> title: anObject [
+MicPublicationSection >> title: anObject [
 
 	title := anObject
 ]
