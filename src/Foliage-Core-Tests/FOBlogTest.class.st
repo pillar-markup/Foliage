@@ -274,10 +274,7 @@ FOBlogTest >> setUp [
 			writeStreamDo: [ :st | st nextPutAll: self footerTemplateContents ].
 		root / 'templates' / 'footer-analytics'
 			writeStreamDo: [ :st | st nextPutAll: self footerAnalyticsTemplateContents ].
-		
 	
-		
-			
 		site := FOWebSite new.
 		site templatePath: (root / 'templates' ).
 		site importDirectory: root.

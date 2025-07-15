@@ -41,7 +41,7 @@ FOPageRenderContext >> page: anObject [
 { #category : 'accessing' }
 FOPageRenderContext >> publicationDate [
 
-	^ page publicationDate
+	^ page publishDate
 ]
 
 { #category : 'accessing' }

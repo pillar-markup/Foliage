@@ -82,9 +82,11 @@ FOPageWithMetadata >> publishDate [
 		ifPresent: [ :string |
 			"reading from file an empty date easily ends up being an 
 			empty string so we consider it absent in this case" 
-			string 
+			[ string 
 				ifNotEmpty: [ Date readFrom: string pattern: 'yyyy-mm-dd'  ]
-				ifEmpty: [ nil ]  ]
+				ifEmpty: [ nil ]
+				] on: DateError do: [ nil ]
+				]
 		ifAbsent: [ nil ]
 ]
 

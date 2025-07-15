@@ -68,10 +68,8 @@ FOMicrodownPage >> document: aMicRootBlock [
 { #category : 'accessing' }
 FOMicrodownPage >> publicationDate [
 
-	^ self meta 
-		at: 'publishDate'
-		ifPresent: [ :aString | Date readFrom: aString pattern: 'yyyy-mm-dd'  ]
-		ifAbsent: [ nil ]
+	self deprecated: 'use publishDate'  transformWith: '`@rec publicationDate' -> '`@rec publishDate'.
+	^ self publishDate
 ]
 
 { #category : 'actions' }

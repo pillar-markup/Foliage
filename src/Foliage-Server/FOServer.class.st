@@ -44,7 +44,7 @@ FOServer >> baseUrl [
 { #category : 'accessing' }
 FOServer >> port [
 
-	^ 7071
+	^ 7074
 ]
 
 { #category : 'start/stop' }
@@ -56,28 +56,4 @@ FOServer >> start [
 		prefixFromString: self baseUrl;
 		directory: self baseDirectory;
 	 	yourself)
-]
-
-{ #category : 'start/stop' }
-FOServer >> startOnTestFolder [
-	<script: 'self new start'>
-
-	(ZnServer defaultOn: 7071) start.
-	ZnServer default delegate: (ZnStaticFileServerDelegate new
-		prefixFromString: '';
-		directory: '/Users/ducasse/Test2/Play/generated/' asFileReference;
-	 	yourself)
-]
-
-{ #category : 'start/stop' }
-FOServer >> startOnTestFolder74 [
-	<script: 'self new startOnTestFolder74'>
-
-	(ZnServer defaultOn: 7075) start.
-	ZnServer default
-		delegate:
-			(ZnStaticFileServerDelegate new
-				prefixFromString: '';
-				directory: '/Users/ducasse/Test2/MySite/StephaneDucasse.github.io/generated' asFileReference;
-				yourself).
 ]

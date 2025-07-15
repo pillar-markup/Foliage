@@ -166,10 +166,12 @@ On this page, you can find the personal blogs and social media links of the seve
 
 { #category : 'running' }
 FOBlogAfterConversionTest >> testBlogPostHasMetaData [
-	
-	self assert: blog publishedPosts first publicationDate printString equals: '21 May 2025'.
-	self assert: blog publishedPosts first layout  equals: 'default'.
-	self assert: blog publishedPosts first title equals: 'IsLoop'.
+
+	self
+		assert: blog publishedPosts first publishDate printString
+		equals: '21 May 2025'.
+	self assert: blog publishedPosts first layout equals: 'default'.
+	self assert: blog publishedPosts first title equals: 'IsLoop'
 ]
 
 { #category : 'overviewBuilder' }
