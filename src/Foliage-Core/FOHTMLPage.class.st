@@ -27,7 +27,7 @@ FOHTMLPage >> acceptFOVisitor: aFOVisitor [
 FOHTMLPage >> asFOBlogPost [
 	
 	self flag: #todoSD.
-	"we should use FOMicrodownBlogPost newFrom: self"
+	"the import should do it systematically for all the kind of page we have."
 	
 	^ self as: FOMicrodownBlogPost
 ]
@@ -75,5 +75,5 @@ FOHTMLPage >> render [
 { #category : 'instance creation' }
 FOHTMLPage >> renderContextClass [
 
-	^ FOPageRenderContext
+	^ FOMicrodownPageRenderContext
 ]

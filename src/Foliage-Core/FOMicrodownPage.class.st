@@ -51,7 +51,10 @@ FOMicrodownPage >> abstractAmountOfCharacters [
 ]
 
 { #category : 'visiting' }
-FOMicrodownPage >> acceptFOVisitor: aFOVisitor [ 
+FOMicrodownPage >> acceptFOVisitor: aFOVisitor [
+	"All microdown written page will pass here and this has as effect that the method renderOn: is invoked on the 
+	page (this page can be instance of subclasses of MicrodownPage)."
+
 	^ aFOVisitor visitMicrodownPage: self 
 ]
 

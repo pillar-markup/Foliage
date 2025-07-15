@@ -107,6 +107,24 @@ FOWebSite >> buildOverviewFor: aString [
 	blog at: #'index.html' put: blog overviewPage.  
 ]
 
+{ #category : 'as yet unclassified' }
+FOWebSite >> buildPublicationPage: aString [ 
+	
+	"contrary to blog post there is no need to create an index.html
+	This may be the case for the virtual page"
+	
+	| p |
+	p := FOPublicationListBuilder new.
+	p workingDirectory: self rawPath.
+	p fileNamed:'rmod.bib'.
+	p authorMatchingString: '*', 'Ducasse', '*'.
+	p setFilteringOfNonPublicOff.
+	p build.
+	^ p
+	
+
+]
+
 { #category : 'accessing' }
 FOWebSite >> buildRoot [
 	^ FOWebsiteRoot new
@@ -117,6 +135,7 @@ FOWebSite >> buildRoot [
 FOWebSite >> configureBlogs [
 	"During the configuration of blogs, pages are converted to blog post objects in the model."
 	
+	"This could be managed in a more modular fashion via a plugin architecture if needed."
 	blogSpecs do: [ :assoc |
 		| blog |
 		blog := (self / assoc key) convertToBlog.
@@ -128,6 +147,17 @@ FOWebSite >> configureBlogs [
 		"blog rssFeed addHeadersTo: blog / 'index.html'" ].
 ]
 
+{ #category : 'importing' }
+FOWebSite >> configureFromConfigFile [
+	
+	| instance |
+	instance := self readConfigFile: (self rawPath asFileReference / 'FoliageConfig.ston').
+	self baseUri: instance baseUri.
+		
+	self blogSpecs: instance blogs.
+	self configureBlogs.
+]
+
 { #category : 'defaults' }
 FOWebSite >> defaultTargetPath [
 	^ 'docs'
@@ -136,6 +166,25 @@ FOWebSite >> defaultTargetPath [
 { #category : 'defaults' }
 FOWebSite >> defaultTemplatePath [ 
 	^ 'templates'
+]
+
+{ #category : 'importing' }
+FOWebSite >> handlePlugins [
+	"We could check all the file and check plugins"
+	
+	"for now only top level: make it work, make it right, make it better"
+	| plugins elemenWithPlugin |
+	plugins := self root items select: [ :each | (each respondsTo: #meta)
+				ifTrue: [  each meta
+						at: #plugin 
+						ifPresent: [ :string | true ]
+						ifAbsent: [ false ] 
+		] 
+				ifFalse: [ false ]
+	].	
+	
+	elemenWithPlugin := plugins asArray first.
+	self pluginHandle: (elemenWithPlugin meta at: #plugin) for: elemenWithPlugin.
 ]
 
 { #category : 'building' }
@@ -166,6 +215,30 @@ FOWebSite >> initialize [
 	root := self buildRoot.
 
 	rawPath := '' asFileReference
+]
+
+{ #category : 'as yet unclassified' }
+FOWebSite >> pluginHandle: aString for: aFOMicrodownPage [ 
+	
+	"
+	here we could change the class of the file to be a PublicationPage
+	See convertToBlog for an idea how to do it and without duplication
+	"
+	| p sections |
+	p := FOPublicationListBuilder new.
+		"so ugly"
+	p onStream:  (root  / 'rmod.bib') sourcePath asFileReference readStream.
+	p authorMatchingString: '*', 'Ducasse', '*'.
+	p build.
+	sections := p sections.
+	
+	"this is super ugly we should change the import to create correct objects first"
+	self root items at: aFOMicrodownPage sourcePath basename put: ((aFOMicrodownPage as: FOFullPublicationPage) sections: sections; yourself)
+]
+
+{ #category : 'as yet unclassified' }
+FOWebSite >> pluginHandleFor: aString [ 
+	self shouldBeImplemented.
 ]
 
 { #category : 'accessing' }
@@ -200,6 +273,22 @@ FOWebSite >> rawPath [
 { #category : 'accessing' }
 FOWebSite >> rawPath: anObject [
 	rawPath := anObject asFileReference 
+]
+
+{ #category : 'importing' }
+FOWebSite >> readConfigFile: aName [
+
+	| reference |
+	reference := aName asFileReference.
+	reference exists ifFalse: [ 
+		self error: ('File {1} does not exists' format: { reference fullName }) ].
+	
+	^ [ (STONReader on: reference readStream) next ]
+		on: Error 
+		do: [ :e | 
+			self error: ('Error reading file {1}: {2}' 
+				format: { reference fullName. e messageText }) ]
+	
 ]
 
 { #category : 'accessing' }

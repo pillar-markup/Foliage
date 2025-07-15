@@ -1,6 +1,6 @@
 Class {
 	#name : 'FOBlogPostRenderContext',
-	#superclass : 'FOPageRenderContext',
+	#superclass : 'FOMicrodownPageRenderContext',
 	#category : 'Foliage-Core-Blog',
 	#package : 'Foliage-Core',
 	#tag : 'Blog'

@@ -51,6 +51,44 @@ Suscribe to this blog: <a href="http://pharo.org/news/atom.xml">Entries RSS</a> 
 ]
 
 { #category : 'running' }
+FOBlogTest >> defineFiles [
+
+	root := FileSystem memory root.
+	(root / 'success') ensureCreateDirectory.
+	root / 'success' / self mdOneFileName writeStreamDo: [ :st |
+		st nextPutAll: self gsocContentsMD ].
+	root / 'success' / self mdOneFileName2 writeStreamDo: [ :st |
+		st nextPutAll: self gsocContentsMD2 ].
+	(root / 'templates') ensureCreateDirectory.
+
+	root / 'templates' / 'blog-post-abstract' writeStreamDo: [ :st |
+		st nextPutAll: self blogPostAbstractTemplateContents ].
+
+	root / 'templates' / 'blog' writeStreamDo: [ :st |
+		st nextPutAll: self blogTemplateContents ].
+
+	root / 'templates' / 'head' writeStreamDo: [ :st |
+		st nextPutAll: self headTemplateContents ].
+
+	root / 'templates' / 'header' writeStreamDo: [ :st |
+		st nextPutAll: self headerTemplateContents ].
+
+	root / 'templates' / 'navbar' writeStreamDo: [ :st |
+		st nextPutAll: self navbarTemplateContents ].
+
+	root / 'templates' / 'menu' writeStreamDo: [ :st |
+		st nextPutAll: self menuTemplateContents ].
+	root / 'templates' / 'main' writeStreamDo: [ :st |
+		st nextPutAll: self mainTemplateContents ].
+	root / 'templates' / 'blog-footer' writeStreamDo: [ :st |
+		st nextPutAll: self blogfooterTemplateContents ].
+	root / 'templates' / 'footer' writeStreamDo: [ :st |
+		st nextPutAll: self footerTemplateContents ].
+	root / 'templates' / 'footer-analytics' writeStreamDo: [ :st |
+		st nextPutAll: self footerAnalyticsTemplateContents ]
+]
+
+{ #category : 'running' }
 FOBlogTest >> footerAnalyticsTemplateContents [
 
 	^ '<script>

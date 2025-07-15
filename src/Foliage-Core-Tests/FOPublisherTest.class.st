@@ -32,7 +32,7 @@ FOPublisherTest >> testConfigurateWebSite [
 	self assert: publisher targetPath equals: '/home/ducasse/Test2/foliage/output'.	
 	self assert: publisher templatePath equals: 'templates'.	
 		
-	ws := publisher configureNewWebSite.
+	ws := publisher newWebSite.
 	self assert: ws baseUri equals: 'http://pharo.org'.
 	self assert: ws targetPath fullName equals: '/home/ducasse/Test2/foliage/output'.
 	self assert: ws rawPath fullName equals: '/home/ducasse/Test2/foliage/test'.
