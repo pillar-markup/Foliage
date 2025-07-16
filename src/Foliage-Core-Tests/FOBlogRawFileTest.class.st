@@ -1,6 +1,6 @@
 Class {
 	#name : 'FOBlogRawFileTest',
-	#superclass : 'FOBlogTest',
+	#superclass : 'FOAbstractWebSiteTest',
 	#category : 'Foliage-Core-Tests-Blog',
 	#package : 'Foliage-Core-Tests',
 	#tag : 'Blog'

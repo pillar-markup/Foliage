@@ -1,9 +1,8 @@
 Class {
-	#name : 'FOBlogTest',
+	#name : 'FOAbstractWebSiteTest',
 	#superclass : 'TestCase',
 	#instVars : [
 		'root',
-		'blog',
 		'site'
 	],
 	#category : 'Foliage-Core-Tests-Blog',
@@ -12,7 +11,7 @@ Class {
 }
 
 { #category : 'data' }
-FOBlogTest >> blogPostAbstractTemplateContents [
+FOAbstractWebSiteTest >> blogPostAbstractTemplateContents [
 
 	^ '<h2><a href="{{pathString}}">{{title}}</a></h2>
 {{abstract}}
@@ -20,7 +19,7 @@ FOBlogTest >> blogPostAbstractTemplateContents [
 ]
 
 { #category : 'running' }
-FOBlogTest >> blogTemplateContents [
+FOAbstractWebSiteTest >> blogTemplateContents [
 
 	^ '<!DOCTYPE HTML>
 <html>
@@ -42,7 +41,7 @@ FOBlogTest >> blogTemplateContents [
 ]
 
 { #category : 'running' }
-FOBlogTest >> blogfooterTemplateContents [
+FOAbstractWebSiteTest >> blogfooterTemplateContents [
 
 	^ '<div class="blog-footer">
 <hr>
@@ -51,7 +50,7 @@ Suscribe to this blog: <a href="http://pharo.org/news/atom.xml">Entries RSS</a> 
 ]
 
 { #category : 'running' }
-FOBlogTest >> defineFiles [
+FOAbstractWebSiteTest >> defineFiles [
 
 	root := FileSystem memory root.
 	(root / 'success') ensureCreateDirectory.
@@ -89,14 +88,14 @@ FOBlogTest >> defineFiles [
 ]
 
 { #category : 'running' }
-FOBlogTest >> footerAnalyticsTemplateContents [
+FOAbstractWebSiteTest >> footerAnalyticsTemplateContents [
 
 	^ '<script>
 </script>'
 ]
 
 { #category : 'running' }
-FOBlogTest >> footerTemplateContents [
+FOAbstractWebSiteTest >> footerTemplateContents [
 
 	^ '<div id="footer">
     <div class="container"> 
@@ -113,7 +112,7 @@ FOBlogTest >> footerTemplateContents [
 ]
 
 { #category : 'data' }
-FOBlogTest >> gsocContentsMD [
+FOAbstractWebSiteTest >> gsocContentsMD [
 
 	^ '{
 "title" : "Google Summer of Code",
@@ -180,7 +179,7 @@ On this page, you can find the personal blogs and social media links of the seve
 ]
 
 { #category : 'data' }
-FOBlogTest >> gsocContentsMD2 [
+FOAbstractWebSiteTest >> gsocContentsMD2 [
 
 	^ '{
 "title" : "IsLoop",
@@ -199,19 +198,19 @@ The previous editions were held at Split, Montpelllier and Fianarantsoa.
 ]
 
 { #category : 'running' }
-FOBlogTest >> headTemplateContents [
+FOAbstractWebSiteTest >> headTemplateContents [
 
 	^ ''
 ]
 
 { #category : 'running' }
-FOBlogTest >> headerTemplateContents [
+FOAbstractWebSiteTest >> headerTemplateContents [
 	
 	^ '{{> navbar}}'
 ]
 
 { #category : 'running' }
-FOBlogTest >> mainTemplateContents [
+FOAbstractWebSiteTest >> mainTemplateContents [
 
 	^ '
 	BODYSTART
@@ -221,19 +220,19 @@ FOBlogTest >> mainTemplateContents [
 ]
 
 { #category : 'data' }
-FOBlogTest >> mdOneFileName [
+FOAbstractWebSiteTest >> mdOneFileName [
 
 	^ 'gsoc.md'
 ]
 
 { #category : 'data' }
-FOBlogTest >> mdOneFileName2 [
+FOAbstractWebSiteTest >> mdOneFileName2 [
 	
 	^ 'gsoc2.md'
 ]
 
 { #category : 'running' }
-FOBlogTest >> menuTemplateContents [ 
+FOAbstractWebSiteTest >> menuTemplateContents [ 
 	^ '<ul class="nav navbar-nav">
     <li><a href="/news" class="{{#news-active}}active{{/news-active}}">News</a></li>
     <li><a href="/features"  class="{{#features-active}}active{{/features-active}}">Features</a></li>
@@ -247,7 +246,7 @@ FOBlogTest >> menuTemplateContents [
 ]
 
 { #category : 'running' }
-FOBlogTest >> navbarTemplateContents [ 
+FOAbstractWebSiteTest >> navbarTemplateContents [ 
 	^ '<nav class="navbar navbar-default" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -277,7 +276,7 @@ FOBlogTest >> navbarTemplateContents [
 ]
 
 { #category : 'running' }
-FOBlogTest >> setUp [ 
+FOAbstractWebSiteTest >> setUp [ 
 
 		self defineFiles.
 	

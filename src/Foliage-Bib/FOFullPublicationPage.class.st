@@ -9,6 +9,12 @@ Class {
 	#tag : 'Core'
 }
 
+{ #category : 'instance creation' }
+FOFullPublicationPage class >> new [ 
+
+	self halt
+]
+
 { #category : 'visiting' }
 FOFullPublicationPage >> acceptFOVisitor: aVisitor [
 	"remotely inoke renderOn:"
@@ -28,11 +34,13 @@ FOFullPublicationPage >> renderOn: aStream [
 	| visitor |
 	super renderOn: aStream.
 	"another ugly I cannot access the superclass visitor... "
+	self halt.
 	visitor := MicHTMLVisitor new
 		           stream: aStream;
 		           crAsNewLine;
 		           yourself.
 	sections do: [ :s | visitor visit: s ] .
+	self halt.
 	"This does not work because sections are not Mic but FO objects. I have to think about it."
 	^ visitor contents
 ]

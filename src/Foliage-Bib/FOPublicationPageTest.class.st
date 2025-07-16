@@ -1,6 +1,6 @@
 Class {
 	#name : 'FOPublicationPageTest',
-	#superclass : 'FOBlogTest',
+	#superclass : 'FOAbstractWebSiteTest',
 	#category : 'Foliage-Bib-Tests',
 	#package : 'Foliage-Bib',
 	#tag : 'Tests'
@@ -41,9 +41,16 @@ FOPublicationPageTest >> publicationPageName [
 { #category : 'running' }
 FOPublicationPageTest >> testBuildPublicationPage [
 
-	| publications |
+	| builder |
+	self halt.
+	"here we are just computing the list of publications. 
+	And so far we are not generating a page.
+	The renderOn: method is not invoked."
+	
 	site rawPath: root.
-	publications := site buildPublicationPage: self publicationPageName.
-	self assert: publications sections isNotEmpty.
+	builder := site buildPublicationPage: self publicationPageName.
+	self assert: builder sections isNotEmpty.
+	
+	self halt.
 	
 ]

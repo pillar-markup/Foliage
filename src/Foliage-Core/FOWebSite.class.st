@@ -107,7 +107,7 @@ FOWebSite >> buildOverviewFor: aString [
 	blog at: #'index.html' put: blog overviewPage.  
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'plugins' }
 FOWebSite >> buildPublicationPage: aString [ 
 	
 	"contrary to blog post there is no need to create an index.html
@@ -173,18 +173,27 @@ FOWebSite >> handlePlugins [
 	"We could check all the file and check plugins"
 	
 	"for now only top level: make it work, make it right, make it better"
+	
 	| plugins elemenWithPlugin |
 	plugins := self root items select: [ :each | (each respondsTo: #meta)
-				ifTrue: [  each meta
+				ifTrue: [  
+					self halt. 
+					"this meta stuff should be moved to the class of each"
+					
+					each meta
 						at: #plugin 
 						ifPresent: [ :string | true ]
 						ifAbsent: [ false ] 
-		] 
+						] 
 				ifFalse: [ false ]
 	].	
 	
 	elemenWithPlugin := plugins asArray first.
-	self pluginHandle: (elemenWithPlugin meta at: #plugin) for: elemenWithPlugin.
+	"for now let us try with the first one."
+	
+	self 
+		pluginHandle: (elemenWithPlugin meta at: #plugin) 
+		for: elemenWithPlugin.
 ]
 
 { #category : 'building' }
@@ -217,7 +226,7 @@ FOWebSite >> initialize [
 	rawPath := '' asFileReference
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'plugins' }
 FOWebSite >> pluginHandle: aString for: aFOMicrodownPage [ 
 	
 	"
@@ -233,10 +242,12 @@ FOWebSite >> pluginHandle: aString for: aFOMicrodownPage [
 	sections := p sections.
 	
 	"this is super ugly we should change the import to create correct objects first"
-	self root items at: aFOMicrodownPage sourcePath basename put: ((aFOMicrodownPage as: FOFullPublicationPage) sections: sections; yourself)
+	self root items 
+		at: aFOMicrodownPage sourcePath basename 
+		put: ((aFOMicrodownPage as: FOFullPublicationPage) sections: sections; yourself)
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'plugins' }
 FOWebSite >> pluginHandleFor: aString [ 
 	self shouldBeImplemented.
 ]

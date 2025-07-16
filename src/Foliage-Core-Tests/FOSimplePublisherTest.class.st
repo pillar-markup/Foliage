@@ -1,5 +1,5 @@
 Class {
-	#name : 'FOPublisherTest',
+	#name : 'FOSimplePublisherTest',
 	#superclass : 'TestCase',
 	#category : 'Foliage-Core-Tests-Importer',
 	#package : 'Foliage-Core-Tests',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'tests' }
-FOPublisherTest >> testBasic2 [
+FOSimplePublisherTest >> testBasic2 [
 	
 	| publisher |
 	publisher := FOPublisher new
@@ -21,7 +21,7 @@ FOPublisherTest >> testBasic2 [
 ]
 
 { #category : 'tests' }
-FOPublisherTest >> testConfigurateWebSite [
+FOSimplePublisherTest >> testConfigurateWebSite [
 	
 	| publisher ws |
 	publisher := FOPublisher new

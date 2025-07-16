@@ -1,6 +1,9 @@
 Class {
 	#name : 'FOBlogAfterConversionTest',
-	#superclass : 'FOBlogTest',
+	#superclass : 'FOAbstractWebSiteTest',
+	#instVars : [
+		'blog'
+	],
 	#category : 'Foliage-Core-Tests-Blog',
 	#package : 'Foliage-Core-Tests',
 	#tag : 'Blog'
