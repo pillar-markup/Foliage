@@ -2,7 +2,8 @@ Class {
 	#name : 'FOPublicationListTest',
 	#superclass : 'TestCase',
 	#instVars : [
-		'filesystem'
+		'filesystem',
+		'builder'
 	],
 	#category : 'Foliage-Bib-Tests',
 	#package : 'Foliage-Bib',
@@ -126,6 +127,8 @@ FOPublicationListTest >> setUp [
 	(filesystem / 'rmod.bib')
 		ensureCreateFile;
 		writeStreamDo: [ :s | s << self contents ].
+	builder := FOPublicationListBuilder new.
+	builder fileNamed: filesystem / 'rmod.bib'.
 	
 	
 ]
@@ -133,77 +136,59 @@ FOPublicationListTest >> setUp [
 { #category : 'tests - sections' }
 FOPublicationListTest >> testBuild [
 
-	| p |
-	p := FOPublicationListBuilder new.
-	p fileNamed: filesystem / 'rmod.bib'.
-	p authorMatchingString: '*', 'Ducasse', '*'.
-	p setFilteringOfNonPublicOff.
-	p build.
-	self assert: p sections size equals: #(intJournal topConf internConf intWorks) size.
-	self assert: p sections first title equals: 'Refereed Articles in International Journals'.
-	self assert: p sections first items size equals: 2.
-	self assert: p sections second title equals: 'Refereed Articles in Top Conferences'.
-	self assert: p sections first items size equals: 2.
+	builder authorMatchingString: '*', 'Ducasse', '*'.
+	builder setFilteringOfNonPublicOff.
+	builder build.
+	self assert: builder sections size equals: #(intJournal topConf internConf intWorks) size.
+	self assert: builder sections first title equals: 'Refereed Articles in International Journals'.
+	self assert: builder sections first items size equals: 2.
+	self assert: builder sections second title equals: 'Refereed Articles in Top Conferences'.
+	self assert: builder sections first items size equals: 2.
 ]
 
 { #category : 'tests - filter by script' }
 FOPublicationListTest >> testFilteringOffInSubmission [
 
-	| p |
-	p := FOPublicationListBuilder new.
-	p fileNamed: filesystem / 'rmod.bib'.
-	p authorMatchingString: '*', 'Ducasse', '*'.
-	self assert: p bibset size equals: 7.
-	p setFilteringOfNonPublicOff.
-	p filter.
-	self assert: p workingBibSet size equals: p bibset size.
+	builder authorMatchingString: '*' , 'Ducasse' , '*'.
+	self assert: builder bibset size equals: 7.
+	builder setFilteringOfNonPublicOff.
+	builder filter.
+	self assert: builder workingBibSet size equals: builder bibset size
 ]
 
 { #category : 'tests - filter by script' }
 FOPublicationListTest >> testFilteringOutBlackListed [
 
-	| p |
-	p := FOPublicationListBuilder new.
-	p fileNamed: filesystem / 'rmod.bib'.
-	p authorMatchingString: '*', 'Ducasse', '*'.
-	p keysOfBlackListedEntries: #(Duca22a Duca00c).
-	p setFilteringOfNonPublicOn.
-	p filter.
-	self assert: p workingBibSet size equals: 5.
+	builder authorMatchingString: '*' , 'Ducasse' , '*'.
+	builder keysOfBlackListedEntries: #( #Duca22a #Duca00c ).
+	builder setFilteringOfNonPublicOn.
+	builder filter.
+	self assert: builder workingBibSet size equals: 5
 ]
 
 { #category : 'tests - filter by script' }
 FOPublicationListTest >> testFilteringOutBlackListedWithInSubmissionToo [
 
-	| p |
-	p := FOPublicationListBuilder new.
-	p fileNamed: filesystem / 'rmod.bib'.
-	p authorMatchingString: '*', 'Ducasse', '*'.
-	p keysOfBlackListedEntries: #(Duca22a Scha03a).
-	p setFilteringOfNonPublicOn.
-	p filter.
-	self assert: p workingBibSet size equals: 4.
+	
+	builder authorMatchingString: '*' , 'Ducasse' , '*'.
+	builder keysOfBlackListedEntries: #( #Duca22a #Scha03a ).
+	builder setFilteringOfNonPublicOn.
+	builder filter.
+	self assert: builder workingBibSet size equals: 4
 ]
 
 { #category : 'tests - filter by script' }
 FOPublicationListTest >> testFilteringOutInSubmission [
 
-	| p |
-	p := FOPublicationListBuilder new.
-	p fileNamed: filesystem / 'rmod.bib'.
-	p authorMatchingString: '*', 'Ducasse', '*'.
-	p setFilteringOfNonPublicOn.
-	p filter.
-	self assert: p workingBibSet size equals: 6.
+	builder authorMatchingString: '*' , 'Ducasse' , '*'.
+	builder setFilteringOfNonPublicOn.
+	builder filter.
+	self assert: builder workingBibSet size equals: 6
 ]
 
 { #category : 'tests - import' }
 FOPublicationListTest >> testPublicationListHasEntryBeforeBuilding [
 
-	| p |
-	p := FOPublicationListBuilder new.
-	p fileNamed: filesystem / 'rmod.bib'.
-	
-	self assert: p bibset size equals: 7.
-	self assert: p bibset entries first class equals: CZEntry.
+	self assert: builder bibset size equals: 7.
+	self assert: builder bibset entries first class equals: CZEntry
 ]
