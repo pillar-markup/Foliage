@@ -17,7 +17,10 @@ BaselineOfFoliage >> baseline: spec [
 				repository: 'github://pillar-markup/Microdown:dev/src'
 				"load: #( 'Core' #'Microdown-HTMLExporter')" ]. 
 	
-
+		spec 
+ 	  		baseline: 'Citezen' 
+ 	  		with: [ spec repository: 'github://Ducasse/Citezen' ].
+		
 		self
 			mustache: spec; 
 			soup: spec;
@@ -33,12 +36,13 @@ BaselineOfFoliage >> baseline: spec [
 			package: 'Foliage-Feed' with: [
 				spec requires: #( 'Soup' 'Foliage-Core') ];
 			package: 'Foliage-Core-Tests' with: [
-				spec requires: #('Foliage-Core') ].
+				spec requires: #('Foliage-Core') ];
+			package: 'Foliage-Bib' with: [ spec requires: #('Citezen' 'Core')].
 		spec 
 			group: 'Core' with: #('Foliage-Core' 'Foliage-Publisher');
 			group: 'Publisher' with: #('Core' 'Foliage-Publisher');
 			group: 'Tests' with: #('Foliage-Core-Tests' );
-			group: 'default' with: #('Core' 'Foliage-Feed' 'Publisher' 'Tests');
+			group: 'default' with: #('Core' 'Foliage-Feed' 'Foliage-Bib' 'Publisher' 'Tests');
 			group: 'development' with: #('Core' 'Tests' 'Publisher' 'Foliage-Feed' 'ZincHTTPComponents') ]
 
 ]

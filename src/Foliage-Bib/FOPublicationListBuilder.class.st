@@ -321,7 +321,7 @@ FOPublicationListBuilder >> keysOfBlackListedEntries: aCol [
 
 { #category : 'main configuration' }
 FOPublicationListBuilder >> localizationClass [
-	^ CZLocalisation
+	^ FOLocalisation
 ]
 
 { #category : 'queries' }
