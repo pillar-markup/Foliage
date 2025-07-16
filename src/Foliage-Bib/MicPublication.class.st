@@ -4,7 +4,15 @@ I represent a Citezen publication in Microdown world.
 Class {
 	#name : 'MicPublication',
 	#superclass : 'MicElement',
-	#category : 'Foliage-Bib-Core',
+	#instVars : [
+		'pub'
+	],
+	#category : 'Foliage-Bib-MicrodownExtensions',
 	#package : 'Foliage-Bib',
-	#tag : 'Core'
+	#tag : 'MicrodownExtensions'
 }
+
+{ #category : 'as yet unclassified' }
+MicPublication >> citePub: aCZEntry [ 
+	pub := aCZEntry
+]

@@ -36,13 +36,12 @@ FOPublicationListBuilder >> addEntitledSection: aString withBibEntries: entries 
 
 	self addSection: (MicPublicationSection new
 			 title: aString;
-			 items: (entries collect: [ :each | MicPublication new citePub: each ]); 
+			 items: (entries entries collect: [ :each | MicPublication new citePub: each ]); 
 					yourself)
 ]
 
 { #category : 'intersections' }
 FOPublicationListBuilder >> addSection: aSection [
-
 
 	sections add: aSection
 ]

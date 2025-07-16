@@ -34,8 +34,9 @@ Class {
 		'TopConferences',
 		'Vulgarisation'
 	],
-	#category : 'Foliage-Bib',
-	#package : 'Foliage-Bib'
+	#category : 'Foliage-Bib-Core',
+	#package : 'Foliage-Bib',
+	#tag : 'Core'
 }
 
 { #category : 'initialize' }

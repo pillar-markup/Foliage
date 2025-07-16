@@ -36,7 +36,7 @@ FOMicrodownPageRenderContext >> page: anObject [
 { #category : 'accessing' }
 FOMicrodownPageRenderContext >> publicationDate [
 
-	^ page publicationDate
+	^ page publishDate
 ]
 
 { #category : 'accessing' }

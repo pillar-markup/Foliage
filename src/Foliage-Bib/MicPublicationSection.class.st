@@ -8,9 +8,9 @@ Class {
 		'title',
 		'items'
 	],
-	#category : 'Foliage-Bib-Core',
+	#category : 'Foliage-Bib-MicrodownExtensions',
 	#package : 'Foliage-Bib',
-	#tag : 'Core'
+	#tag : 'MicrodownExtensions'
 }
 
 { #category : 'accessing' }
