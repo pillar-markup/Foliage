@@ -175,24 +175,20 @@ FOWebSite >> handlePlugins [
 	"for now only top level: make it work, make it right, make it better"
 	
 	| plugins elemenWithPlugin |
-	plugins := self root items select: [ :each | (each respondsTo: #meta)
-				ifTrue: [  
-					self halt. 
-					"this meta stuff should be moved to the class of each"
-					
-					each meta
-						at: #plugin 
-						ifPresent: [ :string | true ]
-						ifAbsent: [ false ] 
-						] 
-				ifFalse: [ false ]
-	].	
+	"we could check that a plugin can only be describe in a page and only select FOPage subinstances."
+	plugins := self root items 
+		select: [ :each | (each respondsTo: #meta)
+			ifTrue: [  each hasPlugin ] 
+			ifFalse: [ false ] ].	
 	
-	elemenWithPlugin := plugins asArray first.
+	self halt.
+	elemenWithPlugin := plugins asArray 
+	   ifEmpty: [ ^ self ]
+		ifNotEmpty: [:a | a first].
 	"for now let us try with the first one."
-	
+	self halt.
 	self 
-		pluginHandle: (elemenWithPlugin meta at: #plugin) 
+		pluginHandle: elemenWithPlugin plugin
 		for: elemenWithPlugin.
 ]
 

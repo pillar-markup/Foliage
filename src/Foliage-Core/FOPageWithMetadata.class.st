@@ -32,6 +32,15 @@ FOPageWithMetadata >> hasLayout [
 ]
 
 { #category : 'testing' }
+FOPageWithMetadata >> hasPlugin [
+
+ ^  meta
+		at: #plugin 
+		ifPresent: [ :string | true ]
+		ifAbsent: [ false ] 
+]
+
+{ #category : 'testing' }
 FOPageWithMetadata >> isPage [
 	^ true
 ]
@@ -73,6 +82,40 @@ FOPageWithMetadata >> metaAt: key put: value [
 	self meta 
 		at: key
 		put: value
+]
+
+{ #category : 'plugins' }
+FOPageWithMetadata >> plugin [
+
+ ^  meta
+		at: #plugin 
+		ifPresent: [ :aDict | aDict ]
+		
+]
+
+{ #category : 'plugins' }
+FOPageWithMetadata >> pluginKind [
+	
+	^  meta
+		at: #plugin 
+		ifPresent: [ :aDict | aDict asDictionary at: 'kind' ifAbsent: [ self error: 'Missing plugin kind' ]]
+		ifAbsent: [ self error: 'Missing plugin' ]
+		
+]
+
+{ #category : 'plugins' }
+FOPageWithMetadata >> pluginSpec [
+
+ ^  meta
+		at: #plugin 
+		ifPresent: [ :aDict | 
+				| res |
+				res := aDict asDictionary 
+									at: #pluginSpec 
+									ifAbsent: [ self error: 'Missing plugin spec' ].
+				res asDictionary ]
+		ifAbsent: [ self error: 'Missing plugin' ]
+		
 ]
 
 { #category : 'accessing' }

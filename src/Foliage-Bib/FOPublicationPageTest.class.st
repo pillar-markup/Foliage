@@ -23,6 +23,12 @@ FOPublicationPageTest >> publicationPage [
 	^ '{
 "title" : "Stef publication",
 "layout" : "default",
+"plugin" : [ 
+	"kind" : "publicationList",
+	"pluginSpec" : [ 
+		#authorMatchingString : ''*Ducasse*'',
+		#keysOfBlackListedEntries : [ ],
+		#filename : ''rmod.bib'' ] ],
 "publishDate" : "2019-05-21"
 }
 
@@ -52,5 +58,26 @@ FOPublicationPageTest >> testBuildPublicationPage [
 	self assert: builder sections isNotEmpty.
 	
 	self halt.
+	
+]
+
+{ #category : 'running' }
+FOPublicationPageTest >> testHandlePlugins [ 
+
+	site handlePlugins
+	self halt. 
+	"this is the next place to work"
+]
+
+{ #category : 'running' }
+FOPublicationPageTest >> testPlugin [
+
+	| fileWithPlugin |
+	site rawPath: root.
+	fileWithPlugin := (site / self publicationPageName).
+	self assert: fileWithPlugin hasPlugin.
+	self assert: fileWithPlugin pluginKind equals: 'publicationList'.
+	self assert: fileWithPlugin pluginSpec class equals: Dictionary.
+	self assert: (fileWithPlugin pluginSpec  at: #authorMatchingString) equals: '*Ducasse*'.
 	
 ]

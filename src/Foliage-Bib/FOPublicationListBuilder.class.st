@@ -266,6 +266,7 @@ FOPublicationListBuilder >> initialize [
 	self keysOfBlackListedEntries: self defaultKeysOfBlackListedEntries.
 	years := 1990 to: Year currentYearNumber.
 	self doNotAllowEmptySections.
+	bodySpecification := self defaultSpecification.
 	sections := OrderedCollection new
 ]
 
