@@ -12,7 +12,19 @@ Class {
 	#tag : 'MicrodownExtensions'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 MicPublication >> citePub: aCZEntry [ 
 	pub := aCZEntry
+]
+
+{ #category : 'accessing' }
+MicPublication >> key [
+
+	^ pub key
+]
+
+{ #category : 'printing' }
+MicPublication >> printOn: aStream [
+
+	aStream nextPutAll: self key asString
 ]

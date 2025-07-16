@@ -13,7 +13,7 @@ FOPublicationPageTest >> defineFiles [
 	root / self publicationPageName
 			writeStreamDo: [ :st | st nextPutAll: self publicationPage ].
 	root / 'rmod.bib' 
-		writeStreamDo: [ :st | st nextPutAll: FOPublicationListTest new contents ].
+		writeStreamDo: [ :st | st nextPutAll: FOPublicationListBuilderTest new contents ].
 	
 ]
 
@@ -44,5 +44,6 @@ FOPublicationPageTest >> testBuildPublicationPage [
 	| publications |
 	site rawPath: root.
 	publications := site buildPublicationPage: self publicationPageName.
-	self assert: publications sections isNotEmpty
+	self assert: publications sections isNotEmpty.
+	
 ]

@@ -1,5 +1,5 @@
 Class {
-	#name : 'FOPublicationListTest',
+	#name : 'FOPublicationListBuilderTest',
 	#superclass : 'TestCase',
 	#instVars : [
 		'filesystem',
@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : 'running' }
-FOPublicationListTest >> contents [
+FOPublicationListBuilderTest >> contents [
 
 	^ '
 
@@ -120,7 +120,7 @@ FOPublicationListTest >> contents [
 ]
 
 { #category : 'running' }
-FOPublicationListTest >> setUp [
+FOPublicationListBuilderTest >> setUp [
 
 	super setUp.
 	filesystem := FileSystem memory.
@@ -134,7 +134,7 @@ FOPublicationListTest >> setUp [
 ]
 
 { #category : 'tests - sections' }
-FOPublicationListTest >> testBuild [
+FOPublicationListBuilderTest >> testBuild [
 
 	builder authorMatchingString: '*', 'Ducasse', '*'.
 	builder setFilteringOfNonPublicOff.
@@ -147,7 +147,7 @@ FOPublicationListTest >> testBuild [
 ]
 
 { #category : 'tests - filter by script' }
-FOPublicationListTest >> testFilteringOffInSubmission [
+FOPublicationListBuilderTest >> testFilteringOffInSubmission [
 
 	builder authorMatchingString: '*' , 'Ducasse' , '*'.
 	self assert: builder bibset size equals: 7.
@@ -157,7 +157,7 @@ FOPublicationListTest >> testFilteringOffInSubmission [
 ]
 
 { #category : 'tests - filter by script' }
-FOPublicationListTest >> testFilteringOutBlackListed [
+FOPublicationListBuilderTest >> testFilteringOutBlackListed [
 
 	builder authorMatchingString: '*' , 'Ducasse' , '*'.
 	builder keysOfBlackListedEntries: #( #Duca22a #Duca00c ).
@@ -167,7 +167,7 @@ FOPublicationListTest >> testFilteringOutBlackListed [
 ]
 
 { #category : 'tests - filter by script' }
-FOPublicationListTest >> testFilteringOutBlackListedWithInSubmissionToo [
+FOPublicationListBuilderTest >> testFilteringOutBlackListedWithInSubmissionToo [
 
 	
 	builder authorMatchingString: '*' , 'Ducasse' , '*'.
@@ -178,7 +178,7 @@ FOPublicationListTest >> testFilteringOutBlackListedWithInSubmissionToo [
 ]
 
 { #category : 'tests - filter by script' }
-FOPublicationListTest >> testFilteringOutInSubmission [
+FOPublicationListBuilderTest >> testFilteringOutInSubmission [
 
 	builder authorMatchingString: '*' , 'Ducasse' , '*'.
 	builder setFilteringOfNonPublicOn.
@@ -187,8 +187,17 @@ FOPublicationListTest >> testFilteringOutInSubmission [
 ]
 
 { #category : 'tests - import' }
-FOPublicationListTest >> testPublicationListHasEntryBeforeBuilding [
+FOPublicationListBuilderTest >> testPublicationListHasEntryBeforeBuilding [
 
 	self assert: builder bibset size equals: 7.
 	self assert: builder bibset entries first class equals: CZEntry
+]
+
+{ #category : 'tests - import' }
+FOPublicationListBuilderTest >> testPublicationPrintOn [
+	
+	"clearly this tests show that we should have another one with a simple setup."
+	builder authorMatchingString: '*', 'Ducasse', '*'.
+	builder build.
+	self assert: builder sections first items first printString equals: 'Saren24a'
 ]

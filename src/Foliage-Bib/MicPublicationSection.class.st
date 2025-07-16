@@ -29,8 +29,8 @@ MicPublicationSection >> items: anObject [
 MicPublicationSection >> printOn: aStream [
 
 	super printOn: aStream. 
-	aStream nextPutAll: '(', title,  '-'.
-	items entries do: [ :s | aStream nextPutAll: s key ] separatedBy: [ aStream nextPutAll: ', ' ].
+	aStream nextPutAll: '(', title,  ' - '.
+	items do: [ :s | s printOn: aStream ] separatedBy: [ aStream nextPutAll: ', ' ].
 	aStream nextPutAll: ')' 
 ]
 
