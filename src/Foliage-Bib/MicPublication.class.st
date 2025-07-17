@@ -19,11 +19,6 @@ MicPublication >> accept: aVisitor [
 ]
 
 { #category : 'accessing' }
-MicPublication >> citePub: aCZEntry [ 
-	pub := aCZEntry
-]
-
-{ #category : 'accessing' }
 MicPublication >> key [
 
 	^ pub key
@@ -33,4 +28,14 @@ MicPublication >> key [
 MicPublication >> printOn: aStream [
 
 	aStream nextPutAll: self key asString
+]
+
+{ #category : 'accessing' }
+MicPublication >> pub [ 
+	^ pub
+]
+
+{ #category : 'accessing' }
+MicPublication >> pub: aCZEntry [ 
+	pub := aCZEntry
 ]

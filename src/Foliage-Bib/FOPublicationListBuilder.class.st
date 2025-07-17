@@ -30,7 +30,7 @@ FOPublicationListBuilder >> addEntitledSection: aString withBibEntries: entries 
 
 	self addSection: (MicPublicationSection new
 			 title: aString;
-			 items: (entries entries collect: [ :each | MicPublication new citePub: each ]); 
+			 items: (entries entries collect: [ :each | MicPublication new pub: each ]); 
 					yourself)
 ]
 

@@ -46,7 +46,6 @@ FOFullPublicationPage >> renderOn: aStream [
 		           crAsNewLine;
 		           yourself.
 	sections do: [ :s | visitor visit: s ] .
-	self halt.
 	^ visitor contents
 ]
 

@@ -187,8 +187,7 @@ FOWebSite >> handlePlugins [
 		select: [ :each | (each respondsTo: #meta)
 			ifTrue: [  each hasPlugin ] 
 			ifFalse: [ false ] ].	
-	
-	self halt.
+
 	elemenWithPlugin := plugins asArray 
 	   ifEmpty: [ ^ self ]
 		ifNotEmpty: [:a | a first].
