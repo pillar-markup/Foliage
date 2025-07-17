@@ -23,7 +23,8 @@ Class {
 		'model',
 		'root',
 		'properties',
-		'blogSpecs'
+		'blogSpecs',
+		'plugins'
 	],
 	#classInstVars : [
 		'instance'
@@ -62,6 +63,12 @@ FOWebSite >> absoluteLinkFor: aFOWebResourece [
 { #category : 'visiting' }
 FOWebSite >> acceptFOVisitor: aFOVisitor [ 
 	^ aFOVisitor visitWebsite: self 
+]
+
+{ #category : 'initialization' }
+FOWebSite >> addPluginHandlerClass: aPluginHandlerClass for: akindKey [
+
+	plugins at: akindKey put: aPluginHandlerClass
 ]
 
 { #category : 'enumerating' }
@@ -218,8 +225,9 @@ FOWebSite >> initialize [
 	properties := Dictionary new.
 	blogSpecs := OrderedCollection new. 
 	root := self buildRoot.
-
-	rawPath := '' asFileReference
+	
+	rawPath := '' asFileReference.
+	self registerPlugins.
 ]
 
 { #category : 'plugins' }
@@ -232,7 +240,7 @@ FOWebSite >> pluginHandle: aString for: aFOMicrodownPage [
 	| p sections |
 	p := FOPublicationListBuilder new.
 		"so ugly"
-	p onStream:  (root  / 'rmod.bib') sourcePath asFileReference readStream.
+	p onStream: (root / 'rmod.bib') sourcePath asFileReference readStream.
 	p authorMatchingString: '*', 'Ducasse', '*'.
 	p build.
 	sections := p sections.
@@ -295,6 +303,18 @@ FOWebSite >> readConfigFile: aName [
 		do: [ :e | 
 			self error: ('Error reading file {1}: {2}' 
 				format: { reference fullName. e messageText }) ]
+	
+]
+
+{ #category : 'initialization' }
+FOWebSite >> registerPlugins [
+
+	plugins := Dictionary new. 
+	"do not really like such a way of filling up 
+	but else this is unclear how an extension can refer to a website."
+	
+	FOPluginHandler subclasses do: [ :cl | 
+		self addPluginHandlerClass: cl for: cl kind ]
 	
 ]
 

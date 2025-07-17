@@ -13,6 +13,12 @@ Class {
 	#tag : 'MicrodownExtensions'
 }
 
+{ #category : 'visiting' }
+MicPublicationSection >> accept: aVisitor [
+
+	aVisitor visitPublicationSection: self
+]
+
 { #category : 'accessing' }
 MicPublicationSection >> items [
 

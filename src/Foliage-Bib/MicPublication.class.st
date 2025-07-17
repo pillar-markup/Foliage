@@ -12,6 +12,12 @@ Class {
 	#tag : 'MicrodownExtensions'
 }
 
+{ #category : 'visiting' }
+MicPublication >> accept: aVisitor [
+
+	aVisitor visitPublication: self
+]
+
 { #category : 'accessing' }
 MicPublication >> citePub: aCZEntry [ 
 	pub := aCZEntry

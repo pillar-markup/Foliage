@@ -90,6 +90,7 @@ FOPageWithMetadata >> plugin [
  ^  meta
 		at: #plugin 
 		ifPresent: [ :aDict | aDict ]
+		ifAbsent: [  ]
 		
 ]
 

@@ -25,12 +25,6 @@ FOPublicationListBuilder >> PhDAndHabilitationQuery [
 	^ CZQuery PhDAndHabilitation
 ]
 
-{ #category : 'visiting' }
-FOPublicationListBuilder >> acceptFOVisitor: aFOVisitor [
-
-	self halt.
-]
-
 { #category : 'intersections' }
 FOPublicationListBuilder >> addEntitledSection: aString withBibEntries: entries [
 

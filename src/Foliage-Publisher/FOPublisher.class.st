@@ -58,7 +58,7 @@ Foliage {
 
 ```
 p := FOPublisher new. 
-p baseUri: 'http://pharo.org'.
+p baseUri: 'StephaneDucasse.github.io'.
 p sourcePath: '/Users/ducasse/Test2/MySite/StephaneDucasse.github.io/site'.
 p targetPath: '/Users/ducasse/Test2/MySite/StephaneDucasse.github.io/generated'.
 p publish.
@@ -229,8 +229,6 @@ FOPublisher >> publish [
 	site importFiles.
 	site configureFromConfigFile.
 	site handlePlugins.
-	""
-	
 	
 	site publish.
 ]

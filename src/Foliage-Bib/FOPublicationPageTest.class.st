@@ -63,7 +63,7 @@ FOPublicationPageTest >> testBuildPublicationPage [
 
 { #category : 'running' }
 FOPublicationPageTest >> testHandlePlugins [ 
-
+	self halt.
 	site handlePlugins
 	self halt. 
 	"this is the next place to work"
@@ -80,4 +80,17 @@ FOPublicationPageTest >> testPlugin [
 	self assert: fileWithPlugin pluginSpec class equals: Dictionary.
 	self assert: (fileWithPlugin pluginSpec  at: #authorMatchingString) equals: '*Ducasse*'.
 	
+]
+
+{ #category : 'running' }
+FOPublicationPageTest >> testPluginHandler [
+
+	| fileWithPlugin |
+	site rawPath: root.
+	fileWithPlugin := site / self publicationPageName.
+		self halt.
+	site
+		pluginHandle: fileWithPlugin plugin
+		for: fileWithPlugin.
+
 ]
