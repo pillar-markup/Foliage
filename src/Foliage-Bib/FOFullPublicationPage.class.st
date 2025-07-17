@@ -33,14 +33,12 @@ FOFullPublicationPage >> renderOn: aStream [
 
 	| visitor |
 	super renderOn: aStream.
-	"another ugly I cannot access the superclass visitor... "
-	
+
 	"for now we do not use templates but it would make sense to provide a template so 
 	section and for citation this way the user could customise it.
 	It is unclear to me how I can inject the template.
 	So make it work first."
 	
-	self halt.
 	visitor := MicHTMLVisitor new
 		           stream: aStream;
 		           crAsNewLine;

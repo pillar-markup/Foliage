@@ -192,7 +192,7 @@ FOWebSite >> handlePlugins [
 	   ifEmpty: [ ^ self ]
 		ifNotEmpty: [:a | a first].
 	"for now let us try with the first one."
-	self halt.
+	self flag: #hereStef.
 	self 
 		pluginHandle: elemenWithPlugin plugin
 		for: elemenWithPlugin.
