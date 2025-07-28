@@ -77,7 +77,7 @@ FOPublicationListBuilder >> authorMatchingString [
 { #category : 'main configuration' }
 FOPublicationListBuilder >> authorMatchingString: aString [
 
-	authorMatchingString := aString
+	authorMatchingString :=  '*', aString, '*'
 ]
 
 { #category : 'queries' }
@@ -86,6 +86,13 @@ FOPublicationListBuilder >> authorQuery [
 	^ CZFieldQuery 
 		named: #author 
 		checks: [ :value | self authorMatchingString match: value ]
+]
+
+{ #category : 'files' }
+FOPublicationListBuilder >> bibFilename: aStringDotBib [
+	"Parser and set the bib file."
+	 
+	self onStream: ((webSite root / aStringDotBib) sourcePath asFileReference) readStream
 ]
 
 { #category : 'accessing' }
@@ -105,6 +112,17 @@ FOPublicationListBuilder >> bibset: aBibSet [
 FOPublicationListBuilder >> bodySpecification [
 
 	^ bodySpecification ifNil: [ bodySpecification := self defaultSpecification ]
+]
+
+{ #category : 'accessing' }
+FOPublicationListBuilder >> bodySpecification: aColOfSymbols [
+	"
+	aColOfSymbols should be a selector amongst
+		 #( #internationalJournal #nationalJournal #topConference #internationalConference #nationalConference #invitedPaper #bookChapter #book #editor #internationalWorkshop #toolDemo #vulgarisation #PhDAndHabilitation) 
+	"
+	
+	bodySpecification := aColOfSymbols
+	
 ]
 
 { #category : 'queries' }
@@ -456,6 +474,11 @@ FOPublicationListBuilder >> treatBody [
 { #category : 'queries' }
 FOPublicationListBuilder >> vulgarisationQuery [
 	^ CZQuery vulgarisation
+]
+
+{ #category : 'accessing' }
+FOPublicationListBuilder >> webSite: aFOWebSite [ 
+	webSite := aFOWebSite
 ]
 
 { #category : 'accessing' }
