@@ -24,7 +24,7 @@ MicHTMLVisitor >> visitPublicationSection: aMicPublicationSection [
 		with: [ canvas nextPutAll: aMicPublicationSection title ].		
 				
 	canvas tag
-		name: 'ul';
+		name: 'ol';
 		with: [ 
 			canvas newLine. 		
 			aMicPublicationSection items do: [ :each | each accept: self ] ]. 
