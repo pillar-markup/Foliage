@@ -212,10 +212,10 @@ FOPublicationListBuilder >> editorQuery [
 	
 ]
 
-{ #category : 'initialization' }
+{ #category : 'accessing' }
 FOPublicationListBuilder >> endYear: aNumber [
 
- 	endYear := aNumber
+ 	endYear := aNumber asNumber
 ]
 
 { #category : 'main configuration' }
@@ -435,10 +435,10 @@ FOPublicationListBuilder >> shouldFilterNonPublic [
 	^ shouldFilterNonPublic
 ]
 
-{ #category : 'initialization' }
+{ #category : 'accessing' }
 FOPublicationListBuilder >> startYear: aNumber [
 
- 	startYear := aNumber
+ 	startYear := aNumber asNumber
 ]
 
 { #category : 'queries' }
