@@ -13,7 +13,10 @@ Class {
 		'originalBibSet',
 		'bodySpecification',
 		'noEmptySection',
-		'sections'
+		'sections',
+		'startYear',
+		'endYear',
+		'webSite'
 	],
 	#category : 'Foliage-Bib-Core',
 	#package : 'Foliage-Bib',
@@ -191,6 +194,12 @@ FOPublicationListBuilder >> editorQuery [
 	
 ]
 
+{ #category : 'initialization' }
+FOPublicationListBuilder >> endYear: aNumber [
+
+ 	endYear := aNumber
+]
+
 { #category : 'main configuration' }
 FOPublicationListBuilder >> english [
 
@@ -258,7 +267,9 @@ FOPublicationListBuilder >> initialize [
 	self fieldOrder: self defaultFieldOrder.
 	self setFilteringOfNonPublicOn.
 	self keysOfBlackListedEntries: self defaultKeysOfBlackListedEntries.
-	years := 1990 to: Year currentYearNumber.
+	startYear := 1990.
+	endYear := Year currentYearNumber.
+	years := startYear to: endYear.
 	self doNotAllowEmptySections.
 	bodySpecification := self defaultSpecification.
 	sections := OrderedCollection new
@@ -404,6 +415,12 @@ FOPublicationListBuilder >> setLanguage: aSymbol [
 FOPublicationListBuilder >> shouldFilterNonPublic [
 
 	^ shouldFilterNonPublic
+]
+
+{ #category : 'initialization' }
+FOPublicationListBuilder >> startYear: aNumber [
+
+ 	startYear := aNumber
 ]
 
 { #category : 'queries' }
