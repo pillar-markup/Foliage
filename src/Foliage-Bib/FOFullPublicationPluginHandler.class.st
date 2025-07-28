@@ -66,17 +66,19 @@ FOFullPublicationPluginHandler >> api [
 { #category : 'as yet unclassified' }
 FOFullPublicationPluginHandler >> treat: aFOMicrodownPage [
 
-	| bibFileName author p sections |
+	| p sections |
 	
-	bibFileName := aFOMicrodownPage pluginSpec at: #bibFilename.
 	
-	author := aFOMicrodownPage pluginSpec at: #authorMatchingString.
-	self flag: #todo. "handle error"
-
 	p := FOPublicationListBuilder new.
 	p webSite: webSite. 
-	p bibFilename: bibFileName.
-	p authorMatchingString: author.
+		
+	self api do: [ :each |
+		aFOMicrodownPage pluginSpec 
+			at: each key asSymbol 
+			ifPresent: [ :f | p perform: (each key, ':') asSymbol with: f ]
+		 ].
+	self flag: #todo. "handle error"
+	
 	
 	p build.
 	sections := p sections.
