@@ -177,25 +177,18 @@ FOWebSite >> defaultTemplatePath [
 
 { #category : 'importing' }
 FOWebSite >> handlePlugins [
-	"We could check all the file and check plugins"
-	
 	"for now only top level: make it work, make it right, make it better"
 	
-	| plugins elemenWithPlugin |
-	"we could check that a plugin can only be describe in a page and only select FOPage subinstances."
-	plugins := self root items 
+	
+	| topElementsWithPlugin |
+	topElementsWithPlugin := self root items 
 		select: [ :each | (each respondsTo: #meta)
 			ifTrue: [  each hasPlugin ] 
-			ifFalse: [ false ] ].	
-
-	elemenWithPlugin := plugins asArray 
-	   ifEmpty: [ ^ self ]
-		ifNotEmpty: [:a | a first].
-	"for now let us try with the first one."
-	self flag: #hereStef.
-	self 
-		pluginHandle: elemenWithPlugin plugin
-		for: elemenWithPlugin.
+			ifFalse: [ false ] ].
+	topElementsWithPlugin do: [ :elemenWithPlugin | 
+		self 
+			pluginHandle: elemenWithPlugin plugin
+			for: elemenWithPlugin ]
 ]
 
 { #category : 'building' }
@@ -237,24 +230,9 @@ FOWebSite >> pluginHandle: aString for: aFOMicrodownPage [
 	See convertToBlog for an idea how to do it and without duplication
 	"
 	
-	"Here we should invoke a plugin Handler so that this guy encapsulate the knowledge"
-	
-	| p sections bibFileName author |
-	bibFileName := aFOMicrodownPage pluginSpec at: #filename. 
-	author := aFOMicrodownPage pluginSpec at: #authorMatchingString.
-	self flag: #todo. "handle error"
-
-	p := FOPublicationListBuilder new.
-	p onStream: (root / bibFileName) sourcePath asFileReference readStream.
-	p authorMatchingString: '*', author, '*'.
-	
-	p build.
-	sections := p sections.
-	
-	"this is super ugly we should change the import to create correct objects first"
-	self root items 
-		at: aFOMicrodownPage sourcePath basename 
-		put: ((aFOMicrodownPage as: FOFullPublicationPage) sections: sections; yourself)
+	FOFullPublicationPluginHandler new
+		webSite: self;
+		treat: aFOMicrodownPage
 ]
 
 { #category : 'plugins' }
