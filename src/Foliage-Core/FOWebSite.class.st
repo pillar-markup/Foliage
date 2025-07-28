@@ -236,11 +236,18 @@ FOWebSite >> pluginHandle: aString for: aFOMicrodownPage [
 	here we could change the class of the file to be a PublicationPage
 	See convertToBlog for an idea how to do it and without duplication
 	"
-	| p sections |
+	
+	"Here we should invoke a plugin Handler so that this guy encapsulate the knowledge"
+	
+	| p sections bibFileName author |
+	bibFileName := aFOMicrodownPage pluginSpec at: #filename. 
+	author := aFOMicrodownPage pluginSpec at: #authorMatchingString.
+	self flag: #todo. "handle error"
+
 	p := FOPublicationListBuilder new.
-		"so ugly"
-	p onStream: (root / 'rmod.bib') sourcePath asFileReference readStream.
-	p authorMatchingString: '*', 'Ducasse', '*'.
+	p onStream: (root / bibFileName) sourcePath asFileReference readStream.
+	p authorMatchingString: '*', author, '*'.
+	
 	p build.
 	sections := p sections.
 	
