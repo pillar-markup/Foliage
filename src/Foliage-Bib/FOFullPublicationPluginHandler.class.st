@@ -35,6 +35,12 @@ FOFullPublicationPluginHandler class >> kind [
 	^ 'publicationList'
 ]
 
+{ #category : 'description' }
+FOFullPublicationPluginHandler class >> pluginKind [
+
+	^ 'publicationList'
+]
+
 { #category : 'as yet unclassified' }
 FOFullPublicationPluginHandler >> api [ 
 
@@ -68,10 +74,11 @@ FOFullPublicationPluginHandler >> treat: aFOMicrodownPage [
 
 	| p sections |
 	
-	
 	p := FOPublicationListBuilder new.
 	p webSite: webSite. 
-		
+	
+	"we will see in the future if this way of managing config values 
+	should be moved to all plugins"	
 	self api do: [ :each |
 		aFOMicrodownPage pluginSpec 
 			at: each key asSymbol 

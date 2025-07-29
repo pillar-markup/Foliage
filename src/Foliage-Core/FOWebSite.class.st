@@ -229,6 +229,11 @@ FOWebSite >> pluginHandle: aString for: aFOMicrodownPage [
 	here we could change the class of the file to be a PublicationPage
 	See convertToBlog for an idea how to do it and without duplication
 	"
+	| handlerClass |
+
+	handlerClass :=
+		FOPluginHandler subclasses select: [ :cls | 
+				cls kind = aFOMicrodownPage pluginKind ].
 	
 	FOFullPublicationPluginHandler new
 		webSite: self;
