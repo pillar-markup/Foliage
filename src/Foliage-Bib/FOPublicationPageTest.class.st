@@ -88,7 +88,7 @@ FOPublicationPageTest >> testPluginHandler [
 	| fileWithPlugin |
 	site rawPath: root.
 	fileWithPlugin := site / self publicationPageName.
-		self halt.
+	self halt.
 	site
 		pluginHandle: fileWithPlugin plugin
 		for: fileWithPlugin.

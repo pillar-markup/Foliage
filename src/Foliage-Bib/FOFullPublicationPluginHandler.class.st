@@ -73,7 +73,6 @@ FOFullPublicationPluginHandler >> api [
 FOFullPublicationPluginHandler >> treat: aFOMicrodownPage [
 
 	| p sections |
-	
 	p := FOPublicationListBuilder new.
 	p webSite: webSite. 
 	

@@ -30,7 +30,7 @@ FOPublicationListBuilderTest >> contents [
   hal-url = {https://hal.inria.fr/hal-03563605/document}}
 	
 	
-	@inproceedings{Duca00c,
+	@inproceedings{InSubmissionDuca00c,
   author = {St{\''e}phane Ducasse and Serge Demeyer and Oscar Nierstrasz},
   title = {Transform Conditionals to Polymorphism},
   booktitle = {Proceedings of EuroPLoP ''2000},
@@ -128,15 +128,15 @@ FOPublicationListBuilderTest >> setUp [
 		ensureCreateFile;
 		writeStreamDo: [ :s | s << self contents ].
 	builder := FOPublicationListBuilder new.
+	builder webSite: FOWebSite new.
+	self flag: #RevisieWorkingDirectory.
 	builder fileNamed: filesystem / 'rmod.bib'.
-	
-	
 ]
 
 { #category : 'tests - sections' }
 FOPublicationListBuilderTest >> testBuild [
 
-	builder authorMatchingString: '*', 'Ducasse', '*'.
+	builder authorMatchingString: 'Ducasse'.
 	builder setFilteringOfNonPublicOff.
 	builder build.
 	self assert: builder sections size equals: #(intJournal topConf internConf intWorks) size.
@@ -149,8 +149,8 @@ FOPublicationListBuilderTest >> testBuild [
 { #category : 'tests - filter by script' }
 FOPublicationListBuilderTest >> testFilteringOffInSubmission [
 
-	builder authorMatchingString: '*' , 'Ducasse' , '*'.
-	self assert: builder bibset size equals: 7.
+	builder authorMatchingString: 'Ducasse'.
+	self assert: builder originalBibSet size equals: 7.
 	builder setFilteringOfNonPublicOff.
 	builder filter.
 	self assert: builder workingBibSet size equals: builder bibset size
@@ -159,7 +159,7 @@ FOPublicationListBuilderTest >> testFilteringOffInSubmission [
 { #category : 'tests - filter by script' }
 FOPublicationListBuilderTest >> testFilteringOutBlackListed [
 
-	builder authorMatchingString: '*' , 'Ducasse' , '*'.
+	builder authorMatchingString: 'Ducasse'.
 	builder keysOfBlackListedEntries: #( #Duca22a #Duca00c ).
 	builder setFilteringOfNonPublicOn.
 	builder filter.
@@ -170,7 +170,7 @@ FOPublicationListBuilderTest >> testFilteringOutBlackListed [
 FOPublicationListBuilderTest >> testFilteringOutBlackListedWithInSubmissionToo [
 
 	
-	builder authorMatchingString: '*' , 'Ducasse' , '*'.
+	builder authorMatchingString: 'Ducasse'.
 	builder keysOfBlackListedEntries: #( #Duca22a #Scha03a ).
 	builder setFilteringOfNonPublicOn.
 	builder filter.
@@ -180,24 +180,64 @@ FOPublicationListBuilderTest >> testFilteringOutBlackListedWithInSubmissionToo [
 { #category : 'tests - filter by script' }
 FOPublicationListBuilderTest >> testFilteringOutInSubmission [
 
-	builder authorMatchingString: '*' , 'Ducasse' , '*'.
+	builder authorMatchingString: 'Ducasse'.
 	builder setFilteringOfNonPublicOn.
 	builder filter.
 	self assert: builder workingBibSet size equals: 6
 ]
 
-{ #category : 'tests - import' }
-FOPublicationListBuilderTest >> testPublicationListHasEntryBeforeBuilding [
+{ #category : 'tests - filter by script' }
+FOPublicationListBuilderTest >> testOnly2024YearPeriod [
 
-	self assert: builder bibset size equals: 7.
-	self assert: builder bibset entries first class equals: CZEntry
+	builder authorMatchingString: 'Ducasse'.
+	builder startYear: 2024.
+	self assert: builder endYear equals: Year currentYearNumber.
+	builder filter.
+	self assert: builder workingBibSet size equals: 1
+]
+
+{ #category : 'tests - import' }
+FOPublicationListBuilderTest >> testOriginalBibSetHasEntryBeforeBuilding [
+
+	self assert: builder originalBibSet size equals: 7.
+	self assert: builder originalBibSet entries first class equals: CZEntry
 ]
 
 { #category : 'tests - import' }
 FOPublicationListBuilderTest >> testPublicationPrintOn [
 	
-	"clearly this tests show that we should have another one with a simple setup."
-	builder authorMatchingString: '*', 'Ducasse', '*'.
+	"clearly this tess show that we should have another one with a simple setup."
+	builder authorMatchingString: 'Ducasse'.
 	builder build.
 	self assert: builder sections first items first printString equals: 'Saren24a'
+]
+
+{ #category : 'tests - filter by script' }
+FOPublicationListBuilderTest >> testYearPeriod [
+
+	builder authorMatchingString: 'Ducasse'.
+	builder startYear: 2024.
+	self assert: builder endYear equals: Year currentYearNumber.
+	builder filter.
+	self assert: builder workingBibSet size equals: 1
+]
+
+{ #category : 'tests - filter by script' }
+FOPublicationListBuilderTest >> testYearPeriodAll [
+
+	builder authorMatchingString: 'Ducasse'.
+	self assert: builder endYear equals: Year currentYearNumber.
+	builder filter.
+	self assert: builder workingBibSet size equals: 6
+]
+
+{ #category : 'tests - filter by script' }
+FOPublicationListBuilderTest >> testYearPeriodFrom2000To2005 [
+
+	builder authorMatchingString: 'Ducasse'.
+	builder startYear: 1999.
+	builder endYear: 2020.
+	self assert: builder endYear equals: 2020.
+	builder filter.
+	self assert: builder workingBibSet size equals: 3
 ]

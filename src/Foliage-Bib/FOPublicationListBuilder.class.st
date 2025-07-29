@@ -105,7 +105,7 @@ FOPublicationListBuilder >> bibset: aBibSet [
 	"We copy the original to be sure that we can always refer to it, even if we destructively change the working set."
 	originalBibSet := aBibSet.
 	aBibSet scope: CZSet standardDefinitions.
-	workingBibSet := aBibSet copy
+	
 ]
 
 { #category : 'accessing' }
@@ -213,9 +213,15 @@ FOPublicationListBuilder >> editorQuery [
 ]
 
 { #category : 'accessing' }
-FOPublicationListBuilder >> endYear: aNumber [
+FOPublicationListBuilder >> endYear [
+	^ endYear
+]
 
- 	endYear := aNumber asNumber
+{ #category : 'accessing' }
+FOPublicationListBuilder >> endYear: aNumber [
+	
+ 	endYear := aNumber asNumber.
+	self updateYears
 ]
 
 { #category : 'main configuration' }
@@ -239,34 +245,53 @@ FOPublicationListBuilder >> fileNamed: aStringDotBib [
 	self onStream: (workingDirectory resolve: aStringDotBib) readStream
 ]
 
-{ #category : 'private' }
+{ #category : 'filtering' }
 FOPublicationListBuilder >> filter [
-	"Filter insubmission and other blacklisted entries"
+	
+	self filterWithinPeriod.
+	self filterInSubmissionAndBlackListed.
+	self filterAuthorAndEditor.
+]
+
+{ #category : 'filtering' }
+FOPublicationListBuilder >> filterAuthorAndEditor [
+	"Filter the **working set** to only the author entries"
+	
+	workingBibSet := workingBibSet select: (self authorQuery OR: self editorQuery)
+]
+
+{ #category : 'filtering' }
+FOPublicationListBuilder >> filterInSubmissionAndBlackListed [
+	"Filter insubmission and other blacklisted entries.
+	Pay attention works on a selection of the original list."
 
 	self shouldFilterNonPublic
 		ifFalse: [ ^ self ].
 	workingBibSet := workingBibSet reject: self inSubmissionQuery.
 	workingBibSet := workingBibSet
 		reject: [ :each | keysOfBlackListedEntries includes: each key ].
-		
-	"set the working set to only the author entries"
-	workingBibSet := workingBibSet select: (self authorQuery OR: self editorQuery)
+	
+]
+
+{ #category : 'filtering' }
+FOPublicationListBuilder >> filterWithinPeriod [
+	"Pay attention filter from the original set so it should always be invoked prior to 
+	other filer functions."
+	
+	| yearDict |
+	yearDict := originalBibSet groupedBy: CZQuery year.
+	(((yearDict keys select: [ :each | each isNumber ]) sort: [ :a :b| a > b ]) 
+		select: [:each | 
+			years includes: each asNumber]) 
+			do: 
+				[ :k | 
+					workingBibSet addAll: (yearDict at: k) ]
 ]
 
 { #category : 'main configuration' }
 FOPublicationListBuilder >> french [
 
 	localization french
-]
-
-{ #category : 'initialization' }
-FOPublicationListBuilder >> generateFor: aDoc on: aStream [
-
-	| visitor |
-	visitor := self configureGenerator.
-	fieldOrder ifNotNil: [ visitor fieldOrder: fieldOrder ].
-	visitor outputStream: aStream.
-	visitor visit: aDoc
 ]
 
 { #category : 'queries' }
@@ -287,10 +312,11 @@ FOPublicationListBuilder >> initialize [
 	self keysOfBlackListedEntries: self defaultKeysOfBlackListedEntries.
 	startYear := 1990.
 	endYear := Year currentYearNumber.
-	years := startYear to: endYear.
+	self updateYears. 
 	self doNotAllowEmptySections.
 	bodySpecification := self defaultSpecification.
-	sections := OrderedCollection new
+	sections := OrderedCollection new.
+	workingBibSet := CZSet new
 ]
 
 { #category : 'queries' }
@@ -374,6 +400,12 @@ FOPublicationListBuilder >> onStream: aStream [
 	
 ]
 
+{ #category : 'accessing' }
+FOPublicationListBuilder >> originalBibSet [
+
+	^ originalBibSet
+]
+
 { #category : 'queries' }
 FOPublicationListBuilder >> periodicalQuery [
 	^ CZQuery periodical
@@ -438,7 +470,8 @@ FOPublicationListBuilder >> shouldFilterNonPublic [
 { #category : 'accessing' }
 FOPublicationListBuilder >> startYear: aNumber [
 
- 	startYear := aNumber asNumber
+ 	startYear := aNumber asNumber.
+	self updateYears
 ]
 
 { #category : 'queries' }
@@ -469,6 +502,12 @@ FOPublicationListBuilder >> treatBody [
 						addSectionFromQuery: (self perform: (each, #Query) asSymbol)  
 						withTitle: (localization perform: each) ] 
 				
+]
+
+{ #category : 'initialization' }
+FOPublicationListBuilder >> updateYears [
+	
+	years := startYear to: endYear.
 ]
 
 { #category : 'queries' }
