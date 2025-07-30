@@ -235,9 +235,12 @@ FOWebSite >> pluginHandle: aString for: aFOMicrodownPage [
 		FOPluginHandler subclasses select: [ :cls | 
 				cls kind = aFOMicrodownPage pluginKind ].
 	
-	FOFullPublicationPluginHandler new
+	"We return it so that we can get information for test"
+	^ FOFullPublicationPluginHandler new
 		webSite: self;
-		treat: aFOMicrodownPage
+		treat: aFOMicrodownPage;
+		yourself
+	
 ]
 
 { #category : 'plugins' }

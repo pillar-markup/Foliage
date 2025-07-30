@@ -26,7 +26,7 @@ FOPublicationPageTest >> publicationPage [
 "plugin" : [ 
 	"kind" : "publicationList",
 	"pluginSpec" : [ 
-		#authorMatchingString : ''*Ducasse*'',
+		#authorMatchingString : ''Ducasse'',
 		#keysOfBlackListedEntries : [ ],
 		#filename : ''rmod.bib'' ] ],
 "publishDate" : "2019-05-21"
@@ -70,7 +70,7 @@ FOPublicationPageTest >> testHandlePlugins [
 ]
 
 { #category : 'running' }
-FOPublicationPageTest >> testPlugin [
+FOPublicationPageTest >> testPluginDeclaration [
 
 	| fileWithPlugin |
 	site rawPath: root.
@@ -78,19 +78,19 @@ FOPublicationPageTest >> testPlugin [
 	self assert: fileWithPlugin hasPlugin.
 	self assert: fileWithPlugin pluginKind equals: 'publicationList'.
 	self assert: fileWithPlugin pluginSpec class equals: Dictionary.
-	self assert: (fileWithPlugin pluginSpec  at: #authorMatchingString) equals: '*Ducasse*'.
+	self assert: (fileWithPlugin pluginSpec  at: #authorMatchingString) equals: 'Ducasse'.
 	
 ]
 
 { #category : 'running' }
 FOPublicationPageTest >> testPluginHandler [
 
-	| fileWithPlugin |
+	| fileWithPlugin handler |
 	site rawPath: root.
 	fileWithPlugin := site / self publicationPageName.
-	self halt.
-	site
+	handler := site
 		pluginHandle: fileWithPlugin plugin
 		for: fileWithPlugin.
+	self assert: handler authorMatchingString equals: '*Ducasse*'
 
 ]

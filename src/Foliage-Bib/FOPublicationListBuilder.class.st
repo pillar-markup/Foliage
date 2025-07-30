@@ -303,6 +303,8 @@ FOPublicationListBuilder >> inSubmissionQuery [
 FOPublicationListBuilder >> initialize [
 
 	super initialize.
+	workingBibSet := CZSet new.
+	originalBibSet := CZSet new.
 	workingDirectory := FileSystem workingDirectory.
 	self authorMatchingString: '*'.
 	localization := self localizationClass new.
@@ -316,7 +318,7 @@ FOPublicationListBuilder >> initialize [
 	self doNotAllowEmptySections.
 	bodySpecification := self defaultSpecification.
 	sections := OrderedCollection new.
-	workingBibSet := CZSet new
+
 ]
 
 { #category : 'queries' }
@@ -530,6 +532,11 @@ FOPublicationListBuilder >> workingBibSet [
 FOPublicationListBuilder >> workingDirectory: aWorkingDirectory [ 
 	
 	workingDirectory := aWorkingDirectory
+]
+
+{ #category : 'accessing' }
+FOPublicationListBuilder >> years [
+	^ years
 ]
 
 { #category : 'accessing' }

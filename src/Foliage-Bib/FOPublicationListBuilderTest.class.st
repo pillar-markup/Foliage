@@ -146,7 +146,16 @@ FOPublicationListBuilderTest >> testBuild [
 	self assert: builder sections first items size equals: 2.
 ]
 
-{ #category : 'tests - filter by script' }
+{ #category : 'tests - period' }
+FOPublicationListBuilderTest >> testEndPeriodIsCurrentWhenNotSpecified [ 
+
+	builder startYear: 2024.
+	self assert: builder endYear equals: Year currentYearNumber.
+	self assert: builder years equals: (2024 to: Year currentYearNumber).
+	
+]
+
+{ #category : 'tests - filter2' }
 FOPublicationListBuilderTest >> testFilteringOffInSubmission [
 
 	builder authorMatchingString: 'Ducasse'.
@@ -156,7 +165,7 @@ FOPublicationListBuilderTest >> testFilteringOffInSubmission [
 	self assert: builder workingBibSet size equals: builder bibset size
 ]
 
-{ #category : 'tests - filter by script' }
+{ #category : 'tests - filter2' }
 FOPublicationListBuilderTest >> testFilteringOutBlackListed [
 
 	builder authorMatchingString: 'Ducasse'.
@@ -166,7 +175,7 @@ FOPublicationListBuilderTest >> testFilteringOutBlackListed [
 	self assert: builder workingBibSet size equals: 5
 ]
 
-{ #category : 'tests - filter by script' }
+{ #category : 'tests - filter2' }
 FOPublicationListBuilderTest >> testFilteringOutBlackListedWithInSubmissionToo [
 
 	
@@ -177,7 +186,7 @@ FOPublicationListBuilderTest >> testFilteringOutBlackListedWithInSubmissionToo [
 	self assert: builder workingBibSet size equals: 4
 ]
 
-{ #category : 'tests - filter by script' }
+{ #category : 'tests - filter2' }
 FOPublicationListBuilderTest >> testFilteringOutInSubmission [
 
 	builder authorMatchingString: 'Ducasse'.
@@ -186,14 +195,34 @@ FOPublicationListBuilderTest >> testFilteringOutInSubmission [
 	self assert: builder workingBibSet size equals: 6
 ]
 
-{ #category : 'tests - filter by script' }
-FOPublicationListBuilderTest >> testOnly2024YearPeriod [
+{ #category : 'tests - filter2' }
+FOPublicationListBuilderTest >> testFilteringStartAndDefaultEndPeriod [
 
 	builder authorMatchingString: 'Ducasse'.
 	builder startYear: 2024.
 	self assert: builder endYear equals: Year currentYearNumber.
 	builder filter.
 	self assert: builder workingBibSet size equals: 1
+]
+
+{ #category : 'tests - filter2' }
+FOPublicationListBuilderTest >> testFilteringWithNoPeriodIsAll [
+
+	builder authorMatchingString: 'Ducasse'.
+	self assert: builder endYear equals: Year currentYearNumber.
+	builder filter.
+	self assert: builder workingBibSet size equals: 6
+]
+
+{ #category : 'tests - filter2' }
+FOPublicationListBuilderTest >> testFilteringWithStartAndEndPeriodFrom2000To2005 [
+
+	builder authorMatchingString: 'Ducasse'.
+	builder startYear: 2000.
+	builder endYear: 2020.
+	self assert: builder endYear equals: 2020.
+	builder filter.
+	self assert: builder workingBibSet size equals: 3
 ]
 
 { #category : 'tests - import' }
@@ -212,32 +241,12 @@ FOPublicationListBuilderTest >> testPublicationPrintOn [
 	self assert: builder sections first items first printString equals: 'Saren24a'
 ]
 
-{ #category : 'tests - filter by script' }
-FOPublicationListBuilderTest >> testYearPeriod [
+{ #category : 'tests - period' }
+FOPublicationListBuilderTest >> testStartEnd [
 
-	builder authorMatchingString: 'Ducasse'.
-	builder startYear: 2024.
-	self assert: builder endYear equals: Year currentYearNumber.
-	builder filter.
-	self assert: builder workingBibSet size equals: 1
-]
-
-{ #category : 'tests - filter by script' }
-FOPublicationListBuilderTest >> testYearPeriodAll [
-
-	builder authorMatchingString: 'Ducasse'.
-	self assert: builder endYear equals: Year currentYearNumber.
-	builder filter.
-	self assert: builder workingBibSet size equals: 6
-]
-
-{ #category : 'tests - filter by script' }
-FOPublicationListBuilderTest >> testYearPeriodFrom2000To2005 [
-
-	builder authorMatchingString: 'Ducasse'.
-	builder startYear: 1999.
-	builder endYear: 2020.
-	self assert: builder endYear equals: 2020.
-	builder filter.
-	self assert: builder workingBibSet size equals: 3
+	builder startYear: 1990.
+	builder endYear: 2004.
+	self assert: builder endYear equals: 2004.
+	self assert: builder years equals: (1990 to: 2004).
+	
 ]
