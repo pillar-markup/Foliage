@@ -44,7 +44,7 @@ FOFullPublicationPluginHandler class >> pluginKind [
 	^ 'publicationList'
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 FOFullPublicationPluginHandler >> api [ 
 
 	^ {
@@ -72,13 +72,13 @@ FOFullPublicationPluginHandler >> api [
 	}
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 FOFullPublicationPluginHandler >> builder [
 
 	^ builder
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
 FOFullPublicationPluginHandler >> initialize [ 
 	
 	super initialize. 
@@ -88,7 +88,7 @@ FOFullPublicationPluginHandler >> initialize [
 	
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'operate' }
 FOFullPublicationPluginHandler >> treat: aFOMicrodownPage [
 
 	| sections |
@@ -111,7 +111,7 @@ FOFullPublicationPluginHandler >> treat: aFOMicrodownPage [
 	^ builder
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 FOFullPublicationPluginHandler >> webSite: aWebSite [
 
 	webSite := aWebSite.

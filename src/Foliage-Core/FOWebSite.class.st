@@ -50,14 +50,15 @@ FOWebSite class >> reset [
 	instance := nil
 ]
 
-{ #category : 'arithmetic' }
+{ #category : 'accessing items' }
 FOWebSite >> / anObject [
 	^ root / anObject
 ]
 
-{ #category : 'accessing' }
-FOWebSite >> absoluteLinkFor: aFOWebResourece [
-	^ baseUri asZnUrl / (aFOWebResourece pathString)  
+{ #category : 'helpers' }
+FOWebSite >> absoluteLinkFor: aFOWebResource [
+
+	^ baseUri asZnUrl / aFOWebResource pathString  
 ]
 
 { #category : 'visiting' }
@@ -71,7 +72,7 @@ FOWebSite >> addPluginHandlerClass: aPluginHandlerClass for: akindKey [
 	plugins at: akindKey put: aPluginHandlerClass
 ]
 
-{ #category : 'enumerating' }
+{ #category : 'accessing items' }
 FOWebSite >> allFiles [
 
 	^ self rawPath allFiles
@@ -101,11 +102,14 @@ FOWebSite >> baseUri: anObject [
 
 { #category : 'accessing-blogs' }
 FOWebSite >> blogSpecs: aColOfPairOfFolderNamesToTitles [
+	"To specify blogs pass a collection of pair folder name -> name"
+
 	"| p |
 	p := FOPublisher new. 
 	p blogs: {
 		'news' -> 'Pharo News' . 
 		'success' ->'Pharo Success Stories'  }."
+		
 	blogSpecs := aColOfPairOfFolderNamesToTitles
 ]
 
@@ -117,8 +121,9 @@ FOWebSite >> buildOverviewFor: aString [
 	blog at: #'index.html' put: blog overviewPage.  
 ]
 
-{ #category : 'accessing' }
+{ #category : 'initialization' }
 FOWebSite >> buildRoot [
+
 	^ FOWebsiteRoot new
 		parent: self 
 ]
@@ -187,7 +192,7 @@ FOWebSite >> importFiles [
 	self importDirectory: self rawPath 
 ]
 
-{ #category : 'accessing' }
+{ #category : 'initialization' }
 FOWebSite >> importer [
 	"Creates a new importer associated with the website."
 	
@@ -228,11 +233,6 @@ FOWebSite >> pluginHandle: aString for: aFOMicrodownPage [
 	
 ]
 
-{ #category : 'plugins' }
-FOWebSite >> pluginHandleFor: aString [ 
-	self shouldBeImplemented.
-]
-
 { #category : 'accessing' }
 FOWebSite >> properties [
 	^ properties
@@ -264,6 +264,8 @@ FOWebSite >> rawPath [
 
 { #category : 'accessing' }
 FOWebSite >> rawPath: anObject [
+	"To define a physical file reference"
+	
 	rawPath := anObject asFileReference 
 ]
 
@@ -295,7 +297,7 @@ FOWebSite >> registerPlugins [
 	
 ]
 
-{ #category : 'accessing' }
+{ #category : 'helpers' }
 FOWebSite >> relativeRawPath: aFileReference [
 	^ aFileReference asAbsolute relativeTo: self rawPath asAbsolute 
 ]
@@ -338,12 +340,12 @@ FOWebSite >> templatePath: anObject [
 	templatePath := anObject asFileReference
 ]
 
-{ #category : 'accessing' }
+{ #category : 'helpers' }
 FOWebSite >> templatePathForLayout: aString [ 
 	^ self templatePath / aString
 ]
 
-{ #category : 'accessing' }
+{ #category : 'helpers' }
 FOWebSite >> templatePathForLayout: aString  partial: partialName [
 	^ self templatePath / partialName
 ]

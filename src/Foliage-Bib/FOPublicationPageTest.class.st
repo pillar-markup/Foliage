@@ -6,7 +6,7 @@ Class {
 	#tag : 'Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'publications' }
 FOPublicationPageTest >> defineFiles [
 
 	super defineFiles.
@@ -28,7 +28,7 @@ FOPublicationPageTest >> publicationPage [
 	"pluginSpec" : [ 
 		#authorMatchingString : ''Ducasse'',
 		#keysOfBlackListedEntries : [ ],
-		#filename : ''rmod.bib'' ] ],
+		#bibFilename : ''rmod.bib'' ] ],
 "publishDate" : "2019-05-21"
 }
 
@@ -44,7 +44,7 @@ FOPublicationPageTest >> publicationPageName [
 	^ 'publications.md'
 ]
 
-{ #category : 'running' }
+{ #category : 'tests - declaration' }
 FOPublicationPageTest >> testPluginDeclaration [
 
 	| fileWithPlugin |
@@ -53,18 +53,24 @@ FOPublicationPageTest >> testPluginDeclaration [
 	self assert: fileWithPlugin hasPlugin.
 	self assert: fileWithPlugin pluginKind equals: 'publicationList'.
 	self assert: fileWithPlugin pluginSpec class equals: Dictionary.
-	self assert: (fileWithPlugin pluginSpec  at: #authorMatchingString) equals: 'Ducasse'.
+	self assert: (fileWithPlugin pluginSpec at: #authorMatchingString) equals: 'Ducasse'.
+	self assert: (fileWithPlugin pluginSpec at: #bibFilename) equals: 'rmod.bib'
 	
 ]
 
-{ #category : 'running' }
+{ #category : 'tests - declaration' }
 FOPublicationPageTest >> testPluginHandler [
 
-	| fileWithPlugin handler |
+	| fileWithPlugin handler sections |
 	site rawPath: root.
 	fileWithPlugin := site / self publicationPageName.
 	handler := site
 		pluginHandle: fileWithPlugin plugin
 		for: fileWithPlugin.
-	self halt.
+	sections := handler builder sections.
+	self assert: sections size equals: 4.
+	self assert: sections first title equals: 'Refereed Articles in International Journals'.
+	self assert: sections first items size equals: 2.
+	self assert: sections first items first key equals: #Saren24a.
+	
 ]
