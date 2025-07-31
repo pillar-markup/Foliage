@@ -45,31 +45,6 @@ FOPublicationPageTest >> publicationPageName [
 ]
 
 { #category : 'running' }
-FOPublicationPageTest >> testBuildPublicationPage [
-
-	| builder |
-	self halt.
-	"here we are just computing the list of publications. 
-	And so far we are not generating a page.
-	The renderOn: method is not invoked."
-	
-	site rawPath: root.
-	builder := site buildPublicationPage: self publicationPageName.
-	self assert: builder sections isNotEmpty.
-	
-	self halt.
-	
-]
-
-{ #category : 'running' }
-FOPublicationPageTest >> testHandlePlugins [ 
-	self halt.
-	site handlePlugins
-	self halt. 
-	"this is the next place to work"
-]
-
-{ #category : 'running' }
 FOPublicationPageTest >> testPluginDeclaration [
 
 	| fileWithPlugin |

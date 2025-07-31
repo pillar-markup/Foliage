@@ -114,24 +114,6 @@ FOWebSite >> buildOverviewFor: aString [
 	blog at: #'index.html' put: blog overviewPage.  
 ]
 
-{ #category : 'plugins' }
-FOWebSite >> buildPublicationPage: aString [ 
-	
-	"contrary to blog post there is no need to create an index.html
-	This may be the case for the virtual page"
-	
-	| p |
-	p := FOPublicationListBuilder new.
-	p workingDirectory: self rawPath.
-	p fileNamed:'rmod.bib'.
-	p authorMatchingString: '*', 'Ducasse', '*'.
-	p setFilteringOfNonPublicOff.
-	p build.
-	^ p
-	
-
-]
-
 { #category : 'accessing' }
 FOWebSite >> buildRoot [
 	^ FOWebsiteRoot new
