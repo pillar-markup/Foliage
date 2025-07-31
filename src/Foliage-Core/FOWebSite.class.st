@@ -93,6 +93,9 @@ FOWebSite >> baseUri [
 
 { #category : 'accessing' }
 FOWebSite >> baseUri: anObject [
+	"Expect the base of the website including the http
+	e.g., FOWebSite new baseUri: 'https://pharo.org'."
+	
 	baseUri := anObject
 ]
 

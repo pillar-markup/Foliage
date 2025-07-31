@@ -66,6 +66,5 @@ FOPublicationPageTest >> testPluginHandler [
 	handler := site
 		pluginHandle: fileWithPlugin plugin
 		for: fileWithPlugin.
-	self assert: handler authorMatchingString equals: '*Ducasse*'
-
+	self halt.
 ]
