@@ -1,5 +1,5 @@
 "
-I represent a Citezen publication in Microdown world. 
+I represent a Citezen publication in Microdown world. I will be part of the document tree.
 "
 Class {
 	#name : 'MicPublication',
