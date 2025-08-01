@@ -99,7 +99,10 @@ FOPageWithMetadata >> pluginKind [
 	
 	^  meta
 		at: #plugin 
-		ifPresent: [ :aDict | aDict asDictionary at: 'kind' ifAbsent: [ self error: 'Missing plugin kind' ]]
+		ifPresent: [ :aDict | 
+				aDict asDictionary 
+					at: 'kind' 
+					ifAbsent: [ self error: 'Missing plugin kind' ]]
 		ifAbsent: [ self error: 'Missing plugin' ]
 		
 ]

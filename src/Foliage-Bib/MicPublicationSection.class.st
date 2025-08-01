@@ -1,5 +1,6 @@
 "
-I represent a list of publications with a title. 
+I represent a list of publications with a title. I will be part of the document tree of a publication page. 
+My items are MicPublication instances. 
 "
 Class {
 	#name : 'MicPublicationSection',

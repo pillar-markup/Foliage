@@ -49,7 +49,7 @@ FOFullPublicationPluginHandler >> api [
 
 	^ {
 	(#authorMatchingString  
-		-> 'Enter an expression that will in addition be surrounded by *. E.g. Ducasse will be *Ducasse*') .
+		->  'Expects a string that will identify the author. The expression that will in addition be surrounded by `*`. E.g. `Ducasse` will be `*Ducasse*`)') .
 		
 	(#bibFilename 
 		-> 'The path name of the file containing bib file. E.g. rmod.bib') .
@@ -67,8 +67,7 @@ FOFullPublicationPluginHandler >> api [
 		-> 'A year number that defines the beginning of the period to be taken into account. By default this is the current year') .
 		
 	(#bodySpecification 
-		-> 'A collection of symbols taken from the default configuration:
-		 #( #internationalJournal #nationalJournal #topConference #internationalConference #nationalConference #invitedPaper #bookChapter #book #editor #internationalWorkshop #toolDemo #vulgarisation #PhDAndHabilitation)')
+		-> 'Expects a collection of Symbols. With it you can control the order of the publication kinds (journal, conference,...) or if a subsection should appear at all. A collection of symbols taken from the default configuration:	 #( #internationalJournal #nationalJournal #topConference #internationalConference #nationalConference #invitedPaper #bookChapter #book #editor #internationalWorkshop #toolDemo #vulgarisation #PhDAndHabilitation)')
 	}
 ]
 
