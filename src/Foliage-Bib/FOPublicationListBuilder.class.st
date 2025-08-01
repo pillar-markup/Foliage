@@ -313,7 +313,7 @@ FOPublicationListBuilder >> initialize [
 	self fieldOrder: self defaultFieldOrder.
 	self setFilteringOfNonPublicOn.
 	self keysOfBlackListedEntries: self defaultKeysOfBlackListedEntries.
-	startYear := 1990.
+	startYear := 1900.
 	endYear := Year currentYearNumber.
 	self updateYears. 
 	self doNotAllowEmptySections.
