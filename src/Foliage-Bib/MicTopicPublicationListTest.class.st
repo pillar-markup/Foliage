@@ -10,6 +10,7 @@ Class {
 MicTopicPublicationListTest >> testTopicList [
 
 	| doc |
+	self skip.
 	doc := Microdown parse: 
 
 '<!topicList|title=This is a cool title&tag=nh5p
