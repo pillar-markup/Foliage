@@ -11,6 +11,21 @@ It offers
 - Automatic publication generation 
 - A simple plugin architecture
 
+## Sample
+
+
+If you are looking for example. You can have a look at 
+
+- https//www.github.com/Pillar-markup/FoliageSample. It is simple example of a little but not trivial web site with automatic publication list generation. 
+
+- https://www.github.com/stephaneducasse.github.io
+
+Notice that while Foliage 2.0 can generate the full Pharo web site, it is not yet used. 
+The Pharo official website https://www.pharo.org is still using an old version of Foliage.
+Don't use it (or at your own risk) :)
+
+
+
 ## File structure
 
 A site has a basic structure
