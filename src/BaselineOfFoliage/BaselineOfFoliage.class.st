@@ -14,7 +14,7 @@ BaselineOfFoliage >> baseline: spec [
 		
 		spec baseline: 'Microdown' with: [
 			spec 
-				repository: 'github://pillar-markup/Microdown:dev/src'
+				repository: 'github://pillar-markup/Microdown:v2.9.2/src'
 				"load: #( 'Core' #'Microdown-HTMLExporter')" ]. 
 	
 		spec 
