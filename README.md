@@ -12,7 +12,7 @@ To load it in Pharo 13
 ```
 Metacello new
 	baseline: 'Foliage';
-	repository: 'github://Ducasse/Foliage:v2.1.0/src';
+	repository: 'github://pillar-markup/Foliage:v2.1.0/src';
 	onConflict: [ :ex | ex useIncoming ];
 	onUpgrade: [ :ex | ex useIncoming ];
 	load.
