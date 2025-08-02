@@ -1,9 +1,11 @@
 # Foliage
-
 A simple static site generator based on Microdown.
 
+It is used to generate for example
+- https://www.pharo.org
+- https://stephaneducasse.github.io
 
-
+### Loading 
 
 To load it in Pharo 13
 
@@ -15,6 +17,12 @@ Metacello new
 	onUpgrade: [ :ex | ex useIncoming ];
 	load.
 ```
+
+### Get Started 
+
+- Check the doc folder.
+- Have a look at https//www.github.com/Pillar-markup/FoliageSample. It is simple example of a little but not trivial web site with automatic publication list generation. 
+
 
 
 ### To generate the Pharo website
