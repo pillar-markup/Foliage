@@ -222,11 +222,13 @@ FOWebSite >> pluginHandle: aString for: aFOMicrodownPage [
 	| handlerClass |
 
 	handlerClass :=
-		FOPluginHandler subclasses select: [ :cls | 
-				cls kind = aFOMicrodownPage pluginKind ].
+		FOPluginHandler subclasses 
+			detect: [ :cls | 
+				cls kind = aFOMicrodownPage pluginKind ]
+			ifNone: [ Error signal: 'Unknown plugin ',  aFOMicrodownPage pluginKind ]	.
 	
 	"We return it so that we can get information for test"
-	^ FOFullPublicationPluginHandler new
+	^ handlerClass new
 		webSite: self;
 		treat: aFOMicrodownPage;
 		yourself
