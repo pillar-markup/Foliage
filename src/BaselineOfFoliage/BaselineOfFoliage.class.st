@@ -14,7 +14,7 @@ BaselineOfFoliage >> baseline: spec [
 		
 		spec baseline: 'Microdown' with: [
 			spec 
-				repository: 'github://pillar-markup/Microdown:v2.9.3/src'
+				repository: 'github://pillar-markup/Microdown:v2.9.4/src'
 				"load: #( 'Core' #'Microdown-HTMLExporter')" ]. 
 	
 		spec 
@@ -45,14 +45,6 @@ BaselineOfFoliage >> baseline: spec [
 			group: 'default' with: #('Core' 'Foliage-Feed' 'Foliage-Bib' 'Publisher' 'Tests');
 			group: 'development' with: #('Core' 'Tests' 'Publisher' 'Foliage-Feed' 'ZincHTTPComponents') ]
 
-]
-
-{ #category : 'baselines' }
-BaselineOfFoliage >> microdown: spec [
-	spec baseline: 'Microdown' with: [
-		spec 
-			repository: 'github://pillar-markup/Microdown:v2.8.2/src';
-			loads: #( 'Core' #'Microdown-HTMLExporter')].
 ]
 
 { #category : 'baselines' }
