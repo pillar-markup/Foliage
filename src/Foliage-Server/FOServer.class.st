@@ -57,3 +57,11 @@ FOServer >> start [
 		directory: self baseDirectory;
 	 	yourself)
 ]
+
+{ #category : 'start/stop' }
+FOServer >> stop [
+	<script: 'self new start'>
+
+	(ZnServer defaultOn: self port) stop.
+	
+]
