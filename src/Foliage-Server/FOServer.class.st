@@ -26,7 +26,8 @@ FOServer class >> stop [
 { #category : 'accessing' }
 FOServer >> baseDirectory [
 
-	^ baseDirectory ifNil: [ baseDirectory := 'generated' asFileReference ]
+	^ baseDirectory 
+		ifNil: [ baseDirectory := '/Users/ducasse/Workspace/FirstCircle/Writing/Working/oleks.fr/generated' asFileReference ]
 ]
 
 { #category : 'accessing' }
