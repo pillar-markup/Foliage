@@ -7,12 +7,12 @@ It is used to generate for example
 
 ### Loading 
 
-To load it in Pharo 13
+To load it in Pharo 13 change the following expression to point to the latest tag.
 
 ```
 Metacello new
 	baseline: 'Foliage';
-	repository: 'github://pillar-markup/Foliage:v2.1.0/src';
+	repository: 'github://pillar-markup/Foliage:vXXXX/src';
 	onConflict: [ :ex | ex useIncoming ];
 	onUpgrade: [ :ex | ex useIncoming ];
 	load.
