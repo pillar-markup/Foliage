@@ -116,7 +116,7 @@ FOPublisher class >> commandLine [
 				yourself);
 			add: ((ClapPositional id: 'project')
 				implicitMeaning: [ self defaultProjectFileName ];
-				description: 'STON file describing project (default .foliage.ston)';
+				description: 'STON file describing project (default is Foliage.ston)';
 				yourself);
 			meaning: [ :args |
 				args at: #helpFlag ifPresent: [ :help | 
@@ -133,7 +133,7 @@ FOPublisher class >> commandLine [
 { #category : 'clap - defaults' }
 FOPublisher class >> defaultProjectFileName [
 		
-	^ '.foliage.ston'
+	^ 'Foliage.ston'
 ]
 
 { #category : 'defaults' }
