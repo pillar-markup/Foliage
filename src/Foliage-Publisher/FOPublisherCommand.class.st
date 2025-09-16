@@ -14,7 +14,7 @@ Class {
 }
 
 { #category : 'accessing' }
-FOPublisherCommand class >> specification [
+FOPublisherCommand class >> commandSpecification [
 
 	^ (ClapCommandSpec id: 'foliage')
 		description: 'Foliage publisher';
@@ -28,23 +28,30 @@ FOPublisherCommand class >> specification [
 				
 				addPositional: 'project' spec: [ :positional |
 						positional
-				description: 'STON file describing project (default is Foliage.ston)';
-				defaultValue: [ :match | self defaultProjectFileName ] ]
+							description: 'STON file describing project (default is Foliage.ston)';
+							defaultValue: [ :match | FOPublisher defaultProjectFileName ] ]
 				yourself );
 		yourself
 ]
 
 { #category : 'clap' }
-FOPublisherCommand >> readFile: aName [
+FOPublisherCommand >> execute [ 
 
-	| reference |
-	reference := aName asFileReference.
-	reference exists ifFalse: [ 
-		self error: ('File {1} does not exists' format: { reference fullName }) ].
-	
-	^ [ (STONReader on: reference readStream) next ]
-		on: Error 
-		do: [ :e | 
-			self error: ('Error reading file {1}: {2}' 
-				format: { reference fullName. e messageText }) ]
+	| publisher |
+	publisher := FOPublisher new. 
+	(self hasFlag: #source)
+		ifTrue: [ publisher sourcePath: self source ].
+	(self hasFlag: #target)
+		ifTrue: [ publisher targetPath: self target ].	
+	publisher publish
+]
+
+{ #category : 'clap' }
+FOPublisherCommand >> source [
+	^ self positional: #source
+]
+
+{ #category : 'clap' }
+FOPublisherCommand >> target [
+	^ self positional: #target
 ]
