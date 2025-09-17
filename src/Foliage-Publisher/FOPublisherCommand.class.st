@@ -2,12 +2,7 @@ Class {
 	#name : 'FOPublisherCommand',
 	#superclass : 'ClapApplication',
 	#instVars : [
-		'baseUri',
-		'targetPath',
-		'sourcePath',
-		'templatePath',
-		'blogs',
-		'site'
+		'publisher'
 	],
 	#category : 'Foliage-Publisher',
 	#package : 'Foliage-Publisher'
@@ -16,42 +11,57 @@ Class {
 { #category : 'accessing' }
 FOPublisherCommand class >> commandSpecification [
 
-	^ (ClapCommandSpec id: 'foliage')
-		description: 'Foliage publisher';
-		commandClass: self;
-		addHelp;
-		add: ((ClapCommandSpec id: 'publish')
+	^(ClapCommandSpec id: 'publish')
 				description: 'Publish foliage project';
 				addHelp ;
+				commandClass: self;
 				addFlagWithPositional: 'source' description: 'Site input files location';
 				addFlagWithPositional: 'target' description: 'Generated output location';
 				
 				addPositional: 'project' spec: [ :positional |
 						positional
 							description: 'STON file describing project (default is Foliage.ston)';
-							defaultValue: [ :match | FOPublisher defaultProjectFileName ] ]
-				yourself );
-		yourself
+							defaultValue: [ :match | FOPublisher defaultProjectFileName ] ];
+				yourself
+]
+
+{ #category : 'clap' }
+FOPublisherCommand >> configure [
+
+	(self hasFlag: #source)
+		ifTrue: [ publisher sourcePath: self source ].
+	(self hasFlag: #target)
+		ifTrue: [ publisher targetPath: self target ].	
+	
 ]
 
 { #category : 'clap' }
 FOPublisherCommand >> execute [ 
 
-	| publisher |
-	publisher := FOPublisher new. 
-	(self hasFlag: #source)
-		ifTrue: [ publisher sourcePath: self source ].
-	(self hasFlag: #target)
-		ifTrue: [ publisher targetPath: self target ].	
+	self configure.
 	publisher publish
 ]
 
-{ #category : 'clap' }
+{ #category : 'initialize' }
+FOPublisherCommand >> initialize [
+
+	super initialize.
+	publisher := FOPublisher new. 
+	
+]
+
+{ #category : 'accessing' }
+FOPublisherCommand >> publisher [ 
+
+	^ publisher
+]
+
+{ #category : 'accessing' }
 FOPublisherCommand >> source [
 	^ self positional: #source
 ]
 
-{ #category : 'clap' }
+{ #category : 'accessing' }
 FOPublisherCommand >> target [
 	^ self positional: #target
 ]
