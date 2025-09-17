@@ -29,7 +29,7 @@ FOSimplePublisherTest >> testConfigurateWebSite [
 		targetPath: '/home/ducasse/Test2/foliage/output';
 		sourcePath: '/home/ducasse/Test2/foliage/test/'.
 	self assert: publisher sourcePath fullName equals: '/home/ducasse/Test2/foliage/test'.		
-	self assert: publisher targetPath equals: '/home/ducasse/Test2/foliage/output'.	
+	self assert: publisher targetPath fullName equals: '/home/ducasse/Test2/foliage/output'.	
 	self assert: publisher templatePath equals: 'templates'.	
 		
 	ws := publisher newWebSite.

@@ -30,7 +30,7 @@ FOMicrodownPageTest >> community [
 
 ## Discord team
 
-We hang out on Discord \(Invitation at [https://discord.gg/QewZMZa](https://discord.gg/QewZMZa)\), where we discuss everything for Pharo users and developers.
+We hang out on Discordwhere.
 
 You can get an instant invite following this [link](https://discord.gg/QewZMZa).
 '
@@ -196,11 +196,12 @@ FOMicrodownPageTest >> testRenderOnWithMicrodownV2 [
 
 	self
 		assert: (String streamContents: [ :s |
-					 (FOMicrodownV2Reader file: root / 'community.md') createModelEntity renderOn: s ])
-		equals:
-			self lineEnding , '<h1>Community & help</h1>' , self lineEnding
-			, '<h2>Discord team</h2>' , self lineEnding , 
-			'We hang out on Discord (Invitation at <a target="_blank" href="https://discord.gg/QewZMZa"><a target="_blank" href="https://discord.gg/QewZMZa">https://discord.gg/QewZMZa</a></a>), where we discuss everything for Pharo users and developers.'
-			, self lineEnding ,
-			'You can get an instant invite following this <a target="_blank" href="https://discord.gg/QewZMZa">link</a>.'
+					 (FOMicrodownV2Reader file: root / 'community.md') createModelEntity renderOn: s ]) equals: '
+<h1>Community & help</h1>
+<h2>Discord team</h2>
+<p>We hang out on Discordwhere.</p>
+
+<p>You can get an instant invite following this <a target="_blank" href="https://discord.gg/QewZMZa">link</a>.</p>
+'
+	
 ]

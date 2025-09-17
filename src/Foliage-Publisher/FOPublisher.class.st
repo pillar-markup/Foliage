@@ -260,7 +260,7 @@ FOPublisher >> targetPath [
 { #category : 'accessing' }
 FOPublisher >> targetPath: aString [
 
-	targetPath := aString
+	targetPath := aString asFileReference
 ]
 
 { #category : 'accessing' }
