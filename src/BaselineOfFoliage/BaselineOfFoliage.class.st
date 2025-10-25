@@ -77,7 +77,7 @@ packagesToUnload := ((PackageOrganizer default packages
 
 	#( 'Microdown' ) do: [ :name |
         (IceRepository repositoryNamed: name)
-            ifNil: [ self inform: 'Project not found: ' , name ]
+            ifNil: [ 'Project not found: ' , name traceCr ]
             ifNotNil: [ :found |
                 found
                     unload;
