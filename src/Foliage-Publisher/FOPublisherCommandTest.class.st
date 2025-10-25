@@ -53,6 +53,6 @@ FOPublisherCommandTest >> testTargetSetInPublisher [
  	
 	command configure.
 
-	self assert: command publisher targetPath equals: '/taraget'
+	self assert: command publisher targetPath fullName equals: '/taraget'
 	
 ]
