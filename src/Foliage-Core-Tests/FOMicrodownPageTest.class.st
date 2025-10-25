@@ -132,7 +132,9 @@ FOMicrodownPageTest >> testAbstractBuilderVisitor [
 		  amountOfCharacters: 100;
 		  post: aPage.
 	
-	self assert: abstract equals:  'We hang out on Discord (Invitation at https://discord.gg/QewZMZa), where we discuss everything fo...You can...link.' 
+	self 
+		assert: abstract 
+		equals: 'We hang out on Discordwhere.You can get an instant invite following this link.'
 ]
 
 { #category : 'running' }
@@ -145,7 +147,9 @@ FOMicrodownPageTest >> testAbstractBuilderVisitorSmallerAbstractThanText [
 		  amountOfCharacters: 100;
 		  post: aPage.
 	
-	self assert: abstract equals:  'We hang out on Discord (Invitation at https://discord.gg/QewZMZa), where we discuss everything fo...You can...link.' 
+	self 
+		assert: abstract 
+		equals: 'We hang out on Discordwhere.You can get an instant invite following this link.' 
 ]
 
 { #category : 'running' }
@@ -158,7 +162,9 @@ FOMicrodownPageTest >> testAbstractBuilderVisitorSmallerTextThanAbstract [
 		  amountOfCharacters: 400;
 		  post: aPage.
 	
-	self assert: abstract equals: 'We hang out on Discord (Invitation at https://discord.gg/QewZMZa), where we discuss everything for Pharo users and developers.You can get an instant invite following this link.' 
+	self 
+		assert: abstract 
+		equals: 'We hang out on Discordwhere.You can get an instant invite following this link.'  
 ]
 
 { #category : 'running' }
@@ -166,7 +172,9 @@ FOMicrodownPageTest >> testBasicAbstractOnMicrodownPage [
 
 	| aPage |
 	aPage := (FOMicrodownV2Reader file: root / 'community.md') createModelEntity.
-	self assert: aPage abstract equals: 'Community & help Discord team We hang out on Discord \(Invitation at [https://discord.gg/QewZMZa](https://discord.gg/QewZMZa)\), where we discuss everything for Pharo users and developers. You can get an instant invite following this [link](https://discord.gg/QewZMZa).'
+	self 
+		assert: aPage abstract  
+		equals: 'Community & help Discord team We hang out on Discordwhere. You can get an instant invite following this [link](https://discord.gg/QewZMZa).'
 ]
 
 { #category : 'running' }

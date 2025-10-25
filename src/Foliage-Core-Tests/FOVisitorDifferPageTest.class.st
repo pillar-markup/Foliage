@@ -188,7 +188,7 @@ FOVisitorDifferPageTest >> testBold [
 		assert: (String streamContents: [ :s |
 					 (FOMicrodownV2Reader file: root / 'test-text-bold.md')
 						 createModelEntity renderOn: s ])
-		equals: self lineEnding , '<strong>Bold</strong>'
+		equals: self lineEnding , '<p><strong>Bold</strong></p>', self lineEnding 
 ]
 
 { #category : 'tests' }
@@ -199,7 +199,7 @@ FOVisitorDifferPageTest >> testCode [
 					 (FOMicrodownV2Reader file: root / 'test-code.md')
 						 createModelEntity renderOn: s ])
 		equals:
-			self lineEnding , 'Here is some code' , self lineEnding
+			self lineEnding , '<p>Here is some code</p>' , self lineEnding,  self lineEnding
 			, '<pre><code>   1000 factorial / 999 factorial</code></pre>'
 			, self lineEnding
 ]
@@ -214,7 +214,7 @@ FOVisitorDifferPageTest >> testFigure [
 		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
 		equals: self lineEnding
 			,
-			'Here is a figure: <figure><img src="/media/logo/logo.png" alt="Pharologo"><figcaption>Pharologo</figcaption></img></figure>'
+			'<p>Here is a figure: <figure><img src="/media/logo/logo.png" alt="Pharologo"><figcaption>Pharologo</figcaption></img></figure></p>', self lineEnding
 ]
 
 { #category : 'tests' }
@@ -224,7 +224,7 @@ FOVisitorDifferPageTest >> testItalic [
 		assert: (String streamContents: [ :s |
 					 (FOMicrodownV2Reader file: root / 'test-text-italic.md')
 						 createModelEntity renderOn: s ])
-		equals: self lineEnding , '<i>italic</i>'
+		equals: self lineEnding , '<p><i>italic</i></p>', self lineEnding
 ]
 
 { #category : 'tests' }
@@ -235,7 +235,7 @@ FOVisitorDifferPageTest >> testLink [
 					 (FOMicrodownV2Reader file: root / 'test-link.md')
 						 createModelEntity renderOn: s ])
 		equals: self lineEnding
-			, '<a target="_blank" href="http://pharo.org/">Pharo</a>.'
+			, '<p><a target="_blank" href="http://pharo.org/">Pharo</a>.</p>', self lineEnding
 ]
 
 { #category : 'tests' }
@@ -245,7 +245,7 @@ FOVisitorDifferPageTest >> testList [
 		assert: (String streamContents: [ :s |
 					 (FOMicrodownV2Reader file: root / 'test-list.md')
 						 createModelEntity renderOn: s ])
-		equals: self lineEnding , 'Here is a list:' , self lineEnding , '<ul>' , self lineEnding , '<li>item 1' , self lineEnding , '<ol>' , self lineEnding , '<li>sub item 1</li>'
+		equals: self lineEnding , '<p>Here is a list:</p>' , self lineEnding , self lineEnding , '<ul>' , self lineEnding , '<li>item 1' , self lineEnding , '<ol>' , self lineEnding , '<li>sub item 1</li>'
 			, self lineEnding
 			, '<li>sub item 2</li>' , self lineEnding , '</ol></li>' , self lineEnding , '<li>item 2</li>' , self lineEnding , '</ul>'
 ]
@@ -257,7 +257,7 @@ FOVisitorDifferPageTest >> testMonospace [
 		assert: (String streamContents: [ :s |
 					 (FOMicrodownV2Reader file: root / 'test-text-monospace.md')
 						 createModelEntity renderOn: s ])
-		equals: self lineEnding , '<code>monospace</code>'
+		equals: self lineEnding , '<p><code>monospace</code></p>', self lineEnding 
 ]
 
 { #category : 'tests' }
@@ -267,7 +267,7 @@ FOVisitorDifferPageTest >> testOrderedList [
 		assert: (String streamContents: [ :s |
 					 (FOMicrodownV2Reader file: root / 'test-list-ordered.md')
 						 createModelEntity renderOn: s ])
-		equals: self lineEnding , 'Here is a list:' , self lineEnding , '<ol>' , self lineEnding , '<li>item 1</li>' , self lineEnding , '<li>item 2</li>' , self lineEnding , '<li>item 3</li>' , self lineEnding , '</ol>'
+		equals: self lineEnding , '<p>Here is a list:</p>' , self lineEnding , self lineEnding , '<ol>' , self lineEnding , '<li>item 1</li>' , self lineEnding , '<li>item 2</li>' , self lineEnding , '<li>item 3</li>' , self lineEnding , '</ol>'
 ]
 
 { #category : 'tests' }
@@ -282,10 +282,10 @@ FOVisitorDifferPageTest >> testRenderOn [
 			, self lineEnding
 			, '<h2>Discord team</h2>' , self lineEnding
 			,
-			'We hang out on Discord (Invitation at <a target="_blank" href="https://discord.gg/QewZMZa"><a target="_blank" href="https://discord.gg/QewZMZa">https://discord.gg/QewZMZa</a></a>), where we discuss everything for Pharo users and developers.'
+			'<p>We hang out on Discord (Invitation at <a target="_blank" href="https://discord.gg/QewZMZa"><a target="_blank" href="https://discord.gg/QewZMZa">https://discord.gg/QewZMZa</a></a>), where we discuss everything for Pharo users and developers.</p>'
 			, self lineEnding
-			,
-			'You can get an instant invite following this <a target="_blank" href="https://discord.gg/QewZMZa">link</a>.'
+			, self lineEnding, 
+			'<p>You can get an instant invite following this <a target="_blank" href="https://discord.gg/QewZMZa">link</a>.</p>', self lineEnding
 ]
 
 { #category : 'tests' }
@@ -310,5 +310,5 @@ FOVisitorDifferPageTest >> testUnorderedList [
 
 	self
 		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
-		equals: self lineEnding , 'Here is a list:' , self lineEnding , '<ul>' , self lineEnding , '<li>item 1</li>' , self lineEnding , '<li>item 2</li>' , self lineEnding , '<li>item 3</li>' , self lineEnding , '</ul>'
+		equals: self lineEnding , '<p>Here is a list:</p>' , self lineEnding, self lineEnding , '<ul>' , self lineEnding , '<li>item 1</li>' , self lineEnding , '<li>item 2</li>' , self lineEnding , '<li>item 3</li>' , self lineEnding , '</ul>'
 ]
