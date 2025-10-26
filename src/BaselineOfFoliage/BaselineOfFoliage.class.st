@@ -33,8 +33,8 @@ BaselineOfFoliage >> baseline: spec [
 				spec requires: #('Foliage-Core') ];
 			package: 'Foliage-Server' with: [
 				spec requires: #('Foliage-Core') ];
-			package: 'Foliage-Feed' with: [
-				spec requires: #( 'Soup' 'Foliage-Core') ];
+			"package: 'Foliage-Feed' with: [
+				spec requires: #( 'Soup' 'Foliage-Core') ];"
 			package: 'Foliage-Core-Tests' with: [
 				spec requires: #('Foliage-Core') ];
 			package: 'Foliage-Bib' with: [ spec requires: #('Citezen' 'Core')].
@@ -42,8 +42,9 @@ BaselineOfFoliage >> baseline: spec [
 			group: 'Core' with: #('Foliage-Core' 'Foliage-Publisher');
 			group: 'Publisher' with: #('Core' 'Foliage-Publisher');
 			group: 'Tests' with: #('Foliage-Core-Tests' );
-			group: 'default' with: #('Core' 'Foliage-Feed' 'Foliage-Bib' 'Publisher' 'Tests');
-			group: 'development' with: #('Core' 'Tests' 'Publisher' 'Foliage-Feed' 'ZincHTTPComponents') ]
+			"group: 'default' with: #('Core' 'Foliage-Feed' 'Foliage-Bib' 'Publisher' 'Tests');"
+			group: 'default' with: #('Core' 'Foliage-Bib' 'Publisher' 'Tests');
+			group: 'development' with: #('Core' 'Tests' 'Publisher' 'ZincHTTPComponents') ]
 
 ]
 
