@@ -10,7 +10,7 @@ Class {
 
 { #category : 'accessing' }
 FOPublisherCommand class >> commandSpecification [
-
+	<commandline>
 	^(ClapCommandSpec id: 'publish')
 				description: 'Publish foliage project';
 				addHelp ;
