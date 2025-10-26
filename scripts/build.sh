@@ -31,6 +31,9 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 __builddir="$(pwd)/build"
 PHARO_VERSION="${PHARO_VERSION:-130}"
 
+#Was changed by luc logic
+PHARO="./pharo Pharo.image --no-default-preferences"
+
 rm -rf "${__builddir}" && mkdir -p "${__builddir}" && cd "${__builddir}"
 
 # I reverted luc changes because it breaks on my machine - no pharo anymore. 
@@ -44,8 +47,7 @@ wget -O - get.pharo.org/64/${PHARO_VERSION}+vm | bash
 #  echo "pharo not found in PATH"
 #  PHARO_VM_BIN="./pharo"
 #fi
-
-PHARO="$PHARO_VM_BIN Pharo.image --no-default-preferences"
+# PHARO="$PHARO_VM_BIN Pharo.image --no-default-preferences"
 
 REPOSITORY_PATH=${__dir}/../src
 OS=$(get_platform_identifier)
