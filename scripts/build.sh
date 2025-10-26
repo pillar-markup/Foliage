@@ -64,5 +64,5 @@ ${PHARO} eval --save "PharoFilesOpener default unsetInformAboutReadOnlyChanges."
 ${PHARO} eval --save "Smalltalk logFileName: '/tmp/FoliageApp.log'"
 
 cp "${__dir}/wrappers/"* "${__builddir}"
-chmod +x "${__builddir}"/foliage
-chmod +x "${__builddir}"/foliage-db
+chmod +x "${__builddir}"/foliage.sh
+chmod +x "${__builddir}"/foliage-db.sh
