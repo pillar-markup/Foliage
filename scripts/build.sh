@@ -61,9 +61,8 @@ ${PHARO} eval --save "StartupPreferencesLoader allowStartupScript: false."
 
 # UserManager 
 ${PHARO} eval --save "PharoFilesOpener default unsetInformAboutReadOnlyChanges."
-${PHARO} eval --save "Smalltalk logFileName: '/tmp/pillarApp.log'"
+${PHARO} eval --save "Smalltalk logFileName: '/tmp/FoliageApp.log'"
 
 cp "${__dir}/wrappers/"* "${__builddir}"
-chmod +x "${__builddir}"/pillar
-chmod +x "${__builddir}"/pillar-db
-cp -r "${__dir}/../archetypes" "${__builddir}/archetypes"
+chmod +x "${__builddir}"/foliage
+chmod +x "${__builddir}"/foliage-db
