@@ -26,7 +26,9 @@ jobs:
       - uses: actions/upload-artifact@v5
         with:
           name: foliage-runtime
-          path: build/**
+          path: |
+                build/Pharo.image 
+                build/Pharo.changes
           retention-days: 5
 
   publish:
