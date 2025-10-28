@@ -9,7 +9,15 @@ As a model I store
 
 This is on the subclasses of `FOWebResource` that a publisher visitor will create the concrete website.
 
+Here is a way to get a live site
 
+```
+FOWebSite new 
+	baseUri: 'http://pharo.org';
+	rawPath: '/Users/ducasse/Test2/pharo-website/site';
+	templatePath: '/Users/ducasse/Test2/pharo-website/site' asFileReference / 'templates'; 
+	importFiles
+```
 "
 Class {
 	#name : 'FOWebSite',
