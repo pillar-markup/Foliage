@@ -42,7 +42,7 @@ jobs:
         uses: actions/download-artifact@v5
       
       - name: Display structure of downloaded files
-        run: ls -R artifacts      
+        run: ls -R
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
