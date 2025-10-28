@@ -19,17 +19,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
-	  
       - name: Build Foliage
         run: ./foliage/scripts/build.sh
-
       - name: Execute Foliage
         run: ./build/foliage --source site --target generated
-
       - uses: actions/upload-artifact@v5
         with:
           name: foliage-generated
           path: generated
           retention-days: 5
-		  
-		 
