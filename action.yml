@@ -18,6 +18,7 @@ runs:
     - uses: demarey/pharo-setup-gha@main
       with:
         version: "13"
+        skipImageDownload: "true"
 
     - name: Prepare Foliage image
       run: |
