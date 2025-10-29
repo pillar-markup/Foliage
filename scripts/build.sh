@@ -36,7 +36,7 @@ rm -rf "${__builddir}" && mkdir -p "${__builddir}" && cd "${__builddir}"
 wget -O - get.pharo.org/64/${PHARO_VERSION}+vm | bash
 mv ./pharo ./pharoForFoliage
 mv ./pharo-ui ./pharoForFoliage-ui
-PHARO_VM_BIN="./pharoForPillar"
+PHARO_VM_BIN="./pharoForFoliage"
 PHARO="$PHARO_VM_BIN Pharo.image --no-default-preferences"
 
 
