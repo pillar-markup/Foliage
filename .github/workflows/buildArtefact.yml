@@ -43,6 +43,11 @@ jobs:
       
       - name: Display structure of downloaded files
         run: ls -R
+      
+      - name: Zip foliage image
+        run: zip -q -9 foliage.zip *.image *.changes
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
+        with:
+          files: foliage.zip
