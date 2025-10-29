@@ -1,4 +1,4 @@
-name: Build Foliage Artefact
+name: Build Foliage Image
 
 # Controls when the workflow will run
 on:
