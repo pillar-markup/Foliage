@@ -1,0 +1,40 @@
+name: "foliage"
+description: "Build a static web site from microdown files using Foliage"
+
+inputs:
+  source:
+    description: "The directory containing web site sources"
+    required: true
+  target:
+    description: "The directory where to generate the web site"
+    default: "generated"
+  retention-days:
+    description: "Duration after which artifact will expire in days. 0 means using default retention."
+    default: 0
+
+runs:
+  using: "composite"
+  steps:
+    - uses: demarey/pharo-setup-gha@main
+      with:
+        version: "13"
+        skipImageDownload: "true"
+
+    - name: Prepare Foliage image
+      run: |
+        echo "Downloading Foliage image"
+        curl -L https://github.com/pillar-markup/Foliage/releases/latest/download/foliage.zip -o foliage-runtime.zip
+        unzip -q foliage-runtime.zip -d .
+        rm -f foliage-runtime.zip
+      shell: bash
+
+    - name: Generate web site
+      run: |
+        $PHARO --headless Pharo.image --no-default-preferences clap publish --source ${{ inputs.source }} --target ${{ inputs.target }}
+      shell: bash
+
+    - uses: actions/upload-artifact@v5
+      with:
+        name: foliage-generated
+        path: ${{ inputs.target }}
+        retention-days: ${{ inputs.retention-days }}
