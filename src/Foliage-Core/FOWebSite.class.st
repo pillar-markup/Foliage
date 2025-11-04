@@ -366,3 +366,8 @@ FOWebSite >> webRootPrefix [
 
 	^ webRootPrefix
 ]
+
+FOWebSite >> webRootPrefix: aString [
+
+	webRootPrefix := aString
+]
