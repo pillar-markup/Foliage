@@ -23,6 +23,7 @@ Class {
 	#name : 'FOWebSite',
 	#superclass : 'Object',
 	#instVars : [
+		'webRootPrefix',
 		'baseUri',
 		'blogs',
 		'targetPath',
@@ -190,9 +191,9 @@ FOWebSite >> handlePlugins [
 ]
 
 { #category : 'building' }
-FOWebSite >> importDirectory: path [ 
-	self importer
-		readAll: path allFiles
+FOWebSite >> importDirectory: path [
+	"Populate the site by creating a model for each of the file of path"
+	self importer readAll: path allFiles
 ]
 
 { #category : 'building' }
@@ -358,4 +359,10 @@ FOWebSite >> templatePathForLayout: aString [
 { #category : 'helpers' }
 FOWebSite >> templatePathForLayout: aString  partial: partialName [
 	^ self templatePath / partialName
+]
+
+{ #category : 'accessing' }
+FOWebSite >> webRootPrefix [
+
+	^ webRootPrefix
 ]

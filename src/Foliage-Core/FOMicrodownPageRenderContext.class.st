@@ -44,3 +44,9 @@ FOMicrodownPageRenderContext >> title [
 
 	^ self page title
 ]
+
+{ #category : 'accessing' }
+FOMicrodownPageRenderContext >> webRootPrefix [
+	
+	^ website webRootPrefix
+]

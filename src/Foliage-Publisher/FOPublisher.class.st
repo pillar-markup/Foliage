@@ -73,7 +73,8 @@ Class {
 		'sourcePath',
 		'templatePath',
 		'blogs',
-		'site'
+		'site',
+		'webRootPrefix'
 	],
 	#category : 'Foliage-Publisher',
 	#package : 'Foliage-Publisher'
@@ -219,6 +220,7 @@ FOPublisher >> newWebSite [
 		  baseUri: self baseUri;
 		  targetPath: self targetPath;
 		  rawPath: self sourcePath;
+			webRootPrefix: self webRootPrefix; 
 		  templatePath: self sourcePath asFileReference / self templatePath asString
 ]
 
@@ -273,4 +275,16 @@ FOPublisher >> templatePath [
 FOPublisher >> templatePath: aString [
 
 	templatePath := aString
+]
+
+{ #category : 'accessing' }
+FOPublisher >> webRootPrefix [
+
+	^ webRootPrefix ifNil: [ '' ]
+]
+
+{ #category : 'accessing' }
+FOPublisher >> webRootPrefix: anObject [
+
+	webRootPrefix := anObject
 ]
