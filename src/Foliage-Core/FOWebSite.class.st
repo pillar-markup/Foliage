@@ -155,11 +155,12 @@ FOWebSite >> configureBlogs [
 
 { #category : 'importing' }
 FOWebSite >> configureFromConfigFile [
+	"clearly there is something fishy about the current configuration management."
 	
 	| instance |
 	instance := self readConfigFile: (self rawPath asFileReference / 'FoliageConfig.ston').
 	self baseUri: instance baseUri.
-		
+	self webRootPrefix: instance webRootPrefix.
 	self blogSpecs: instance blogs.
 	self configureBlogs.
 ]
@@ -367,6 +368,7 @@ FOWebSite >> webRootPrefix [
 	^ webRootPrefix
 ]
 
+{ #category : 'as yet unclassified' }
 FOWebSite >> webRootPrefix: aString [
 
 	webRootPrefix := aString
