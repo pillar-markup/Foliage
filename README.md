@@ -5,7 +5,13 @@ It is used to generate for example
 - https://www.pharo.org
 - https://stephaneducasse.github.io
 
-### Loading 
+### User Get Started 
+
+Have a look at https://github.com/Pillar-Markup/FoliageSample for a working example with automatic publication on push. 
+The resulting site is available at https://pillar-markup.github.io/FoliageSample
+
+
+### For Dev: Loading 
 
 To load it in Pharo 13 change the following expression to point to the latest tag.
 
@@ -17,13 +23,6 @@ Metacello new
 	onUpgrade: [ :ex | ex useIncoming ];
 	load.
 ```
-
-### Get Started 
-
-- Check the doc folder.
-- Have a look at https//www.github.com/Pillar-markup/FoliageSample. It is simple example of a little but not trivial web site with automatic publication list generation. 
-
-
 
 ### To generate the Pharo website
 
@@ -39,10 +38,6 @@ p baseUri: 'http://pharo.org'.
 p sourcePath: '/Users/ducasse/Test2/pharo-website/site'.
 p publish
 ```
-
-
-
-
 
 ## Foliage 1.0 instructions
 
