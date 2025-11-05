@@ -62,7 +62,8 @@ FOHTMLPage >> htmlString [
 
 { #category : 'instance creation' }
 FOHTMLPage >> newRenderContext [
-
+	"In addition, just pass the page to the rendering context"
+	
 	^ super newRenderContext page: self 
 ]
 
