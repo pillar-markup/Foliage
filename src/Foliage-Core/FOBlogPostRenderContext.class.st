@@ -20,8 +20,10 @@ FOBlogPostRenderContext >> nextPost [
 
 { #category : 'accessing' }
 FOBlogPostRenderContext >> pathString [
-
-	^ website webRootPrefix , page pathString
+	
+	"	(website webRootPrefix , page pathString) traceCr.
+	^ website webRootPrefix , page pathString"
+	^ page pathString
 ]
 
 { #category : 'accessing' }

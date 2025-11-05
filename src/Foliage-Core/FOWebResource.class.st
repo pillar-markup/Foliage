@@ -103,7 +103,10 @@ FOWebResource >> path [
 
 { #category : 'accessing' }
 FOWebResource >> pathString [
-	^ (self path withExtension: #html) pathString
+	
+	^ self website webRootPrefix, (self path withExtension: #html) pathString
+		
+	"^ (self path withExtension: #html) pathString"
 ]
 
 { #category : 'accessing' }
