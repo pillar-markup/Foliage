@@ -364,12 +364,12 @@ FOWebSite >> templatePathForLayout: aString  partial: partialName [
 
 { #category : 'accessing' }
 FOWebSite >> webRootPrefix [
-
+	
 	^ webRootPrefix
 ]
 
 { #category : 'as yet unclassified' }
 FOWebSite >> webRootPrefix: aString [
-
+	
 	webRootPrefix := aString
 ]

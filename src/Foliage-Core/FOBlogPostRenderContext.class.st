@@ -21,7 +21,7 @@ FOBlogPostRenderContext >> nextPost [
 { #category : 'accessing' }
 FOBlogPostRenderContext >> pathString [
 
-	^ page pathString
+	^ website webRootPrefix , page pathString
 ]
 
 { #category : 'accessing' }
