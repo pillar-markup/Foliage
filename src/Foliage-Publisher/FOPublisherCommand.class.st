@@ -1,3 +1,10 @@
+"
+Here is an example of how to use me in Pharo 13. 
+
+```
+/Users/ducasse/Documents/Pharo/vms/130-x64/Pharo.app/Contents/MacOS/Pharo /Users/ducasse/Documents/Pharo/images/P13-Foliage-3/P13-Foliage-3.image clap publish --source /Users/ducasse/Test2/ESUGWeb20/site --target /Users/ducasse/Test2/ESUGWeb20/generated
+```
+"
 Class {
 	#name : 'FOPublisherCommand',
 	#superclass : 'ClapApplication',
