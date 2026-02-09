@@ -116,5 +116,7 @@ FOMicrodownPage >> renderOn: aStream [
 
 { #category : 'accessing' }
 FOMicrodownPage >> template [
+	"Returns the template for the layout as available in for example .../templates/index or templates/blog"
+	
 	^ (self website templatePathForLayout: self layout) asMustacheTemplate.
 ]
