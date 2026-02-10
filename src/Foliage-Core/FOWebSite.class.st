@@ -219,6 +219,7 @@ FOWebSite >> initialize [
 	root := self buildRoot.
 	
 	rawPath := '' asFileReference.
+	webRootPrefix := ''.
 	self registerPlugins.
 ]
 
@@ -368,7 +369,7 @@ FOWebSite >> webRootPrefix [
 	^ webRootPrefix
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 FOWebSite >> webRootPrefix: aString [
 	
 	webRootPrefix := aString
