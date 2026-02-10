@@ -22,24 +22,31 @@ FOSimplePublisherTest >> testBasic2 [
 
 { #category : 'tests' }
 FOSimplePublisherTest >> testConfigurateWebSite [
-	
+
 	| publisher ws |
 	publisher := FOPublisher new
-		baseUri: 'http://pharo.org';
-		targetPath: '/home/ducasse/Test2/foliage/output';
-		sourcePath: '/home/ducasse/Test2/foliage/test/'.
-	self assert: publisher sourcePath fullName equals: '/home/ducasse/Test2/foliage/test'.		
-	self assert: publisher targetPath fullName equals: '/home/ducasse/Test2/foliage/output'.	
-	self assert: publisher templatePath equals: 'templates'.	
-		
+		             baseUri: 'http://pharo.org';
+		             targetPath: '/home/ducasse/Test2/foliage/output';
+		             sourcePath: '/home/ducasse/Test2/foliage/test/'.
+	self
+		assert: publisher sourcePath fullName
+		equals: '/home/ducasse/Test2/foliage/test'.
+	self
+		assert: publisher targetPath fullName
+		equals: '/home/ducasse/Test2/foliage/output'.
+	self assert: publisher templatePath equals: 'templates'.
+
 	ws := publisher newWebSite.
 	self assert: ws baseUri equals: 'http://pharo.org'.
-	self assert: ws targetPath fullName equals: '/home/ducasse/Test2/foliage/output'.
-	self assert: ws rawPath fullName equals: '/home/ducasse/Test2/foliage/test'.
-	self assert: ws templatePath fullName equals: '/home/ducasse/Test2/foliage/test/templates'
-	
-	"this is strange that the publisher is not using directly fileReference and only the website is configured so but let us see."
-	
-	
+	self
+		assert: ws targetPath fullName
+		equals: '/home/ducasse/Test2/foliage/output'.
+	self
+		assert: ws sourcePath fullName
+		equals: '/home/ducasse/Test2/foliage/test'.
+	self
+		assert: ws templatePath fullName
+		equals: '/home/ducasse/Test2/foliage/test/templates'
 
+	"this is strange that the publisher is not using directly fileReference and only the website is configured so but let us see."
 ]

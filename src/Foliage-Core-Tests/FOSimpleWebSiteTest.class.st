@@ -11,7 +11,7 @@ FOSimpleWebSiteTest >> testWebsiteHasARawPathWellInitialized [
 
 	| w |
 	w := FOWebSite new.
-	self assert: w rawPath class equals: FileReference
+	self assert: w sourcePath class equals: FileReference
 ]
 
 { #category : 'tests' }

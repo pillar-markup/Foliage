@@ -91,9 +91,10 @@ FOPublicationListBuilder >> authorQuery [
 { #category : 'files' }
 FOPublicationListBuilder >> bibFilename: aStringDotBib [
 	"Parser and set the bib file."
-	
+
 	"self onStream: ((webSite root / aStringDotBib) sourcePath asFileReference) readStream"
-	self onStream: (webSite rawPath / aStringDotBib) readStream
+
+	self onStream: (webSite sourcePath / aStringDotBib) readStream
 ]
 
 { #category : 'accessing' }

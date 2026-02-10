@@ -219,9 +219,10 @@ FOPublisher >> newWebSite [
 	^ FOWebSite new
 		  baseUri: self baseUri;
 		  targetPath: self targetPath;
-		  rawPath: self sourcePath;
-			webRootPrefix: self webRootPrefix; 
-		  templatePath: self sourcePath asFileReference / self templatePath asString
+		  sourcePath: self sourcePath;
+		  webRootPrefix: self webRootPrefix;
+		  templatePath:
+			  self sourcePath asFileReference / self templatePath asString
 ]
 
 { #category : 'actions' }

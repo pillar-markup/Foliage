@@ -48,29 +48,33 @@ FOPublicationPageTest >> publicationPageName [
 FOPublicationPageTest >> testPluginDeclaration [
 
 	| fileWithPlugin |
-	site rawPath: root.
-	fileWithPlugin := (site / self publicationPageName).
+	site sourcePath: root.
+	fileWithPlugin := site / self publicationPageName.
 	self assert: fileWithPlugin hasPlugin.
 	self assert: fileWithPlugin pluginKind equals: 'publicationList'.
 	self assert: fileWithPlugin pluginSpec class equals: Dictionary.
-	self assert: (fileWithPlugin pluginSpec at: #authorMatchingString) equals: 'Ducasse'.
-	self assert: (fileWithPlugin pluginSpec at: #bibFilename) equals: 'rmod.bib'
-	
+	self
+		assert: (fileWithPlugin pluginSpec at: #authorMatchingString)
+		equals: 'Ducasse'.
+	self
+		assert: (fileWithPlugin pluginSpec at: #bibFilename)
+		equals: 'rmod.bib'
 ]
 
 { #category : 'tests - declaration' }
 FOPublicationPageTest >> testPluginHandler [
 
 	| fileWithPlugin handler sections |
-	site rawPath: root.
+	site sourcePath: root.
 	fileWithPlugin := site / self publicationPageName.
 	handler := site
-		pluginHandle: fileWithPlugin plugin
-		for: fileWithPlugin.
+		           pluginHandle: fileWithPlugin plugin
+		           for: fileWithPlugin.
 	sections := handler builder sections.
 	self assert: sections size equals: 4.
-	self assert: sections first title equals: 'Refereed Articles in International Journals'.
+	self
+		assert: sections first title
+		equals: 'Refereed Articles in International Journals'.
 	self assert: sections first items size equals: 2.
-	self assert: sections first items first key equals: #Saren24a.
-	
+	self assert: sections first items first key equals: #Saren24a
 ]

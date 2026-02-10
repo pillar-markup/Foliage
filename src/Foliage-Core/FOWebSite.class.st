@@ -28,12 +28,12 @@ Class {
 		'blogs',
 		'targetPath',
 		'templatePath',
-		'rawPath',
 		'model',
 		'root',
 		'properties',
 		'blogSpecs',
-		'plugins'
+		'plugins',
+		'sourcePath'
 	],
 	#classInstVars : [
 		'instance'
@@ -218,7 +218,7 @@ FOWebSite >> initialize [
 	blogSpecs := OrderedCollection new. 
 	root := self buildRoot.
 	
-	rawPath := '' asFileReference.
+	sourcePath := '' asFileReference.
 	webRootPrefix := ''.
 	self registerPlugins.
 ]
@@ -272,14 +272,15 @@ FOWebSite >> publish [
 
 { #category : 'accessing' }
 FOWebSite >> rawPath [
-	^ rawPath 
+	self deprecated: '' transformWith: '`@receiver rawPath' -> '`@receiver sourcePath'.
+	^ sourcePath 
 ]
 
 { #category : 'accessing' }
 FOWebSite >> rawPath: anObject [
 	"To define a physical file reference"
-	
-	rawPath := anObject asFileReference 
+	self deprecated: '' transformWith: '`@receiver rawPath: `@arg' -> '`@receiver sourcePath: `@arg'.
+	sourcePath := anObject asFileReference 
 ]
 
 { #category : 'importing' }
@@ -312,7 +313,8 @@ FOWebSite >> registerPlugins [
 
 { #category : 'helpers' }
 FOWebSite >> relativeRawPath: aFileReference [
-	^ aFileReference asAbsolute relativeTo: self rawPath asAbsolute 
+
+	^ aFileReference asAbsolute relativeTo: self sourcePath asAbsolute
 ]
 
 { #category : 'navigating' }
@@ -323,6 +325,16 @@ FOWebSite >> resolvePath: aPath [
 { #category : 'accessing' }
 FOWebSite >> root [
 	^ root
+]
+
+{ #category : 'accessing' }
+FOWebSite >> sourcePath [
+	^ sourcePath
+]
+
+{ #category : 'accessing' }
+FOWebSite >> sourcePath: aString [ 
+	sourcePath := aString
 ]
 
 { #category : 'accessing' }
