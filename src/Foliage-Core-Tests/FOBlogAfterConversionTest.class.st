@@ -18,7 +18,7 @@ FOBlogAfterConversionTest >> setUp [
 		or better 
 		blog := site buildBlog: 'success
 		It should call convertToBlog + build overview"
-
+		site webRootPrefix: ''.
 		blog := (site / 'success') convertToBlog.
 		blog title: 'Super success'.
 		"	blog at: #'index.html' put: blog overviewPage."
