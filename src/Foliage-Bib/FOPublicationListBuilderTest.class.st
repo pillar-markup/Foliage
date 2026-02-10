@@ -128,9 +128,8 @@ FOPublicationListBuilderTest >> setUp [
 		ensureCreateFile;
 		writeStreamDo: [ :s | s << self contents ].
 	builder := FOPublicationListBuilder new.
-	builder webSite: FOWebSite new.
-	self flag: #RevisieWorkingDirectory.
-	builder fileNamed: filesystem / 'rmod.bib'.
+	builder webSite: (FOWebSite new fileSystem: filesystem).
+	builder fileNamed: 'rmod.bib'.
 ]
 
 { #category : 'tests - sections' }

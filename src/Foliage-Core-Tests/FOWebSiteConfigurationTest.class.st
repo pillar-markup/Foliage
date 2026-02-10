@@ -55,8 +55,8 @@ FOWebSiteConfigurationTest >> foliageStonContents [
 FOWebSiteConfigurationTest >> setUp [ 
 
 	super setUp.
-	(root / 'home'/'Test2'/'foliage'/'test') ensureCreateDirectory.
-	root / 'home'/'Test2'/'foliage'/'test' / 'FoliageConfig.ston'
+	(fileSystem / 'home'/'Test2'/'foliage'/'test') ensureCreateDirectory.
+	fileSystem / 'home'/'Test2'/'foliage'/'test' / 'FoliageConfig.ston'
 		writeStreamDo: [ :st | st nextPutAll: self foliageStonContents ].
 ]
 
@@ -77,6 +77,23 @@ FOWebSiteConfigurationTest >> testUninitializedWebSite [
 		
 	self flag: #todo. 
 	"use fileReference instead of string"
+	self 
+		assert: ws sourcePath 
+		equals: '/home/Test2/foliage/test/'.		
+	self 
+		assert: ws targetPath fullName 
+		equals: '/home/Test2/foliage/output'.	
+]
+
+{ #category : 'tests' }
+FOWebSiteConfigurationTest >> testWithFileSystemUninitializedWebSite [
+	
+	| ws |
+	ws := FOWebSite new.
+	ws fileSystem: fileSystem.
+	ws	targetPath: '/home/Test2/foliage/output'.
+	ws	sourcePath: '/home/Test2/foliage/test/'.
+		
 	self 
 		assert: ws sourcePath 
 		equals: '/home/Test2/foliage/test/'.		

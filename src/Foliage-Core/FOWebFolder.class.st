@@ -49,7 +49,8 @@ FOWebFolder >> emitSelectors [
 
 { #category : 'tools' }
 FOWebFolder >> gtInspectorItemsIn: composite [
-	<gtInspectorPresentationOrder: 0>
+	<gtInspectorPresentationOrder: 0 builder: ''>
+	
 	^ composite fastTable 
 		title: 'Items';
 		display: [ 

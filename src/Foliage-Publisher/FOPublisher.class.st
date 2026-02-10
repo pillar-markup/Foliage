@@ -218,7 +218,7 @@ FOPublisher >> newWebSite [
 
 	^ FOWebSite new
 		  baseUri: self baseUri;
-		  targetPath: self targetPath;
+		  targetPath: self targetPath fullName;
 		  sourcePath: self sourcePath;
 		  webRootPrefix: self webRootPrefix;
 		  templatePath:

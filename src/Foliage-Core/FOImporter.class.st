@@ -52,11 +52,12 @@ FOImporter >> readFile: file path: aPath [
 	The model is stored in the site root."
 	
 	|  model |
-	[ (self readerForExtension: file extension) ifNotNil: [ :reader | 
-		model := (reader file: file) createModelEntity.
+	[ (self readerForExtension: file extension)
+		 ifNotNil: [ :reader | model := (reader file: file) createModelEntity.
 		
 		"Set the parent (which is used to compute the root) 
 		of the model based on the tree structure."
+
 		(website resolvePath: aPath parent)
 			at: aPath basename
 			put: model ] ]

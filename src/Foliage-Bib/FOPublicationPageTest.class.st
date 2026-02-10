@@ -48,7 +48,7 @@ FOPublicationPageTest >> publicationPageName [
 FOPublicationPageTest >> testPluginDeclaration [
 
 	| fileWithPlugin |
-	site sourcePath: root.
+	self halt.
 	fileWithPlugin := site / self publicationPageName.
 	self assert: fileWithPlugin hasPlugin.
 	self assert: fileWithPlugin pluginKind equals: 'publicationList'.
@@ -65,7 +65,6 @@ FOPublicationPageTest >> testPluginDeclaration [
 FOPublicationPageTest >> testPluginHandler [
 
 	| fileWithPlugin handler sections |
-	site sourcePath: root.
 	fileWithPlugin := site / self publicationPageName.
 	handler := site
 		           pluginHandle: fileWithPlugin plugin

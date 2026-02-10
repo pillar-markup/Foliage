@@ -33,7 +33,8 @@ Class {
 		'properties',
 		'blogSpecs',
 		'plugins',
-		'sourcePath'
+		'sourcePath',
+		'fileSystem'
 	],
 	#classInstVars : [
 		'instance'
@@ -167,13 +168,32 @@ FOWebSite >> configureFromConfigFile [
 ]
 
 { #category : 'defaults' }
+FOWebSite >> defaultSourcePath [
+
+	^ 'site'
+]
+
+{ #category : 'defaults' }
 FOWebSite >> defaultTargetPath [
-	^ 'docs'
+	^ 'generated'
 ]
 
 { #category : 'defaults' }
 FOWebSite >> defaultTemplatePath [ 
 	^ 'templates'
+]
+
+{ #category : 'accessing' }
+FOWebSite >> fileSystem [
+
+	^ fileSystem
+]
+
+{ #category : 'accessing' }
+FOWebSite >> fileSystem: aFileSystem [
+
+	fileSystem := aFileSystem.
+	self initializePaths.
 ]
 
 { #category : 'importing' }
@@ -219,10 +239,17 @@ FOWebSite >> initialize [
 	properties := Dictionary new.
 	blogSpecs := OrderedCollection new. 
 	root := self buildRoot.
-	
-	sourcePath := '' asFileReference.
+	self fileSystem: FileSystem disk.
 	webRootPrefix := ''.
 	self registerPlugins.
+]
+
+{ #category : 'initialization' }
+FOWebSite >> initializePaths [
+
+	self sourcePath: self defaultSourcePath.
+	self targetPath: self defaultTargetPath.
+	self templatePath: self defaultTemplatePath.
 ]
 
 { #category : 'plugins' }
@@ -315,8 +342,8 @@ FOWebSite >> registerPlugins [
 
 { #category : 'helpers' }
 FOWebSite >> relativeRawPath: aFileReference [
-
-	^ aFileReference asAbsolute relativeTo: self sourcePath asAbsolute
+	
+	^ aFileReference relativeTo: self sourcePath 
 ]
 
 { #category : 'navigating' }
@@ -331,24 +358,29 @@ FOWebSite >> root [
 
 { #category : 'accessing' }
 FOWebSite >> sourcePath [
+
 	^ sourcePath
 ]
 
 { #category : 'accessing' }
-FOWebSite >> sourcePath: aString [ 
-	sourcePath := aString
+FOWebSite >> sourcePath: aString [
+
+	aString isString not ifTrue: [ self error: 'sourcePath: expects a string' ].
+	
+	sourcePath := fileSystem referenceTo: aString
 ]
 
 { #category : 'accessing' }
 FOWebSite >> targetPath [
-	^ targetPath ifNil: [ 
-		targetPath := self defaultTargetPath asFileReference ]
+
+	^ targetPath 
 ]
 
 { #category : 'accessing' }
 FOWebSite >> targetPath: anObject [
 
-	targetPath := anObject asFileReference
+	anObject isString not ifTrue: [ self error: 'targetPath expects a string' ].	
+	targetPath := fileSystem referenceTo: anObject
 ]
 
 { #category : 'accessing' }
@@ -358,13 +390,14 @@ FOWebSite >> targetPathFor: aWebObject [
 
 { #category : 'accessing' }
 FOWebSite >> templatePath [
-	^ templatePath ifNil: [ 
-		templatePath := self defaultTemplatePath asFileReference ]
+	^ templatePath 
 ]
 
 { #category : 'accessing' }
 FOWebSite >> templatePath: anObject [
-	templatePath := anObject asFileReference
+	anObject isString not ifTrue: [ self error: 'templatePath expects a string' ].
+	
+	templatePath := fileSystem referenceTo: anObject
 ]
 
 { #category : 'helpers' }

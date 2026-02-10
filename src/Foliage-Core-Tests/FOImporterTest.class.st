@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'root',
 		'web',
-		'importer'
+		'importer',
+		'filesystem'
 	],
 	#category : 'Foliage-Core-Tests-Importer',
 	#package : 'Foliage-Core-Tests',
@@ -176,22 +177,34 @@ FOImporterTest >> pngFileName [
 FOImporterTest >> setUp [
 
 	super setUp.
-	root := FileSystem memory root.
-	root / self mdOneFileName
+	filesystem := FileSystem memory.
+	root := filesystem root.
+	(root / 'site') ensureCreateDirectory.
+	
+	(root / 'site' / 'siteChild1') ensureCreateDirectory.
+	
+	(root / 'site' / 'siteInChild1' / 'nestedFile.md') ensureCreateFile.
+	
+	(root / 'site' / 'siteInChild1' / 'nestedFile.md')
+		writeStreamDo: [ :st | st nextPutAll: '# Yes nested deep' ].
+		
+	root / 'site' / self mdOneFileName
 		writeStreamDo: [ :st | st nextPutAll: self gsocContentsMD ].
-	root / self mdTwoFileName
+	root / 'site' / self mdTwoFileName
 		writeStreamDo: [ :st | st nextPutAll: self gsocContentsMD2 ].
 	
-	root / self pngFileName
+	root / 'site' / self pngFileName
 		writeStreamDo: [ :st | st nextPutAll: 'This is a PNG' ].
 		
-	(root / 'news') ensureCreateDirectory.
-	root / 'news' / self mdTwoFileName
+	(root / 'site' / 'news') ensureCreateDirectory.
+	root / 'site' / 'news' / self mdTwoFileName
 		writeStreamDo: [ :st | st nextPutAll: self gsocContentsMD2 ]. 
-	root / 'news' / 'gsoc2.md'
+	root / 'site' / 'news' / 'gsoc2.md'
 		writeStreamDo: [ :st | st nextPutAll: self gsocContentsMD2 ]. 
 		
 	web := FOWebSite new baseUri: 'http://pharo.org'.
+	web fileSystem: filesystem.
+	
 	importer := FOImporter new.
 	importer	website: web.	
 	
@@ -200,29 +213,52 @@ FOImporterTest >> setUp [
 { #category : 'tests - blogs' }
 FOImporterTest >> testConvertToBlog [
 	
-	web importer readFile: root /  'news'/ self mdTwoFileName.
-	web importer readFile: root /  'news'/ 'gsoc2.md'.
+	web importer readFile: root / 'site' / 'news'/ self mdTwoFileName.
+	web importer readFile: root / 'site' / 'news'/ 'gsoc2.md'.
 	(web root / 'news' ) convertToBlog.
 	
 	self 
-		assert: ( web root /  'news' / self mdTwoFileName ) class 
+		assert: ( web root / 'news' / self mdTwoFileName ) class 
 		equals: FOMicrodownBlogPost
 		
+]
+
+{ #category : 'running' }
+FOImporterTest >> testDefaultSourcePath [
+	
+	self assert: web fileSystem store class name equals: 'MemoryStore'.
+	self assert: web sourcePath printString equals: 'memory://site'
+]
+
+{ #category : 'running' }
+FOImporterTest >> testDefaultTargetPath [
+	
+	self assert: web fileSystem store class name equals: 'MemoryStore'.
+	self assert: web targetPath printString equals: 'memory://generated'
 ]
 
 { #category : 'tests' }
 FOImporterTest >> testReadFile [
 
-	importer readFile: root / 'gsoc.md'.
+	importer readFile: filesystem / 'site' / 'gsoc.md'.
 	self 
-		assert: ( web root /'gsoc.md' ) class 
+		assert: ( web root / 'gsoc.md' ) class 
+		equals: FOMicrodownPage 
+]
+
+{ #category : 'tests' }
+FOImporterTest >> testReadFileInNestedFolder [
+
+	importer readFile: root / 'site' / 'siteInChild1' / 'nestedFile.md'.
+	self 
+		assert: ( web root / 'siteInChild1' / 'nestedFile.md' ) class 
 		equals: FOMicrodownPage 
 ]
 
 { #category : 'tests' }
 FOImporterTest >> testReadFileMicrodonwContentsIsParsed [
 	
-	importer readFile: root / 'gsoc.md'.
+	importer readFile: root / 'site' / 'gsoc.md'.
 	self assert: ( web root / 'gsoc.md') document class equals: MicRootBlock
 	
 	
@@ -231,15 +267,23 @@ FOImporterTest >> testReadFileMicrodonwContentsIsParsed [
 { #category : 'tests' }
 FOImporterTest >> testReadFilePngKeepsJustARef [
 	
-	importer readFile: root / self pngFileName.
+	importer readFile: root / 'site' /  self pngFileName.
 	
 	self 
-		assert: ( web root / self pngFileName) class 
+		assert: ( web root  / self pngFileName) class 
 		equals: FOWebImage. 
 	self 
 		assert: ( web root / self pngFileName) name 
 		equals: self pngFileName.
+	
+]
+
+{ #category : 'tests' }
+FOImporterTest >> testReadFilePngKeepsJustARefSourcePath [
+	
+	importer readFile: root / 'site' /  self pngFileName.
+	
 	self 
-		assert: ( web root / self pngFileName) sourcePath
-		equals: Path / 'aPNG.png'
+		assert: ( web root  / self pngFileName) sourcePath
+		equals: Path / 'site' / 'aPNG.png'
 ]

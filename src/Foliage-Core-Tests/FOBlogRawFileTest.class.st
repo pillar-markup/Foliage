@@ -10,6 +10,7 @@ Class {
 FOBlogRawFileTest >> testBlogPostHasMetaData [
 
 	| item1 |
+	self halt.
 	item1 := site / 'success' / self mdOneFileName2.
 	self assert: item1 title equals: 'IsLoop'.
 	self assert: item1 publishDate printString equals: '21 May 2025'.

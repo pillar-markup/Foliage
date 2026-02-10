@@ -3,7 +3,8 @@ Class {
 	#superclass : 'TestCase',
 	#instVars : [
 		'root',
-		'site'
+		'site',
+		'fileSystem'
 	],
 	#category : 'Foliage-Core-Tests-Blog',
 	#package : 'Foliage-Core-Tests',
@@ -52,7 +53,7 @@ Suscribe to this blog: <a href="http://pharo.org/news/atom.xml">Entries RSS</a> 
 { #category : 'running' }
 FOAbstractWebSiteTest >> defineFiles [
 
-	root := FileSystem memory root.
+
 	(root / 'success') ensureCreateDirectory.
 	root / 'success' / self mdOneFileName writeStreamDo: [ :st |
 		st nextPutAll: self gsocContentsMD ].
@@ -277,10 +278,14 @@ FOAbstractWebSiteTest >> navbarTemplateContents [
 
 { #category : 'running' }
 FOAbstractWebSiteTest >> setUp [ 
+	self halt.
+	fileSystem := FileSystem memory. 
+	root := fileSystem root.
 
-		self defineFiles.
+	self defineFiles.
 	
-		site := FOWebSite new.
-		site templatePath: (root / 'templates' ).
-		site importDirectory: root.
+	site := FOWebSite new.
+	site fileSystem: fileSystem.
+	site templatePath: '/templates'.
+	site importDirectory: root.
 ]

@@ -251,7 +251,7 @@ FOPublicationListBuilder >> fieldOrder: aCol [
 FOPublicationListBuilder >> fileNamed: aStringDotBib [
 	"Parser and set the bib file."
 	
-	self onStream: (workingDirectory resolve: aStringDotBib) readStream
+	self onStream: (webSite fileSystem / aStringDotBib) readStream
 ]
 
 { #category : 'filtering' }
@@ -314,7 +314,6 @@ FOPublicationListBuilder >> initialize [
 	super initialize.
 	workingBibSet := CZSet new.
 	originalBibSet := CZSet new.
-	workingDirectory := FileSystem workingDirectory.
 	self authorMatchingString: '*'.
 	localization := self localizationClass new.
 	self english.
