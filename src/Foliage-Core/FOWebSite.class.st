@@ -156,13 +156,14 @@ FOWebSite >> configureBlogs [
 { #category : 'importing' }
 FOWebSite >> configureFromConfigFile [
 	"clearly there is something fishy about the current configuration management."
-	
+
 	| instance |
-	instance := self readConfigFile: (self rawPath asFileReference / 'FoliageConfig.ston').
+	instance := self readConfigFile:
+		            self sourcePath asFileReference / 'FoliageConfig.ston'.
 	self baseUri: instance baseUri.
 	self webRootPrefix: instance webRootPrefix.
 	self blogSpecs: instance blogs.
-	self configureBlogs.
+	self configureBlogs
 ]
 
 { #category : 'defaults' }
@@ -199,7 +200,8 @@ FOWebSite >> importDirectory: path [
 
 { #category : 'building' }
 FOWebSite >> importFiles [
-	self importDirectory: self rawPath 
+
+	self importDirectory: self sourcePath
 ]
 
 { #category : 'initialization' }
