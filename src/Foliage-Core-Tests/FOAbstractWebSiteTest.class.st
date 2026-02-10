@@ -278,7 +278,7 @@ FOAbstractWebSiteTest >> navbarTemplateContents [
 
 { #category : 'running' }
 FOAbstractWebSiteTest >> setUp [ 
-	self halt.
+	
 	fileSystem := FileSystem memory. 
 	root := fileSystem root.
 

@@ -78,8 +78,8 @@ FOWebSiteConfigurationTest >> testUninitializedWebSite [
 	self flag: #todo. 
 	"use fileReference instead of string"
 	self 
-		assert: ws sourcePath 
-		equals: '/home/Test2/foliage/test/'.		
+		assert: ws sourcePath fullName 
+		equals: '/home/Test2/foliage/test'.		
 	self 
 		assert: ws targetPath fullName 
 		equals: '/home/Test2/foliage/output'.	
@@ -95,8 +95,8 @@ FOWebSiteConfigurationTest >> testWithFileSystemUninitializedWebSite [
 	ws	sourcePath: '/home/Test2/foliage/test/'.
 		
 	self 
-		assert: ws sourcePath 
-		equals: '/home/Test2/foliage/test/'.		
+		assert: ws sourcePath fullName 
+		equals: '/home/Test2/foliage/test'.		
 	self 
 		assert: ws targetPath fullName 
 		equals: '/home/Test2/foliage/output'.	
