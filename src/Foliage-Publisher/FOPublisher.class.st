@@ -218,11 +218,11 @@ FOPublisher >> newWebSite [
 
 	^ FOWebSite new
 		  baseUri: self baseUri;
-		  targetPath: self targetPath fullName;
+		  targetPath: self targetPath;
 		  sourcePath: self sourcePath;
 		  webRootPrefix: self webRootPrefix;
 		  templatePath:
-			  self sourcePath asFileReference / self templatePath asString
+			  (self sourcePath asFileReference / self templatePath asString) fullName
 ]
 
 { #category : 'actions' }
@@ -250,7 +250,7 @@ FOPublisher >> sourcePath [
 { #category : 'accessing' }
 FOPublisher >> sourcePath: aString [
 
-	sourcePath := aString asFileReference
+	sourcePath := aString
 ]
 
 { #category : 'accessing' }
@@ -263,13 +263,15 @@ FOPublisher >> targetPath [
 { #category : 'accessing' }
 FOPublisher >> targetPath: aString [
 
-	targetPath := aString asFileReference
+	targetPath := aString
 ]
 
 { #category : 'accessing' }
 FOPublisher >> templatePath [
 
-	^ templatePath ifNil: [ self templatePath: self class defaultTemplatePath. ^ templatePath ]
+	^ templatePath 
+		ifNil: [ self templatePath: self class defaultTemplatePath. 
+		^ templatePath ]
 ]
 
 { #category : 'accessing' }

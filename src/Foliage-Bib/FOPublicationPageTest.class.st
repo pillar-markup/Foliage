@@ -10,9 +10,9 @@ Class {
 FOPublicationPageTest >> defineFiles [
 
 	super defineFiles.
-	root / self publicationPageName
+	fileSystem / 'site' / self publicationPageName
 			writeStreamDo: [ :st | st nextPutAll: self publicationPage ].
-	root / 'rmod.bib' 
+	fileSystem / 'site' / 'rmod.bib' 
 		writeStreamDo: [ :st | st nextPutAll: FOPublicationListBuilderTest new contents ].
 	
 ]
@@ -48,7 +48,6 @@ FOPublicationPageTest >> publicationPageName [
 FOPublicationPageTest >> testPluginDeclaration [
 
 	| fileWithPlugin |
-	self halt.
 	fileWithPlugin := site / self publicationPageName.
 	self assert: fileWithPlugin hasPlugin.
 	self assert: fileWithPlugin pluginKind equals: 'publicationList'.

@@ -26,7 +26,7 @@ FOPublisherCommandTest >> testSourceSetInPublisher [
 	command configure.
 	
 	self 
-		assert: command publisher sourcePath fullName 
+		assert: command publisher sourcePath 
 		equals: '/home/stef/site'
 	
 ]
@@ -53,6 +53,8 @@ FOPublisherCommandTest >> testTargetSetInPublisher [
  	
 	command configure.
 
-	self assert: command publisher targetPath fullName equals: '/taraget'
+	self 
+		assert: command publisher targetPath
+		 equals: '/taraget'
 	
 ]
