@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'root',
 		'blog',
-		'site'
+		'site',
+		'filesystem'
 	],
 	#category : 'Foliage-Core-Tests-Blog',
 	#package : 'Foliage-Core-Tests',
@@ -43,18 +44,19 @@ On this page, you can find the personal blogs and social media links of the seve
 { #category : 'running' }
 FOBrokenDateBlogTest >> setUp [ 
 
-	root := FileSystem memory root.
-	(root / 'success') ensureCreateDirectory.
-	root / 'success' / 'broken.md'
+	filesystem := FileSystem memory.
+	(filesystem / 'site' / 'success') ensureCreateDirectory.
+	filesystem / 'site' / 'success' / 'broken.md'
 		writeStreamDo: [ :st | st nextPutAll: self brokenDateGsocContentsMD ].
-	root / 'success' / 'niled.md'
+	filesystem / 'site' / 'success' / 'niled.md'
 		writeStreamDo: [ :st | st nextPutAll: self nilDateGsocContentsMD ].
 	
 	"this looks too much just to test a date in a metadata of a file.
 	There is something wrong."	
 	
 	site := FOWebSite new.
-	site importDirectory: root.
+	site sourcePath: (filesystem / 'site') fullName.
+	site importDirectory: filesystem root / 'site'.
 	blog := (site / 'success') convertToBlog.
 	blog title: 'Super success'.
 ]

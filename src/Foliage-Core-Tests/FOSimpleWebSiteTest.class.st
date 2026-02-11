@@ -7,6 +7,51 @@ Class {
 }
 
 { #category : 'tests' }
+FOSimpleWebSiteTest >> testSourcePath [
+
+	"Here I test some values for sourcePath to check because it looks like there are an invariant that 
+	the site files should be in a folder that is not root.
+	
+	"
+	| fs |
+	fs := FileSystem memory. 
+	
+	self 
+		assert: ((fs / 'site' / 'success') asFileReference relativeTo: (fs / 'site' ) asFileReference) fullName 
+		equals: 'success'
+]
+
+{ #category : 'tests' }
+FOSimpleWebSiteTest >> testSourcePathWithTopFolder [
+
+	"Here I test some values for sourcePath to check because it looks like there are an invariant that 
+	the site files should be in a folder that is not root.
+	
+	"
+	| fs |
+	fs := FileSystem memory. 
+	
+	self 
+		assert: ((fs / 'site' / 'success') asFileReference relativeTo: (fs / 'site' ) asFileReference) fullName 
+		equals: 'success'
+]
+
+{ #category : 'tests' }
+FOSimpleWebSiteTest >> testSourcePathWithoutTopFolder [
+
+	"Here I test some values for sourcePath to check because it looks like there are an invariant that 
+	the site files should be in a folder that is not root.
+	
+	"
+	| fs |
+	fs := FileSystem memory. 
+	
+	self 
+		assert: ((fs / 'success') asFileReference relativeTo: fs root ) fullName
+		equals: 'success'
+]
+
+{ #category : 'tests' }
 FOSimpleWebSiteTest >> testWebsiteHasARawPathWellInitialized [
 
 	| w |

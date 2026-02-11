@@ -54,37 +54,37 @@ Suscribe to this blog: <a href="http://pharo.org/news/atom.xml">Entries RSS</a> 
 FOAbstractWebSiteTest >> defineFiles [
 
 
-	(root / 'success') ensureCreateDirectory.
-	root / 'success' / self mdOneFileName writeStreamDo: [ :st |
+	(fileSystem / 'site' / 'success') ensureCreateDirectory.
+	fileSystem / 'site' / 'success' / self mdOneFileName writeStreamDo: [ :st |
 		st nextPutAll: self gsocContentsMD ].
-	root / 'success' / self mdOneFileName2 writeStreamDo: [ :st |
+	fileSystem / 'site'/ 'success' / self mdOneFileName2 writeStreamDo: [ :st |
 		st nextPutAll: self gsocContentsMD2 ].
-	(root / 'templates') ensureCreateDirectory.
+	(fileSystem / 'site' / 'templates') ensureCreateDirectory.
 
-	root / 'templates' / 'blog-post-abstract' writeStreamDo: [ :st |
+	fileSystem / 'site'/ 'templates' / 'blog-post-abstract' writeStreamDo: [ :st |
 		st nextPutAll: self blogPostAbstractTemplateContents ].
 
-	root / 'templates' / 'blog' writeStreamDo: [ :st |
+	fileSystem / 'site' / 'templates' / 'blog' writeStreamDo: [ :st |
 		st nextPutAll: self blogTemplateContents ].
 
-	root / 'templates' / 'head' writeStreamDo: [ :st |
+	fileSystem / 'site'/'templates' / 'head' writeStreamDo: [ :st |
 		st nextPutAll: self headTemplateContents ].
 
-	root / 'templates' / 'header' writeStreamDo: [ :st |
+	fileSystem / 'site' / 'templates' / 'header' writeStreamDo: [ :st |
 		st nextPutAll: self headerTemplateContents ].
 
-	root / 'templates' / 'navbar' writeStreamDo: [ :st |
+	fileSystem / 'site' / 'templates' / 'navbar' writeStreamDo: [ :st |
 		st nextPutAll: self navbarTemplateContents ].
 
-	root / 'templates' / 'menu' writeStreamDo: [ :st |
+	fileSystem / 'site'/ 'templates' / 'menu' writeStreamDo: [ :st |
 		st nextPutAll: self menuTemplateContents ].
-	root / 'templates' / 'main' writeStreamDo: [ :st |
+	fileSystem / 'site' / 'templates' / 'main' writeStreamDo: [ :st |
 		st nextPutAll: self mainTemplateContents ].
-	root / 'templates' / 'blog-footer' writeStreamDo: [ :st |
+	fileSystem / 'site' / 'templates' / 'blog-footer' writeStreamDo: [ :st |
 		st nextPutAll: self blogfooterTemplateContents ].
-	root / 'templates' / 'footer' writeStreamDo: [ :st |
+	fileSystem / 'site' / 'templates' / 'footer' writeStreamDo: [ :st |
 		st nextPutAll: self footerTemplateContents ].
-	root / 'templates' / 'footer-analytics' writeStreamDo: [ :st |
+	fileSystem / 'site'/ 'templates' / 'footer-analytics' writeStreamDo: [ :st |
 		st nextPutAll: self footerAnalyticsTemplateContents ]
 ]
 
@@ -285,7 +285,9 @@ FOAbstractWebSiteTest >> setUp [
 	self defineFiles.
 	
 	site := FOWebSite new.
+
+	site sourcePath: '/site'.
 	site fileSystem: fileSystem.
-	site templatePath: '/templates'.
-	site importDirectory: root.
+	site templatePath: '/site/templates'.
+	site importDirectory: fileSystem root / 'site'.
 ]

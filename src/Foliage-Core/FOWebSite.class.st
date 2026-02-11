@@ -364,7 +364,8 @@ FOWebSite >> sourcePath [
 
 { #category : 'accessing' }
 FOWebSite >> sourcePath: aString [
-
+	"sourcePath: is expected to be a subdirectory of / e.g. 
+	/usr/site"
 	aString isString not ifTrue: [ self error: 'sourcePath: expects a string' ].
 	
 	sourcePath := fileSystem referenceTo: aString
