@@ -11,6 +11,32 @@ Class {
 	#tag : 'Blog'
 }
 
+{ #category : 'running' }
+FOAbstractWebSiteTest >> JSONFoliageConfigFileContents [
+
+	^ '{
+	#baseUri : ''http://esug.org'',
+	#blogs: [ 
+		''news'': ''News''
+	],
+	#menu : [
+			{ "title" : "About Us",
+		 	 "url" : "/about_us.html",
+		  	"has_subfiles" : true,
+		  	"submenu" : [ { "title" : "About","url" : "/about_us.html" },
+							{ "title" : "Membership", "url" : "/membership.html" },
+				{ "title" : "ESUG News","url" : "/about_us.html"	}] 
+				},
+			{ "title" : "Conferences",
+		  	"url" : "/conferences.html",
+		  	"has_subfiles" : true,
+		  	"submenu" : [ { "title" : "2025", "url" : "/2025-Conference/conf2025.html" },
+				{ "title" : "2024", "url" : "/2024-Conference/conf2024.html" }]
+		}],
+	#site_short_description : "European Smalltalk User Group"
+}'
+]
+
 { #category : 'data' }
 FOAbstractWebSiteTest >> blogPostAbstractTemplateContents [
 
@@ -85,7 +111,10 @@ FOAbstractWebSiteTest >> defineFiles [
 	fileSystem / 'site' / 'templates' / 'footer' writeStreamDo: [ :st |
 		st nextPutAll: self footerTemplateContents ].
 	fileSystem / 'site'/ 'templates' / 'footer-analytics' writeStreamDo: [ :st |
-		st nextPutAll: self footerAnalyticsTemplateContents ]
+		st nextPutAll: self footerAnalyticsTemplateContents ].
+	
+	(fileSystem / 'site' / 'FoliageConfig.ston')
+		 writeStreamDo: [ :st | st nextPutAll: self JSONFoliageConfigFileContents ].
 ]
 
 { #category : 'running' }
@@ -285,9 +314,13 @@ FOAbstractWebSiteTest >> setUp [
 	self defineFiles.
 	
 	site := FOWebSite new.
-
-	site sourcePath: '/site'.
 	site fileSystem: fileSystem.
+	site webRootPrefix: ''.
+	
+	site sourcePath: '/site'.
 	site templatePath: '/site/templates'.
+	
+	"normally importFiles will do it all together"
+	site readConfigFile.
 	site importDirectory: fileSystem root / 'site'.
 ]

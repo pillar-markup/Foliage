@@ -170,12 +170,6 @@ FOPublisher class >> readFile: aName [
 				format: { reference fullName. e messageText }) ]
 ]
 
-{ #category : 'ston-core' }
-FOPublisher class >> stonName [
-
-	^ #Foliage
-]
-
 { #category : 'clap' }
 FOPublisher class >> withErrorHandlingDo: aBlock [
 

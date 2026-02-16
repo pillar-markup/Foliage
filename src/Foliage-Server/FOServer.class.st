@@ -27,7 +27,7 @@ FOServer class >> stop [
 FOServer >> baseDirectory [
 
 	^ baseDirectory 
-		ifNil: [ baseDirectory := '/Users/ducasse/Test2/MySite/StephaneDucasse.github.io/generated' asFileReference ]
+		ifNil: [ baseDirectory := '/Users/ducasse/Test2/FoliageSample/generated' asFileReference ]
 ]
 
 { #category : 'accessing' }

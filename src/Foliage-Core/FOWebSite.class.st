@@ -28,13 +28,13 @@ Class {
 		'blogs',
 		'targetPath',
 		'templatePath',
-		'model',
 		'root',
 		'properties',
 		'blogSpecs',
 		'plugins',
 		'sourcePath',
-		'fileSystem'
+		'fileSystem',
+		'configuration'
 	],
 	#classInstVars : [
 		'instance'
@@ -61,8 +61,10 @@ FOWebSite class >> reset [
 ]
 
 { #category : 'accessing items' }
-FOWebSite >> / anObject [
-	^ root / anObject
+FOWebSite >> / aName [
+	"Access the model entity associated with the path aName"
+	
+	^ root / aName
 ]
 
 { #category : 'helpers' }
@@ -220,7 +222,8 @@ FOWebSite >> importDirectory: path [
 
 { #category : 'building' }
 FOWebSite >> importFiles [
-
+	
+	self readConfigFile.
 	self importDirectory: self sourcePath
 ]
 
@@ -236,12 +239,19 @@ FOWebSite >> importer [
 { #category : 'initialization' }
 FOWebSite >> initialize [ 
 	super initialize.
-	properties := Dictionary new.
+	self fileSystem: FileSystem disk.
+	configuration := FOConfigurationFile new.	
+
 	blogSpecs := OrderedCollection new. 
 	root := self buildRoot.
-	self fileSystem: FileSystem disk.
+	
 	webRootPrefix := ''.
+	
+	"Obsolete"
+	properties := Dictionary new.
+		
 	self registerPlugins.
+	
 ]
 
 { #category : 'initialization' }
@@ -277,16 +287,19 @@ FOWebSite >> pluginHandle: aString for: aFOMicrodownPage [
 
 { #category : 'accessing' }
 FOWebSite >> properties [
+	self halt.
 	^ properties
 ]
 
 { #category : 'accessing' }
-FOWebSite >> propertyAt: aString [ 
+FOWebSite >> propertyAt: aString [
+	self halt.
 	^ properties at: aString
 ]
 
 { #category : 'accessing' }
 FOWebSite >> propertyAt: aString put: anObject [
+	self halt.
 	^ properties 
 		at: aString
 		put: anObject 
@@ -312,11 +325,21 @@ FOWebSite >> rawPath: anObject [
 	sourcePath := anObject asFileReference 
 ]
 
+{ #category : 'as yet unclassified' }
+FOWebSite >> readConfigFile [
+
+	| dict |
+	dict := self readConfigFile: 'FoliageConfig.ston'.
+	dict keysAndValuesDo: [ :k :v | 
+		configuration propertyAt: k put: v ].
+	^ configuration
+]
+
 { #category : 'importing' }
 FOWebSite >> readConfigFile: aName [
 
 	| reference |
-	reference := aName asFileReference.
+	reference := sourcePath / aName.
 	reference exists ifFalse: [ 
 		self error: ('File {1} does not exists' format: { reference fullName }) ].
 	
@@ -414,11 +437,11 @@ FOWebSite >> templatePathForLayout: aString  partial: partialName [
 { #category : 'accessing' }
 FOWebSite >> webRootPrefix [
 	
-	^ webRootPrefix
+	^ configuration webRootPrefix
 ]
 
 { #category : 'accessing' }
 FOWebSite >> webRootPrefix: aString [
 	
-	webRootPrefix := aString
+	configuration webRootPrefix: aString
 ]
