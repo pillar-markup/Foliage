@@ -4,8 +4,9 @@ Class {
 	#instVars : [
 		'properties'
 	],
-	#category : 'Foliage-Core',
-	#package : 'Foliage-Core'
+	#category : 'Foliage-Core-Model',
+	#package : 'Foliage-Core',
+	#tag : 'Model'
 }
 
 { #category : 'accessing' }
