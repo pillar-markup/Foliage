@@ -23,13 +23,9 @@ Class {
 	#name : 'FOWebSite',
 	#superclass : 'Object',
 	#instVars : [
-		'webRootPrefix',
-		'blogs',
 		'targetPath',
 		'templatePath',
 		'root',
-		'properties',
-		'blogSpecs',
 		'plugins',
 		'sourcePath',
 		'fileSystem',
@@ -111,19 +107,6 @@ FOWebSite >> baseUri: anObject [
 	configuration baseUri: anObject
 ]
 
-{ #category : 'accessing-blogs' }
-FOWebSite >> blogSpecs: aColOfPairOfFolderNamesToTitles [
-	"To specify blogs pass a collection of pair folder name -> name"
-
-	"| p |
-	p := FOPublisher new. 
-	p blogs: {
-		'news' -> 'Pharo News' . 
-		'success' ->'Pharo Success Stories'  }."
-		
-	blogSpecs := aColOfPairOfFolderNamesToTitles
-]
-
 { #category : 'building' }
 FOWebSite >> buildOverviewFor: aString [ 
 	
@@ -140,7 +123,7 @@ FOWebSite >> buildRoot [
 ]
 
 { #category : 'accessing-blogs' }
-FOWebSite >> configureBlogs [
+FOWebSite >> configureBlogsFrom: blogSpecs [
 	"During the configuration of blogs, pages are converted to blog post objects in the model."
 	
 	"This could be managed in a more modular fashion via a plugin architecture if needed."
@@ -159,12 +142,8 @@ FOWebSite >> configureBlogs [
 FOWebSite >> configureFromConfigFile [
 	"clearly there is something fishy about the current configuration management."
 
-	| instance |
-	instance := self readConfigFile.
-	self baseUri: instance baseUri.
-	self webRootPrefix: instance webRootPrefix.
-	self blogSpecs: instance blogs.
-	self configureBlogs
+	self readConfigFile.
+	self configureBlogsFrom: configuration blogs.
 ]
 
 { #category : 'defaults' }
@@ -235,19 +214,12 @@ FOWebSite >> importer [
 ]
 
 { #category : 'initialization' }
-FOWebSite >> initialize [ 
+FOWebSite >> initialize [
+
 	super initialize.
 	self fileSystem: FileSystem disk.
 	configuration := FOConfigurationFile new.	
-
-	blogSpecs := OrderedCollection new. 
 	root := self buildRoot.
-	
-	webRootPrefix := ''.
-	
-	"Obsolete"
-	properties := Dictionary new.
-		
 	self registerPlugins.
 	
 ]
@@ -283,26 +255,6 @@ FOWebSite >> pluginHandle: aString for: aFOMicrodownPage [
 		treat: aFOMicrodownPage;
 		yourself
 	
-]
-
-{ #category : 'accessing' }
-FOWebSite >> properties [
-	self halt.
-	^ properties
-]
-
-{ #category : 'accessing' }
-FOWebSite >> propertyAt: aString [
-	self halt.
-	^ properties at: aString
-]
-
-{ #category : 'accessing' }
-FOWebSite >> propertyAt: aString put: anObject [
-	self halt.
-	^ properties 
-		at: aString
-		put: anObject 
 ]
 
 { #category : 'building' }
