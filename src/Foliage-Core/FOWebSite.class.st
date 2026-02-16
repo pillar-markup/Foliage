@@ -101,7 +101,7 @@ FOWebSite >> asBeaconSignal [
 
 { #category : 'accessing' }
 FOWebSite >> baseUri [
-	^ baseUri
+	^ configuration baseUri
 ]
 
 { #category : 'accessing' }
@@ -109,7 +109,7 @@ FOWebSite >> baseUri: anObject [
 	"Expect the base of the website including the http
 	e.g., FOWebSite new baseUri: 'https://pharo.org'."
 	
-	baseUri := anObject
+	configuration baseUri: anObject
 ]
 
 { #category : 'accessing-blogs' }
@@ -185,13 +185,13 @@ FOWebSite >> defaultTemplatePath [
 	^ 'templates'
 ]
 
-{ #category : 'accessing' }
+{ #category : 'accessing - for tests' }
 FOWebSite >> fileSystem [
 
 	^ fileSystem
 ]
 
-{ #category : 'accessing' }
+{ #category : 'accessing - for tests' }
 FOWebSite >> fileSystem: aFileSystem [
 
 	fileSystem := aFileSystem.
@@ -256,7 +256,9 @@ FOWebSite >> initialize [
 
 { #category : 'initialization' }
 FOWebSite >> initializePaths [
-
+	" not sure that this is needed may the publisher responsibility is to gather and push these
+	values to the website. "
+	
 	self sourcePath: self defaultSourcePath.
 	self targetPath: self defaultTargetPath.
 	self templatePath: self defaultTemplatePath.
@@ -325,7 +327,7 @@ FOWebSite >> rawPath: anObject [
 	sourcePath := anObject asFileReference 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'building' }
 FOWebSite >> readConfigFile [
 
 	| dict |
@@ -379,13 +381,13 @@ FOWebSite >> root [
 	^ root
 ]
 
-{ #category : 'accessing' }
+{ #category : 'accessing deployment' }
 FOWebSite >> sourcePath [
 
 	^ sourcePath
 ]
 
-{ #category : 'accessing' }
+{ #category : 'accessing deployment' }
 FOWebSite >> sourcePath: aString [
 	"sourcePath: is expected to be a subdirectory of / e.g. 
 	/usr/site"
@@ -394,13 +396,13 @@ FOWebSite >> sourcePath: aString [
 	sourcePath := fileSystem referenceTo: aString
 ]
 
-{ #category : 'accessing' }
+{ #category : 'accessing deployment' }
 FOWebSite >> targetPath [
 
 	^ targetPath 
 ]
 
-{ #category : 'accessing' }
+{ #category : 'accessing deployment' }
 FOWebSite >> targetPath: anObject [
 
 	anObject isString not ifTrue: [ self error: 'targetPath expects a string' ].	
