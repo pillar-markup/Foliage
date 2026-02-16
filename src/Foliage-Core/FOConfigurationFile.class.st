@@ -8,12 +8,6 @@ Class {
 	#package : 'Foliage-Core'
 }
 
-{ #category : 'ston-core' }
-FOConfigurationFile class >> stonName [
-
-	^ #Foliage
-]
-
 { #category : 'accessing' }
 FOConfigurationFile >> baseUri [
 	
@@ -23,6 +17,11 @@ FOConfigurationFile >> baseUri [
 { #category : 'accessing' }
 FOConfigurationFile >> baseUri: aString [ 
 	self propertyAt: #baseUri put: aString
+]
+
+{ #category : 'accessing' }
+FOConfigurationFile >> blogs [
+	^ self propertyAt: #blogs ifAbsent: [ #() ]
 ]
 
 { #category : 'initialization' }
@@ -42,6 +41,12 @@ FOConfigurationFile >> properties: aDictionary [
 FOConfigurationFile >> propertyAt: aString [
 
 	^ properties at: aString
+]
+
+{ #category : 'accessing' }
+FOConfigurationFile >> propertyAt: aString ifAbsent: aBlock [
+
+	^ properties at: aString ifAbsent: aBlock
 ]
 
 { #category : 'accessing' }

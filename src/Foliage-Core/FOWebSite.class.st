@@ -24,7 +24,6 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'webRootPrefix',
-		'baseUri',
 		'blogs',
 		'targetPath',
 		'templatePath',
@@ -70,7 +69,7 @@ FOWebSite >> / aName [
 { #category : 'helpers' }
 FOWebSite >> absoluteLinkFor: aFOWebResource [
 
-	^ baseUri asZnUrl / aFOWebResource pathString  
+	^ self baseUri asZnUrl / aFOWebResource pathString  
 ]
 
 { #category : 'visiting' }
@@ -161,8 +160,7 @@ FOWebSite >> configureFromConfigFile [
 	"clearly there is something fishy about the current configuration management."
 
 	| instance |
-	instance := self readConfigFile:
-		            self sourcePath asFileReference / 'FoliageConfig.ston'.
+	instance := self readConfigFile.
 	self baseUri: instance baseUri.
 	self webRootPrefix: instance webRootPrefix.
 	self blogSpecs: instance blogs.

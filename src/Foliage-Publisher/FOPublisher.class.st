@@ -86,8 +86,7 @@ FOPublisher class >> clapPublish: args [
 	self withLoggingDo: [ 
 		self withErrorHandlingDo: [
 			| publisher |
-			
-			publisher := self readFile: (args at: #project) value. 
+			publisher := self new. 
 			args at: #target ifPresent: [ :arg | publisher targetPath: (arg at: #path) value ].
 			args at: #source ifPresent: [ :arg | publisher sourcePath: (arg at: #path) value ].
 			publisher publish ] ]
@@ -159,6 +158,7 @@ FOPublisher class >> defaultTemplatePath [
 FOPublisher class >> readFile: aName [
 
 	| reference |
+	self halt.
 	reference := aName asFileReference.
 	reference exists ifFalse: [ 
 		self error: ('File {1} does not exists' format: { reference fullName }) ].
