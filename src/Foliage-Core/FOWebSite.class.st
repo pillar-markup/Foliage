@@ -108,6 +108,14 @@ FOWebSite >> baseUri: anObject [
 ]
 
 { #category : 'building' }
+FOWebSite >> build [
+
+	self importFiles.
+	self configureFromConfigFile.
+	self handlePlugins. 
+]
+
+{ #category : 'building' }
 FOWebSite >> buildOverviewFor: aString [ 
 	
 	| blog |
@@ -140,8 +148,7 @@ FOWebSite >> configureBlogsFrom: blogSpecs [
 
 { #category : 'importing' }
 FOWebSite >> configureFromConfigFile [
-	"clearly there is something fishy about the current configuration management."
-
+	
 	self readConfigFile.
 	self configureBlogsFrom: configuration blogs.
 ]

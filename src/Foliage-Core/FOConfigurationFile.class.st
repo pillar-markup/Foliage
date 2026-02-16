@@ -33,6 +33,12 @@ FOConfigurationFile >> initialize [
 ]
 
 { #category : 'accessing' }
+FOConfigurationFile >> menus [
+
+	^ self propertyAt: #menus ifAbsent: [ #() ]
+]
+
+{ #category : 'accessing' }
 FOConfigurationFile >> properties: aDictionary [ 
 	properties := aDictionary
 ]

@@ -15,7 +15,7 @@ FOConfigurationFileTest >> JSONFoliageConfigFileContents [
 	#blogs: [ 
 		''news'': ''News''
 	],
-	#menu : [
+	#menus : [
 			{ "title" : "About Us",
 		 	 "url" : "/about_us.html",
 		  	"has_subfiles" : true,
@@ -94,12 +94,12 @@ FOConfigurationFileTest >> testConfigurationFileExists [
 ]
 
 { #category : 'running' }
-FOConfigurationFileTest >> testConfigurationReads [
+FOConfigurationFileTest >> testConfigurationReads2 [
 
 	| config |
 	config := site readConfigFile.
 	self assert: config class equals: FOConfigurationFile.
-	self assert: (config propertyAt: #webRootPrefix) equals:  '/ESUGWeb20'.
-	self assert: (config propertyAt: #blogs) equals:  {  'news' ->'News'}.
-	self assert: (config propertyAt: #menu) size equals: 2
+	self assert: (config webRootPrefix) equals:  '/ESUGWeb20'.
+	self assert: (config blogs) equals:  {  'news' ->'News'}.
+	self assert: (config menus) size equals: 2
 ]

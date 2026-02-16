@@ -223,12 +223,7 @@ FOPublisher >> newWebSite [
 FOPublisher >> publish [
 
 	site := self newWebSite.
-	
-	"this should probably pushed to the website"
-	site importFiles.
-	site configureFromConfigFile.
-	site handlePlugins.
-	
+	site build.
 	site publish.
 ]
 
@@ -237,8 +232,8 @@ FOPublisher >> sourcePath [
 
 	^ sourcePath 
 			ifNil: [ 
-					self sourcePath: self class defaultSourcePath. 
-					^ sourcePath ]
+				self sourcePath: self class defaultSourcePath. 
+				sourcePath ]
 ]
 
 { #category : 'accessing' }
@@ -251,7 +246,9 @@ FOPublisher >> sourcePath: aString [
 FOPublisher >> targetPath [
 	
 	^ targetPath 
-		ifNil: [ self targetPath: self class defaultTargetPath. ^ targetPath ]
+		ifNil: [ 
+			self targetPath: self class defaultTargetPath. 
+			targetPath ]
 ]
 
 { #category : 'accessing' }
@@ -264,8 +261,9 @@ FOPublisher >> targetPath: aString [
 FOPublisher >> templatePath [
 
 	^ templatePath 
-		ifNil: [ self templatePath: self class defaultTemplatePath. 
-		^ templatePath ]
+		ifNil: [ 
+			self templatePath: self class defaultTemplatePath. 
+			templatePath ]
 ]
 
 { #category : 'accessing' }
