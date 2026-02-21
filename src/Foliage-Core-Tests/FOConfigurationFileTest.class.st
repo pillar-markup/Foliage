@@ -109,7 +109,7 @@ FOConfigurationFileTest >> testConfigurationReads2 [
 
 	| config |
 	config := site readConfigFile.
-	self assert: config class equals: FOConfigurationFile.
+	self assert: config class equals: FOConfiguration.
 	self assert: (config webRootPrefix) equals:  '/ESUGWeb20'.
 	self assert: (config blogs) equals:  {  'news' ->'News'}.
 	self assert: (config menus) size equals: 2

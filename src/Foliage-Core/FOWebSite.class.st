@@ -225,7 +225,7 @@ FOWebSite >> initialize [
 
 	super initialize.
 	self fileSystem: FileSystem disk.
-	configuration := FOConfigurationFile new.	
+	configuration := FOConfiguration new.	
 	root := self buildRoot.
 	self registerPlugins.
 	

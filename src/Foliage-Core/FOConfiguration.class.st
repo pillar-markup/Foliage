@@ -1,5 +1,5 @@
 Class {
-	#name : 'FOConfigurationFile',
+	#name : 'FOConfiguration',
 	#superclass : 'Object',
 	#instVars : [
 		'properties'
@@ -10,23 +10,23 @@ Class {
 }
 
 { #category : 'accessing' }
-FOConfigurationFile >> baseUri [
+FOConfiguration >> baseUri [
 	
 	^ self propertyAt: #baseUri
 ]
 
 { #category : 'accessing' }
-FOConfigurationFile >> baseUri: aString [ 
+FOConfiguration >> baseUri: aString [ 
 	self propertyAt: #baseUri put: aString
 ]
 
 { #category : 'accessing' }
-FOConfigurationFile >> blogs [
+FOConfiguration >> blogs [
 	^ self propertyAt: #blogs ifAbsent: [ #() ]
 ]
 
 { #category : 'initialization' }
-FOConfigurationFile >> initialize [
+FOConfiguration >> initialize [
 
 	super initialize.
 	properties := Dictionary new.
@@ -34,48 +34,48 @@ FOConfigurationFile >> initialize [
 ]
 
 { #category : 'accessing' }
-FOConfigurationFile >> menus [
+FOConfiguration >> menus [
 
 	^ self propertyAt: #menus ifAbsent: [ #() ]
 ]
 
 { #category : 'accessing' }
-FOConfigurationFile >> properties: aDictionary [ 
+FOConfiguration >> properties: aDictionary [ 
 	properties := aDictionary
 ]
 
 { #category : 'accessing' }
-FOConfigurationFile >> propertyAt: aString [
+FOConfiguration >> propertyAt: aString [
 
 	^ properties at: aString
 ]
 
 { #category : 'accessing' }
-FOConfigurationFile >> propertyAt: aString ifAbsent: aBlock [
+FOConfiguration >> propertyAt: aString ifAbsent: aBlock [
 
 	^ properties at: aString ifAbsent: aBlock
 ]
 
 { #category : 'accessing' }
-FOConfigurationFile >> propertyAt: aKey put: aString [
+FOConfiguration >> propertyAt: aKey put: aString [
 
 	properties at: aKey put: aString
 ]
 
 { #category : 'accessing' }
-FOConfigurationFile >> webRootPrefix [
+FOConfiguration >> webRootPrefix [
 
 	^ properties at: self webRootPrefixSymbol
 ]
 
 { #category : 'accessing' }
-FOConfigurationFile >> webRootPrefix: aString [
+FOConfiguration >> webRootPrefix: aString [
 
 	properties at: self webRootPrefixSymbol put: aString
 ]
 
 { #category : 'private' }
-FOConfigurationFile >> webRootPrefixSymbol [
+FOConfiguration >> webRootPrefixSymbol [
 
 	^ #webRootPrefix
 ]
