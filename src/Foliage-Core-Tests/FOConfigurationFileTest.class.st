@@ -8,7 +8,8 @@ Class {
 
 { #category : 'running' }
 FOConfigurationFileTest >> JSONFoliageConfigFileContents [
-
+	"Here we redefine the file to include a webrootprefix"
+	
 	^ '{
 	#baseUri : ''http://esug.org'',
 	#webRootPrefix : ''/ESUGWeb20'',
@@ -35,7 +36,7 @@ FOConfigurationFileTest >> JSONFoliageConfigFileContents [
 
 { #category : 'running' }
 FOConfigurationFileTest >> StonConfigFileContents [
-
+	"this is the same in Ston format and so far it is not supported"
 	^ 'Foliage {
 	#baseUri : ''http://esug.org'',
 	#webRootPrefix : ''/ESUGWeb20'',
@@ -84,6 +85,16 @@ FOConfigurationFileTest >> setUp [
 	site := FOWebSite new.
 	site fileSystem: fileSystem.
 	site sourcePath: 'site'.
+]
+
+{ #category : 'running' }
+FOConfigurationFileTest >> testConfigurationAccessToProperties [
+
+	| config |
+	config := site readConfigFile.
+	self 
+		assert: (config propertyAt: #site_short_description)
+		equals: 'European Smalltalk User Group'
 ]
 
 { #category : 'running' }
