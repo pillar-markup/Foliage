@@ -76,6 +76,9 @@ FOConfigurationWrapperTest >> testReadsProperties [
 	menus := (config propertyAt: 'menus').
 	self assert: menus first class equals: Dictionary.
 	self assert: menus second class equals: Dictionary.
+	self 
+		assert: (config propertyAt: 'site_short_description') 
+		equals: 'European Smalltalk User Group'
 ]
 
 { #category : 'tests' }

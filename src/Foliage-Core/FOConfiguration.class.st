@@ -1,3 +1,14 @@
+"
+Represent information held in a Foliage.ston file.
+The information is about the structure of the web.
+
+I do not capture source, target and template locations.  
+
+The file contents can be two formats: JSON and STON.
+When the file contains STON, the reader generates a wrapper that is turned into 
+an instance of this class. 
+
+"
 Class {
 	#name : 'FOConfiguration',
 	#superclass : 'Object',
