@@ -53,29 +53,18 @@ FOConfigurationWrapperTest >> setUp [
 ]
 
 { #category : 'tests' }
-FOConfigurationWrapperTest >> testConfigurationReadsFromSton [
-
-	| config |
-	config := site readConfigFile.
-	self assert: config isFromSton
-]
-
-{ #category : 'tests' }
-FOConfigurationWrapperTest >> testConfigurationReadsValue [
-
-	| config |
-	config := site readConfigFile.
-	self assert: config class equals: FOConfiguration.
-	self assert: config webRootPrefix equals:  '/ESUGWeb20'.
-	self assert: config baseUri equals:  'http://esug.org'.
-	self assert: config blogs equals: {'news'->'News'}.
-]
-
-{ #category : 'tests' }
 FOConfigurationWrapperTest >> testFoliageStonExists [
 
 	self assert: (fileSystem / 'site'/ 'FoliageConfig.ston') exists.
 
+]
+
+{ #category : 'tests' }
+FOConfigurationWrapperTest >> testReadsFromSton [
+
+	| config |
+	config := site readConfigFile.
+	self assert: config isFromSton
 ]
 
 { #category : 'tests' }
@@ -87,4 +76,15 @@ FOConfigurationWrapperTest >> testReadsProperties [
 	menus := (config propertyAt: 'menus').
 	self assert: menus first class equals: Dictionary.
 	self assert: menus second class equals: Dictionary.
+]
+
+{ #category : 'tests' }
+FOConfigurationWrapperTest >> testReadsValue [
+
+	| config |
+	config := site readConfigFile.
+	self assert: config class equals: FOConfiguration.
+	self assert: config webRootPrefix equals:  '/ESUGWeb20'.
+	self assert: config baseUri equals:  'http://esug.org'.
+	self assert: config blogs equals: {'news'->'News'}.
 ]
