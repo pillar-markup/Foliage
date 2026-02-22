@@ -89,13 +89,6 @@ FOMicrodownPage >> publishPath [
 	^ super publishPath withExtension: 'html'
 ]
 
-{ #category : 'accessing' }
-FOMicrodownPage >> publishPathFor: aString [ 
-	^ (aString endsWith: #html)
-		ifTrue: [ aString ]
-		ifFalse: [ (aString allButLast: 2), #html ]
-]
-
 { #category : 'rendering' }
 FOMicrodownPage >> render [ 
 

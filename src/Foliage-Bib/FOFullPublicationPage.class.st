@@ -17,7 +17,7 @@ FOFullPublicationPage class >> new [
 
 { #category : 'visiting' }
 FOFullPublicationPage >> acceptFOVisitor: aVisitor [
-	"remotely inoke renderOn:"
+	"remotely invoke renderOn:"
 	
 	^ aVisitor visitMicrodownPage: self
 ]

@@ -23,7 +23,7 @@ FOHTMLPage >> acceptFOVisitor: aFOVisitor [
 	^ aFOVisitor visitHTMLPageSource: self 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'conversion' }
 FOHTMLPage >> asFOBlogPost [
 	
 	self flag: #todoSD.
@@ -40,7 +40,7 @@ FOHTMLPage >> buildHtmlDocument [
 	^ document
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'html' }
 FOHTMLPage >> buildHtmlString [
 	htmlDocument ifNotNil: [ 
 		^ htmlDocument printString ].
@@ -53,27 +53,27 @@ FOHTMLPage >> htmlDocument [
 		htmlDocument := self buildHtmlDocument ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'html' }
 FOHTMLPage >> htmlString [
 
 	^ htmlString ifNil: [ 
 		htmlString := self buildHtmlString ]
 ]
 
-{ #category : 'instance creation' }
+{ #category : 'hooks' }
 FOHTMLPage >> newRenderContext [
 	"In addition, just pass the page to the rendering context"
 	
 	^ super newRenderContext page: self 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'html' }
 FOHTMLPage >> render [
 
 	^ nil
 ]
 
-{ #category : 'instance creation' }
+{ #category : 'hooks' }
 FOHTMLPage >> renderContextClass [
 
 	^ FOMicrodownPageRenderContext
