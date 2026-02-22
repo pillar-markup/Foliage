@@ -22,12 +22,6 @@ FOFullPublicationPage >> acceptFOVisitor: aVisitor [
 	^ aVisitor visitMicrodownPage: self
 ]
 
-{ #category : 'instance creation' }
-FOFullPublicationPage >> renderContextClass [
-
-	^ FOBlogRenderContext
-]
-
 { #category : 'visiting' }
 FOFullPublicationPage >> renderOn: aStream [
 

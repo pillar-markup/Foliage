@@ -38,9 +38,13 @@ FOBlogAfterConversionTest >> testBlogAfterOverviewBuildingNowContainsIndex [
 { #category : 'running' }
 FOBlogAfterConversionTest >> testBlogBeforeOverviewBuildingOnlyContainsChildren [ 
 
-	self assert: blog items size equals: 2.
+	self 
+		assert: blog items size 
+		equals: 2.
 	blog items keys do: [ :each | self assert: (#( 'gsoc.md' 'gsoc2.md') includes: each) ].
-	self assert: blog publishedPosts size equals: 2.
+	self 
+		assert: blog publishedPosts size 
+		equals: 2.
 ]
 
 { #category : 'running' }
@@ -170,26 +174,34 @@ On this page, you can find the personal blogs and social media links of the seve
 
 { #category : 'running' }
 FOBlogAfterConversionTest >> testBlogPostHasMetaData [
-
+	
 	self
 		assert: blog publishedPosts first publishDate printString
 		equals: '21 May 2025'.
-	self assert: blog publishedPosts first layout equals: 'default'.
-	self assert: blog publishedPosts first title equals: 'IsLoop'
+	self 
+		assert: blog publishedPosts first layout 
+		equals: 'default'.
+	self 
+		assert: blog publishedPosts first title 
+		equals: 'IsLoop'
 ]
 
 { #category : 'overviewBuilder' }
 FOBlogAfterConversionTest >> testOverviewBuilderCreatesPageWithDocumentHavingRawChildren [
 
-	| o page |
-	o := FOBlogOverviewBuilder new.
-	o
+	| builder page |
+	builder := FOBlogOverviewBuilder new.
+	builder
 		blog: blog;
 		numberOfCharacters: 100. 
-	page := o buildSummary.
+	page := builder buildSummary.
 	self assert: page title equals: blog title.
 	self assert: page layout equals: blog layout.
-	self assert: page document children size equals: 2.
+	self 
+		assert: page document children size 
+		equals: 2.
 	
-	self assert: page document children first class equals: MicRawBlock
+	self 
+		assert: page document children first class 
+		equals: MicRawBlock
 ]

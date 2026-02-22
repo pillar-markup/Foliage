@@ -14,7 +14,7 @@ FOMicrodownPageRenderContext >> body [
 	"{{{body}}} is used in template to represent the body of the page"
 	
 	^ String streamContents: [ :s |
-		page renderOn: s ].
+			page renderOn: s ].
 ]
 
 { #category : 'accessing' }
@@ -25,11 +25,13 @@ FOMicrodownPageRenderContext >> layout [
 
 { #category : 'accessing' }
 FOMicrodownPageRenderContext >> page [
+
 	^ page
 ]
 
 { #category : 'accessing' }
 FOMicrodownPageRenderContext >> page: anObject [
+
 	page := anObject
 ]
 

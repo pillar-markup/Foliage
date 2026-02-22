@@ -1,3 +1,7 @@
+"
+I'm post. 
+I can generate a summary of my contents to be displayed in BlogPage (the main page that contains a list of abstracts).
+"
 Class {
 	#name : 'FOMicrodownBlogPost',
 	#superclass : 'FOMicrodownPage',

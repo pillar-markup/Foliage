@@ -41,12 +41,12 @@ FOBlogOverviewBuilder >> buildAbstract: aPage [
 { #category : 'building' }
 FOBlogOverviewBuilder >> buildSummary [
 
-	| abstracts document |
-	abstracts := self publishedPosts 
+	| rawAbstracts document |
+	rawAbstracts := self publishedPosts 
 		collect: [ :post | self buildAbstract: post ].
 	
 	document := MicRootBlock new.
-	abstracts do: [ :each | document addChild: each ].
+	rawAbstracts do: [ :each | document addChild: each ].
 	
 	^ FOMicrodownBlogPage new 
 		metaAt: 'layout' put: blog layout;

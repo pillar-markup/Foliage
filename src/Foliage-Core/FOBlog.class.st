@@ -1,7 +1,7 @@
 "
-I'm a blog I have a title and a layout.
-I'm build from a folder. 
-I generate a Blog page overview and a list of posts.
+I'm a blog. I have a title and a layout.
+I'm built from a folder. 
+I generate a blog page overview (a list of abstract) and a list of posts (instance of `FOMicrodownBlogPost`).
 "
 Class {
 	#name : 'FOBlog',
@@ -86,12 +86,6 @@ FOBlog >> posts [
 { #category : 'sorting' }
 FOBlog >> publishedPosts [
 	^ self posts select: [ :each | each isPublished ]
-]
-
-{ #category : 'rendering' }
-FOBlog >> renderContextClass [
-
-	^ FORenderContext
 ]
 
 { #category : 'resolving' }

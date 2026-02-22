@@ -79,7 +79,6 @@ Suscribe to this blog: <a href="http://pharo.org/news/atom.xml">Entries RSS</a> 
 { #category : 'running' }
 FOAbstractWebSiteTest >> defineFiles [
 
-
 	(fileSystem / 'site' / 'success') ensureCreateDirectory.
 	fileSystem / 'site' / 'success' / self mdOneFileName writeStreamDo: [ :st |
 		st nextPutAll: self gsocContentsMD ].
