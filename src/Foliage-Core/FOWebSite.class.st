@@ -287,11 +287,18 @@ FOWebSite >> rawPath: anObject [
 { #category : 'building' }
 FOWebSite >> readConfigFile [
 
-	| dict |
-	dict := self readConfigFile: 'FoliageConfig.ston'.
-	dict keysAndValuesDo: [ :k :v | 
-		configuration propertyAt: k put: v ].
-	^ configuration
+	| dictOrWrapper |
+	dictOrWrapper := self readConfigFile: 'FoliageConfig.ston'.
+	
+	
+	^ dictOrWrapper class = Dictionary 
+		ifTrue: [ 
+			"Here we read in JSON and not STON"
+			dictOrWrapper keysAndValuesDo: [ :k :v | 
+				configuration propertyAt: k put: v ].
+				configuration fromJSON.
+				configuration ]
+		ifFalse: [ dictOrWrapper configuration fromSton ]
 ]
 
 { #category : 'importing' }

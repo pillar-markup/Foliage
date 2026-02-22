@@ -1,5 +1,5 @@
 Class {
-	#name : 'FOConfigurationFileTest',
+	#name : 'FOConfigurationTest',
 	#superclass : 'FOAbstractWebSiteTest',
 	#category : 'Foliage-Core-Tests-Model',
 	#package : 'Foliage-Core-Tests',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'running' }
-FOConfigurationFileTest >> JSONFoliageConfigFileContents [
+FOConfigurationTest >> JSONFoliageConfigFileContents [
 	"Here we redefine the file to include a webrootprefix"
 	
 	^ '{
@@ -35,7 +35,7 @@ FOConfigurationFileTest >> JSONFoliageConfigFileContents [
 ]
 
 { #category : 'running' }
-FOConfigurationFileTest >> StonConfigFileContents [
+FOConfigurationTest >> StonConfigFileContents [
 	"this is the same in Ston format and so far it is not supported"
 	^ 'Foliage {
 	#baseUri : ''http://esug.org'',
@@ -79,7 +79,7 @@ FOConfigurationFileTest >> StonConfigFileContents [
 ]
 
 { #category : 'running' }
-FOConfigurationFileTest >> setUp [ 
+FOConfigurationTest >> setUp [ 
 	
 	super setUp.
 	site := FOWebSite new.
@@ -88,7 +88,7 @@ FOConfigurationFileTest >> setUp [
 ]
 
 { #category : 'running' }
-FOConfigurationFileTest >> testConfigurationAccessToProperties [
+FOConfigurationTest >> testConfigurationAccessToProperties [
 
 	| config |
 	config := site readConfigFile.
@@ -98,19 +98,37 @@ FOConfigurationFileTest >> testConfigurationAccessToProperties [
 ]
 
 { #category : 'running' }
-FOConfigurationFileTest >> testConfigurationFileExists [
+FOConfigurationTest >> testConfigurationAccessToUnknowProperties [
+
+	| config unk |
+	config := site readConfigFile.
+	unk := false.
+	config propertyAt: #doesNotExists ifAbsent: [ unk := true ].
+	self assert: unk
+]
+
+{ #category : 'running' }
+FOConfigurationTest >> testConfigurationFileExists [
 
 	self assert: (fileSystem / 'site' / 'FoliageConfig.ston') exists
 
 ]
 
 { #category : 'running' }
-FOConfigurationFileTest >> testConfigurationReads2 [
+FOConfigurationTest >> testConfigurationReads2 [
 
 	| config |
 	config := site readConfigFile.
 	self assert: config class equals: FOConfiguration.
-	self assert: (config webRootPrefix) equals:  '/ESUGWeb20'.
-	self assert: (config blogs) equals:  {  'news' ->'News'}.
-	self assert: (config menus) size equals: 2
+	self assert: config webRootPrefix equals:  '/ESUGWeb20'.
+	self assert: config blogs equals:  {  'news' ->'News'}.
+	self assert: config menus size equals: 2
+]
+
+{ #category : 'running' }
+FOConfigurationTest >> testConfigurationReadsFromJSON [
+
+	| config |
+	config := site readConfigFile.
+	self deny: config isFromSton
 ]

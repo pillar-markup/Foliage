@@ -2,7 +2,8 @@ Class {
 	#name : 'FOConfiguration',
 	#superclass : 'Object',
 	#instVars : [
-		'properties'
+		'properties',
+		'fromSton'
 	],
 	#category : 'Foliage-Core-Model',
 	#package : 'Foliage-Core',
@@ -16,7 +17,8 @@ FOConfiguration >> baseUri [
 ]
 
 { #category : 'accessing' }
-FOConfiguration >> baseUri: aString [ 
+FOConfiguration >> baseUri: aString [
+
 	self propertyAt: #baseUri put: aString
 ]
 
@@ -25,12 +27,36 @@ FOConfiguration >> blogs [
 	^ self propertyAt: #blogs ifAbsent: [ #() ]
 ]
 
+{ #category : 'accessing' }
+FOConfiguration >> configuration [
+	"to be polymorphic with the wrapper so that we can use the wrapper or the wrappee to the the wrappee"
+	^ self
+]
+
+{ #category : 'instance creation' }
+FOConfiguration >> fromJSON [
+
+	fromSton := false
+]
+
+{ #category : 'instance creation' }
+FOConfiguration >> fromSton [
+	fromSton := true
+]
+
 { #category : 'initialization' }
 FOConfiguration >> initialize [
 
 	super initialize.
 	properties := Dictionary new.
+	fromSton := false.
 	self propertyAt: self webRootPrefixSymbol put: ''
+]
+
+{ #category : 'instance creation' }
+FOConfiguration >> isFromSton [
+
+	^ fromSton
 ]
 
 { #category : 'accessing' }
