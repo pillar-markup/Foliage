@@ -24,12 +24,14 @@ FOConfiguration >> baseUri: aString [
 
 { #category : 'accessing' }
 FOConfiguration >> blogs [
+
 	^ self propertyAt: #blogs ifAbsent: [ #() ]
 ]
 
 { #category : 'accessing' }
 FOConfiguration >> configuration [
 	"to be polymorphic with the wrapper so that we can use the wrapper or the wrappee to the the wrappee"
+	
 	^ self
 ]
 
@@ -41,6 +43,7 @@ FOConfiguration >> fromJSON [
 
 { #category : 'instance creation' }
 FOConfiguration >> fromSton [
+
 	fromSton := true
 ]
 
@@ -50,7 +53,7 @@ FOConfiguration >> initialize [
 	super initialize.
 	properties := Dictionary new.
 	fromSton := false.
-	self propertyAt: self webRootPrefixSymbol put: ''
+	self propertyAt: self webRootPrefixString put: ''
 ]
 
 { #category : 'instance creation' }
@@ -62,11 +65,12 @@ FOConfiguration >> isFromSton [
 { #category : 'accessing' }
 FOConfiguration >> menus [
 
-	^ self propertyAt: #menus ifAbsent: [ #() ]
+	^ self propertyAt: 'menus' ifAbsent: [ #() ]
 ]
 
 { #category : 'accessing' }
-FOConfiguration >> properties: aDictionary [ 
+FOConfiguration >> properties: aDictionary [
+
 	properties := aDictionary
 ]
 
@@ -91,17 +95,17 @@ FOConfiguration >> propertyAt: aKey put: aString [
 { #category : 'accessing' }
 FOConfiguration >> webRootPrefix [
 
-	^ properties at: self webRootPrefixSymbol
+	^ properties at: self webRootPrefixString
 ]
 
 { #category : 'accessing' }
 FOConfiguration >> webRootPrefix: aString [
 
-	properties at: self webRootPrefixSymbol put: aString
+	properties at: self webRootPrefixString put: aString
 ]
 
 { #category : 'private' }
-FOConfiguration >> webRootPrefixSymbol [
+FOConfiguration >> webRootPrefixString [
 
-	^ #webRootPrefix
+	^ 'webRootPrefix'
 ]

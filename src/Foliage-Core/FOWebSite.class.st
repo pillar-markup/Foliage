@@ -290,15 +290,18 @@ FOWebSite >> readConfigFile [
 	| dictOrWrapper |
 	dictOrWrapper := self readConfigFile: 'FoliageConfig.ston'.
 	
-	
-	^ dictOrWrapper class = Dictionary 
+	^ dictOrWrapper class = Dictionary
 		ifTrue: [ 
 			"Here we read in JSON and not STON"
 			dictOrWrapper keysAndValuesDo: [ :k :v | 
 				configuration propertyAt: k put: v ].
 				configuration fromJSON.
 				configuration ]
-		ifFalse: [ dictOrWrapper configuration fromSton ]
+		ifFalse: [ 
+			| configuration |
+			configuration := dictOrWrapper configuration.
+			configuration fromSton.
+			configuration ]
 ]
 
 { #category : 'importing' }

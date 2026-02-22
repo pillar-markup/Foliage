@@ -20,38 +20,21 @@ FOConfigurationWrapperTest >> StonConfigFileContents [
 	#blogs: [ 
 		''news'': ''News''
 	],
-	#properties : {
-		"menu" : [
-			{ "title" : "About Us",
-		 	 "url" : "/about_us.html",
-		  	"has_subfiles" : true,
-		  	"submenu" : [ { 
-				"title" : "About",
-				"url" : "/about_us.html" 
+	
+		"menus" : [
+			{ "title" : "About Us", "url" : "/about_us.html", "has_subfiles" : true,
+		  		"submenu" : [ 
+					{ "title" : "About","url" : "/about_us.html" },
+					{ "title" : "Membership","url" : "/membership.html" },
+					{ "title" : "ESUG News","url" : "/about_us.html" }]
 				},
-				{ 
-				"title" : "Membership",
-				"url" : "/membership.html" 
-				},
-				{ 
-				"title" : "ESUG News",
-				"url" : "/about_us.html" 
-				}]
-				},
-			{ "title" : "Conferences",
-		  	"url" : "/conferences.html",
-		  	"has_subfiles" : true,
-		  	"submenu" : [ { 
-				"title" : "2025",
-				"url" : "/2025-Conference/conf2025.html" 
-				},
-				{ 
-				"title" : "2024",
-				"url" : "/2024-Conference/conf2024.html" 
-				}]
-		}],
+			{ "title" : "Conferences", "url" : "/conferences.html", "has_subfiles" : true,
+		  		"submenu" : [ 
+					{ "title" : "2025", "url" : "/2025-Conference/conf2025.html" },
+					{ "title" : "2024", "url" : "/2024-Conference/conf2024.html" }]}
+		],
 		"site_short_description" : "European Smalltalk User Group"
-		}
+
 }'
 ]
 
@@ -93,4 +76,15 @@ FOConfigurationWrapperTest >> testFoliageStonExists [
 
 	self assert: (fileSystem / 'site'/ 'FoliageConfig.ston') exists.
 
+]
+
+{ #category : 'tests' }
+FOConfigurationWrapperTest >> testReadsProperties [
+
+	| config menus |
+	config := site readConfigFile.
+	self assert: config class equals: FOConfiguration.
+	menus := (config propertyAt: 'menus').
+	self assert: menus first class equals: Dictionary.
+	self assert: menus second class equals: Dictionary.
 ]
