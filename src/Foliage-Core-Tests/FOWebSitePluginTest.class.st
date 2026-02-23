@@ -1,5 +1,5 @@
 Class {
-	#name : 'FOWebSiteTest',
+	#name : 'FOWebSitePluginTest',
 	#superclass : 'FOAbstractWebSiteTest',
 	#category : 'Foliage-Core-Tests-Blog',
 	#package : 'Foliage-Core-Tests',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'tests' }
-FOWebSiteTest >> testHandlePlugins [
+FOWebSitePluginTest >> testHandlePlugins [
 
 	
 	"so far we cannot really tests handleplugins in a generic manner since it is 

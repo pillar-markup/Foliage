@@ -130,6 +130,11 @@ FOWebSite >> buildRoot [
 		parent: self 
 ]
 
+{ #category : 'accessing' }
+FOWebSite >> configuration [
+	^ configuration
+]
+
 { #category : 'accessing-blogs' }
 FOWebSite >> configureBlogsFrom: blogSpecs [
 	"During the configuration of blogs, pages are converted to blog post objects in the model."

@@ -5,9 +5,9 @@ Class {
 		'site',
 		'fileSystem'
 	],
-	#category : 'Foliage-Core-Tests-Model',
+	#category : 'Foliage-Core-Tests-Configuration',
 	#package : 'Foliage-Core-Tests',
-	#tag : 'Model'
+	#tag : 'Configuration'
 }
 
 { #category : 'running' }

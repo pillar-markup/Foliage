@@ -1,16 +1,16 @@
 Class {
-	#name : 'FOFileObjectTest',
+	#name : 'FOReaderObjectTest',
 	#superclass : 'TestCase',
 	#instVars : [
 		'root'
 	],
-	#category : 'Foliage-Core-Tests-Model',
+	#category : 'Foliage-Core-Tests-Reader',
 	#package : 'Foliage-Core-Tests',
-	#tag : 'Model'
+	#tag : 'Reader'
 }
 
 { #category : 'running' }
-FOFileObjectTest >> setUp [
+FOReaderObjectTest >> setUp [
 
 	root := FileSystem memory root.
 	(root / 'community.css')
@@ -22,7 +22,7 @@ FOFileObjectTest >> setUp [
 ]
 
 { #category : 'running' }
-FOFileObjectTest >> testGetAFileObject [
+FOReaderObjectTest >> testGetAFileObject [
 
 	| aPage |
 	aPage := (FOFileReader file: root / 'community.css') createModelEntity.

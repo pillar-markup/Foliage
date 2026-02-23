@@ -1,16 +1,16 @@
 Class {
-	#name : 'FOHTMLPageTest',
+	#name : 'FOReaderHTMLTest',
 	#superclass : 'TestCase',
 	#instVars : [
 		'root'
 	],
-	#category : 'Foliage-Core-Tests-Model',
+	#category : 'Foliage-Core-Tests-Reader',
 	#package : 'Foliage-Core-Tests',
-	#tag : 'Model'
+	#tag : 'Reader'
 }
 
 { #category : 'running' }
-FOHTMLPageTest >> setUp [
+FOReaderHTMLTest >> setUp [
 
 	root := FileSystem memory root.
 	(root / 'community.html')
@@ -22,7 +22,7 @@ FOHTMLPageTest >> setUp [
 ]
 
 { #category : 'running' }
-FOHTMLPageTest >> testGetAFileObject [
+FOReaderHTMLTest >> testGetAFileObject [
 
 	| aPage |
 	aPage := (FOHTMLReader file: root / 'community.html') createModelEntity.

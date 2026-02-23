@@ -74,9 +74,7 @@ FOWebSiteConfigurationTest >> testUninitializedWebSite [
 	ws := FOWebSite new
 		targetPath: '/home/Test2/foliage/output';
 		sourcePath: '/home/Test2/foliage/test/'.
-		
-	self flag: #todo. 
-	"use fileReference instead of string"
+
 	self 
 		assert: ws sourcePath fullName 
 		equals: '/home/Test2/foliage/test'.		

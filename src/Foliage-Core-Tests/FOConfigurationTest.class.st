@@ -1,9 +1,9 @@
 Class {
 	#name : 'FOConfigurationTest',
 	#superclass : 'FOAbstractWebSiteTest',
-	#category : 'Foliage-Core-Tests-Model',
+	#category : 'Foliage-Core-Tests-Configuration',
 	#package : 'Foliage-Core-Tests',
-	#tag : 'Model'
+	#tag : 'Configuration'
 }
 
 { #category : 'running' }
@@ -59,6 +59,15 @@ FOConfigurationTest >> testConfigurationAccessToUnknowProperties [
 	unk := false.
 	config propertyAt: #doesNotExists ifAbsent: [ unk := true ].
 	self assert: unk
+]
+
+{ #category : 'running' }
+FOConfigurationTest >> testConfigurationAccessViaSite [
+
+	site readConfigFile.
+	self 
+		assert: (site configuration propertyAt: #site_short_description)
+		equals: 'European Smalltalk User Group'
 ]
 
 { #category : 'running' }

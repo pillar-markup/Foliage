@@ -1,16 +1,16 @@
 Class {
-	#name : 'FOWebImageTest',
+	#name : 'FOReaderWebImageTest',
 	#superclass : 'TestCase',
 	#instVars : [
 		'root'
 	],
-	#category : 'Foliage-Core-Tests-Model',
+	#category : 'Foliage-Core-Tests-Reader',
 	#package : 'Foliage-Core-Tests',
-	#tag : 'Model'
+	#tag : 'Reader'
 }
 
 { #category : 'running' }
-FOWebImageTest >> setUp [
+FOReaderWebImageTest >> setUp [
 
 	root := FileSystem memory root.
 	(root / 'community.png')
@@ -22,7 +22,7 @@ FOWebImageTest >> setUp [
 ]
 
 { #category : 'running' }
-FOWebImageTest >> testGetAnImage [
+FOReaderWebImageTest >> testGetAnImage [
 
 	| aPage |
 	aPage := (FOImageReader file: root / 'community.png') createModelEntity.
