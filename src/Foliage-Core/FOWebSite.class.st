@@ -246,6 +246,14 @@ FOWebSite >> initializePaths [
 	self templatePath: self defaultTemplatePath.
 ]
 
+{ #category : 'mustache error' }
+FOWebSite >> mustacheDefaultWhenLookupFails: aFailingPart [
+
+	^ configuration 
+		propertyAt: aFailingPart 
+		ifAbsent: [ super mustacheDefaultWhenLookupFails: aFailingPart ]
+]
+
 { #category : 'plugins' }
 FOWebSite >> pluginHandle: aString for: aFOMicrodownPage [ 
 	

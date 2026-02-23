@@ -112,23 +112,16 @@ FONoTemplatePageRenderingTest >> lineEnding [
 ]
 
 { #category : 'running' }
-FONoTemplatePageRenderingTest >> setUp [ 
-	
-	fileSystem := FileSystem memory. 
-	root := fileSystem root.
+FONoTemplatePageRenderingTest >> setUp [
 
-	self defineFiles.
+	root := FileSystem memory root.
+	(root / 'community.md')
+		ensureCreateFile;
+		writeStreamDo: [ :s | s << self community ].
+	(root / 'gsoc.md')
+		ensureCreateFile;
+		writeStreamDo: [ :s | s << self gsocContentsMD2 ]
 	
-	site := FOWebSite new.
-	site fileSystem: fileSystem.
-	site webRootPrefix: ''.
-	
-	site sourcePath: '/site'.
-	site templatePath: '/site/templates'.
-	
-	"normally importFiles will do it all together"
-	site readConfigFile.
-	site importDirectory: fileSystem root / 'site'.
 ]
 
 { #category : 'running' }

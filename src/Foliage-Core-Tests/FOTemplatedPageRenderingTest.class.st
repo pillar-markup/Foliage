@@ -46,12 +46,31 @@ Yes Pharo has been selected for GSOC
 ]
 
 { #category : 'running' }
-FOTemplatedPageRenderingTest >> templateVariableContents [
+FOTemplatedPageRenderingTest >> setUp [ 
 
+	super setUp.
+	site webRootPrefix: 'Tintin'.
+	
+]
+
+{ #category : 'running' }
+FOTemplatedPageRenderingTest >> templateVariableContents [
+	"
+	The variable body is a method defined in the context associated to the microdown page.
+	site returns the site associate to the page.
+	site.baseUri and webRootPrefix is a method defined in the site class.
+		
+	site_short_description is not an existing message but as a key in the configuration.
+	site.foo is not existing as message nor as key in the configuration.
+	"
+	
+	
 	^ 'BODYSTART
 {{{body}}}
-site.baseUri:
-{{site.baseUri}}
+site.baseUri: {{site.baseUri}}
+site.webRootPrefix: {{site.webRootPrefix}}
+{{site.foo}}
+site.site_short_description: {{site.site_short_description}}
 BODYEND'
 ]
 
@@ -98,16 +117,17 @@ BODYEND'
 FOTemplatedPageRenderingTest >> testTemplatedContentsWithExtendedVariables [
 	
 	self 
-		assert: ( site / 'templateVariableUser.md') templatedContents 
+		assert: ( site / 'templateVariableUser.md') templatedContents
 		equals:  'BODYSTART
 
 <h1>Google Summer of Code 2019 Students</h1>
 <p>Yes Pharo has been selected for GSOC</p>
 
-site.baseUri:
-http://esug.org
+site.baseUri: http://esug.org
+site.webRootPrefix: Tintin
+
+site.site_short_description: European Smalltalk User Group
 BODYEND'
+	
 
-
-		
 ]
