@@ -19,7 +19,7 @@ FOAbstractWebSiteTest >> JSONFoliageConfigFileContents [
 	#blogs: [ 
 		''news'': ''News''
 	],
-	#menu : [
+	#menus : [
 			{ "title" : "About Us",
 		 	 "url" : "/about_us.html",
 		  	"has_subfiles" : true,

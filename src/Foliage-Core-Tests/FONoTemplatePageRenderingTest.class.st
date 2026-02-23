@@ -9,7 +9,9 @@ Class {
 	#name : 'FONoTemplatePageRenderingTest',
 	#superclass : 'TestCase',
 	#instVars : [
-		'root'
+		'root',
+		'fileSystem',
+		'site'
 	],
 	#category : 'Foliage-Core-Tests-Rendering',
 	#package : 'Foliage-Core-Tests',
@@ -110,16 +112,23 @@ FONoTemplatePageRenderingTest >> lineEnding [
 ]
 
 { #category : 'running' }
-FONoTemplatePageRenderingTest >> setUp [
-
-	root := FileSystem memory root.
-	(root / 'community.md')
-		ensureCreateFile;
-		writeStreamDo: [ :s | s << self community ].
-	(root / 'gsoc.md')
-		ensureCreateFile;
-		writeStreamDo: [ :s | s << self gsocContentsMD2 ]
+FONoTemplatePageRenderingTest >> setUp [ 
 	
+	fileSystem := FileSystem memory. 
+	root := fileSystem root.
+
+	self defineFiles.
+	
+	site := FOWebSite new.
+	site fileSystem: fileSystem.
+	site webRootPrefix: ''.
+	
+	site sourcePath: '/site'.
+	site templatePath: '/site/templates'.
+	
+	"normally importFiles will do it all together"
+	site readConfigFile.
+	site importDirectory: fileSystem root / 'site'.
 ]
 
 { #category : 'running' }

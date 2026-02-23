@@ -1,6 +1,5 @@
 "
-This is a little test checking that manual meta data are parsed. 
-This is because in early version of microdown there was no file metadata. So Foliage introduced one.  
+Some tests about Foliage
 "
 Class {
 	#name : 'ManifestFoliageCoreTests',
