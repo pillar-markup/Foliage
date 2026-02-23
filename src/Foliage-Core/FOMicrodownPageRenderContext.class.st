@@ -50,6 +50,12 @@ FOMicrodownPageRenderContext >> publicationDate [
 ]
 
 { #category : 'accessing' }
+FOMicrodownPageRenderContext >> site [
+	
+	^ website
+]
+
+{ #category : 'accessing' }
 FOMicrodownPageRenderContext >> title [
 
 	^ self page title

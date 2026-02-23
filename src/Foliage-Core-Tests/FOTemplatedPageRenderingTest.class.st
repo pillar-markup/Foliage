@@ -10,15 +10,15 @@ Class {
 FOTemplatedPageRenderingTest >> defineFiles [ 
 	
 	super defineFiles. 
-	fileSystem / 'site' / 'templates' / 'main' writeStreamDo: [ :st |
+	fileSystem / 'site' / 'templates' / 'mainTemplate' writeStreamDo: [ :st |
 		st nextPutAll: self mainTemplateContents ].
-	fileSystem / 'site' / 'usingMainTemplate.md' writeStreamDo: [ :st |
-		st nextPutAll: self someContentsMDUsingMainTemplate ].
+	fileSystem / 'site' / 'mainTemplateUser.md' writeStreamDo: [ :st |
+		st nextPutAll: self mainTemplateUserContents ].
 	
-	fileSystem / 'site' / 'templates' / 'templateExtendedVariables' writeStreamDo: [ :st |
-		st nextPutAll: self mainTemplateContents ].
-	fileSystem / 'site' / 'usingExtendedVariables.md' writeStreamDo: [ :st |
-		st nextPutAll: self someContentsMDUsingMainTemplate ].
+	fileSystem / 'site' / 'templates' / 'templateVariable' writeStreamDo: [ :st |
+		st nextPutAll: self templateVariableContents ].
+	fileSystem / 'site' / 'templateVariableUser.md' writeStreamDo: [ :st |
+		st nextPutAll: self templateVariableUserContents ].
 	
 ]
 
@@ -31,11 +31,36 @@ BODYEND'
 ]
 
 { #category : 'running' }
-FOTemplatedPageRenderingTest >> someContentsMDUsingMainTemplate [
+FOTemplatedPageRenderingTest >> mainTemplateUserContents [
 
 	^ '{
 "title" : "Google Summer of Code",
-"layout" : "main",
+"layout" : "mainTemplate",
+"publishDate" : "2019-05-21"
+}
+
+# Google Summer of Code 2019 Students
+
+Yes Pharo has been selected for GSOC
+'
+]
+
+{ #category : 'running' }
+FOTemplatedPageRenderingTest >> templateVariableContents [
+
+	^ 'BODYSTART
+{{{body}}}
+site.baseUri:
+{{site.baseUri}}
+BODYEND'
+]
+
+{ #category : 'running' }
+FOTemplatedPageRenderingTest >> templateVariableUserContents [
+
+	^ '{
+"title" : "Google Summer of Code",
+"layout" : "templateVariable",
 "publishDate" : "2019-05-21"
 }
 
@@ -48,9 +73,9 @@ Yes Pharo has been selected for GSOC
 { #category : 'running' }
 FOTemplatedPageRenderingTest >> testFileExistsAndGetsImported [ 
 
-	self assert: (fileSystem / 'site' / 'usingMainTemplate.md') exists.
+	self assert: (fileSystem / 'site' / 'mainTemplateUser.md') exists.
 	self 
-		assert: (site / 'usingMainTemplate.md') class 
+		assert: (site / 'mainTemplateUser.md') class 
 		equals: FOMicrodownPage 
 
 ]
@@ -59,7 +84,7 @@ FOTemplatedPageRenderingTest >> testFileExistsAndGetsImported [
 FOTemplatedPageRenderingTest >> testTemplatedContents [
 	
 	self 
-		assert: ( site / 'usingMainTemplate.md') templatedContents
+		assert: ( site / 'mainTemplateUser.md') templatedContents
 		equals:  'BODYSTART
 
 <h1>Google Summer of Code 2019 Students</h1>
@@ -73,32 +98,16 @@ BODYEND'
 FOTemplatedPageRenderingTest >> testTemplatedContentsWithExtendedVariables [
 	
 	self 
-		assert: ( site / 'usingExtendedVariables.md') templatedContents
+		assert: ( site / 'templateVariableUser.md') templatedContents 
 		equals:  'BODYSTART
 
 <h1>Google Summer of Code 2019 Students</h1>
 <p>Yes Pharo has been selected for GSOC</p>
 
+site.baseUri:
+http://esug.org
 BODYEND'
+
+
 		
-]
-
-{ #category : 'running' }
-FOTemplatedPageRenderingTest >> usingExtendedVariables [
-
-	^ 'BODYSTART
-{{{body}}}
-site.baseUri:
-{{site.baseUri}}
-BODYEND'
-]
-
-{ #category : 'running' }
-FOTemplatedPageRenderingTest >> withExtendedVariables [
-
-	^ 'BODYSTART
-{{{body}}}
-site.baseUri:
-{{site.baseUri}}
-BODYEND'
 ]
