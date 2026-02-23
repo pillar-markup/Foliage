@@ -1,3 +1,7 @@
+"
+This context provides access to a blog post abstract, title and navigation (next and previous). 
+
+"
 Class {
 	#name : 'FOBlogPostRenderContext',
 	#superclass : 'FOMicrodownPageRenderContext',

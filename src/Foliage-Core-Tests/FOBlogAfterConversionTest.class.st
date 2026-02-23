@@ -74,7 +74,7 @@ FOBlogAfterConversionTest >> testBlogOverviewRender [
 	site buildOverviewFor: 'success'.
 	summaryPageObject := blog items at: #'index.html'.
 	self 
-		assert: summaryPageObject htmlString
+		assert: summaryPageObject templatedContents
 		equals: 
 	 '<!DOCTYPE HTML>
 <html>

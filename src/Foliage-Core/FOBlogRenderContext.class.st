@@ -1,3 +1,6 @@
+"
+So far unused... 
+"
 Class {
 	#name : 'FOBlogRenderContext',
 	#superclass : 'FOMicrodownPageRenderContext',

@@ -80,19 +80,12 @@ FOMicrodownPage >> document: aMicRootBlock [
 	document := aMicRootBlock
 ]
 
-{ #category : 'accessing' }
-FOMicrodownPage >> publicationDate [
-
-	self deprecated: 'use publishDate'  transformWith: '`@rec publicationDate' -> '`@rec publishDate'.
-	^ self publishDate
-]
-
 { #category : 'actions' }
 FOMicrodownPage >> publish [
 
 	self publishPath
 		ensureDelete;
-		writeStreamDo: [ :stream | stream << self htmlString ]
+		writeStreamDo: [ :stream | stream << self templatedContents ]
 ]
 
 { #category : 'accessing' }
@@ -109,7 +102,7 @@ FOMicrodownPage >> template [
 ]
 
 { #category : 'rendering' }
-FOMicrodownPage >> templatedRender [ 
+FOMicrodownPage >> templatedContents [ 
 
 	^ self newRenderContext renderTemplate: self template
 ]
