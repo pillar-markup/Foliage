@@ -44,7 +44,7 @@ FOHTMLPage >> buildHtmlDocument [
 FOHTMLPage >> buildHtmlString [
 	htmlDocument ifNotNil: [ 
 		^ htmlDocument printString ].
-	^ self render
+	^ self templatedRender
 ]
 
 { #category : 'accessing' }
@@ -67,14 +67,14 @@ FOHTMLPage >> newRenderContext [
 	^ super newRenderContext page: self 
 ]
 
-{ #category : 'html' }
-FOHTMLPage >> render [
-
-	^ nil
-]
-
 { #category : 'hooks' }
 FOHTMLPage >> renderContextClass [
 
 	^ FOMicrodownPageRenderContext
+]
+
+{ #category : 'html' }
+FOHTMLPage >> templatedRender [
+
+	^ nil
 ]

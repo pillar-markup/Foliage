@@ -14,7 +14,7 @@ FOMicrodownPageRenderContext >> body [
 	"{{{body}}} is used in template to represent the body of the page"
 	
 	^ String streamContents: [ :s |
-			page renderOn: s ].
+			page bodyOn: s ].
 ]
 
 { #category : 'accessing' }

@@ -161,7 +161,7 @@ FOBlogAfterConversionTest >> testBlogOverviewRenderOn [
 	| summaryPageObject str |
 	site buildOverviewFor: 'success'.
 	summaryPageObject := blog items at: #'index.html'.
-	str := String streamContents: [ :st | summaryPageObject renderOn: st ].
+	str := String streamContents: [ :st | summaryPageObject bodyOn: st ].
 	self assert: str equals: '<h2><a href="/success/gsoc2.html">IsLoop</a></h2>
 We are organizing a summer school on Pharo and advanced design every year.
 The previous editions were held at Split, Montpelllier and Fianarantsoa.

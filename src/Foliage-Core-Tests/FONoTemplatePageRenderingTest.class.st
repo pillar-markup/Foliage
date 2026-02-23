@@ -6,18 +6,18 @@ For now the only distinction between md converted in pillar and md are: md2 exte
 
 "
 Class {
-	#name : 'FOMicrodownPageTest',
+	#name : 'FONoTemplatePageRenderingTest',
 	#superclass : 'TestCase',
 	#instVars : [
 		'root'
 	],
-	#category : 'Foliage-Core-Tests-Model',
+	#category : 'Foliage-Core-Tests-Rendering',
 	#package : 'Foliage-Core-Tests',
-	#tag : 'Model'
+	#tag : 'Rendering'
 }
 
 { #category : 'running' }
-FOMicrodownPageTest >> community [
+FONoTemplatePageRenderingTest >> community [
 
 
 ^ '{ 
@@ -37,7 +37,7 @@ You can get an instant invite following this [link](https://discord.gg/QewZMZa).
 ]
 
 { #category : 'running' }
-FOMicrodownPageTest >> gsocContentsMD2 [ 
+FONoTemplatePageRenderingTest >> gsocContentsMD2 [ 
 
 	^ '{
 "title" : "Google Summer of Code",
@@ -104,13 +104,13 @@ On this page, you can find the personal blogs and social media links of the seve
 ]
 
 { #category : 'running' }
-FOMicrodownPageTest >> lineEnding [
+FONoTemplatePageRenderingTest >> lineEnding [
 
 	^ Character cr asString
 ]
 
 { #category : 'running' }
-FOMicrodownPageTest >> setUp [
+FONoTemplatePageRenderingTest >> setUp [
 
 	root := FileSystem memory root.
 	(root / 'community.md')
@@ -123,7 +123,7 @@ FOMicrodownPageTest >> setUp [
 ]
 
 { #category : 'running' }
-FOMicrodownPageTest >> testAbstractBuilderVisitor [
+FONoTemplatePageRenderingTest >> testAbstractBuilderVisitor [
 
 	| aPage abstract |
 	aPage := (FOMicrodownV2Reader file: root / 'community.md') createModelEntity.
@@ -138,7 +138,7 @@ FOMicrodownPageTest >> testAbstractBuilderVisitor [
 ]
 
 { #category : 'running' }
-FOMicrodownPageTest >> testAbstractBuilderVisitorSmallerAbstractThanText [
+FONoTemplatePageRenderingTest >> testAbstractBuilderVisitorSmallerAbstractThanText [
 
 	| aPage abstract |
 	aPage := (FOMicrodownV2Reader file: root / 'community.md') createModelEntity.
@@ -153,7 +153,7 @@ FOMicrodownPageTest >> testAbstractBuilderVisitorSmallerAbstractThanText [
 ]
 
 { #category : 'running' }
-FOMicrodownPageTest >> testAbstractBuilderVisitorSmallerTextThanAbstract [
+FONoTemplatePageRenderingTest >> testAbstractBuilderVisitorSmallerTextThanAbstract [
 
 	| aPage abstract |
 	aPage := (FOMicrodownV2Reader file: root / 'community.md') createModelEntity.
@@ -168,7 +168,7 @@ FOMicrodownPageTest >> testAbstractBuilderVisitorSmallerTextThanAbstract [
 ]
 
 { #category : 'running' }
-FOMicrodownPageTest >> testBasicAbstractOnMicrodownPage [
+FONoTemplatePageRenderingTest >> testBasicAbstractOnMicrodownPage [
 
 	| aPage |
 	aPage := (FOMicrodownV2Reader file: root / 'community.md') createModelEntity.
@@ -178,7 +178,7 @@ FOMicrodownPageTest >> testBasicAbstractOnMicrodownPage [
 ]
 
 { #category : 'running' }
-FOMicrodownPageTest >> testGetAMicrodownPageWithAMicrodownTree [
+FONoTemplatePageRenderingTest >> testGetAMicrodownPageWithAMicrodownTree [
 
 	| aPage |
 	aPage := (FOMicrodownV2Reader file: root / 'community.md') createModelEntity.
@@ -189,7 +189,7 @@ FOMicrodownPageTest >> testGetAMicrodownPageWithAMicrodownTree [
 ]
 
 { #category : 'running' }
-FOMicrodownPageTest >> testPublicationDate [
+FONoTemplatePageRenderingTest >> testPublicationDate [
 
 	| aPage |
 	aPage := (FOMicrodownV2Reader file: root / 'community.md')
@@ -200,11 +200,11 @@ FOMicrodownPageTest >> testPublicationDate [
 ]
 
 { #category : 'running' }
-FOMicrodownPageTest >> testRenderOnWithMicrodownV2 [
+FONoTemplatePageRenderingTest >> testRenderOnWithMicrodownV2 [
 
 	self
 		assert: (String streamContents: [ :s |
-					 (FOMicrodownV2Reader file: root / 'community.md') createModelEntity renderOn: s ]) equals: '
+					 (FOMicrodownV2Reader file: root / 'community.md') createModelEntity bodyOn: s ]) equals: '
 <h1>Community & help</h1>
 <h2>Discord team</h2>
 <p>We hang out on Discordwhere.</p>

@@ -16,6 +16,7 @@ FOFileObject class >> supportedFileExtensions [
 ]
 
 { #category : 'visiting' }
-FOFileObject >> acceptFOVisitor: aFOVisitor [ 
+FOFileObject >> acceptFOVisitor: aFOVisitor [
+
 	^ aFOVisitor visitFileObject: self 
 ]

@@ -58,6 +58,18 @@ FOMicrodownPage >> acceptFOVisitor: aFOVisitor [
 	^ aFOVisitor visitMicrodownPage: self 
 ]
 
+{ #category : 'rendering' }
+FOMicrodownPage >> bodyOn: aStream [
+
+	| visitor |
+	visitor := MicHTMLVisitor new
+		           stream: aStream;
+		           crAsNewLine;
+		           yourself.
+	visitor visit: document.
+	^ visitor contents
+]
+
 { #category : 'accessing' }
 FOMicrodownPage >> document [
 	^ document
@@ -89,27 +101,15 @@ FOMicrodownPage >> publishPath [
 	^ super publishPath withExtension: 'html'
 ]
 
-{ #category : 'rendering' }
-FOMicrodownPage >> render [ 
-
-	^ self newRenderContext renderTemplate: self template
-]
-
-{ #category : 'rendering' }
-FOMicrodownPage >> renderOn: aStream [
-
-	| visitor |
-	visitor := MicHTMLVisitor new
-		           stream: aStream;
-		           crAsNewLine;
-		           yourself.
-	visitor visit: document.
-	^ visitor contents
-]
-
 { #category : 'accessing' }
 FOMicrodownPage >> template [
 	"Returns the template for the layout as available in for example .../templates/index or templates/blog"
 	
 	^ (self website templatePathForLayout: self layout) asMustacheTemplate.
+]
+
+{ #category : 'rendering' }
+FOMicrodownPage >> templatedRender [ 
+
+	^ self newRenderContext renderTemplate: self template
 ]

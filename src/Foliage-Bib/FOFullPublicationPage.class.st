@@ -23,10 +23,10 @@ FOFullPublicationPage >> acceptFOVisitor: aVisitor [
 ]
 
 { #category : 'visiting' }
-FOFullPublicationPage >> renderOn: aStream [
+FOFullPublicationPage >> bodyOn: aStream [
 
 	| visitor |
-	super renderOn: aStream.
+	super bodyOn: aStream.
 
 	"for now we do not use templates but it would make sense to provide a template so 
 	section and for citation this way the user could customise it.

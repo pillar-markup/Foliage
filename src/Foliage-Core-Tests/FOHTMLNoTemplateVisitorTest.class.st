@@ -1,16 +1,16 @@
 Class {
-	#name : 'FOVisitorDifferPageTest',
+	#name : 'FOHTMLNoTemplateVisitorTest',
 	#superclass : 'TestCase',
 	#instVars : [
 		'root'
 	],
-	#category : 'Foliage-Core-Tests-Model',
+	#category : 'Foliage-Core-Tests-Rendering',
 	#package : 'Foliage-Core-Tests',
-	#tag : 'Model'
+	#tag : 'Rendering'
 }
 
 { #category : 'running' }
-FOVisitorDifferPageTest >> createAllMDElementTestFiles [
+FOHTMLNoTemplateVisitorTest >> createAllMDElementTestFiles [
 
 	self createMDTitlesTestFile.
 	self createMDCodeTestFile.
@@ -23,7 +23,7 @@ FOVisitorDifferPageTest >> createAllMDElementTestFiles [
 ]
 
 { #category : 'running' }
-FOVisitorDifferPageTest >> createMDCodeTestFile [
+FOHTMLNoTemplateVisitorTest >> createMDCodeTestFile [
 
 	(root / 'test-code.md')
 		ensureCreateFile;
@@ -37,7 +37,7 @@ Here is some code
 ]
 
 { #category : 'running' }
-FOVisitorDifferPageTest >> createMDFigureTestFile [
+FOHTMLNoTemplateVisitorTest >> createMDFigureTestFile [
 
 	(root / 'test-figure.md')
 		ensureCreateFile;
@@ -48,7 +48,7 @@ Here is a figure: ![Pharologo](https://files.pharo.org/media/logo/logo.png size=
 ]
 
 { #category : 'running' }
-FOVisitorDifferPageTest >> createMDLinkTestFile [
+FOHTMLNoTemplateVisitorTest >> createMDLinkTestFile [
 
 	(root / 'test-link.md')
 		ensureCreateFile;
@@ -59,7 +59,7 @@ FOVisitorDifferPageTest >> createMDLinkTestFile [
 ]
 
 { #category : 'running' }
-FOVisitorDifferPageTest >> createMDListOrderedTestFile [
+FOHTMLNoTemplateVisitorTest >> createMDListOrderedTestFile [
 
 	(root / 'test-list-ordered.md')
 		ensureCreateFile;
@@ -73,7 +73,7 @@ Here is a list:
 ]
 
 { #category : 'running' }
-FOVisitorDifferPageTest >> createMDListTestFile [
+FOHTMLNoTemplateVisitorTest >> createMDListTestFile [
 
 	(root / 'test-list.md')
 		ensureCreateFile;
@@ -88,7 +88,7 @@ Here is a list:
 ]
 
 { #category : 'running' }
-FOVisitorDifferPageTest >> createMDListUnorderedTestFile [
+FOHTMLNoTemplateVisitorTest >> createMDListUnorderedTestFile [
 
 	(root / 'test-list-unordered.md')
 		ensureCreateFile;
@@ -102,7 +102,7 @@ Here is a list:
 ]
 
 { #category : 'running' }
-FOVisitorDifferPageTest >> createMDTextBoldTestFile [
+FOHTMLNoTemplateVisitorTest >> createMDTextBoldTestFile [
 
 	(root / 'test-text-bold.md')
 		ensureCreateFile;
@@ -113,7 +113,7 @@ FOVisitorDifferPageTest >> createMDTextBoldTestFile [
 ]
 
 { #category : 'running' }
-FOVisitorDifferPageTest >> createMDTextItalicTestFile [
+FOHTMLNoTemplateVisitorTest >> createMDTextItalicTestFile [
 
 	(root / 'test-text-italic.md')
 		ensureCreateFile;
@@ -124,7 +124,7 @@ _italic_
 ]
 
 { #category : 'running' }
-FOVisitorDifferPageTest >> createMDTextMonospaceTestFile [
+FOHTMLNoTemplateVisitorTest >> createMDTextMonospaceTestFile [
 
 	(root / 'test-text-monospace.md')
 		ensureCreateFile;
@@ -135,7 +135,7 @@ FOVisitorDifferPageTest >> createMDTextMonospaceTestFile [
 ]
 
 { #category : 'running' }
-FOVisitorDifferPageTest >> createMDTextStyles [
+FOHTMLNoTemplateVisitorTest >> createMDTextStyles [
 
 	self createMDTextBoldTestFile.
 	self createMDTextItalicTestFile.
@@ -143,7 +143,7 @@ FOVisitorDifferPageTest >> createMDTextStyles [
 ]
 
 { #category : 'running' }
-FOVisitorDifferPageTest >> createMDTitlesTestFile [
+FOHTMLNoTemplateVisitorTest >> createMDTitlesTestFile [
 
 	(root / 'test-titles.md')
 		ensureCreateFile;
@@ -156,13 +156,13 @@ FOVisitorDifferPageTest >> createMDTitlesTestFile [
 ]
 
 { #category : 'as yet unclassified' }
-FOVisitorDifferPageTest >> lineEnding [
+FOHTMLNoTemplateVisitorTest >> lineEnding [
 
 	^ Character cr asString
 ]
 
 { #category : 'running' }
-FOVisitorDifferPageTest >> setUp [
+FOHTMLNoTemplateVisitorTest >> setUp [
 
 	root := FileSystem memory root.
 	(root / 'community.md')
@@ -182,22 +182,22 @@ You can get an instant invite following this [link](https://discord.gg/QewZMZa).
 ]
 
 { #category : 'tests' }
-FOVisitorDifferPageTest >> testBold [
+FOHTMLNoTemplateVisitorTest >> testBold [
 
 	self
 		assert: (String streamContents: [ :s |
 					 (FOMicrodownV2Reader file: root / 'test-text-bold.md')
-						 createModelEntity renderOn: s ])
+						 createModelEntity bodyOn: s ])
 		equals: self lineEnding , '<p><strong>Bold</strong></p>', self lineEnding 
 ]
 
 { #category : 'tests' }
-FOVisitorDifferPageTest >> testCode [
+FOHTMLNoTemplateVisitorTest >> testCode [
 
 	self
 		assert: (String streamContents: [ :s |
 					 (FOMicrodownV2Reader file: root / 'test-code.md')
-						 createModelEntity renderOn: s ])
+						 createModelEntity bodyOn: s ])
 		equals:
 			self lineEnding , '<p>Here is some code</p>' , self lineEnding,  self lineEnding
 			, '<pre><code>   1000 factorial / 999 factorial</code></pre>'
@@ -205,78 +205,78 @@ FOVisitorDifferPageTest >> testCode [
 ]
 
 { #category : 'tests' }
-FOVisitorDifferPageTest >> testFigure [
+FOHTMLNoTemplateVisitorTest >> testFigure [
 
 	| aMicrodownPage |
 	aMicrodownPage := (FOMicrodownV2Reader file: root / 'test-figure.md')
 		                  createModelEntity.
 	self
-		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
+		assert: (String streamContents: [ :s | aMicrodownPage bodyOn: s ])
 		equals: self lineEnding
 			,
 			'<p>Here is a figure: <figure><img src="/media/logo/logo.png" alt="Pharologo"><figcaption>Pharologo</figcaption></img></figure></p>', self lineEnding
 ]
 
 { #category : 'tests' }
-FOVisitorDifferPageTest >> testItalic [
+FOHTMLNoTemplateVisitorTest >> testItalic [
 
 	self
 		assert: (String streamContents: [ :s |
 					 (FOMicrodownV2Reader file: root / 'test-text-italic.md')
-						 createModelEntity renderOn: s ])
+						 createModelEntity bodyOn: s ])
 		equals: self lineEnding , '<p><i>italic</i></p>', self lineEnding
 ]
 
 { #category : 'tests' }
-FOVisitorDifferPageTest >> testLink [
+FOHTMLNoTemplateVisitorTest >> testLink [
 
 	self
 		assert: (String streamContents: [ :s |
 					 (FOMicrodownV2Reader file: root / 'test-link.md')
-						 createModelEntity renderOn: s ])
+						 createModelEntity bodyOn: s ])
 		equals: self lineEnding
 			, '<p><a target="_blank" href="http://pharo.org/">Pharo</a>.</p>', self lineEnding
 ]
 
 { #category : 'tests' }
-FOVisitorDifferPageTest >> testList [
+FOHTMLNoTemplateVisitorTest >> testList [
 
 	self
 		assert: (String streamContents: [ :s |
 					 (FOMicrodownV2Reader file: root / 'test-list.md')
-						 createModelEntity renderOn: s ])
+						 createModelEntity bodyOn: s ])
 		equals: self lineEnding , '<p>Here is a list:</p>' , self lineEnding , self lineEnding , '<ul>' , self lineEnding , '<li>item 1' , self lineEnding , '<ol>' , self lineEnding , '<li>sub item 1</li>'
 			, self lineEnding
 			, '<li>sub item 2</li>' , self lineEnding , '</ol></li>' , self lineEnding , '<li>item 2</li>' , self lineEnding , '</ul>'
 ]
 
 { #category : 'tests' }
-FOVisitorDifferPageTest >> testMonospace [
+FOHTMLNoTemplateVisitorTest >> testMonospace [
 
 	self
 		assert: (String streamContents: [ :s |
 					 (FOMicrodownV2Reader file: root / 'test-text-monospace.md')
-						 createModelEntity renderOn: s ])
+						 createModelEntity bodyOn: s ])
 		equals: self lineEnding , '<p><code>monospace</code></p>', self lineEnding 
 ]
 
 { #category : 'tests' }
-FOVisitorDifferPageTest >> testOrderedList [
+FOHTMLNoTemplateVisitorTest >> testOrderedList [
 
 	self
 		assert: (String streamContents: [ :s |
 					 (FOMicrodownV2Reader file: root / 'test-list-ordered.md')
-						 createModelEntity renderOn: s ])
+						 createModelEntity bodyOn: s ])
 		equals: self lineEnding , '<p>Here is a list:</p>' , self lineEnding , self lineEnding , '<ol>' , self lineEnding , '<li>item 1</li>' , self lineEnding , '<li>item 2</li>' , self lineEnding , '<li>item 3</li>' , self lineEnding , '</ol>'
 ]
 
 { #category : 'tests' }
-FOVisitorDifferPageTest >> testRenderOn [
+FOHTMLNoTemplateVisitorTest >> testRenderOn [
 
 	self
 		assert: (String streamContents: [ :s |
 					 (FOMicrodownV2Reader file: root / 'community.md')
-						 createModelEntity renderOn: s ])
+						 createModelEntity bodyOn: s ])
 		equals:
 			self lineEnding , '<h1>Community & help</h1>'
 			, self lineEnding
@@ -289,19 +289,19 @@ FOVisitorDifferPageTest >> testRenderOn [
 ]
 
 { #category : 'tests' }
-FOVisitorDifferPageTest >> testTitles [
+FOHTMLNoTemplateVisitorTest >> testTitles [
 
 	self
 		assert: (String streamContents: [ :s |
 					 (FOMicrodownV2Reader file: root / 'test-titles.md')
-						 createModelEntity renderOn: s ])
+						 createModelEntity bodyOn: s ])
 		equals: self lineEnding , '<h1>Microdown is quite cool</h1>'
 			, self lineEnding
 			, '<h2>Microdown is quite coool x2</h2>' , self lineEnding , '<h3>Microdown is quite cooool x3</h3>'
 ]
 
 { #category : 'tests' }
-FOVisitorDifferPageTest >> testUnorderedList [
+FOHTMLNoTemplateVisitorTest >> testUnorderedList [
 
 	| aMicrodownPage |
 	aMicrodownPage := (FOMicrodownV2Reader file:
@@ -309,6 +309,6 @@ FOVisitorDifferPageTest >> testUnorderedList [
 		                  createModelEntity.
 
 	self
-		assert: (String streamContents: [ :s | aMicrodownPage renderOn: s ])
+		assert: (String streamContents: [ :s | aMicrodownPage bodyOn: s ])
 		equals: self lineEnding , '<p>Here is a list:</p>' , self lineEnding, self lineEnding , '<ul>' , self lineEnding , '<li>item 1</li>' , self lineEnding , '<li>item 2</li>' , self lineEnding , '<li>item 3</li>' , self lineEnding , '</ul>'
 ]
