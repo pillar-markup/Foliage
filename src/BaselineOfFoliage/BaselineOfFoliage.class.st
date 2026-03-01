@@ -14,7 +14,7 @@ BaselineOfFoliage >> baseline: spec [
 		
 		spec baseline: 'Microdown' with: [
 			spec 
-				repository: 'github://pillar-markup/Microdown:v2.9.7/src'
+				repository: 'github://pillar-markup/Microdown:dev/src'
 				"load: #( 'Core' #'Microdown-HTMLExporter')" ]. 
 	
 		spec 
@@ -22,13 +22,13 @@ BaselineOfFoliage >> baseline: spec [
  	  		with: [ spec repository: 'github://Ducasse/Citezen' ].
 		
 		self
-			"mustache: spec;"
+			mustache: spec;
 			soup: spec;
 			zinc: spec.
 			
 		spec 
 			package: 'Foliage-Core' with: [
-				spec requires: #( 'Microdown') ];
+				spec requires: #( 'Microdown' 'Mustache') ];
 			package: 'Foliage-Publisher' with: [
 				spec requires: #('Foliage-Core') ];
 			package: 'Foliage-Server' with: [
