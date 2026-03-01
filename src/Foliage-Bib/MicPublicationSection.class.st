@@ -4,7 +4,7 @@ My items are MicPublication instances.
 "
 Class {
 	#name : 'MicPublicationSection',
-	#superclass : 'MicElement',
+	#superclass : 'AnObsoleteMicElement',
 	#instVars : [
 		'title',
 		'items'

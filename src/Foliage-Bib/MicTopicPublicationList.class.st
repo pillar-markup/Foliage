@@ -1,6 +1,6 @@
 Class {
 	#name : 'MicTopicPublicationList',
-	#superclass : 'MicAnnotationBlock',
+	#superclass : 'AnObsoleteMicAnnotationBlock',
 	#category : 'Foliage-Bib-MicrodownExtensions',
 	#package : 'Foliage-Bib',
 	#tag : 'MicrodownExtensions'

@@ -3,7 +3,7 @@ I represent a Citezen publication in Microdown world. I will be part of the docu
 "
 Class {
 	#name : 'MicPublication',
-	#superclass : 'MicElement',
+	#superclass : 'AnObsoleteMicElement',
 	#instVars : [
 		'pub'
 	],
