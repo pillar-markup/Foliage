@@ -13,7 +13,7 @@ MicTopicPublicationList class >> tag [
 ]
 
 { #category : 'accessing' }
-MicTopicPublicationList >> description [ 
+MicTopicPublicationList >> description [
 
 	^ self arguments at: #description
 ]
