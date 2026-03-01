@@ -55,13 +55,19 @@ FOTemplatedPageRenderingTest >> setUp [
 
 { #category : 'running' }
 FOTemplatedPageRenderingTest >> templateVariableContents [
+	
 	"
-	The variable body is a method defined in the context associated to the microdown page.
-	site returns the site associate to the page.
-	site.baseUri and webRootPrefix is a method defined in the site class.
+		The template uses different variables: body, site.baseUri....
 		
-	site_short_description is not an existing message but as a key in the configuration.
-	site.foo is not existing as message nor as key in the configuration.
+		The value of the variable body is given by a method defined in the context associated to the microdown page.
+		
+		site returns the site associated to the page.
+		
+		site.baseUri and webRootPrefix values are given by methods defined in the site class.
+		
+		the value for site_short_description is not an existing method but it is a key in the configuration.
+	
+		site.foo is not existing as message nor as key in the configuration so it is ignored""
 	"
 	
 	
@@ -115,6 +121,21 @@ BODYEND'
 
 { #category : 'running' }
 FOTemplatedPageRenderingTest >> testTemplatedContentsWithExtendedVariables [
+	
+	"This test is based on the following assumptions: 
+	
+		The template uses different variables: body, site.baseUri....
+		
+		The value of the variable body is given by a method defined in the context associated to the microdown page.
+		
+		site returns the site associated to the page.
+		
+		site.baseUri and webRootPrefix values are given by methods defined in the site class.
+		
+		the value for site_short_description is not an existing method but it is a key in the configuration.
+	
+		site.foo is not existing as message nor as key in the configuration so it is ignored"
+	
 	
 	self 
 		assert: ( site / 'templateVariableUser.md') templatedContents

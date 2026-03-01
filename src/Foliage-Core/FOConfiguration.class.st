@@ -74,6 +74,14 @@ FOConfiguration >> isFromSton [
 ]
 
 { #category : 'accessing' }
+FOConfiguration >> menu [
+	"in the template we have menu. Now it should be managed as a properties so normally 
+	we do not need to explicitly call this method."
+	
+	^ self propertyAt: 'menu' ifAbsent: [ #() ]
+]
+
+{ #category : 'accessing' }
 FOConfiguration >> menus [
 
 	^ self propertyAt: 'menus' ifAbsent: [ #() ]
