@@ -4,7 +4,7 @@ My items are MicPublication instances.
 "
 Class {
 	#name : 'MicPublicationSection',
-	#superclass : 'AnObsoleteMicElement',
+	#superclass : 'MicElement',
 	#instVars : [
 		'title',
 		'items'
@@ -35,7 +35,7 @@ MicPublicationSection >> items: anObject [
 { #category : 'printing' }
 MicPublicationSection >> printOn: aStream [
 
-	super printOn: aStream.
+	super printOn: aStream. 
 	aStream nextPutAll: '(', title,  ' - '.
 	items do: [ :s | s printOn: aStream ] separatedBy: [ aStream nextPutAll: ', ' ].
 	aStream nextPutAll: ')' 

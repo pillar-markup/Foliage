@@ -1,6 +1,6 @@
 Class {
 	#name : 'MicTopicPublicationList',
-	#superclass : 'AnObsoleteMicAnnotationBlock',
+	#superclass : 'MicAnnotationBlock',
 	#category : 'Foliage-Bib-MicrodownExtensions',
 	#package : 'Foliage-Bib',
 	#tag : 'MicrodownExtensions'
@@ -13,7 +13,7 @@ MicTopicPublicationList class >> tag [
 ]
 
 { #category : 'accessing' }
-MicTopicPublicationList >> description [
+MicTopicPublicationList >> description [ 
 
 	^ self arguments at: #description
 ]
