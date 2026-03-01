@@ -22,13 +22,13 @@ BaselineOfFoliage >> baseline: spec [
  	  		with: [ spec repository: 'github://Ducasse/Citezen' ].
 		
 		self
-			mustache: spec; 
+			"mustache: spec;"
 			soup: spec;
 			zinc: spec.
 			
 		spec 
 			package: 'Foliage-Core' with: [
-				spec requires: #( 'Microdown' 'Mustache') ];
+				spec requires: #( 'Microdown') ];
 			package: 'Foliage-Publisher' with: [
 				spec requires: #('Foliage-Core') ];
 			package: 'Foliage-Server' with: [
@@ -52,7 +52,7 @@ BaselineOfFoliage >> baseline: spec [
 BaselineOfFoliage >> mustache: spec [
 	spec baseline: 'Mustache' with: [
 		spec 
-			repository: 'github://noha/mustache:v1.4/repository/';
+			repository: 'github://noha/mustache:v1.4/repository';
 			loads: #('Core')].
 ]
 
