@@ -227,14 +227,14 @@ FOImporterTest >> testConvertToBlog [
 FOImporterTest >> testDefaultSourcePath [
 	
 	self assert: web fileSystem store class name equals: 'MemoryStore'.
-	self assert: web sourcePath printString equals: 'memory://site'
+	self assert: web sourcePath printString equals: 'memory:///site'
 ]
 
 { #category : 'running' }
 FOImporterTest >> testDefaultTargetPath [
 	
 	self assert: web fileSystem store class name equals: 'MemoryStore'.
-	self assert: web targetPath printString equals: 'memory://generated'
+	self assert: web targetPath printString equals: 'memory:///generated'
 ]
 
 { #category : 'tests' }

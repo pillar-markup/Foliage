@@ -373,7 +373,7 @@ FOWebSite >> sourcePath: aString [
 	/usr/site"
 	aString isString not ifTrue: [ self error: 'sourcePath: expects a string' ].
 	
-	sourcePath := fileSystem referenceTo: aString
+	sourcePath := fileSystem workingDirectory / aString
 ]
 
 { #category : 'accessing deployment' }
@@ -383,10 +383,11 @@ FOWebSite >> targetPath [
 ]
 
 { #category : 'accessing deployment' }
-FOWebSite >> targetPath: anObject [
+FOWebSite >> targetPath: aString [
 
-	anObject isString not ifTrue: [ self error: 'targetPath expects a string' ].	
-	targetPath := fileSystem referenceTo: anObject
+	aString isString not 
+		ifTrue: [ self error: 'targetPath expects a string' ].	
+	targetPath := fileSystem workingDirectory / aString
 ]
 
 { #category : 'accessing' }

@@ -321,5 +321,5 @@ FOAbstractWebSiteTest >> setUp [
 	
 	"normally importFiles will do it all together"
 	site readConfigFile.
-	site importDirectory: fileSystem root / 'site'.
+	site importDirectory: fileSystem root / site sourcePath fullName .
 ]
