@@ -4,9 +4,9 @@ Class {
 	#instVars : [
 		'blog'
 	],
-	#category : 'Foliage-Core-Tests-Blog',
+	#category : 'Foliage-Core-Tests-Core',
 	#package : 'Foliage-Core-Tests',
-	#tag : 'Blog'
+	#tag : 'Core'
 }
 
 { #category : 'running' }

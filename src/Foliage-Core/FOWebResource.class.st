@@ -136,14 +136,8 @@ FOWebResource >> propertyAt: key ifAbsentPut: aBlock [
 
 { #category : 'accessing' }
 FOWebResource >> publishPath [
-	self flag: #todo.
-	"path is not properly defined. When there is raw path and when publich path?"
+	
 	^ self website targetPath resolvePath: self relativePath  
-]
-
-{ #category : 'accessing' }
-FOWebResource >> publishPathFor: aString [ 
-	^ aString
 ]
 
 { #category : 'accessing' }

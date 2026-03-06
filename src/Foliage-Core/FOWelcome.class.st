@@ -2,6 +2,19 @@
 Here are some random notes so that I understand something. 
 
 
+
+### To publish from Pharo 
+
+```
+p := FOPublisher new. 
+p baseUri: 'StephaneDucasse.github.io'.
+p sourcePath: '/Users/ducasse/Test2/FoliageSample/site'.
+p targetPath: '/Users/ducasse/Test2/oliageSample/generated'.
+p publish.
+```
+
+### [Old] To publish from command-line
+
 ```
 FOPublisher commandLine activateWith: {
     'foliage'.
@@ -43,6 +56,14 @@ Here is one way to use loops in template
 	{{/ list }}'.
     </body>
 </html>
+```
+
+
+
+### To invoke while developing 
+
+```
+pharo-ui /Users/ducasse/Documents/Pharo/images/P13Foliage3/P13Foliage3.image clap foliage publish --source /Users/ducasse/Test2/pharo-website/site --target /home/ducasse/Test2/foliage/test/ /Users/ducasse/Test2/pharo-website/site/.foliage.ston
 ```
 "
 Class {
