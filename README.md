@@ -15,6 +15,17 @@ The resulting site is available at https://pillar-markup.github.io/FoliageSample
 
 To load it in Pharo 13 change the following expression to point to the latest tag.
 
+Since the current Metacello version is not able to update the baselines we should do it manually as follows: 
+
+```
+Smalltalk globals
+	at: #BaselineOfMicrodown 
+	ifPresent: [ :c | c removeFromSystem ].
+Smalltalk globals
+	at: #BaselineOfMustache 
+	ifPresent: [ :c | c removeFromSystem ].
+```
+
 ```
 Metacello new
 	baseline: 'Foliage';
