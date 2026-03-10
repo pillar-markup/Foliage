@@ -81,9 +81,9 @@ BaselineOfFoliage >> preload: loader package: packageSpec [
 		ifPresent: [ :c | c removeFromSystem ].
 
 
-	mustache := (IceRepository repositoryNamed: 'Mustache').
+	mustache := (IceRepository repositoryNamed: 'mustache').
 	mustache ifNotNil: [ 
-		{ 'BaselineOfMustache' . 'Mustache' } do: [ :each | 
+		{ 'BaselineOfMustache' . 'Mustache-Core' . 'Mustache-Tests'} do: [ :each | 
 				(mustache packageNamed: each) unload ].
 		mustache delete ].
 	
