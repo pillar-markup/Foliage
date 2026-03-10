@@ -11,3 +11,7 @@ MicrodownVisitor >> visitPublicationSection: aMicPublicationSection [
 
 	
 ]
+
+{ #category : '*Foliage-Bib' }
+MicrodownVisitor >> visitTopicPublicationList: aList [
+]

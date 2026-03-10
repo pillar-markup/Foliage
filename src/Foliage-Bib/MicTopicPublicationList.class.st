@@ -12,6 +12,12 @@ MicTopicPublicationList class >> tag [
 	^ #topicList
 ]
 
+{ #category : 'visiting' }
+MicTopicPublicationList >> accept: aVisitor [
+
+	aVisitor visitTopicPublicationList: self 
+]
+
 { #category : 'accessing' }
 MicTopicPublicationList >> description [ 
 

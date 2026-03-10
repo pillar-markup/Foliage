@@ -124,11 +124,9 @@ FOBlogAfterConversionTest >> testBlogOverviewRender [
 	<h2><a href="/success/gsoc2.html">IsLoop</a></h2>
 We are organizing a summer school on Pharo and advanced design every year.
 The previous editions were held at Split, Montpelllier and Fianarantsoa.
-<div class="date">21 May 2025</div>
-<h2><a href="/success/gsoc.html">Google Summer of Code</a></h2>
+<div class="date">21 May 2025</div><h2><a href="/success/gsoc.html">Google Summer of Code</a></h2>
 On this page, you can find the personal blogs and social media links of the seven students accepted for Google Summer of Code with Pharo Consortium in 2019. Follow their pages to get regular updates on their progress. Don''t hesitate to get in touch with those students - they need your feedback.Personal blogTwitterGitHubPersonal blogTwitterFacebookGitHubPersonal blogTwitterFacebookGitHubPersonal...TwitterGitHubPersona...TwitterFacebookGitHubPersona...TwitterGitHubPersona...TwitterGitHub
 <div class="date">21 May 2019</div>
-
 	BODYEND
 	
                     <div class="blog-footer">
@@ -165,11 +163,9 @@ FOBlogAfterConversionTest >> testBlogOverviewRenderOn [
 	self assert: str equals: '<h2><a href="/success/gsoc2.html">IsLoop</a></h2>
 We are organizing a summer school on Pharo and advanced design every year.
 The previous editions were held at Split, Montpelllier and Fianarantsoa.
-<div class="date">21 May 2025</div>
-<h2><a href="/success/gsoc.html">Google Summer of Code</a></h2>
+<div class="date">21 May 2025</div><h2><a href="/success/gsoc.html">Google Summer of Code</a></h2>
 On this page, you can find the personal blogs and social media links of the seven students accepted for Google Summer of Code with Pharo Consortium in 2019. Follow their pages to get regular updates on their progress. Don''t hesitate to get in touch with those students - they need your feedback.Personal blogTwitterGitHubPersonal blogTwitterFacebookGitHubPersonal blogTwitterFacebookGitHubPersonal...TwitterGitHubPersona...TwitterFacebookGitHubPersona...TwitterGitHubPersona...TwitterGitHub
-<div class="date">21 May 2019</div>
-' 
+<div class="date">21 May 2019</div>' 
 ]
 
 { #category : 'running' }
