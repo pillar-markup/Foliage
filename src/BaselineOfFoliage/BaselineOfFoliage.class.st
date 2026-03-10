@@ -60,22 +60,33 @@ BaselineOfFoliage >> mustache: spec [
 BaselineOfFoliage >> preload: loader package: packageSpec [
 	"Ignore pre and post loads if already executed"
 
-	| packagesToUnload mic |
-packagesToUnload := ((PackageOrganizer default packages 
+	| packagesToUnload mic mustache |
+	packagesToUnload := ((PackageOrganizer default packages 
 		select: [ :each | each name beginsWith: 'Microdown' ])  collect: [ :each | each name ]) 
 		reject: [ :each |  
- 	#('Microdown-RichTextPresenter' 'Microdown-RichTextPresenter-Tests') includes: each ].
-	"these two are not managed by the microdown repo but the documentation.
-	I should rename them in the future to avoid confusion"
-	packagesToUnload := packagesToUnload asOrderedCollection.
-	packagesToUnload add: 'BaselineOfMicrodown'.
+ 		#('Microdown-RichTextPresenter' 'Microdown-RichTextPresenter-Tests') includes: each ].
+		"these two are not managed by the microdown repo but the documentation.
+		I should rename them in the future to avoid confusion"
+		packagesToUnload := packagesToUnload asOrderedCollection.
+		packagesToUnload add: 'BaselineOfMicrodown'.
+	
 	mic := (IceRepository repositoryNamed: 'Microdown').
 	mic ifNotNil: [ 
 		packagesToUnload do: 
-			[ :each | 
-				(mic packageNamed: each) unload ].
+			[ :each | (mic packageNamed: each) unload ].
 		mic delete ].
 
+	Smalltalk globals
+		at: #BaselineOfMicrodown 
+		ifPresent: [ :c | c removeFromSystem ].
+
+
+	mustache := (IceRepository repositoryNamed: 'Mustache').
+	mustache ifNotNil: [ 
+		{ 'BaselineOfMustache' . 'Mustache' } do: [ :each | 
+				(mustache packageNamed: each) unload ].
+		mustache delete ].
+	
 	#( 'Microdown' ) do: [ :name |
         (IceRepository repositoryNamed: name)
             ifNil: [ 'Project not found: ' , name traceCr ]
@@ -85,7 +96,7 @@ packagesToUnload := ((PackageOrganizer default packages
                     forget ] ].
 
 	Smalltalk globals
-		at: #BaselineOfMicrodown 
+		at: #BaselineOfMustache 
 		ifPresent: [ :c | c removeFromSystem ].
 ]
 
