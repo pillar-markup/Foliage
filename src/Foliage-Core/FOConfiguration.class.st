@@ -30,13 +30,13 @@ FOConfiguration >> baseUri [
 { #category : 'accessing' }
 FOConfiguration >> baseUri: aString [
 
-	self propertyAt: #baseUri put: aString
+	self propertyAt: 'baseUri' put: aString
 ]
 
 { #category : 'accessing' }
 FOConfiguration >> blogs [
 
-	^ self propertyAt: #blogs ifAbsent: [ #() ]
+	^ self propertyAt: 'blogs' ifAbsent: [ #() ]
 ]
 
 { #category : 'accessing' }
@@ -96,19 +96,19 @@ FOConfiguration >> properties: aDictionary [
 { #category : 'accessing' }
 FOConfiguration >> propertyAt: aString [
 
-	^ properties at: aString
+	^ properties at: aString asString
 ]
 
 { #category : 'accessing' }
 FOConfiguration >> propertyAt: aString ifAbsent: aBlock [
 
-	^ properties at: aString ifAbsent: aBlock
+	^ properties at: aString asString ifAbsent: aBlock
 ]
 
 { #category : 'accessing' }
 FOConfiguration >> propertyAt: aKey put: aString [
 
-	properties at: aKey put: aString
+	properties at: aKey asString put: aString
 ]
 
 { #category : 'accessing' }

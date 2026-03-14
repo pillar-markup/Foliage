@@ -31,6 +31,6 @@ FOConfigurationWrapper >> initialize [
 { #category : 'accessing' }
 FOConfigurationWrapper >> instVarNamed: instVarName put: avalue [
 	
-	configuration propertyAt: instVarName put: avalue
+	configuration propertyAt: instVarName asString put: avalue
 		
 ]

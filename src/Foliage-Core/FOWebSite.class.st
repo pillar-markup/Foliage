@@ -300,7 +300,12 @@ FOWebSite >> rawPath: anObject [
 { #category : 'building' }
 FOWebSite >> readConfigFile [
 
-	| dictOrWrapper |
+	| dictOrWrapper reference |
+	reference := sourcePath / 'FoliageConfig.json'.
+	reference exists 
+		ifTrue: [ ^ (STONReader on: reference readStream) next ].
+	
+
 	dictOrWrapper := self readConfigFile: 'FoliageConfig.ston'.
 	
 	^ dictOrWrapper class = Dictionary
