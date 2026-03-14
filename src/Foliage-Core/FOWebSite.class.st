@@ -212,7 +212,7 @@ FOWebSite >> importDirectory: path [
 { #category : 'building' }
 FOWebSite >> importFiles [
 	
-	self readConfigFile.
+	"self readConfigFile."
 	self importDirectory: self sourcePath
 ]
 
