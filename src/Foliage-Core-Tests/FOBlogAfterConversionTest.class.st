@@ -27,10 +27,70 @@ FOBlogAfterConversionTest >> setUp [
 ]
 
 { #category : 'failing tests' }
+FOBlogAfterConversionTest >> testBlogAbstract [
+
+	| summaryPageObject str |
+	summaryPageObject := blog items at: #'pharo.md'.
+	
+	str := String streamContents: [ :st | st << summaryPageObject abstract  ].
+	self 
+		assert: str 
+		equals: 'Pharo is a cross-platform implementation of the classic Smalltalk-80 programming language and runtime system.[3] It is based on the OpenSmalltalk virtual machine (VM) named Cog,[4][5][6][7]: 16  which evaluates a dynamic, reflective, and object-oriented programming language with a syntax closely resembling Smalltalk-80. It is free and open-source software, released under a mix of MIT, and Apach...' 
+		
+]
+
+{ #category : 'failing tests' }
+FOBlogAfterConversionTest >> testBlogAbstract2 [
+
+	| summaryPageObject str |
+	summaryPageObject := blog items at: #'gsoc2.md'.
+	
+	str := String streamContents: [ :st | st << summaryPageObject abstract  ].
+	self 
+		assert: str 
+		equals: 'We are organizing a summer school on Pharo and advanced design every year.
+The previous editions were held at Split, Montpelllier and Fianarantsoa.' 
+	
+]
+
+{ #category : 'failing tests' }
+FOBlogAfterConversionTest >> testBlogAbstractViaVisitor [
+
+	| summaryPageObject abstract visitor |
+	summaryPageObject := blog items at: #'pharo.md'.
+	
+	visitor := FOAbstractWriterVisitor new.
+	abstract := visitor 
+		amountOfCharacters: 50;
+		post: summaryPageObject.
+	
+	self 
+		assert: abstract
+		equals: 'Pharo is a cross-platform implementation of the...' 
+]
+
+{ #category : 'failing tests' }
+FOBlogAfterConversionTest >> testBlogAbstractViaVisitor2 [
+
+	| summaryPageObject abstract visitor |
+	summaryPageObject := blog items at: #'pharo.md'.
+	
+	visitor := FOAbstractWriterVisitor new.
+	abstract := visitor 
+		amountOfCharacters: 150;
+		post: summaryPageObject.
+	
+	self 
+		assert: abstract 
+		equals: 'Pharo is a cross-platform implementation of the classic Smalltalk-80 programming language and runtime system.[3] It is based on the OpenSmalltalk v...' 
+		
+]
+
+{ #category : 'failing tests' }
 FOBlogAfterConversionTest >> testBlogAfterOverviewBuildingNowContainsIndex [ 
 
 	site buildOverviewFor: 'success'.
-	self assert: blog items size equals: 3.
+	self assert: blog items size equals: 4.
 	self assert: (blog items at: #'index.html') class equals: FOMicrodownBlogPage 
 	
 ]
@@ -40,11 +100,11 @@ FOBlogAfterConversionTest >> testBlogBeforeOverviewBuildingOnlyContainsChildren 
 
 	self 
 		assert: blog items size 
-		equals: 2.
-	blog items keys do: [ :each | self assert: (#( 'gsoc.md' 'gsoc2.md') includes: each) ].
+		equals: 3.
+	blog items keys do: [ :each | self assert: (#( 'gsoc.md' 'gsoc2.md' 'pharo.md') includes: each) ].
 	self 
 		assert: blog publishedPosts size 
-		equals: 2.
+		equals: 3.
 ]
 
 { #category : 'running' }
@@ -55,28 +115,62 @@ FOBlogAfterConversionTest >> testBlogIsNowInFileModel [
 ]
 
 { #category : 'failing tests' }
+FOBlogAfterConversionTest >> testBlogOverviewBodyOn [
+
+	| summaryPageObject str |
+	site buildOverviewFor: 'success'.
+	summaryPageObject := blog items at: #'index.html'.
+	str := String streamContents: [ :st | summaryPageObject bodyOn: st ].
+	self 
+		assert: str 
+		equals:  '<h2><a href="/success/gsoc2.html">IsLoop</a></h2>
+We are organizing a summer school on Pharo and advanced design every year.
+The previous editions were held at Split, Montpelllier and Fianarantsoa.
+<div class="date">21 May 2025</div><h2><a href="/success/pharo.html">Google Summer of Code</a></h2>
+Pharo is a cross-platform implementation of the classic Smalltalk-80 programming language and runtime system.[3] It is based on the OpenSmalltalk virtual machine (VM) named Cog,[4][5][6][7]: 16  which evaluates a dynamic, reflective, and object-oriented programming language with a syntax closely resembling Smalltalk-80. It is free and open-source software, released under a mix of MIT, and Apach...
+<div class="date">21 May 2019</div><h2><a href="/success/gsoc.html">Google Summer of Code</a></h2>
+On this page, you can find the personal blogs and social media links of the seven students accepted for Google Summer of Code with Pharo Consortium in 2019. Follow their pages to get regular updates on their progress. Don''t hesitate to get in touch with those students - they need your feedback.Personal blogTwitterGitHubPersonal blogTwitterFacebookGitHubPersonal blogTwitterFacebookGitHubPersonal...
+<div class="date">21 May 2019</div>' 
+		
+]
+
+{ #category : 'failing tests' }
 FOBlogAfterConversionTest >> testBlogOverviewHasAbstracts [
 
 	| summaryPageObject |
 	site buildOverviewFor: 'success'.
 	summaryPageObject := blog items at: #'index.html'.
-	self assert: blog items size equals: 3.
+	self assert: blog items size equals: 4.
 	
 	"The abstracts are correctly generated."
-	self assert: summaryPageObject document children size equals: 2
+	self assert: summaryPageObject document children size equals: 3
 	
 ]
 
+{ #category : 'running' }
+FOBlogAfterConversionTest >> testBlogPostHasMetaData [
+	
+	self
+		assert: blog publishedPosts first publishDate printString
+		equals: '21 May 2025'.
+	self 
+		assert: blog publishedPosts first layout 
+		equals: 'default'.
+	self 
+		assert: blog publishedPosts first title 
+		equals: 'IsLoop'
+]
+
 { #category : 'failing tests' }
-FOBlogAfterConversionTest >> testBlogOverviewRender [
+FOBlogAfterConversionTest >> testBlogTemplatedContents [
 
 	| summaryPageObject |
 	site buildOverviewFor: 'success'.
 	summaryPageObject := blog items at: #'index.html'.
 	self 
-		assert: summaryPageObject templatedContents
+		assert: summaryPageObject templatedContents 
 		equals: 
-	 '<!DOCTYPE HTML>
+		  '<!DOCTYPE HTML>
 <html>
     
     <body class="default">
@@ -124,8 +218,10 @@ FOBlogAfterConversionTest >> testBlogOverviewRender [
 	<h2><a href="/success/gsoc2.html">IsLoop</a></h2>
 We are organizing a summer school on Pharo and advanced design every year.
 The previous editions were held at Split, Montpelllier and Fianarantsoa.
-<div class="date">21 May 2025</div><h2><a href="/success/gsoc.html">Google Summer of Code</a></h2>
-On this page, you can find the personal blogs and social media links of the seven students accepted for Google Summer of Code with Pharo Consortium in 2019. Follow their pages to get regular updates on their progress. Don''t hesitate to get in touch with those students - they need your feedback.Personal blogTwitterGitHubPersonal blogTwitterFacebookGitHubPersonal blogTwitterFacebookGitHubPersonal...TwitterGitHubPersona...TwitterFacebookGitHubPersona...TwitterGitHubPersona...TwitterGitHub
+<div class="date">21 May 2025</div><h2><a href="/success/pharo.html">Google Summer of Code</a></h2>
+Pharo is a cross-platform implementation of the classic Smalltalk-80 programming language and runtime system.[3] It is based on the OpenSmalltalk virtual machine (VM) named Cog,[4][5][6][7]: 16  which evaluates a dynamic, reflective, and object-oriented programming language with a syntax closely resembling Smalltalk-80. It is free and open-source software, released under a mix of MIT, and Apach...
+<div class="date">21 May 2019</div><h2><a href="/success/gsoc.html">Google Summer of Code</a></h2>
+On this page, you can find the personal blogs and social media links of the seven students accepted for Google Summer of Code with Pharo Consortium in 2019. Follow their pages to get regular updates on their progress. Don''t hesitate to get in touch with those students - they need your feedback.Personal blogTwitterGitHubPersonal blogTwitterFacebookGitHubPersonal blogTwitterFacebookGitHubPersonal...
 <div class="date">21 May 2019</div>
 	BODYEND
 	
@@ -153,35 +249,6 @@ Suscribe to this blog: <a href="http://pharo.org/news/atom.xml">Entries RSS</a> 
 </html>'
 ]
 
-{ #category : 'failing tests' }
-FOBlogAfterConversionTest >> testBlogOverviewRenderOn [
-
-	| summaryPageObject str |
-	site buildOverviewFor: 'success'.
-	summaryPageObject := blog items at: #'index.html'.
-	str := String streamContents: [ :st | summaryPageObject bodyOn: st ].
-	self assert: str equals: '<h2><a href="/success/gsoc2.html">IsLoop</a></h2>
-We are organizing a summer school on Pharo and advanced design every year.
-The previous editions were held at Split, Montpelllier and Fianarantsoa.
-<div class="date">21 May 2025</div><h2><a href="/success/gsoc.html">Google Summer of Code</a></h2>
-On this page, you can find the personal blogs and social media links of the seven students accepted for Google Summer of Code with Pharo Consortium in 2019. Follow their pages to get regular updates on their progress. Don''t hesitate to get in touch with those students - they need your feedback.Personal blogTwitterGitHubPersonal blogTwitterFacebookGitHubPersonal blogTwitterFacebookGitHubPersonal...TwitterGitHubPersona...TwitterFacebookGitHubPersona...TwitterGitHubPersona...TwitterGitHub
-<div class="date">21 May 2019</div>' 
-]
-
-{ #category : 'running' }
-FOBlogAfterConversionTest >> testBlogPostHasMetaData [
-	
-	self
-		assert: blog publishedPosts first publishDate printString
-		equals: '21 May 2025'.
-	self 
-		assert: blog publishedPosts first layout 
-		equals: 'default'.
-	self 
-		assert: blog publishedPosts first title 
-		equals: 'IsLoop'
-]
-
 { #category : 'overviewBuilder' }
 FOBlogAfterConversionTest >> testOverviewBuilderCreatesPageWithDocumentHavingRawChildren [
 
@@ -195,7 +262,7 @@ FOBlogAfterConversionTest >> testOverviewBuilderCreatesPageWithDocumentHavingRaw
 	self assert: page layout equals: blog layout.
 	self 
 		assert: page document children size 
-		equals: 2.
+		equals: 3.
 	
 	self 
 		assert: page document children first class 

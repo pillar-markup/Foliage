@@ -79,19 +79,22 @@ Suscribe to this blog: <a href="http://pharo.org/news/atom.xml">Entries RSS</a> 
 { #category : 'running' }
 FOAbstractWebSiteTest >> defineFiles [
 
+	"Defines files for the blog"
 	(fileSystem / 'site' / 'success') ensureCreateDirectory.
 	fileSystem / 'site' / 'success' / self mdOneFileName writeStreamDo: [ :st |
 		st nextPutAll: self gsocContentsMD ].
 	fileSystem / 'site'/ 'success' / self mdOneFileName2 writeStreamDo: [ :st |
 		st nextPutAll: self gsocContentsMD2 ].
-	(fileSystem / 'site' / 'templates') ensureCreateDirectory.
+	fileSystem / 'site'/ 'success' / 'pharo.md' writeStreamDo: [ :st |
+		st nextPutAll: self gsocContentsMDLongParagraph ].
 
+
+
+	(fileSystem / 'site' / 'templates') ensureCreateDirectory.
 	fileSystem / 'site'/ 'templates' / 'blog-post-abstract' writeStreamDo: [ :st |
 		st nextPutAll: self blogPostAbstractTemplateContents ].
-
 	fileSystem / 'site' / 'templates' / 'blog' writeStreamDo: [ :st |
 		st nextPutAll: self blogTemplateContents ].
-
 	fileSystem / 'site'/'templates' / 'head' writeStreamDo: [ :st |
 		st nextPutAll: self headTemplateContents ].
 
@@ -112,6 +115,7 @@ FOAbstractWebSiteTest >> defineFiles [
 	fileSystem / 'site'/ 'templates' / 'footer-analytics' writeStreamDo: [ :st |
 		st nextPutAll: self footerAnalyticsTemplateContents ].
 	
+	"Configuration"
 	(fileSystem / 'site' / 'FoliageConfig.ston')
 		 writeStreamDo: [ :st | st nextPutAll: self JSONFoliageConfigFileContents ].
 ]
@@ -223,6 +227,29 @@ We are organizing a summer school on Pharo and advanced design every year.
 The previous editions were held at Split, Montpelllier and Fianarantsoa. 
 
 
+'
+]
+
+{ #category : 'data' }
+FOAbstractWebSiteTest >> gsocContentsMDLongParagraph [
+
+	^ '{
+"title" : "Google Summer of Code",
+"layout" : "default",
+"publishDate" : "2019-05-21"
+}
+
+# Pharo on wikipedia
+
+
+Pharo is a cross-platform implementation of the classic Smalltalk-80 programming language and runtime system.[3] It is based on the OpenSmalltalk virtual machine (VM) named Cog,[4][5][6][7]: 16  which evaluates a dynamic, reflective, and object-oriented programming language with a syntax closely resembling Smalltalk-80. It is free and open-source software, released under a mix of MIT, and Apache 2 licenses.
+
+Pharo is shipped with source code compiled into a system image that contains all software needed to run Pharo.[7]: 16  Like the original Smalltalk-80, Pharo provides several live programming features such as immediate object manipulation, live updates, and just-in-time compilation (JIT). The system image includes an integrated development environment (IDE) to modify its components.
+
+## Overview
+Pharo is a pure object-oriented, dynamically typed, and reflective language. The stated project goal is to revisit Smalltalk design and enhance it.
+
+The name Pharo comes from the French word "phare" (French pronunciation: [faʁ]) which means lighthouse. This is why the Pharo logo shows a drawing of a lighthouse inside the final letter O of the name.
 '
 ]
 

@@ -28,9 +28,10 @@ FOAbstractWriterVisitor >> post: anObject [
 ]
 
 { #category : 'accessing' }
-FOAbstractWriterVisitor >> visit: anObject [
+FOAbstractWriterVisitor >> visitEach: anObject [
+	
 	(amountOfCharacters >= upperLimit) 
-		ifFalse: [ anObject accept: self ]
+		ifFalse: [ super visitEach: anObject]
 ]
 
 { #category : 'accessing' }
@@ -49,6 +50,7 @@ FOAbstractWriterVisitor >> visitHeader: aMicHeaderBlock [
 FOAbstractWriterVisitor >> visitText: aMicParagraph [
 
 	| text textSize | 
+	
 	textSize := aMicParagraph text size.
 	text := (amountOfCharacters + textSize >= upperLimit) 
 		ifTrue: [ aMicParagraph text truncateWithElipsisTo: (10 max: (upperLimit - amountOfCharacters)) ]
