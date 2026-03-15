@@ -115,7 +115,7 @@ FOAbstractWebSiteTest >> defineFiles [
 	fileSystem / 'site'/ 'templates' / 'footer-analytics' writeStreamDo: [ :st |
 		st nextPutAll: self footerAnalyticsTemplateContents ].
 	
-	"Configuration"
+
 	(fileSystem / 'site' / 'FoliageConfig.ston')
 		 writeStreamDo: [ :st | st nextPutAll: self JSONFoliageConfigFileContents ].
 ]

@@ -305,11 +305,12 @@ FOWebSite >> readConfigFile [
 	reference exists 
 		ifTrue: [ 
 			| cfg |
-			cfg := (STONReader on: reference readStream) next.
+			cfg := self readConfigFile: 'FoliageConfig.json'.
 			cfg keysAndValuesDo: [ :k :v | 
 				configuration propertyAt: k put: v ].
 				configuration fromJSON.
-				configuration  ].
+				configuration.
+				^ self ].
 	
 
 	dictOrWrapper := self readConfigFile: 'FoliageConfig.ston'.

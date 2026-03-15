@@ -1,20 +1,25 @@
 Class {
 	#name : 'FOConfigurationTest',
-	#superclass : 'FOAbstractWebSiteTest',
+	#superclass : 'TestCase',
+	#instVars : [
+		'site',
+		'fileSystem',
+		'root'
+	],
 	#category : 'Foliage-Core-Tests-Configuration',
 	#package : 'Foliage-Core-Tests',
 	#tag : 'Configuration'
 }
 
 { #category : 'running' }
-FOConfigurationTest >> JSONFoliageConfigFileContents [
+FOConfigurationTest >> JSONFoliageConfigFileContentsReal [
 	"Here we redefine the file to include a webrootprefix"
 	
 	^ '{
-	#baseUri : ''http://esug.org'',
-	#webRootPrefix : ''/ESUGWeb20'',
-	#blogs: [ ''news'': ''News'' ],
-	#menus : [
+	"baseUri" : "http://esug.org",
+	"webRootPrefix" : "/ESUGWeb20",
+	"blogs" : [ "news" : "News" ],
+	"menus" : [
 			{ "title" : "About Us",
 		 	 "url" : "/about_us.html",
 		  	"has_subfiles" : true,
@@ -28,36 +33,42 @@ FOConfigurationTest >> JSONFoliageConfigFileContents [
 		  	"submenu" : [ { "title" : "2025", "url" : "/2025-Conference/conf2025.html" },
 				{ "title" : "2024", "url" : "/2024-Conference/conf2024.html" }]
 		}],
-	#site_short_description : "European Smalltalk User Group"
+	"site_short_description" : "22European Smalltalk User Group"
 }'
 ]
 
 { #category : 'running' }
 FOConfigurationTest >> setUp [ 
 	
-	super setUp.
+	
+	fileSystem := FileSystem memory.
+	(fileSystem / 'site') ensureCreateDirectory.
+	
+	(fileSystem / 'site' / 'FoliageConfig.json')
+		 writeStreamDo: [ :st | st nextPutAll: self JSONFoliageConfigFileContentsReal ].
+		
 	site := FOWebSite new.
 	site fileSystem: fileSystem.
-	site sourcePath: 'site'.
+	site sourcePath: 'site'
 ]
 
 { #category : 'running' }
 FOConfigurationTest >> testConfigurationAccessToProperties [
 
-	| config |
-	config := site readConfigFile.
+	site readConfigFile.
 	self 
-		assert: (config propertyAt: #site_short_description)
-		equals: 'European Smalltalk User Group'
+		assert: (site configuration propertyAt: 'site_short_description')
+		equals: '22European Smalltalk User Group'
 ]
 
 { #category : 'running' }
 FOConfigurationTest >> testConfigurationAccessToUnknowProperties [
 
 	| config unk |
-	config := site readConfigFile.
+	site readConfigFile.
+	config := site configuration.
 	unk := false.
-	config propertyAt: #doesNotExists ifAbsent: [ unk := true ].
+	config propertyAt: 'doesNotExists' ifAbsent: [ unk := true ].
 	self assert: unk
 ]
 
@@ -66,14 +77,15 @@ FOConfigurationTest >> testConfigurationAccessViaSite [
 
 	site readConfigFile.
 	self 
-		assert: (site configuration propertyAt: #site_short_description)
-		equals: 'European Smalltalk User Group'
+		assert: (site configuration propertyAt: 'site_short_description')
+		equals: '22European Smalltalk User Group'
 ]
 
 { #category : 'running' }
 FOConfigurationTest >> testConfigurationFileExists [
 
-	self assert: (fileSystem / 'site' / 'FoliageConfig.ston') exists
+	self assert: (fileSystem / 'site' / 'FoliageConfig.json') exists
+
 
 ]
 
@@ -81,7 +93,8 @@ FOConfigurationTest >> testConfigurationFileExists [
 FOConfigurationTest >> testConfigurationReads2 [
 
 	| config |
-	config := site readConfigFile.
+	site readConfigFile.
+	config := site configuration.
 	self assert: config class equals: FOConfiguration.
 	self assert: config webRootPrefix equals:  '/ESUGWeb20'.
 	self assert: config blogs equals:  { 'news' ->'News' }.
@@ -92,6 +105,8 @@ FOConfigurationTest >> testConfigurationReads2 [
 FOConfigurationTest >> testConfigurationReadsFromJSON [
 
 	| config |
-	config := site readConfigFile.
-	self deny: config isFromSton
+	site readConfigFile.
+	config := site configuration.
+	self assert: (config propertyAt: 'site_short_description')
+		equals: '22European Smalltalk User Group'
 ]
