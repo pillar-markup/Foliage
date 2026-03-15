@@ -119,7 +119,7 @@ FOConfiguration >> webRootPrefix [
 
 { #category : 'accessing' }
 FOConfiguration >> webRootPrefix: aString [
-
+	Transcript show: aString; cr.
 	properties at: self webRootPrefixString put: aString
 ]
 
