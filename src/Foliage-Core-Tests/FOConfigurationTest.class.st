@@ -3,8 +3,7 @@ Class {
 	#superclass : 'TestCase',
 	#instVars : [
 		'site',
-		'fileSystem',
-		'root'
+		'fileSystem'
 	],
 	#category : 'Foliage-Core-Tests-Configuration',
 	#package : 'Foliage-Core-Tests',
