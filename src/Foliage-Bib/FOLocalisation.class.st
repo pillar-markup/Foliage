@@ -111,16 +111,16 @@ FOLocalisation class >> initializeFrenchEntries [
 FOLocalisation class >> initializeTypes [
 	"self initializeTypes"
 	
-	InternationalReviewedJournal := #internationReviewedJournal.
-	NationalReviewedJournal := #nationalReviewedJournal.
-	TopConferences := #topConferences.
-	InternationalConference := #internationalConferences.
+	InternationalReviewedJournal := #internationalJournal.
+	NationalReviewedJournal := #nationalJournal.
+	TopConferences := #topConference.
+	InternationalConference := #internationalConference.
 	NationalReviewedConference := #nationalConference.
 	Book := #book.
 	HandBook := #handbook.
-	Booklet := #booklet.	
+	Booklet := #booklet.
 	BookChapter := #bookChapter.
-	InvitedPaper := #invitedPapers.
+	InvitedPaper := #invitedPaper.
 	"Editor := #editor."
 	InternationalReviewedWorkshop := #internationalWorkshop.
 	NationalWorkshop := #nationalWorkshop.
@@ -129,7 +129,7 @@ FOLocalisation class >> initializeTypes [
 	PHDAndHdr := #phdAndHdr.
 	Deliverable := #deliverable.
 	TechnicalReport := #technicalReport.
-	ToolDemo := #tooldemo.
+	ToolDemo := #toolDemo.
 	Periodical := #periodical.
 	Vulgarisation := #vulgarisation.
 	

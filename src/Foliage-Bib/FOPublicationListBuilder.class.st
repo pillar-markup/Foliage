@@ -112,7 +112,8 @@ FOPublicationListBuilder >> bibset: aBibSet [
 
 { #category : 'accessing' }
 FOPublicationListBuilder >> bodySpecification [
-
+	"The symbols in the body specification are used with Query to perform the actual configuration."
+	
 	^ bodySpecification ifNil: [ bodySpecification := self defaultSpecification ]
 ]
 
@@ -156,13 +157,12 @@ FOPublicationListBuilder >> buildBody [
 	self bodySpecification do: [ :each |
 			self
 				addSectionFromQuery: (self perform: (each , #Query) asSymbol)
-				withTitle: (localization perform: each) ]
-
+				withTitle: (localization perform: each asSymbol) ]
 ]
 
 { #category : 'main configuration' }
 FOPublicationListBuilder >> configure [
-
+	self halt.
 	self 
 		fileNamed: 'rmod.bib';
 		authorMatchingString: '*', 'Ducasse', '*';
@@ -431,6 +431,14 @@ FOPublicationListBuilder >> publishToWebSite: aWebSite withPath: aPath [
 FOPublicationListBuilder >> sections [
 
 	^ sections
+]
+
+{ #category : 'main configuration' }
+FOPublicationListBuilder >> setFiltering: aBoolean [
+	"to filter private entries and others insubmissions"
+	
+	
+	shouldFilterNonPublic := (aBoolean = 'false') not
 ]
 
 { #category : 'main configuration' }

@@ -51,6 +51,8 @@ FOFullPublicationPluginHandler >> api [
 	(#authorMatchingString  
 		->  'Expects a string that will identify the author. The expression that will in addition be surrounded by `*`. E.g. `Ducasse` will be `*Ducasse*`)') .
 		
+	(#setFiltering -> 'Enables the filtering based on keysOfBlackEntries') . 	
+		
 	(#bibFilename 
 		-> 'The path name of the file containing bib file. E.g. rmod.bib') .
 		
@@ -82,6 +84,7 @@ FOFullPublicationPluginHandler >> initialize [
 	
 	super initialize. 
 	builder := FOPublicationListBuilder new.
+	builder setFilteringOn
 	
 
 	
@@ -100,7 +103,7 @@ FOFullPublicationPluginHandler >> treat: aFOMicrodownPage [
 			ifPresent: [ :f | builder perform: (each key, ':') asSymbol with: f ]
 		 ].
 	self flag: #todo. "handle error"
-	
+
 	builder build.
 	sections := builder sections.
 	
