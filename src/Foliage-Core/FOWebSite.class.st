@@ -312,7 +312,8 @@ FOWebSite >> readConfigFile [
 				configuration.
 				^ self ].
 	
-
+	" the following should be removed once all the foliage{ .ston files are removed."
+	
 	dictOrWrapper := self readConfigFile: 'FoliageConfig.ston'.
 	
 	^ dictOrWrapper class = Dictionary
