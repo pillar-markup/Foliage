@@ -100,9 +100,8 @@ FOFullPublicationPluginHandler >> treat: aFOMicrodownPage [
 	self api do: [ :each |
 		aFOMicrodownPage pluginSpec 
 			at: each key asSymbol 
-			ifPresent: [ :f | builder perform: (each key, ':') asSymbol with: f ]
+			ifPresent: [ :f | [ builder perform: (each key, ':') asSymbol with: f] on: MessageNotUnderstood do: [ :ex| 'Error' traceCr. ex messageText traceCr. ] ]
 		 ].
-	self flag: #todo. "handle error"
 
 	builder build.
 	sections := builder sections.
