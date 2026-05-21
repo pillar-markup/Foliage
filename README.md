@@ -1,5 +1,6 @@
 # Foliage
-A simple static site generator based on Microdown.
+A simple static site generator based on Microdown. It supports blogs as well as plugin for automatic generation of publication. 
+It can be extended to introduce new features. 
 
 It is used to generate for example
 - https://www.pharo.org
