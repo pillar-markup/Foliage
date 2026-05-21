@@ -37,11 +37,13 @@ Metacello new
 
 ### To generate the Pharo website
 
-```
-git clone git@github.com:pharo-project/pharo-website.git
-git co WithFoliage20
-```
+You can use the archived https://github.com/pharo-project/PharoWeb20
+to play with. Some configuration files may be different. 
 
+The Pharo official website hosted at https://github.com/pharo-project/pharoweb is generated with Foliage20 using a centralized build hosted in the current repo. The pharo web is using a staging branch: using it you can see the resulting web site at https://staging.pharo.org before changing the official one. 
+
+
+In general you can generate a web site executing this from within Pharo with Foliage loaded. 
 ```
 |  p |
 p := FOPublisher new. 
@@ -49,6 +51,16 @@ p baseUri: 'http://pharo.org'.
 p sourcePath: '/Users/ducasse/Test2/pharo-website/site'.
 p publish
 ```
+
+### Command line
+
+Here is a little command line expression to launch the generation of a site
+
+```
+.../Documents/Pharo/vms/130-x64/Pharo.app/Contents/MacOS/Pharo .../Documents/Pharo/images/P13-FoliageFixingCitezen/P13-FoliageFixingCitezen.image clap publish  --source site --target generated
+```
+
+
 
 ## Foliage 1.0 instructions
 
