@@ -13,10 +13,13 @@ Class {
 
 { #category : 'visiting' }
 FOPublishVisitor >> copyResource: aResource [ 
-	| target |
+	| target source |
 	target := aResource publishPath asFileReference.
 	target exists ifTrue: [  target delete ].
-	aResource sourcePath asFileReference copyTo: target
+	source := aResource website fileSystem / aResource sourcePath pathString.
+	source copyTo: target
+	
+
 ]
 
 { #category : 'visiting' }

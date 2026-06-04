@@ -74,7 +74,8 @@ Class {
 		'templatePath',
 		'blogs',
 		'site',
-		'webRootPrefix'
+		'webRootPrefix',
+		'fileSystem'
 	],
 	#category : 'Foliage-Publisher',
 	#package : 'Foliage-Publisher'
@@ -207,16 +208,28 @@ FOPublisher >> blogs [
 	^ blogs
 ]
 
+{ #category : 'accessing' }
+FOPublisher >> fileSystem [
+
+	^ fileSystem
+]
+
+{ #category : 'accessing' }
+FOPublisher >> fileSystem: aFileSystem [
+
+	fileSystem := aFileSystem
+]
+
 { #category : 'actions' }
 FOPublisher >> newWebSite [
 
 	^ FOWebSite new
 		  baseUri: self baseUri;
+		  in: [ :website | self fileSystem ifNotNil: [ website fileSystem: self fileSystem ] ];
 		  targetPath: self targetPath;
 		  sourcePath: self sourcePath;
 		  webRootPrefix: self webRootPrefix;
-		  templatePath:
-			  (self sourcePath asFileReference / self templatePath asString) fullName
+		  templatePath: self siteTemplatePath
 ]
 
 { #category : 'actions' }
@@ -225,6 +238,17 @@ FOPublisher >> publish [
 	site := self newWebSite.
 	site build.
 	site publish.
+]
+
+{ #category : 'accessing' }
+FOPublisher >> siteTemplatePath [
+
+	"  (self sourcePath asFileReference / self templatePath asString) fullName"
+	
+	^ String streamContents: [ :stream |
+		stream nextPutAll: self sourcePath.
+		(self sourcePath endsWith: '/') ifFalse: [ stream nextPut: $/ ].
+		stream nextPutAll: self templatePath asString ]
 ]
 
 { #category : 'accessing' }
