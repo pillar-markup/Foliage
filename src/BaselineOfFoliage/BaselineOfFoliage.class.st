@@ -6,6 +6,14 @@ Class {
 }
 
 { #category : 'baselines' }
+BaselineOfFoliage >> agenda: spec [
+	spec baseline: 'MicrodownAgenda' with: [
+		spec 
+			repository: 'github://pillar-markup/Microdown-Agenda:agenda-in-microdown/src';
+			loads: #('Microdown-Agenda-Tests')].
+]
+
+{ #category : 'baselines' }
 BaselineOfFoliage >> baseline: spec [
 	<baseline>
 
@@ -23,6 +31,7 @@ BaselineOfFoliage >> baseline: spec [
 		
 		self
 			mustache: spec;
+			agenda: spec;
 			soup: spec;
 			zinc: spec.
 			
