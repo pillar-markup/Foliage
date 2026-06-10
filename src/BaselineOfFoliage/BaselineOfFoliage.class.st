@@ -52,8 +52,8 @@ BaselineOfFoliage >> baseline: spec [
 			group: 'Publisher' with: #('Core' 'Foliage-Publisher');
 			group: 'Tests' with: #('Foliage-Core-Tests' );
 			"group: 'default' with: #('Core' 'Foliage-Feed' 'Foliage-Bib' 'Publisher' 'Tests');"
-			group: 'default' with: #('Core' 'Foliage-Bib' 'Publisher' 'Tests');
-			group: 'development' with: #('Core' 'Tests' 'Publisher' 'ZincHTTPComponents') ]
+			group: 'default' with: #('Core' 'Foliage-Bib' 'MicrodownAgenda' 'Publisher' 'Tests');
+			group: 'development' with: #('Core' 'Tests' 'MicrodownAgenda' 'Publisher' 'ZincHTTPComponents') ]
 
 ]
 
