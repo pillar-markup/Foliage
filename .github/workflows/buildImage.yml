@@ -20,9 +20,18 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
+      - name: Checkout Microdown Agenda resources
+        uses: actions/checkout@v6
+        with:
+          repository: pillar-markup/Microdown-Agenda
+          ref: agenda-in-microdown
+          sparse-checkout: |
+            resources
+            templates
+          path: agenda
       - name: Build Foliage
         run: ./scripts/build.sh
       - uses: actions/upload-artifact@v5
@@ -31,6 +40,7 @@ jobs:
           path: |
                 build/Pharo.image 
                 build/Pharo.changes
+                agenda
           retention-days: 5
 
   publish:
