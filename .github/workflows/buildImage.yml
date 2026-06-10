@@ -23,6 +23,8 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
+      - name: Build Foliage
+        run: ./scripts/build.sh
       - name: Checkout Microdown Agenda resources
         uses: actions/checkout@v6
         with:
@@ -31,16 +33,15 @@ jobs:
           sparse-checkout: |
             resources
             templates
-          path: agenda
-      - name: Build Foliage
-        run: ./scripts/build.sh
+          sparse-checkout-cone-mode: false
+          path: build/agenda
       - uses: actions/upload-artifact@v5
         with:
           name: foliage-runtime
           path: |
                 build/Pharo.image 
                 build/Pharo.changes
-                agenda
+                build/agenda
           retention-days: 5
 
   publish:
