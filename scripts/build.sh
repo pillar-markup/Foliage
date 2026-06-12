@@ -49,6 +49,7 @@ fi
 ${PHARO} st --quit --save "${__dir}/unload_md.st"
 
 ${PHARO} eval --save "Iceberg remoteTypeSelector: #httpsUrl. Metacello new baseline: 'Foliage'; repository: 'gitlocal://${REPOSITORY_PATH}'; load"
+${PHARO} eval --save "Iceberg remoteTypeSelector: #httpsUrl. Metacello new baseline: 'MicrodownAgenda'; repository: 'github://pillar-markup/Microdown-Agenda:agenda-in-microdown/src'; load"
 
 ${PHARO} eval --save "Deprecation raiseWarning: false."
 ${PHARO} eval --save "Deprecation showWarning: false."
